@@ -1,0 +1,401 @@
+//
+//  CHChessClockViewController.m
+//  Chess.com
+//
+//  Created by Pedro Bolaños on 10/22/12.
+//  Copyright (c) 2012 psbt. All rights reserved.
+//
+
+#import "CHChessClockViewController.h"
+#import "CHChessClock.h"
+#import "CHChessClockSettings.h"
+#import "CHChessClockTimeControlStageManager.h"
+#import "CHChessClockSettingsTableViewController.h"
+#import "CHChessClockSettingsManager.h"
+#import "CHTimePiece.h"
+#import "CHTimePieceView.h"
+#import "CHUtil.h"
+
+#import "ChessAppDelegate.h"
+
+//------------------------------------------------------------------------------
+#pragma mark - Private methods declarations
+//------------------------------------------------------------------------------
+@interface CHChessClockViewController()
+<CHChessClockDelegate, UIActionSheetDelegate>
+
+@property (retain, nonatomic) IBOutlet UIView *portraitView;
+@property (retain, nonatomic) IBOutlet UIView *landscapeView;
+
+@property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerOneTimePieceViews;
+@property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerTwoTimePieceViews;
+
+@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *pauseButtons;
+@property (assign, nonatomic) IBOutlet UIButton *resetButtonPortrait;
+@property (assign, nonatomic) IBOutlet UIButton *resetButtonLandscape;
+
+@property (retain, nonatomic) CHChessClock* chessClock;
+
+@end
+
+//------------------------------------------------------------------------------
+#pragma mark - CHChessClockViewController implementation
+//------------------------------------------------------------------------------
+@implementation CHChessClockViewController
+
+static const float CHShowTenthsTime = 10.0f;
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self disableIdleTimer:NO];
+    [self.chessClock cleanup];
+    
+    [_portraitView release];
+    [_landscapeView release];
+    [_playerOneTimePieceViews release];
+    [_playerTwoTimePieceViews release];
+    [_pauseButtons release];
+    [_chessClock release];
+    [_settingsManager release];
+    
+    [super dealloc];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self registerToApplicationNotification:UIApplicationDidEnterBackgroundNotification];
+    [self registerToApplicationNotification:UIApplicationWillResignActiveNotification];
+    
+    self.title = NSLocalizedString(@"Clock", nil);
+        
+    CHChessClock* chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
+                                                          andDelegate:self];
+    self.chessClock = chessClock;
+    [chessClock release];
+
+    [self resetClock];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    // Rotate the view according to the orientation selected by the user
+    BOOL isLandscape = NO;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        isLandscape = [self.settingsManager isLandscape];
+    }
+    else {
+        isLandscape = UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
+    }
+    
+    if (isLandscape) {
+        self.view = self.landscapeView;
+    }
+    else {
+        self.view = self.portraitView;
+    }
+
+    [self rotateTimePieces];
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self rotateMainView];
+    }
+}
+
+- (void)resetInterfaceForLandscape
+{
+    self.view = self.landscapeView;
+    [self rotateTimePieces];
+}
+
+- (void)resetInterfaceForPortrait
+{
+    self.view = self.portraitView;
+    [self rotateTimePieces];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - Private methods definitions
+//------------------------------------------------------------------------------
+- (void)registerToApplicationNotification:(NSString*)notificationName
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationNotificationReceived)
+                                                 name:notificationName
+                                               object:nil];
+}
+
+- (void)applicationNotificationReceived
+{
+    // Just in case the notification is posted on a thread that's not the main one
+    [self performSelectorOnMainThread:@selector(pauseClock) withObject:nil waitUntilDone:NO];
+}
+
+- (NSArray*)timePieceViewsWithId:(NSUInteger)timePieceId
+{
+    NSMutableArray* timePieceViews = [NSMutableArray array];
+    
+    UIView* portraitTimePieceView = [self.portraitView viewWithTag:timePieceId];
+    UIView* landscapeTimePieceView = [self.landscapeView viewWithTag:timePieceId];
+    
+    if ([portraitTimePieceView isKindOfClass:[CHTimePieceView class]]) {
+        [timePieceViews addObject:portraitTimePieceView];
+    }
+
+    if ([landscapeTimePieceView isKindOfClass:[CHTimePieceView class]]) {
+        [timePieceViews addObject:landscapeTimePieceView];
+    }
+    
+    return timePieceViews;
+}
+
+- (void)resetTimeStageDots
+{
+    NSUInteger stageCount = [self.chessClock.settings.stageManager stageCount];
+    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+        [timePieceView setTimeControlStageDotCount:stageCount];
+    }
+    
+    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+        [timePieceView setTimeControlStageDotCount:stageCount];
+    }
+}
+
+- (void)rotateTimePieces
+{
+    float playerOneRotation = 0.0f;
+    float playerTwoRotation = M_PI;
+    BOOL isLandscape = self.view == self.landscapeView;
+    
+    if (isLandscape)
+    {
+        playerOneRotation = playerTwoRotation = 0.0f;
+    }
+    
+    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+        timePieceView.transform = CGAffineTransformMakeRotation(playerOneRotation);
+    }
+    
+    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+        timePieceView.transform = CGAffineTransformMakeRotation(playerTwoRotation);
+    }
+}
+
+- (void)rotateMainView
+{
+    float mainViewRotation = 0.0f;
+    if ([self.settingsManager isLandscape]) {
+        mainViewRotation = M_PI_2;
+    }
+    
+    self.view.transform = CGAffineTransformMakeRotation(mainViewRotation);
+}
+
+- (void)playSound:(NSString*)soundName
+{
+    [m_pAppDelegate.m_pSoundsManager playSound:soundName];
+}
+
+- (void)pauseClock
+{
+    if (!self.chessClock.paused) {
+        [self pauseTapped];
+    }
+}
+
+- (void)resetClock
+{
+    [self.chessClock reset];
+    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+        [timePieceView unhighlightAndActivate:YES];
+    }
+    
+    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+        [timePieceView unhighlightAndActivate:YES];
+    }
+        
+    UIImage* image = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_pauseButtonNormal"]];
+    for (UIButton* button in self.pauseButtons) {
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+    }
+}
+
+- (void)disableIdleTimer:(BOOL)disable
+{
+    [[UIApplication sharedApplication] setIdleTimerDisabled:disable];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - IBAction methods
+//------------------------------------------------------------------------------
+- (IBAction)timePieceTouched:(UIButton *)sender
+{
+    if (!self.chessClock.paused) {
+        if (![UIApplication sharedApplication].idleTimerDisabled) {
+            [self disableIdleTimer:YES];
+        }
+        
+        NSUInteger selectedTimePieceId = sender.superview.tag;
+        [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
+    
+        NSArray* selectedTimePieceViews = [self timePieceViewsWithId:selectedTimePieceId];
+        for (CHTimePieceView* selectedTimePieceView in selectedTimePieceViews) {
+            [selectedTimePieceView unhighlightAndActivate:NO];
+        }
+    
+        if (selectedTimePieceId == ((CHTimePieceView*)[self.playerOneTimePieceViews lastObject]).tag) {
+            for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+                [timePieceView highlight];
+            }
+
+            [self playSound:SOUND_TIME_PIECE_PLAYER_1];
+        }
+        else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
+            for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+                [timePieceView highlight];
+            }
+
+            [self playSound:SOUND_TIME_PIECE_PLAYER_2];
+        }
+    }
+}
+
+- (IBAction)settingsTapped
+{
+    [self pauseClock];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)resetTapped
+{
+    [self pauseClock];
+
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                               destructiveButtonTitle:NSLocalizedString(@"Reset", nil)
+                                                    otherButtonTitles:nil, nil];
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        CGRect bounds = self.resetButtonPortrait.bounds;
+        UIButton* resetButton = self.resetButtonPortrait;
+
+        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+            bounds = self.resetButtonLandscape.bounds;
+            resetButton = self.resetButtonLandscape;
+        }
+    
+        [actionSheet showFromRect:bounds inView:resetButton animated:YES];
+    }
+    else {
+        [actionSheet showInView:self.view];
+    }
+    
+    [actionSheet release];
+}
+
+- (IBAction)pauseTapped
+{
+    if ([self.chessClock isActive]) {
+        [self.chessClock togglePause];
+        [self disableIdleTimer:!self.chessClock.paused];
+    
+        NSString* imageNameNormal = @"chessClock_pauseButtonNormal";
+        NSString* imageNameSelected = @"chessClock_pauseButtonSelected";
+        
+        if (self.chessClock.paused) {
+            imageNameNormal = @"chessClock_playButtonNormal";
+            imageNameSelected = @"chessClock_playButtonSelected";
+        }
+        
+        UIImage* imageNormal = [UIImage imageNamed:[CHUtil imageNameWithBaseName:imageNameNormal]];
+        UIImage* imageSelected = [UIImage imageNamed:[CHUtil imageNameWithBaseName:imageNameSelected]];
+        
+        for (UIButton* button in self.pauseButtons) {
+            [button setBackgroundImage:imageNormal forState:UIControlStateNormal];
+            [button setBackgroundImage:imageSelected forState:UIControlStateHighlighted];
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - CHChessClockDelegate methods
+//------------------------------------------------------------------------------
+- (void)chessClock:(CHChessClock*)chessClock availableTimeUpdatedForTimePiece:(CHTimePiece*)timePiece
+{
+    NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
+    NSTimeInterval timePieceAvailableTime = timePiece.availableTime;
+    BOOL showTenths = timePieceAvailableTime < CHShowTenthsTime;
+    
+    for (CHTimePieceView* timePieceView in timePieceViews) {
+        timePieceView.availableTimeLabel.text = [CHUtil formatTime:timePieceAvailableTime showTenths:showTenths];
+    }
+}
+
+- (void)chessClock:(CHChessClock*)chessClock movesCountUpdatedForTimePiece:(CHTimePiece*)timePiece
+{
+    NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
+
+    NSString* movesText = NSLocalizedString(@"Moves", nil);
+    movesText = [movesText stringByAppendingFormat:@": %d", timePiece.movesCount];
+    
+    for (CHTimePieceView* timePieceView in timePieceViews) {
+        timePieceView.movesCountLabel.text = movesText;
+    }
+}
+
+- (void)chessClock:(CHChessClock*)chessClock stageUpdatedForTimePiece:(CHTimePiece*)timePiece
+{
+    if (timePiece.stageIndex == 1) {
+        [self resetTimeStageDots];
+    }
+    else {
+        NSArray* timePieceViews = [self timePieceViewsWithId:[timePiece timePieceId]];
+        for (CHTimePieceView* timePieceView in timePieceViews) {
+            [timePieceView updateTimeControlStage:timePiece.stageIndex];
+        }
+    }
+}
+
+- (void)chessClockTimeEnded:(CHChessClock*)chessClock withLastActiveTimePiece:(CHTimePiece *)timePiece
+{
+    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+        if (timePieceView.tag == timePiece.timePieceId) {
+            [timePieceView timeEnded];
+        }
+        else {
+            [timePieceView unhighlightAndActivate:NO];
+        }
+    }
+
+    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+        if (timePieceView.tag == timePiece.timePieceId) {
+            [timePieceView timeEnded];
+        }
+        else {
+            [timePieceView unhighlightAndActivate:NO];
+        }
+    }
+
+    [self playSound:SOUND_TIME_PIECE_TIME_ENDED];
+    [self disableIdleTimer:NO];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - UIActionSheetDelegate methods
+//------------------------------------------------------------------------------
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self resetClock];
+    }
+}
+
+@end
