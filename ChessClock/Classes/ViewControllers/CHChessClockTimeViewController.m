@@ -34,16 +34,6 @@ enum CHTimeComponents {
 
 static const NSUInteger CHPickerRowLabelTag = 10;
 
-- (void)dealloc
-{
-    _delegate = nil;
-    
-    [_components release];
-    [_rowsDictionary release];
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -113,7 +103,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
 - (NSMutableArray*)components
 {
     if (_components == nil) {
-        _components = [[NSMutableArray array] retain];
+        _components = [NSMutableArray array];
     }
     
     return _components;
@@ -122,14 +112,14 @@ static const NSUInteger CHPickerRowLabelTag = 10;
 - (NSDictionary*)rowsDictionary
 {
     if (_rowsDictionary == nil) {
-        _rowsDictionary = [[NSDictionary dictionaryWithObjectsAndKeys:
+        _rowsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                            [self arrayForTimeComponentWithMaximumValue:self.maximumHours],
                            [NSNumber numberWithInt:CHTimeComponentHours],
                            [self arrayForTimeComponentWithMaximumValue:self.maximumMinutes],
                            [NSNumber numberWithInt:CHTimeComponentMinutes],
                            [self arrayForTimeComponentWithMaximumValue:self.maximumSeconds],
                            [NSNumber numberWithInt:CHTimeComponentSeconds],
-                           nil] retain];
+                           nil];
                            
     }
     
@@ -214,7 +204,6 @@ static const NSUInteger CHPickerRowLabelTag = 10;
         [label sizeToFit];
                 
         [self.timePickerParentView addSubview:label];
-        [label release];
     }
 }
 
@@ -292,7 +281,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
 {
     if (view == nil) {
         CGSize rowSize = [pickerView rowSizeForComponent:component];
-        view = [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, rowSize.width, rowSize.height)] autorelease];
+        view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, rowSize.width, rowSize.height)];
         view.backgroundColor = [UIColor clearColor];
         
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, rowSize.width * 0.37f, rowSize.height)];
@@ -301,7 +290,6 @@ static const NSUInteger CHPickerRowLabelTag = 10;
         label.textAlignment = NSTextAlignmentRight;
         label.tag = CHPickerRowLabelTag;
         [view addSubview:label];
-        [label release];
     }
     
     UILabel* label = (UILabel*)[view viewWithTag:CHPickerRowLabelTag];

@@ -27,13 +27,6 @@
 //------------------------------------------------------------------------------
 @implementation CHTimePiece
 
-- (void)dealloc
-{
-    _delegate = nil;
-    [_stageManager release];
-    [super dealloc];
-}
-
 - (id)initWithTimePieceId:(NSUInteger)timePieceId andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager
 {
     self = [super init];
@@ -115,8 +108,7 @@
 - (void)setStageManager:(CHChessClockTimeControlStageManager *)stageManager
 {
     if (_stageManager != stageManager) {
-        [_stageManager release];
-        _stageManager = [stageManager retain];
+        _stageManager = stageManager;
         [self updateStateAccordingToCurrentTimeStage];
     }
 }

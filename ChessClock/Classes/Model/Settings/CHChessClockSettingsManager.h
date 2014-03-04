@@ -12,7 +12,7 @@
 
 @interface CHChessClockSettingsManager : NSObject
 
-@property (assign, nonatomic) CHChessClockSettings* currentTimeControl;
+@property (weak, nonatomic) CHChessClockSettings* currentTimeControl;
 
 - (id)initWithUserName:(NSString*)userName;
 

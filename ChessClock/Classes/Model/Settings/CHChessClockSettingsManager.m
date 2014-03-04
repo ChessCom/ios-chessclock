@@ -30,16 +30,6 @@
 static NSString* const CHChessClockCurrentTimeControl = @"CHChessClockCurrentTimeControl";
 static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 
-- (void)dealloc
-{
-    [_timeControls release];
-    [_userName release];
-    [_settings release];
-    _currentTimeControl = nil;
-    
-    [super dealloc];
-}
-
 - (id)initWithUserName:(NSString*)userName
 {
     self = [super init];
@@ -79,10 +69,9 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 
 - (void)moveTimeControlFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex
 {
-    CHChessClockSettings* settingToMove = [[self.timeControls objectAtIndex:sourceIndex] retain];
+    CHChessClockSettings* settingToMove = [self.timeControls objectAtIndex:sourceIndex];
     [self.timeControls removeObjectAtIndex:sourceIndex];
     [self.timeControls insertObject:settingToMove atIndex:destinationIndex];
-    [settingToMove release];
 }
 
 - (NSArray*)allChessClockSettings
@@ -111,7 +100,6 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     NSFileManager* fileManager = [[NSFileManager alloc] init];
     NSString* chessClockSettingsPath = [[self chessClockTimeControlsPath] path];
     [fileManager removeItemAtPath:chessClockSettingsPath error:nil];
-    [fileManager release];
     
     [self loadDefaultSettings];
 }
@@ -169,10 +157,6 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
         if ([timeControlDefinition objectForKey:@"default"]) {
             self.currentTimeControl = settings;
         }
-        
-        [timeControlStageManager release];
-        [increment release];
-        [settings release];
     }
     
     self.timeControls = allTimeControls;
@@ -201,8 +185,6 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
         }
     }
     
-    
-    [fileManager release];
     return self.timeControls != nil && self.settings != nil;
 }
 
@@ -210,7 +192,6 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 {
     NSFileManager* fileManager = [[NSFileManager alloc] init];
     NSURL* documentsPath = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    [fileManager release];
     
     return [documentsPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@.plist", baseName, self.userName]];
 }
