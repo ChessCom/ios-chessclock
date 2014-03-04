@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FAB79F918C65C010040677B /* CHChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79D818C65C010040677B /* CHChessClock.m */; };
+		0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DA18C65C010040677B /* CHTimePiece.m */; };
+		0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DD18C65C010040677B /* CHChessClockBronsteinIncrement.m */; };
+		0FAB79FC18C65C010040677B /* CHChessClockDelayIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DF18C65C010040677B /* CHChessClockDelayIncrement.m */; };
+		0FAB79FD18C65C010040677B /* CHChessClockFischerIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79E118C65C010040677B /* CHChessClockFischerIncrement.m */; };
+		0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79E318C65C010040677B /* CHChessClockIncrement.m */; };
+		0FAB79FF18C65C010040677B /* CHChessClockSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79E518C65C010040677B /* CHChessClockSettings.m */; };
+		0FAB7A0018C65C010040677B /* CHChessClockSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79E718C65C010040677B /* CHChessClockSettingsManager.m */; };
+		0FAB7A0118C65C010040677B /* CHChessClockTimeControlStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79E918C65C010040677B /* CHChessClockTimeControlStage.m */; };
+		0FAB7A0218C65C010040677B /* CHChessClockTimeControlStageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79EB18C65C010040677B /* CHChessClockTimeControlStageManager.m */; };
+		0FAB7A0318C65C010040677B /* CHChessClockIncrementTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79EE18C65C010040677B /* CHChessClockIncrementTableViewController.m */; };
+		0FAB7A0418C65C010040677B /* CHChessClockSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F018C65C010040677B /* CHChessClockSettingsTableViewController.m */; };
+		0FAB7A0518C65C010040677B /* CHChessClockTimeControlStageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F218C65C010040677B /* CHChessClockTimeControlStageTableViewController.m */; };
+		0FAB7A0618C65C010040677B /* CHChessClockTimeControlTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F418C65C010040677B /* CHChessClockTimeControlTableViewController.m */; };
+		0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F618C65C010040677B /* CHChessClockTimeViewController.m */; };
+		0FAB7A0818C65C010040677B /* CHChessClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F818C65C010040677B /* CHChessClockViewController.m */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
 		C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
@@ -35,6 +51,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0FAB79D718C65C010040677B /* CHChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClock.h; sourceTree = "<group>"; };
+		0FAB79D818C65C010040677B /* CHChessClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClock.m; sourceTree = "<group>"; };
+		0FAB79D918C65C010040677B /* CHTimePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTimePiece.h; sourceTree = "<group>"; };
+		0FAB79DA18C65C010040677B /* CHTimePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTimePiece.m; sourceTree = "<group>"; };
+		0FAB79DC18C65C010040677B /* CHChessClockBronsteinIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockBronsteinIncrement.h; sourceTree = "<group>"; };
+		0FAB79DD18C65C010040677B /* CHChessClockBronsteinIncrement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockBronsteinIncrement.m; sourceTree = "<group>"; };
+		0FAB79DE18C65C010040677B /* CHChessClockDelayIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockDelayIncrement.h; sourceTree = "<group>"; };
+		0FAB79DF18C65C010040677B /* CHChessClockDelayIncrement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockDelayIncrement.m; sourceTree = "<group>"; };
+		0FAB79E018C65C010040677B /* CHChessClockFischerIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockFischerIncrement.h; sourceTree = "<group>"; };
+		0FAB79E118C65C010040677B /* CHChessClockFischerIncrement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockFischerIncrement.m; sourceTree = "<group>"; };
+		0FAB79E218C65C010040677B /* CHChessClockIncrement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockIncrement.h; sourceTree = "<group>"; };
+		0FAB79E318C65C010040677B /* CHChessClockIncrement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockIncrement.m; sourceTree = "<group>"; };
+		0FAB79E418C65C010040677B /* CHChessClockSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockSettings.h; sourceTree = "<group>"; };
+		0FAB79E518C65C010040677B /* CHChessClockSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockSettings.m; sourceTree = "<group>"; };
+		0FAB79E618C65C010040677B /* CHChessClockSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockSettingsManager.h; sourceTree = "<group>"; };
+		0FAB79E718C65C010040677B /* CHChessClockSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockSettingsManager.m; sourceTree = "<group>"; };
+		0FAB79E818C65C010040677B /* CHChessClockTimeControlStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlStage.h; sourceTree = "<group>"; };
+		0FAB79E918C65C010040677B /* CHChessClockTimeControlStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlStage.m; sourceTree = "<group>"; };
+		0FAB79EA18C65C010040677B /* CHChessClockTimeControlStageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlStageManager.h; sourceTree = "<group>"; };
+		0FAB79EB18C65C010040677B /* CHChessClockTimeControlStageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlStageManager.m; sourceTree = "<group>"; };
+		0FAB79ED18C65C010040677B /* CHChessClockIncrementTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockIncrementTableViewController.h; sourceTree = "<group>"; };
+		0FAB79EE18C65C010040677B /* CHChessClockIncrementTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockIncrementTableViewController.m; sourceTree = "<group>"; };
+		0FAB79EF18C65C010040677B /* CHChessClockSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockSettingsTableViewController.h; sourceTree = "<group>"; };
+		0FAB79F018C65C010040677B /* CHChessClockSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockSettingsTableViewController.m; sourceTree = "<group>"; };
+		0FAB79F118C65C010040677B /* CHChessClockTimeControlStageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlStageTableViewController.h; sourceTree = "<group>"; };
+		0FAB79F218C65C010040677B /* CHChessClockTimeControlStageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlStageTableViewController.m; sourceTree = "<group>"; };
+		0FAB79F318C65C010040677B /* CHChessClockTimeControlTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlTableViewController.h; sourceTree = "<group>"; };
+		0FAB79F418C65C010040677B /* CHChessClockTimeControlTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlTableViewController.m; sourceTree = "<group>"; };
+		0FAB79F518C65C010040677B /* CHChessClockTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeViewController.h; sourceTree = "<group>"; };
+		0FAB79F618C65C010040677B /* CHChessClockTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeViewController.m; sourceTree = "<group>"; };
+		0FAB79F718C65C010040677B /* CHChessClockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockViewController.h; sourceTree = "<group>"; };
+		0FAB79F818C65C010040677B /* CHChessClockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockViewController.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +129,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FAB79D618C65C010040677B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0FAB79D718C65C010040677B /* CHChessClock.h */,
+				0FAB79D818C65C010040677B /* CHChessClock.m */,
+				0FAB79D918C65C010040677B /* CHTimePiece.h */,
+				0FAB79DA18C65C010040677B /* CHTimePiece.m */,
+				0FAB79DB18C65C010040677B /* Settings */,
+			);
+			name = Model;
+			path = Classes/Model;
+			sourceTree = "<group>";
+		};
+		0FAB79DB18C65C010040677B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0FAB79DC18C65C010040677B /* CHChessClockBronsteinIncrement.h */,
+				0FAB79DD18C65C010040677B /* CHChessClockBronsteinIncrement.m */,
+				0FAB79DE18C65C010040677B /* CHChessClockDelayIncrement.h */,
+				0FAB79DF18C65C010040677B /* CHChessClockDelayIncrement.m */,
+				0FAB79E018C65C010040677B /* CHChessClockFischerIncrement.h */,
+				0FAB79E118C65C010040677B /* CHChessClockFischerIncrement.m */,
+				0FAB79E218C65C010040677B /* CHChessClockIncrement.h */,
+				0FAB79E318C65C010040677B /* CHChessClockIncrement.m */,
+				0FAB79E418C65C010040677B /* CHChessClockSettings.h */,
+				0FAB79E518C65C010040677B /* CHChessClockSettings.m */,
+				0FAB79E618C65C010040677B /* CHChessClockSettingsManager.h */,
+				0FAB79E718C65C010040677B /* CHChessClockSettingsManager.m */,
+				0FAB79E818C65C010040677B /* CHChessClockTimeControlStage.h */,
+				0FAB79E918C65C010040677B /* CHChessClockTimeControlStage.m */,
+				0FAB79EA18C65C010040677B /* CHChessClockTimeControlStageManager.h */,
+				0FAB79EB18C65C010040677B /* CHChessClockTimeControlStageManager.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0FAB79EC18C65C010040677B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0FAB79ED18C65C010040677B /* CHChessClockIncrementTableViewController.h */,
+				0FAB79EE18C65C010040677B /* CHChessClockIncrementTableViewController.m */,
+				0FAB79EF18C65C010040677B /* CHChessClockSettingsTableViewController.h */,
+				0FAB79F018C65C010040677B /* CHChessClockSettingsTableViewController.m */,
+				0FAB79F118C65C010040677B /* CHChessClockTimeControlStageTableViewController.h */,
+				0FAB79F218C65C010040677B /* CHChessClockTimeControlStageTableViewController.m */,
+				0FAB79F318C65C010040677B /* CHChessClockTimeControlTableViewController.h */,
+				0FAB79F418C65C010040677B /* CHChessClockTimeControlTableViewController.m */,
+				0FAB79F518C65C010040677B /* CHChessClockTimeViewController.h */,
+				0FAB79F618C65C010040677B /* CHChessClockTimeViewController.m */,
+				0FAB79F718C65C010040677B /* CHChessClockViewController.h */,
+				0FAB79F818C65C010040677B /* CHChessClockViewController.m */,
+			);
+			name = ViewControllers;
+			path = Classes/ViewControllers;
+			sourceTree = "<group>";
+		};
 		C00DBBC118C52B8C00DDCB32 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +218,8 @@
 		C00DBBD318C52B8C00DDCB32 /* ChessClock */ = {
 			isa = PBXGroup;
 			children = (
+				0FAB79D618C65C010040677B /* Model */,
+				0FAB79EC18C65C010040677B /* ViewControllers */,
 				C00DBBDC18C52B8C00DDCB32 /* CHAppDelegate.h */,
 				C00DBBDD18C52B8C00DDCB32 /* CHAppDelegate.m */,
 				C00DBBDF18C52B8C00DDCB32 /* Main_iPhone.storyboard */,
@@ -254,9 +360,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */,
+				0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */,
+				0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */,
+				0FAB7A0118C65C010040677B /* CHChessClockTimeControlStage.m in Sources */,
+				0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */,
+				0FAB7A0518C65C010040677B /* CHChessClockTimeControlStageTableViewController.m in Sources */,
+				0FAB7A0218C65C010040677B /* CHChessClockTimeControlStageManager.m in Sources */,
 				C00DBBDA18C52B8C00DDCB32 /* main.m in Sources */,
+				0FAB7A0018C65C010040677B /* CHChessClockSettingsManager.m in Sources */,
+				0FAB7A0418C65C010040677B /* CHChessClockSettingsTableViewController.m in Sources */,
+				0FAB7A0618C65C010040677B /* CHChessClockTimeControlTableViewController.m in Sources */,
 				C00DBBDE18C52B8C00DDCB32 /* CHAppDelegate.m in Sources */,
+				0FAB79F918C65C010040677B /* CHChessClock.m in Sources */,
+				0FAB79FC18C65C010040677B /* CHChessClockDelayIncrement.m in Sources */,
+				0FAB7A0318C65C010040677B /* CHChessClockIncrementTableViewController.m in Sources */,
+				0FAB79FF18C65C010040677B /* CHChessClockSettings.m in Sources */,
 				C00DBBE718C52B8C00DDCB32 /* CHViewController.m in Sources */,
+				0FAB7A0818C65C010040677B /* CHChessClockViewController.m in Sources */,
+				0FAB79FD18C65C010040677B /* CHChessClockFischerIncrement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +597,7 @@
 				C00DBC0118C52B8C00DDCB32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C00DBC0218C52B8C00DDCB32 /* Build configuration list for PBXNativeTarget "ChessClockTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +606,7 @@
 				C00DBC0418C52B8C00DDCB32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
