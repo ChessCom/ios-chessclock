@@ -25,7 +25,7 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockIncrementTableViewController : UITableViewController
 
-@property (assign, nonatomic) id<CHChessClockIncrementTableViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<CHChessClockIncrementTableViewControllerDelegate> delegate;
 @property (retain, nonatomic) CHChessClockIncrement* increment;
 
 @end

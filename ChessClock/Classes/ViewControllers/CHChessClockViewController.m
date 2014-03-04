@@ -31,8 +31,8 @@
 @property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerTwoTimePieceViews;
 
 @property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *pauseButtons;
-@property (assign, nonatomic) IBOutlet UIButton *resetButtonPortrait;
-@property (assign, nonatomic) IBOutlet UIButton *resetButtonLandscape;
+@property (weak, nonatomic) IBOutlet UIButton *resetButtonPortrait;
+@property (weak, nonatomic) IBOutlet UIButton *resetButtonLandscape;
 
 @property (retain, nonatomic) CHChessClock* chessClock;
 

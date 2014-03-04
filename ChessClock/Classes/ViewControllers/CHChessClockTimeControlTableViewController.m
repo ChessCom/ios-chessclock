@@ -28,7 +28,7 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (assign, nonatomic) BOOL newTimeControlCreated;
 @property (assign, nonatomic) BOOL newTimeControlSaved;
-@property (assign, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
+@property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
 
 @end
 

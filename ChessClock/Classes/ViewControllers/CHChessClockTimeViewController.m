@@ -19,8 +19,8 @@ enum CHTimeComponents {
 //------------------------------------------------------------------------------
 @interface CHChessClockTimeViewController()
 
-@property (assign, nonatomic) IBOutlet UIView *timePickerParentView;
-@property (assign, nonatomic) IBOutlet UIPickerView* timePickerView;
+@property (weak, nonatomic) IBOutlet UIView *timePickerParentView;
+@property (weak, nonatomic) IBOutlet UIPickerView* timePickerView;
 
 @property (retain, nonatomic) NSMutableArray* components;
 @property (retain, nonatomic) NSDictionary* rowsDictionary;

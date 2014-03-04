@@ -25,7 +25,7 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockTimeViewController : UIViewController
 
-@property (assign, nonatomic) id<CHChessClockTimeViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<CHChessClockTimeViewControllerDelegate> delegate;
 @property (assign, nonatomic) NSUInteger maximumHours;
 @property (assign, nonatomic) NSUInteger maximumMinutes;
 @property (assign, nonatomic) NSUInteger maximumSeconds;

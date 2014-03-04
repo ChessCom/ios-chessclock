@@ -26,7 +26,7 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockTimeControlTableViewController : UITableViewController
 
-@property (assign, nonatomic) id<CHChessClockTimeControlTableViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDelegate> delegate;
 @property (retain, nonatomic) CHChessClockSettings* chessClockSettings;
 
 @end
