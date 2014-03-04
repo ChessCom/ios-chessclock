@@ -24,6 +24,7 @@
 		0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F618C65C010040677B /* CHChessClockTimeViewController.m */; };
 		0FAB7A0818C65C010040677B /* CHChessClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F818C65C010040677B /* CHChessClockViewController.m */; };
 		0FAB7A0C18C667FB0040677B /* CHUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB7A0B18C667FB0040677B /* CHUtil.m */; };
+		0FAB7A1018C680110040677B /* CHTimePieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB7A0F18C680110040677B /* CHTimePieceView.m */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
 		C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
@@ -86,6 +87,8 @@
 		0FAB79F818C65C010040677B /* CHChessClockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockViewController.m; sourceTree = "<group>"; };
 		0FAB7A0A18C667FB0040677B /* CHUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHUtil.h; path = Classes/Other/CHUtil.h; sourceTree = "<group>"; };
 		0FAB7A0B18C667FB0040677B /* CHUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHUtil.m; path = Classes/Other/CHUtil.m; sourceTree = "<group>"; };
+		0FAB7A0E18C680110040677B /* CHTimePieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTimePieceView.h; path = Classes/Views/CHTimePieceView.h; sourceTree = "<group>"; };
+		0FAB7A0F18C680110040677B /* CHTimePieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTimePieceView.m; path = Classes/Views/CHTimePieceView.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -197,6 +200,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		0FAB7A0D18C67FF00040677B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0FAB7A0E18C680110040677B /* CHTimePieceView.h */,
+				0FAB7A0F18C680110040677B /* CHTimePieceView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C00DBBC118C52B8C00DDCB32 = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +242,7 @@
 		C00DBBD318C52B8C00DDCB32 /* ChessClock */ = {
 			isa = PBXGroup;
 			children = (
+				0FAB7A0D18C67FF00040677B /* Views */,
 				0FAB7A0918C667D30040677B /* Other */,
 				0FAB79D618C65C010040677B /* Model */,
 				0FAB79EC18C65C010040677B /* ViewControllers */,
@@ -377,6 +390,7 @@
 				0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */,
 				0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */,
 				0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */,
+				0FAB7A1018C680110040677B /* CHTimePieceView.m in Sources */,
 				0FAB7A0118C65C010040677B /* CHChessClockTimeControlStage.m in Sources */,
 				0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */,
 				0FAB7A0518C65C010040677B /* CHChessClockTimeControlStageTableViewController.m in Sources */,

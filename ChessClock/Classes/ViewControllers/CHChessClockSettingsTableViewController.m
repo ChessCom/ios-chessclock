@@ -57,12 +57,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-#warning What are Helper functions
-//    [HelperFunctions dressUpButton:self.startClockButton
-//                                BG:@"button_big_orange.png"
-//                           HoverBG:@"button_big_grey.png"
-//                             Title:NSLocalizedString(@"Start Clock", nil)
-//                        StretchCap:13.0f];
     
     [self.startClockButton setBackgroundImage:nil forState:UIControlStateHighlighted];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7){

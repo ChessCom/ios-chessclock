@@ -75,7 +75,6 @@
         UIImageView* imageView = [[UIImageView alloc] initWithImage:timeStageNotCompletedImage];
         imageView.center = CGPointMake(posX, posY);
         [self.timeStagesView addSubview:imageView];
-        [imageView release];
         
         posX += distanceBetweenDots;
     }
