@@ -34,19 +34,6 @@
 //------------------------------------------------------------------------------
 @implementation CHChessClock
 
-- (void)dealloc
-{
-    [_settings release];
-    [_timePiecesDictionary release];
-    [_playerOneTimePiece release];
-    [_playerTwoTimePiece release];
-    [_timer release];
-    
-    _delegate = nil;
-    
-    [super dealloc];
-}
-
 - (id)initWithSettings:(CHChessClockSettings*)settings
            andDelegate:(id<CHChessClockDelegate>)delegate
 {
@@ -62,14 +49,12 @@
                                                         andTimeControlStageManager:settings.stageManager];
         self.playerOneTimePiece = playerOneTimePiece;
         self.playerOneTimePiece.delegate = self;
-        [playerOneTimePiece release];
         
         CHTimePiece* playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:2
                                                         andTimeControlStageManager:settings.stageManager];
         
         self.playerTwoTimePiece = playerTwoTimePiece;
         self.playerTwoTimePiece.delegate = self;
-        [playerTwoTimePiece release];
         
         self.timePiecesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                      self.playerOneTimePiece, [NSNumber numberWithInt:self.playerOneTimePiece.timePieceId],
@@ -185,8 +170,7 @@
 - (void)setSettings:(CHChessClockSettings *)settings
 {
     if (_settings != settings) {
-        [_settings release];
-        _settings = [settings retain];
+        _settings = settings;
         
         for (CHTimePiece* currentTimePiece in [self.timePiecesDictionary allValues]) {
             currentTimePiece.stageManager = _settings.stageManager;

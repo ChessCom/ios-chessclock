@@ -12,7 +12,7 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
-#import "ChessAppDelegate.h"
+//#import "ChessAppDelegate.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -24,7 +24,7 @@
 @property (retain, nonatomic) IBOutlet UIButton* startClockButton;
 
 @property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
-@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
+//@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
 
 @property (retain, nonatomic) UIViewController* currentViewController;
 @property (retain, nonatomic) CHChessClockViewController* chessClockViewController;
@@ -44,36 +44,25 @@ static const NSUInteger CHRestoreDefaultsSection = 3;
 static const NSUInteger CHRestoreDefaultsButtonTag = 1;
 static const NSUInteger CHDestructiveButtonIndex = 0;
 
-- (void)dealloc
-{
-    [_orientationTableViewCell release];
-    [_startClockButton release];
-    [_settingsManager release];
-    [_m_pAppDelegate release];
-    [_currentViewController release];
-    [_chessClockViewController release];
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.m_pAppDelegate = (ChessAppDelegate*)[[UIApplication sharedApplication] delegate];
+#warning What do we do with delegate?
+    // self.m_pAppDelegate = (ChessAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-                                                    initWithUserName:self.m_pAppDelegate.m_strUserName];
-    self.settingsManager = settingsManager;
-    [settingsManager release];
+    // CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
+    //                                                 initWithUserName:self.m_pAppDelegate.m_strUserName];
+    //self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [HelperFunctions dressUpButton:self.startClockButton
-                                BG:@"button_big_orange.png"
-                           HoverBG:@"button_big_grey.png"
-                             Title:NSLocalizedString(@"Start Clock", nil)
-                        StretchCap:13.0f];
+#warning What are Helper functions
+//    [HelperFunctions dressUpButton:self.startClockButton
+//                                BG:@"button_big_orange.png"
+//                           HoverBG:@"button_big_grey.png"
+//                             Title:NSLocalizedString(@"Start Clock", nil)
+//                        StretchCap:13.0f];
     
     [self.startClockButton setBackgroundImage:nil forState:UIControlStateHighlighted];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7){
@@ -128,7 +117,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 {
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
     return cell;
@@ -139,13 +128,12 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     NSString* cellIdentifier = @"CHRestoreDefaultsCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView = backgroundView;
-        [backgroundView release];
         
         UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         button.frame = cell.bounds;
@@ -174,7 +162,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
                     forControlEvents:UIControlEventValueChanged];
         
         cell.accessoryView = orientationSwitch;
-        [orientationSwitch release];
     }
     
     UISwitch* orientationSwitch = (UISwitch*)cell.accessoryView;
@@ -243,7 +230,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.currentViewController = timeControlViewController;
     
     [self.navigationController pushViewController:timeControlViewController animated:YES];
-    [timeControlViewController release];
 }
 
 //------------------------------------------------------------------------------
@@ -272,8 +258,9 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     }
     else if(section == CHLandscapeMode)
     {
-        if(self.m_pAppDelegate.m_bIPad)
-            return 0;
+#warning What do we do with delegate?
+//        if(self.m_pAppDelegate.m_bIPad)
+//            return 0;
         return 1;
     }
     
@@ -391,7 +378,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
                                                   cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                                   otherButtonTitles:nil, nil];
             [alert show];
-            [alert release];
         }
     }
 }
@@ -446,7 +432,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:CHRestoreDefaultsSection]];
     UIButton* restoreButton = (UIButton*)[cell viewWithTag:CHRestoreDefaultsButtonTag];
     [actionSheet showFromRect:restoreButton.bounds inView:restoreButton animated:YES];
-    [actionSheet release];
 }
 
 - (IBAction)startClockTapped
@@ -455,7 +440,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
         NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
         CHChessClockViewController* chessClockVC = [[CHChessClockViewController alloc] initWithNibName:nibName bundle:nil];
         self.chessClockViewController = chessClockVC;
-        [chessClockVC release];
     }
     
     self.chessClockViewController.settingsManager = self.settingsManager;

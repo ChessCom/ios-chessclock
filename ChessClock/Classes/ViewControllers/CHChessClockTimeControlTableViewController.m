@@ -47,17 +47,6 @@ static const NSUInteger CHNameTextFieldTag = 1;
 
 static const NSUInteger CHMaxTimeControlStages = 3;
 
-- (void)dealloc
-{
-    _delegate = nil;
-    _stageToUpdate = nil;
-
-    [_nameTableViewCell release];
-    [_chessClockSettings release];
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,7 +62,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
                                                target:self action:@selector(saveButtonTapped)];
 
         self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-        [rightBarButtonItem release];
         
         self.navigationItem.rightBarButtonItem.enabled = NO;
         
@@ -87,10 +75,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
                                                                                increment:increment
                                                                          andStageManager:stageManager];
         self.chessClockSettings = clockSettings;
-
-        [clockSettings release];
-        [increment release];
-        [stageManager release];
     }
     else {
         self.newTimeControlCreated = NO;
@@ -295,8 +279,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     NSString* cellIdentifier = @"CHChessClockTimeControlStageCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                       reuseIdentifier:cellIdentifier];
 
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
     }
@@ -320,15 +304,14 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     NSString* cellIdentifier = @"CHChessClockNewTimeControlStageCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:cellIdentifier];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView = backgroundView;
-        [backgroundView release];
         
         UIButton* addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         addButton.frame = cell.bounds;
@@ -346,8 +329,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     NSString* cellIdentifier = @"CHChessClockIncrementCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                       reuseIdentifier:cellIdentifier];
         
         cell.textLabel.text = NSLocalizedString(@"Type", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -420,7 +403,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
                                            initWithMovesCount:0 andMaximumTime:300];
     
     [self.chessClockSettings.stageManager addTimeStage:stage];
-    [stage release];
     
     NSUInteger stageCount = [self.chessClockSettings.stageManager stageCount];
     
@@ -483,8 +465,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         else {
             [self.navigationController pushViewController:timeViewController animated:YES];
         }
-
-        [timeViewController release];
     }
     else {
         NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeControlStageView"];
@@ -496,7 +476,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         stageViewController.timeControlStage = [self.chessClockSettings.stageManager stageAtIndex:indexPath.row];
         
         [self.navigationController pushViewController:stageViewController animated:YES];
-        [stageViewController release];
     }
 }
 
@@ -510,7 +489,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     vc.delegate = self;
 
     [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
 }
 
 //------------------------------------------------------------------------------
@@ -550,7 +528,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
-    [popoverController release];
 }
 
 //------------------------------------------------------------------------------

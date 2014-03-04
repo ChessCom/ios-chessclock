@@ -35,15 +35,6 @@ static const NSUInteger CHDelaySegmentIndex = 0;
 static const NSUInteger CHBronsteinSegmentIndex = 1;
 static const NSUInteger CHFischerSegmentIndex = 2;
 
-- (void)dealloc
-{
-    _delegate = nil;
-    [_increment release];
-    [_incrementsTypesDictionary release];
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -82,7 +73,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     CHChessClockIncrement* increment = [[NSClassFromString(selectedIncrementClassName) alloc]
                                         initWithIncrementValue:self.selectedIncrementValue];
     self.increment = increment;
-    [increment release];
     
     [self.delegate chessClockIncrementTableViewControllerUpdatedIncrement:self];
     
@@ -95,13 +85,12 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     NSString* reuseIdentifier = @"CHIncrementTypeCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView = backgroundView;
-        [backgroundView release];
 
         UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                                 [NSArray arrayWithObjects:@"Delay",
@@ -112,7 +101,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [segmentedControl addTarget:self action:@selector(incrementTypeChanged:) forControlEvents:UIControlEventValueChanged];
         [cell.contentView addSubview:segmentedControl];
-        [segmentedControl release];
     }
     
     NSString* incrementClassName = NSStringFromClass([self.increment class]);
@@ -127,7 +115,7 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     NSString* reuseIdentifier = @"CHIncrementValueCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -176,8 +164,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     else {
         [self.navigationController pushViewController:timeViewController animated:YES];
     }
-    
-    [timeViewController release];
 }
 
 //------------------------------------------------------------------------------
@@ -256,7 +242,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 {
     NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
-    [popoverController release];
 }
 
 //------------------------------------------------------------------------------

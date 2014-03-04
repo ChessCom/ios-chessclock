@@ -41,16 +41,6 @@ static const NSUInteger CHDeleteButtonIndex = 0;
 
 static const NSUInteger CHMaxMoves = 99;
 
-- (void)dealloc
-{
-    _delegate = nil;
-    [_timeControlStage release];
-    [_timeControlStageManager release];
-    [_movesTableViewCell release];
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -103,8 +93,8 @@ static const NSUInteger CHMaxMoves = 99;
     NSString* cellIdentifier = @"CHChessClockTimeCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                       reuseIdentifier:cellIdentifier];
         
         cell.textLabel.text = NSLocalizedString(@"Time", nil);
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
@@ -145,15 +135,14 @@ static const NSUInteger CHMaxMoves = 99;
     NSString* cellIdentifier = @"CHChessClockDeleteCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:cellIdentifier];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView = backgroundView;
-        [backgroundView release];
         
         UIButton* deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         deleteButton.tag = CHDeleteButtonTag;
@@ -195,7 +184,6 @@ static const NSUInteger CHMaxMoves = 99;
     
     UIButton* deleteButton = (UIButton*)[cell viewWithTag:CHDeleteButtonTag];
     [actionSheet showFromRect:deleteButton.bounds inView:deleteButton animated:YES];
-    [actionSheet release];
 }
 
 - (void)updateMovesCountTextFieldWithCell:(UITableViewCell*)cell
@@ -235,8 +223,6 @@ static const NSUInteger CHMaxMoves = 99;
     else {
         [self.navigationController pushViewController:timeViewController animated:YES];
     }
-    
-    [timeViewController release];
 }
 
 - (void)selectedMovesCellWithIndexPath:(NSIndexPath*)indexPath
@@ -264,7 +250,6 @@ static const NSUInteger CHMaxMoves = 99;
 {
     NSIndexPath* selectedIndexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
-    [popoverController release];
 }
 
 //------------------------------------------------------------------------------
