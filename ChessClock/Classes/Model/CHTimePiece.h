@@ -28,7 +28,7 @@
 //------------------------------------------------------------------------------
 @interface CHTimePiece : NSObject
 
-@property (assign, nonatomic) id<CHTimePieceDelegate> delegate;
+@property (weak, nonatomic) id<CHTimePieceDelegate> delegate;
 @property (assign, nonatomic) BOOL updateAvailableTime;
 @property (retain, nonatomic) CHChessClockTimeControlStageManager* stageManager;
 

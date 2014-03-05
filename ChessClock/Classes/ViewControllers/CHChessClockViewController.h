@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
 @class CHChessClockSettingsManager;
 @class CHTimePieceView;
 
-@interface CHChessClockViewController : BaseViewController
+@interface CHChessClockViewController : UIViewController
 
 @property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
 

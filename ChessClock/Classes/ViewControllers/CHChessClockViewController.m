@@ -14,9 +14,10 @@
 #import "CHChessClockSettingsManager.h"
 #import "CHTimePiece.h"
 #import "CHTimePieceView.h"
+
 #import "CHUtil.h"
 
-#import "ChessAppDelegate.h"
+//#import "ChessAppDelegate.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -31,8 +32,8 @@
 @property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerTwoTimePieceViews;
 
 @property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *pauseButtons;
-@property (assign, nonatomic) IBOutlet UIButton *resetButtonPortrait;
-@property (assign, nonatomic) IBOutlet UIButton *resetButtonLandscape;
+@property (weak, nonatomic) IBOutlet UIButton *resetButtonPortrait;
+@property (weak, nonatomic) IBOutlet UIButton *resetButtonLandscape;
 
 @property (retain, nonatomic) CHChessClock* chessClock;
 
@@ -51,16 +52,6 @@ static const float CHShowTenthsTime = 10.0f;
     
     [self disableIdleTimer:NO];
     [self.chessClock cleanup];
-    
-    [_portraitView release];
-    [_landscapeView release];
-    [_playerOneTimePieceViews release];
-    [_playerTwoTimePieceViews release];
-    [_pauseButtons release];
-    [_chessClock release];
-    [_settingsManager release];
-    
-    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -75,7 +66,6 @@ static const float CHShowTenthsTime = 10.0f;
     CHChessClock* chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
                                                           andDelegate:self];
     self.chessClock = chessClock;
-    [chessClock release];
 
     [self resetClock];
 }
@@ -200,7 +190,8 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)playSound:(NSString*)soundName
 {
-    [m_pAppDelegate.m_pSoundsManager playSound:soundName];
+#warning Sound playing through AppDelegate
+    //[m_pAppDelegate.m_pSoundsManager playSound:soundName];
 }
 
 - (void)pauseClock
@@ -220,7 +211,7 @@ static const float CHShowTenthsTime = 10.0f;
     for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
         [timePieceView unhighlightAndActivate:YES];
     }
-        
+    
     UIImage* image = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_pauseButtonNormal"]];
     for (UIButton* button in self.pauseButtons) {
         [button setBackgroundImage:image forState:UIControlStateNormal];
@@ -246,6 +237,7 @@ static const float CHShowTenthsTime = 10.0f;
         [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
     
         NSArray* selectedTimePieceViews = [self timePieceViewsWithId:selectedTimePieceId];
+        
         for (CHTimePieceView* selectedTimePieceView in selectedTimePieceViews) {
             [selectedTimePieceView unhighlightAndActivate:NO];
         }
@@ -254,15 +246,15 @@ static const float CHShowTenthsTime = 10.0f;
             for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
                 [timePieceView highlight];
             }
-
-            [self playSound:SOUND_TIME_PIECE_PLAYER_1];
+#warning App Delegate?
+            //[self playSound:SOUND_TIME_PIECE_PLAYER_1];
         }
         else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
             for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
                 [timePieceView highlight];
             }
-
-            [self playSound:SOUND_TIME_PIECE_PLAYER_2];
+#warning App Delegate?
+            //[self playSound:SOUND_TIME_PIECE_PLAYER_2];
         }
     }
 }
@@ -297,8 +289,6 @@ static const float CHShowTenthsTime = 10.0f;
     else {
         [actionSheet showInView:self.view];
     }
-    
-    [actionSheet release];
 }
 
 - (IBAction)pauseTapped
@@ -334,6 +324,7 @@ static const float CHShowTenthsTime = 10.0f;
     NSTimeInterval timePieceAvailableTime = timePiece.availableTime;
     BOOL showTenths = timePieceAvailableTime < CHShowTenthsTime;
     
+    
     for (CHTimePieceView* timePieceView in timePieceViews) {
         timePieceView.availableTimeLabel.text = [CHUtil formatTime:timePieceAvailableTime showTenths:showTenths];
     }
@@ -344,7 +335,7 @@ static const float CHShowTenthsTime = 10.0f;
     NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
 
     NSString* movesText = NSLocalizedString(@"Moves", nil);
-    movesText = [movesText stringByAppendingFormat:@": %d", timePiece.movesCount];
+    movesText = [movesText stringByAppendingFormat:@": %ld", (long)timePiece.movesCount];
     
     for (CHTimePieceView* timePieceView in timePieceViews) {
         timePieceView.movesCountLabel.text = movesText;
@@ -374,7 +365,7 @@ static const float CHShowTenthsTime = 10.0f;
             [timePieceView unhighlightAndActivate:NO];
         }
     }
-
+    
     for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
         if (timePieceView.tag == timePiece.timePieceId) {
             [timePieceView timeEnded];
@@ -384,7 +375,8 @@ static const float CHShowTenthsTime = 10.0f;
         }
     }
 
-    [self playSound:SOUND_TIME_PIECE_TIME_ENDED];
+#warning Sounds play through App Delegate
+    //[self playSound:SOUND_TIME_PIECE_TIME_ENDED];
     [self disableIdleTimer:NO];
 }
 

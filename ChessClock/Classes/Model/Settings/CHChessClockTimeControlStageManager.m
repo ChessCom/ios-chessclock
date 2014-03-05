@@ -26,12 +26,6 @@
 
 static NSString* const CHTimeStagesArchiveKey = @"timeStages";
 
-- (void)dealloc
-{
-    [_timeControlStages release];
-    [super dealloc];
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
@@ -54,7 +48,6 @@ static NSString* const CHTimeStagesArchiveKey = @"timeStages";
                                                                                     andMaximumTime:maximumTimeInSeconds];
     
     [self.timeControlStages addObject:stage];
-    [stage release];
 }
 
 - (void)addTimeStage:(CHChessClockTimeControlStage*)stage
@@ -105,9 +98,7 @@ static NSString* const CHTimeStagesArchiveKey = @"timeStages";
 - (NSMutableArray*)timeControlStages
 {
     if (_timeControlStages == nil) {
-        NSMutableArray* stages = [[NSMutableArray alloc] init];
-        _timeControlStages = [stages retain];
-        [stages release];
+        _timeControlStages = [[NSMutableArray alloc] init];
     }
     
     return _timeControlStages;

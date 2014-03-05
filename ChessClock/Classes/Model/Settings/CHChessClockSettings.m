@@ -27,15 +27,6 @@ static NSString* const CHNameArchiveKey = @"name";
 static NSString* const CHIncrementArchiveKey = @"increment";
 static NSString* const CHTimeStagesManagerArchiveKey = @"timeStagesManager";
 
-- (void)dealloc
-{
-    [_name release];
-    [_increment release];
-    [_stageManager release];
-    
-    [super dealloc];
-}
-
 - (id)initWithName:(NSString*)name increment:(CHChessClockIncrement*)increment
    andStageManager:(CHChessClockTimeControlStageManager*)stageManager;
 {
