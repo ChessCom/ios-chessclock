@@ -53,7 +53,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
     [self selectInitialTime];
     [self createSelectionIndicatorLabels];
     
-    self.contentSizeForViewInPopover = CGSizeMake(320.0f, self.timePickerView.bounds.size.height);
+    self.preferredContentSize = CGSizeMake(320.0f, self.timePickerView.bounds.size.height);
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -202,7 +202,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             break;
     }
     
-    [cell setFont:[UIFont boldSystemFontOfSize:15]];
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
     return cell;
 }
 

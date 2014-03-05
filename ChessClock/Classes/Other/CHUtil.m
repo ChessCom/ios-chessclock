@@ -41,17 +41,17 @@
         
     if (hours > 0) {
         if (showTenths) {
-            return [NSString stringWithFormat:@"%d:%02d:%04.1f", hours, minutes, seconds + fmod(timeInSeconds, 1.0f)];
+            return [NSString stringWithFormat:@"%ld:%02ld:%04.1f", (long)hours, (long)minutes, seconds + fmod(timeInSeconds, 1.0f)];
         }
 
-        return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes, seconds];
+        return [NSString stringWithFormat:@"%ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
     }
     else {
         if (showTenths) {
-            return [NSString stringWithFormat:@"%d:%04.1f", minutes, seconds + fmod(timeInSeconds, 1.0f)];
+            return [NSString stringWithFormat:@"%ld:%04.1f", (long)minutes, seconds + fmod(timeInSeconds, 1.0f)];
         }
         
-        return [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+        return [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
     }
 }
 

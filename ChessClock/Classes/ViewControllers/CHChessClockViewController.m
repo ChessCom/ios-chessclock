@@ -335,7 +335,7 @@ static const float CHShowTenthsTime = 10.0f;
     NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
 
     NSString* movesText = NSLocalizedString(@"Moves", nil);
-    movesText = [movesText stringByAppendingFormat:@": %d", timePiece.movesCount];
+    movesText = [movesText stringByAppendingFormat:@": %ld", (long)timePiece.movesCount];
     
     for (CHTimePieceView* timePieceView in timePieceViews) {
         timePieceView.movesCountLabel.text = movesText;

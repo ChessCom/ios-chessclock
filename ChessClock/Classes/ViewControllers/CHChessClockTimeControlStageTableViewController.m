@@ -82,7 +82,7 @@ static const NSUInteger CHMaxMoves = 99;
             secondsString = NSLocalizedString(@"sec", @"Abbreviation for second");
         }
 
-        maximumTimeString = [NSString stringWithFormat:@"%d %@", maximumTime, secondsString];
+        maximumTimeString = [NSString stringWithFormat:@"%ld %@", (long)maximumTime, secondsString];
     }
     
     return maximumTimeString;
@@ -161,7 +161,7 @@ static const NSUInteger CHMaxMoves = 99;
     NSUInteger moves = [sender.text integerValue];
     if (moves > CHMaxMoves) {
         moves = CHMaxMoves;
-        sender.text = [NSString stringWithFormat:@"%d", moves];
+        sender.text = [NSString stringWithFormat:@"%ld", (long)moves];
     }
 }
 
@@ -189,7 +189,7 @@ static const NSUInteger CHMaxMoves = 99;
 - (void)updateMovesCountTextFieldWithCell:(UITableViewCell*)cell
 {
     UITextField* movesCountTextfield = (UITextField*)[cell viewWithTag:CHMovesCountTextFieldTag];
-    movesCountTextfield.text = [NSString stringWithFormat:@"%d", self.timeControlStage.movesCount];
+    movesCountTextfield.text = [NSString stringWithFormat:@"%ld", (long)self.timeControlStage.movesCount];
 }
 
 - (BOOL)isFirstStage

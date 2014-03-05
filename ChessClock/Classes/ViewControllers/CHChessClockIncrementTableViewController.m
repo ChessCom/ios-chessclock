@@ -198,7 +198,7 @@ static const NSUInteger CHFischerSegmentIndex = 2;
             break;
     }
 
-    [cell setFont:[UIFont boldSystemFontOfSize:15]];
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
     return cell;
 }
 

@@ -57,7 +57,7 @@ static NSString* const CHMaximumTimeArchiveKey = @"maximumTime";
                 secondsString = NSLocalizedString(@"sec", @"Abbreviation for second");
             }
             
-            maximumTimeString = [NSString stringWithFormat:@"%d %@", self.maximumTime, secondsString];
+            maximumTimeString = [NSString stringWithFormat:@"%ld %@", (long)self.maximumTime, secondsString];
         }
         
         if (self.movesCount != 0) {
@@ -66,7 +66,7 @@ static NSString* const CHMaximumTimeArchiveKey = @"maximumTime";
                 movesString = NSLocalizedString(@"move in", nil);
             }
             
-            return [NSString stringWithFormat:@"%d %@ %@", self.movesCount, movesString, maximumTimeString];
+            return [NSString stringWithFormat:@"%ld %@ %@", (long)self.movesCount, movesString, maximumTimeString];
         }
         else {
             return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Game in", nil), maximumTimeString];

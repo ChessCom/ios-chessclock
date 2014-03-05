@@ -149,7 +149,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     
     if (cell.accessoryView == nil) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.text = NSLocalizedString(@"Landscape Mode", nil);
+        cell.textLabel.text = NSLocalizedString(@"Landscape Mode", nil);
         
         UISwitch* orientationSwitch = [[UISwitch alloc] init];
         [orientationSwitch addTarget:self action:@selector(landscapeValueChanged:)
@@ -294,7 +294,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
             break;
     }
     
-    [cell setFont:[UIFont boldSystemFontOfSize:15]];
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
     
     return cell;
 }
