@@ -23,7 +23,7 @@
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) IBOutlet UIButton* startClockButton;
 
-@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
+//@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
 //@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
 
 @property (retain, nonatomic) UIViewController* currentViewController;
@@ -47,12 +47,9 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-#warning What do we do with delegate?
-    // self.m_pAppDelegate = (ChessAppDelegate*)[[UIApplication sharedApplication] delegate];
-
+ 
     CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-                                                     initWithUserName:@"pedro"];
+                                                     initWithUserName:@"settingsManager"];
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
@@ -436,7 +433,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
         self.chessClockViewController = chessClockVC;
     }
     
-    self.chessClockViewController.settingsManager = self.settingsManager;
+    //self.chessClockViewController.settingsManager = self.settingsManager;
     self.currentViewController = self.chessClockViewController;
     [self.navigationController pushViewController:self.chessClockViewController animated:YES];
 }

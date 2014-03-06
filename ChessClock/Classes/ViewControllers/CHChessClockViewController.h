@@ -13,6 +13,4 @@
 
 @interface CHChessClockViewController : UIViewController
 
-@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
-
 @end

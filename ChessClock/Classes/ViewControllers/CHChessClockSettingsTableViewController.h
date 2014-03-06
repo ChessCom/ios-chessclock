@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class CHChessClockSettingsManager;
+
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewController
 //------------------------------------------------------------------------------
 @interface CHChessClockSettingsTableViewController : UITableViewController
 
-
+@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
 
 @end

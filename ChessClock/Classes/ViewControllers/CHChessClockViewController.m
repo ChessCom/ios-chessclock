@@ -37,6 +37,8 @@
 
 @property (retain, nonatomic) CHChessClock* chessClock;
 
+@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
+
 @end
 
 //------------------------------------------------------------------------------
@@ -266,7 +268,14 @@ static const float CHShowTenthsTime = 10.0f;
 - (IBAction)settingsTapped
 {
     [self pauseClock];
-    [self.navigationController popViewControllerAnimated:YES];
+ 
+    NSString *nibName = [CHUtil nibNameWithBaseName:@"CHChessClockSettingsView"];
+    CHChessClockSettingsTableViewController *settingsViewController =
+    [[CHChessClockSettingsTableViewController alloc] initWithNibName:nibName
+                                                              bundle:nil];
+    settingsViewController.settingsManager = self.settingsManager;
+    [self.navigationController pushViewController:settingsViewController
+                                         animated:YES];
 }
 
 - (IBAction)resetTapped
