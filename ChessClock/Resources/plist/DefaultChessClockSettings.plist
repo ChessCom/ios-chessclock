@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>defaultSettings</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Bronstein Rapid 25|10</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockBronsteinIncrement</string>
+				<key>incrementValue</key>
+				<integer>10</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>25</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Fischer Rapid 10|5</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>5</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>10</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Fischer Blitz 5|5</string>
+			<key>default</key>
+			<true/>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>5</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>5</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Delay Bullet 1|2</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockDelayIncrement</string>
+				<key>incrementValue</key>
+				<integer>2</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>1</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

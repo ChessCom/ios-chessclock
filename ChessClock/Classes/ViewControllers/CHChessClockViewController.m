@@ -58,6 +58,10 @@ static const float CHShowTenthsTime = 10.0f;
 {
     [super viewDidLoad];
     
+    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
+                                                    initWithUserName:@"pedro"];
+    self.settingsManager = settingsManager;
+    
     [self registerToApplicationNotification:UIApplicationDidEnterBackgroundNotification];
     [self registerToApplicationNotification:UIApplicationWillResignActiveNotification];
     
@@ -246,14 +250,14 @@ static const float CHShowTenthsTime = 10.0f;
             for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
                 [timePieceView highlight];
             }
-#warning App Delegate?
+#warning Sound playing through AppDelegate
             //[self playSound:SOUND_TIME_PIECE_PLAYER_1];
         }
         else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
             for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
                 [timePieceView highlight];
             }
-#warning App Delegate?
+#warning Sound playing through AppDelegate
             //[self playSound:SOUND_TIME_PIECE_PLAYER_2];
         }
     }

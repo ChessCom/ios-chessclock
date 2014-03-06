@@ -54,6 +54,7 @@
 		C00DBBF218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
 		C00DBBFA18C52B8C00DDCB32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C00DBBF818C52B8C00DDCB32 /* InfoPlist.strings */; };
 		C00DBBFC18C52B8C00DDCB32 /* ChessClockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */; };
+		F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		C00DBBF718C52B8C00DDCB32 /* ChessClockTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChessClockTests-Info.plist"; sourceTree = "<group>"; };
 		C00DBBF918C52B8C00DDCB32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessClockTests.m; sourceTree = "<group>"; };
+		F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DefaultChessClockSettings.plist; path = Resources/plist/DefaultChessClockSettings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 		0FC6824418C7E0C70064421D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F31CC1A318C8C4650072398C /* plist */,
 				0FC6826418C7E16F0064421D /* sounds */,
 				0FC6824518C7E1080064421D /* xibs */,
 			);
@@ -370,6 +373,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F31CC1A318C8C4650072398C /* plist */ = {
+			isa = PBXGroup;
+			children = (
+				F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */,
+			);
+			name = plist;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -460,6 +471,7 @@
 				0FC6826818C7E16F0064421D /* chess_clock_switch1.mp3 in Resources */,
 				0FC6825718C7E1170064421D /* CHChessClockSettingsView_iPad.xib in Resources */,
 				0FC6826218C7E1170064421D /* CHChessClockTimeView_iPhone.xib in Resources */,
+				F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */,
 				0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */,
 				0FC6825A18C7E1170064421D /* CHChessClockTimeView_iPad.xib in Resources */,
 				C00DBBD818C52B8C00DDCB32 /* InfoPlist.strings in Resources */,

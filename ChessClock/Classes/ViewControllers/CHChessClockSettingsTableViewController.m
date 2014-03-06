@@ -51,9 +51,9 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 #warning What do we do with delegate?
     // self.m_pAppDelegate = (ChessAppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    // CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-    //                                                 initWithUserName:self.m_pAppDelegate.m_strUserName];
-    //self.settingsManager = settingsManager;
+    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
+                                                     initWithUserName:@"pedro"];
+    self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
