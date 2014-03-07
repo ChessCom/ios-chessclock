@@ -27,7 +27,7 @@
 //@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
 
 @property (retain, nonatomic) UIViewController* currentViewController;
-@property (retain, nonatomic) CHChessClockViewController* chessClockViewController;
+//@property (retain, nonatomic) CHChessClockViewController* chessClockViewController;
 
 @end
 
@@ -84,7 +84,11 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 - (void)updateClockSettings:(CHChessClockSettings*)clockSettings
 {
     self.settingsManager.currentTimeControl = clockSettings;
-    self.chessClockViewController = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(settingsTableViewController:didUpdateSettings:)]) {
+       [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
+                           withObject:self withObject:clockSettings];
+    }
 }
 
 - (void)saveSettings
@@ -427,7 +431,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (IBAction)startClockTapped
 {
-    if (self.chessClockViewController == nil) {
+    /*if (self.chessClockViewController == nil) {
         NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
         CHChessClockViewController* chessClockVC = [[CHChessClockViewController alloc] initWithNibName:nibName bundle:nil];
         self.chessClockViewController = chessClockVC;
@@ -435,7 +439,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     
     //self.chessClockViewController.settingsManager = self.settingsManager;
     self.currentViewController = self.chessClockViewController;
-    [self.navigationController pushViewController:self.chessClockViewController animated:YES];
+    [self.navigationController pushViewController:self.chessClockViewController animated:YES];*/
 }
 
 @end

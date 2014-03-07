@@ -23,7 +23,9 @@
 #pragma mark - Private methods declarations
 //------------------------------------------------------------------------------
 @interface CHChessClockViewController()
-<CHChessClockDelegate, UIActionSheetDelegate>
+<CHChessClockDelegate,
+UIActionSheetDelegate,
+CHChessClockSettingsTableViewControllerDelegate>
 
 @property (retain, nonatomic) IBOutlet UIView *portraitView;
 @property (retain, nonatomic) IBOutlet UIView *landscapeView;
@@ -60,25 +62,20 @@ static const float CHShowTenthsTime = 10.0f;
 {
     [super viewDidLoad];
     
-    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-                                                    initWithUserName:@"pedro"];
-    self.settingsManager = settingsManager;
-    
     [self registerToApplicationNotification:UIApplicationDidEnterBackgroundNotification];
     [self registerToApplicationNotification:UIApplicationWillResignActiveNotification];
     
     self.title = NSLocalizedString(@"Clock", nil);
-        
-    CHChessClock* chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
-                                                          andDelegate:self];
-    self.chessClock = chessClock;
-
-    [self resetClock];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+ 
+    // Set Clock
+    self.chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
+                                                          andDelegate:self];
+    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     // Rotate the view according to the orientation selected by the user
@@ -103,6 +100,8 @@ static const float CHShowTenthsTime = 10.0f;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self rotateMainView];
     }
+    
+    [self resetClock];
 }
 
 - (void)resetInterfaceForLandscape
@@ -115,6 +114,23 @@ static const float CHShowTenthsTime = 10.0f;
 {
     self.view = self.portraitView;
     [self rotateTimePieces];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - Lazy loading
+//------------------------------------------------------------------------------
+
+- (CHChessClockSettingsManager *)settingsManager
+{
+    if (!_settingsManager) {
+        _settingsManager = [[CHChessClockSettingsManager alloc] initWithUserName:@"pedro"];
+    }
+    return _settingsManager;
 }
 
 //------------------------------------------------------------------------------
@@ -274,6 +290,7 @@ static const float CHShowTenthsTime = 10.0f;
     [[CHChessClockSettingsTableViewController alloc] initWithNibName:nibName
                                                               bundle:nil];
     settingsViewController.settingsManager = self.settingsManager;
+    settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController
                                          animated:YES];
 }
@@ -326,6 +343,15 @@ static const float CHShowTenthsTime = 10.0f;
             [button setBackgroundImage:imageSelected forState:UIControlStateHighlighted];
         }
     }
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - CHChessClockSettingsTableViewControllerDelegate methods
+//------------------------------------------------------------------------------
+- (void)settingsTableViewController:(id)settingsTableViewController
+                  didUpdateSettings:(CHChessClockSettings *)settings
+{
+    self.settingsManager.currentTimeControl = settings;
 }
 
 //------------------------------------------------------------------------------
