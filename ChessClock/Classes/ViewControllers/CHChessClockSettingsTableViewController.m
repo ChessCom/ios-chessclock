@@ -12,7 +12,6 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
-#import "CHChessClockSettingsFooterView.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -22,6 +21,9 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) UIViewController* currentViewController;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *startClockButton;
+
 
 @end
 
@@ -47,19 +49,13 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.editButton setTitle:NSLocalizedString(@"Edit", nil)
+                     forState:UIControlStateNormal];
+    [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
+                           forState:UIControlStateNormal];
     
-    NSString *nibName = [CHUtil nibNameWithBaseName:@"CHChessClockSettingsFooterView"];
-    CHChessClockSettingsFooterView *footerView =
-    [[[NSBundle mainBundle] loadNibNamed:nibName
-                                   owner:self.tableView
-                                 options:nil] firstObject];
-    [self.tableView setTableFooterView:footerView];
-    [footerView.startButton addTarget:self
-                                    action:@selector(startClockTapped)
-                          forControlEvents:UIControlEventTouchUpInside];
-    [footerView.startButton setTitle:NSLocalizedString(@"Start", nil)
-                            forState:UIControlStateNormal];
+    [self.editButton addTarget:self
+                        action:@selector(enterEditMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,7 +63,8 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.currentViewController = nil;
 
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -90,6 +87,42 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
        [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
                            withObject:self withObject:clockSettings];
     }
+}
+
+- (void)enterEditMode
+{
+    [self setEditing:YES animated:YES];
+}
+
+- (void)exitEditMode
+{
+    [self setEditing:NO animated:YES];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    NSString *title = editing ?
+    NSLocalizedString(@"Done", nil) :
+    NSLocalizedString(@"Edit", nil);
+    
+    SEL selectorToRemove = editing ?
+    @selector(enterEditMode) :
+    @selector(exitEditMode);
+    
+    SEL selectorToAdd = editing ?
+    @selector(exitEditMode) :
+    @selector(enterEditMode);
+    
+    [self.editButton removeTarget:self
+                           action:selectorToRemove
+                 forControlEvents:UIControlEventTouchUpInside];
+    [self.editButton addTarget:self
+                        action:selectorToAdd
+              forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.editButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)saveSettings
@@ -431,15 +464,8 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (IBAction)startClockTapped
 {
-    /*if (self.chessClockViewController == nil) {
-        NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
-        CHChessClockViewController* chessClockVC = [[CHChessClockViewController alloc] initWithNibName:nibName bundle:nil];
-        self.chessClockViewController = chessClockVC;
-    }
-    
-    //self.chessClockViewController.settingsManager = self.settingsManager;
-    self.currentViewController = self.chessClockViewController;
-    [self.navigationController pushViewController:self.chessClockViewController animated:YES];*/
+    [self.delegate settingsTableViewControllerDidStartClock:self];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

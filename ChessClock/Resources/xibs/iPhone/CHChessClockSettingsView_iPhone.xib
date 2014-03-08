@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CHChessClockSettingsTableViewController">
             <connections>
+                <outlet property="editButton" destination="g2I-Zs-JAq" id="51u-d2-ZcV"/>
+                <outlet property="startClockButton" destination="I74-kt-R5X" id="jfv-xa-e5T"/>
                 <outlet property="view" destination="7" id="8"/>
             </connections>
         </placeholder>
@@ -18,6 +20,37 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <view key="tableHeaderView" contentMode="scaleToFill" id="p9c-hS-fQE">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g2I-Zs-JAq">
+                        <rect key="frame" x="199" y="7" width="101" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Edit">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            </view>
+            <view key="tableFooterView" contentMode="scaleToFill" id="DsW-Bp-bsh">
+                <rect key="frame" x="0.0" y="401" width="320" height="90"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I74-kt-R5X">
+                        <rect key="frame" x="10" y="20" width="300" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="startClockTapped" destination="-1" eventType="touchUpInside" id="1xq-nZ-ZqJ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            </view>
             <connections>
                 <outlet property="dataSource" destination="-1" id="11"/>
                 <outlet property="delegate" destination="-1" id="12"/>
