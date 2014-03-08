@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F18DD4818CB6A3900576E1F /* CHChessClockSettingsFooterView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F18DD4718CB6A3900576E1F /* CHChessClockSettingsFooterView_iPad.xib */; };
+		0F18DD4A18CB6C8400576E1F /* CHChessClockSettingsFooterView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F18DD4918CB6C8400576E1F /* CHChessClockSettingsFooterView_iPhone.xib */; };
+		0F18DD8F18CB756600576E1F /* CHChessClockSettingsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18DD8E18CB756600576E1F /* CHChessClockSettingsFooterView.m */; };
 		0FAB79F918C65C010040677B /* CHChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79D818C65C010040677B /* CHChessClock.m */; };
 		0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DA18C65C010040677B /* CHTimePiece.m */; };
 		0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DD18C65C010040677B /* CHChessClockBronsteinIncrement.m */; };
@@ -68,6 +71,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F18DD4718CB6A3900576E1F /* CHChessClockSettingsFooterView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHChessClockSettingsFooterView_iPad.xib; sourceTree = "<group>"; };
+		0F18DD4918CB6C8400576E1F /* CHChessClockSettingsFooterView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHChessClockSettingsFooterView_iPhone.xib; sourceTree = "<group>"; };
+		0F18DD8D18CB756600576E1F /* CHChessClockSettingsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHChessClockSettingsFooterView.h; path = Classes/Views/CHChessClockSettingsFooterView.h; sourceTree = "<group>"; };
+		0F18DD8E18CB756600576E1F /* CHChessClockSettingsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHChessClockSettingsFooterView.m; path = Classes/Views/CHChessClockSettingsFooterView.m; sourceTree = "<group>"; };
 		0FAB79D718C65C010040677B /* CHChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClock.h; sourceTree = "<group>"; };
 		0FAB79D818C65C010040677B /* CHChessClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClock.m; sourceTree = "<group>"; };
 		0FAB79D918C65C010040677B /* CHTimePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTimePiece.h; sourceTree = "<group>"; };
@@ -232,6 +239,8 @@
 		0FAB7A0D18C67FF00040677B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0F18DD8D18CB756600576E1F /* CHChessClockSettingsFooterView.h */,
+				0F18DD8E18CB756600576E1F /* CHChessClockSettingsFooterView.m */,
 				0FAB7A0E18C680110040677B /* CHTimePieceView.h */,
 				0FAB7A0F18C680110040677B /* CHTimePieceView.m */,
 			);
@@ -266,6 +275,7 @@
 				0FC6824A18C7E1170064421D /* CHChessClockTimeControlView_iPad.xib */,
 				0FC6824B18C7E1170064421D /* CHChessClockTimeView_iPad.xib */,
 				0FC6824C18C7E1170064421D /* CHChessClockView_iPad.xib */,
+				0F18DD4718CB6A3900576E1F /* CHChessClockSettingsFooterView_iPad.xib */,
 			);
 			name = iPad;
 			path = Resources/xibs/iPad;
@@ -282,6 +292,7 @@
 				0FC6825318C7E1170064421D /* CHChessClockTimeControlView_iPhone.xib */,
 				0FC6825418C7E1170064421D /* CHChessClockTimeView_iPhone.xib */,
 				0FC6825518C7E1170064421D /* CHChessClockView_iPhone.xib */,
+				0F18DD4918CB6C8400576E1F /* CHChessClockSettingsFooterView_iPhone.xib */,
 			);
 			name = iPhone;
 			path = Resources/xibs/iPhone;
@@ -459,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FC6825F18C7E1170064421D /* CHChessClockTimeControlNameCell.xib in Resources */,
+				0F18DD4818CB6A3900576E1F /* CHChessClockSettingsFooterView_iPad.xib in Resources */,
 				0FC6826118C7E1170064421D /* CHChessClockTimeControlView_iPhone.xib in Resources */,
 				0FC6825E18C7E1170064421D /* CHChessClockStageMovesCell.xib in Resources */,
 				0FC6825B18C7E1170064421D /* CHChessClockView_iPad.xib in Resources */,
@@ -477,6 +489,7 @@
 				C00DBBD818C52B8C00DDCB32 /* InfoPlist.strings in Resources */,
 				0FC6826018C7E1170064421D /* CHChessClockTimeControlStageView_iPhone.xib in Resources */,
 				0FC6826318C7E1170064421D /* CHChessClockView_iPhone.xib in Resources */,
+				0F18DD4A18CB6C8400576E1F /* CHChessClockSettingsFooterView_iPhone.xib in Resources */,
 				0FC6825618C7E1170064421D /* CHChessClockIncrementView_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +515,7 @@
 				0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */,
 				0FAB7A1018C680110040677B /* CHTimePieceView.m in Sources */,
 				0FAB7A0118C65C010040677B /* CHChessClockTimeControlStage.m in Sources */,
+				0F18DD8F18CB756600576E1F /* CHChessClockSettingsFooterView.m in Sources */,
 				0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */,
 				0FAB7A0518C65C010040677B /* CHChessClockTimeControlStageTableViewController.m in Sources */,
 				0FAB7A0218C65C010040677B /* CHChessClockTimeControlStageManager.m in Sources */,

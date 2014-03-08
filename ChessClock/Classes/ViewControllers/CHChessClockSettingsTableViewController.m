@@ -12,7 +12,7 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
-//#import "ChessAppDelegate.h"
+#import "CHChessClockSettingsFooterView.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -21,7 +21,6 @@
 <CHChessClockTimeControlTableViewControllerDelegate, UIActionSheetDelegate>
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
-@property (retain, nonatomic) IBOutlet UIButton* startClockButton;
 @property (retain, nonatomic) UIViewController* currentViewController;
 
 @end
@@ -50,10 +49,17 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.startClockButton setBackgroundImage:nil forState:UIControlStateHighlighted];
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7){
-        self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight;
-    }
+    NSString *nibName = [CHUtil nibNameWithBaseName:@"CHChessClockSettingsFooterView"];
+    CHChessClockSettingsFooterView *footerView =
+    [[[NSBundle mainBundle] loadNibNamed:nibName
+                                   owner:self.tableView
+                                 options:nil] firstObject];
+    [self.tableView setTableFooterView:footerView];
+    [footerView.startButton addTarget:self
+                                    action:@selector(startClockTapped)
+                          forControlEvents:UIControlEventTouchUpInside];
+    [footerView.startButton setTitle:NSLocalizedString(@"Start", nil)
+                            forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -248,9 +254,8 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     }
     else if(section == CHLandscapeMode)
     {
-#warning What do we do with delegate?
-//        if(self.m_pAppDelegate.m_bIPad)
-//            return 0;
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            return 0;
         return 1;
     }
     
