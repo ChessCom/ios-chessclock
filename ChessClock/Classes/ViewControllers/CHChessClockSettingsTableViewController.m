@@ -22,12 +22,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) IBOutlet UIButton* startClockButton;
-
-//@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
-//@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
-
 @property (retain, nonatomic) UIViewController* currentViewController;
-//@property (retain, nonatomic) CHChessClockViewController* chessClockViewController;
 
 @end
 
