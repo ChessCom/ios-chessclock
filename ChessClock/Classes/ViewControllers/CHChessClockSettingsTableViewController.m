@@ -22,12 +22,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) IBOutlet UIButton* startClockButton;
-
-@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
-//@property (retain, nonatomic) ChessAppDelegate* m_pAppDelegate;
-
 @property (retain, nonatomic) UIViewController* currentViewController;
-@property (retain, nonatomic) CHChessClockViewController* chessClockViewController;
 
 @end
 
@@ -47,12 +42,9 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-#warning What do we do with delegate?
-    // self.m_pAppDelegate = (ChessAppDelegate*)[[UIApplication sharedApplication] delegate];
-
+ 
     CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-                                                     initWithUserName:@"pedro"];
+                                                     initWithUserName:@"settingsManager"];
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
@@ -87,7 +79,11 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 - (void)updateClockSettings:(CHChessClockSettings*)clockSettings
 {
     self.settingsManager.currentTimeControl = clockSettings;
-    self.chessClockViewController = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(settingsTableViewController:didUpdateSettings:)]) {
+       [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
+                           withObject:self withObject:clockSettings];
+    }
 }
 
 - (void)saveSettings
@@ -430,15 +426,15 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (IBAction)startClockTapped
 {
-    if (self.chessClockViewController == nil) {
+    /*if (self.chessClockViewController == nil) {
         NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
         CHChessClockViewController* chessClockVC = [[CHChessClockViewController alloc] initWithNibName:nibName bundle:nil];
         self.chessClockViewController = chessClockVC;
     }
     
-    self.chessClockViewController.settingsManager = self.settingsManager;
+    //self.chessClockViewController.settingsManager = self.settingsManager;
     self.currentViewController = self.chessClockViewController;
-    [self.navigationController pushViewController:self.chessClockViewController animated:YES];
+    [self.navigationController pushViewController:self.chessClockViewController animated:YES];*/
 }
 
 @end
