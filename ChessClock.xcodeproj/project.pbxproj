@@ -54,6 +54,7 @@
 		C00DBBF218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
 		C00DBBFA18C52B8C00DDCB32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C00DBBF818C52B8C00DDCB32 /* InfoPlist.strings */; };
 		C00DBBFC18C52B8C00DDCB32 /* ChessClockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */; };
+		C096E0AC18CE1382008BAF75 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C096E0AB18CE1382008BAF75 /* Crashlytics.framework */; };
 		F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +138,7 @@
 		C00DBBF718C52B8C00DDCB32 /* ChessClockTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChessClockTests-Info.plist"; sourceTree = "<group>"; };
 		C00DBBF918C52B8C00DDCB32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessClockTests.m; sourceTree = "<group>"; };
+		C096E0AB18CE1382008BAF75 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DefaultChessClockSettings.plist; path = Resources/plist/DefaultChessClockSettings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 			files = (
 				C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */,
 				C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */,
+				C096E0AC18CE1382008BAF75 /* Crashlytics.framework in Frameworks */,
 				C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,15 +334,16 @@
 		C00DBBD318C52B8C00DDCB32 /* ChessClock */ = {
 			isa = PBXGroup;
 			children = (
-				0FAB7A0D18C67FF00040677B /* Views */,
-				0FAB7A0918C667D30040677B /* Other */,
-				0FAB79D618C65C010040677B /* Model */,
-				0FAB79EC18C65C010040677B /* ViewControllers */,
 				C00DBBDC18C52B8C00DDCB32 /* CHAppDelegate.h */,
 				C00DBBDD18C52B8C00DDCB32 /* CHAppDelegate.m */,
 				C00DBBE818C52B8C00DDCB32 /* Images.xcassets */,
+				0FAB79D618C65C010040677B /* Model */,
+				0FAB7A0918C667D30040677B /* Other */,
 				0FC6824418C7E0C70064421D /* Resources */,
 				C00DBBD418C52B8C00DDCB32 /* Supporting Files */,
+				C096E0A718CE12CB008BAF75 /* ThirdParty */,
+				0FAB79EC18C65C010040677B /* ViewControllers */,
+				0FAB7A0D18C67FF00040677B /* Views */,
 			);
 			path = ChessClock;
 			sourceTree = "<group>";
@@ -373,6 +377,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C096E0A718CE12CB008BAF75 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				C096E0AA18CE1382008BAF75 /* Crashlytics */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		C096E0AA18CE1382008BAF75 /* Crashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				C096E0AB18CE1382008BAF75 /* Crashlytics.framework */,
+			);
+			name = Crashlytics;
+			path = ThirdParty/Crashlytics;
+			sourceTree = "<group>";
+		};
 		F31CC1A318C8C4650072398C /* plist */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +412,7 @@
 				C00DBBC618C52B8C00DDCB32 /* Sources */,
 				C00DBBC718C52B8C00DDCB32 /* Frameworks */,
 				C00DBBC818C52B8C00DDCB32 /* Resources */,
+				C096E0A518CE128D008BAF75 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -490,6 +512,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C096E0A518CE128D008BAF75 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./ChessClock/ThirdParty/Crashlytics/Crashlytics.framework/run 47969ba8b0f44f287503d0c51b95040668dfa536 94c5f003dd685ab00673823884e50c6056e6f75e9fb719b71b76bc72518bc52f";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C00DBBC618C52B8C00DDCB32 /* Sources */ = {
@@ -636,6 +674,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ChessClock/ThirdParty/Crashlytics",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChessClock/ChessClock-Prefix.pch";
 				INFOPLIST_FILE = "ChessClock/ChessClock-Info.plist";
@@ -650,6 +692,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ChessClock/ThirdParty/Crashlytics",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChessClock/ChessClock-Prefix.pch";
 				INFOPLIST_FILE = "ChessClock/ChessClock-Info.plist";

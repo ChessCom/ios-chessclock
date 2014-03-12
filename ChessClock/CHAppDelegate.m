@@ -11,12 +11,15 @@
 #import "CHUtil.h"
 #import "CHChessClockViewController.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @implementation CHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Crashlytics startWithAPIKey:@"47969ba8b0f44f287503d0c51b95040668dfa536"];
     
+    // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     NSString *baseNibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
