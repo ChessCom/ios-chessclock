@@ -70,7 +70,7 @@
                     </connections>
                 </button>
                 <view tag="1" contentMode="scaleToFill" id="4" customClass="CHTimePieceView">
-                    <rect key="frame" x="20" y="624.00000173028479" width="728" height="380"/>
+                    <rect key="frame" x="20" y="624" width="728" height="380"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
