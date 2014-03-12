@@ -1,14 +1,42 @@
 {
   "images" : [
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 1,
+          "top" : 1,
+          "right" : 1,
+          "left" : 1
+        }
+      },
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "rectLightOrangeButton.png"
+      "filename" : "rectLightOrangeButton.png",
+      "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 3,
+          "height" : 3
+        },
+        "capInsets" : {
+          "bottom" : 2,
+          "top" : 2,
+          "right" : 2,
+          "left" : 2
+        }
+      },
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "rectLightOrangeButton@2x.png"
+      "filename" : "rectLightOrangeButton@2x.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
