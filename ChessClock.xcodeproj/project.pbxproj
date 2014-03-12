@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F8DE44D18CFD1EB0008507D /* CHOrangeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DE44C18CFD1EB0008507D /* CHOrangeButton.m */; };
 		0FAB79F918C65C010040677B /* CHChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79D818C65C010040677B /* CHChessClock.m */; };
 		0FAB79FA18C65C010040677B /* CHTimePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DA18C65C010040677B /* CHTimePiece.m */; };
 		0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79DD18C65C010040677B /* CHChessClockBronsteinIncrement.m */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F8DE44B18CFD1EB0008507D /* CHOrangeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHOrangeButton.h; path = Classes/Views/CHOrangeButton.h; sourceTree = "<group>"; };
+		0F8DE44C18CFD1EB0008507D /* CHOrangeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHOrangeButton.m; path = Classes/Views/CHOrangeButton.m; sourceTree = "<group>"; };
 		0FAB79D718C65C010040677B /* CHChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClock.h; sourceTree = "<group>"; };
 		0FAB79D818C65C010040677B /* CHChessClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClock.m; sourceTree = "<group>"; };
 		0FAB79D918C65C010040677B /* CHTimePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTimePiece.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 			children = (
 				0FAB7A0E18C680110040677B /* CHTimePieceView.h */,
 				0FAB7A0F18C680110040677B /* CHTimePieceView.m */,
+				0F8DE44B18CFD1EB0008507D /* CHOrangeButton.h */,
+				0F8DE44C18CFD1EB0008507D /* CHOrangeButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 				0FAB7A0418C65C010040677B /* CHChessClockSettingsTableViewController.m in Sources */,
 				0FAB7A0618C65C010040677B /* CHChessClockTimeControlTableViewController.m in Sources */,
 				C00DBBDE18C52B8C00DDCB32 /* CHAppDelegate.m in Sources */,
+				0F8DE44D18CFD1EB0008507D /* CHOrangeButton.m in Sources */,
 				0FAB79F918C65C010040677B /* CHChessClock.m in Sources */,
 				0FAB79FC18C65C010040677B /* CHChessClockDelayIncrement.m in Sources */,
 				0FAB7A0318C65C010040677B /* CHChessClockIncrementTableViewController.m in Sources */,
