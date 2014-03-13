@@ -19,6 +19,7 @@
 
 @property (retain, nonatomic) NSDictionary* incrementsTypesDictionary;
 @property (assign, nonatomic) NSUInteger selectedIncrementValue;
+@property (strong, nonatomic) UIPopoverController* customPopoverController;
 
 @end
 
@@ -155,9 +156,9 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     timeViewController.delegate = self;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UIPopoverController* popover = [[UIPopoverController alloc] initWithContentViewController:timeViewController];
-        popover.delegate = self;
-        [popover presentPopoverFromRect:cell.bounds inView:cell
+        self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:timeViewController];
+        self.customPopoverController.delegate = self;
+        [self.customPopoverController presentPopoverFromRect:cell.bounds inView:cell
                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         
     }
