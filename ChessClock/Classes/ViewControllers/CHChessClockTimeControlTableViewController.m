@@ -29,6 +29,7 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 @property (assign, nonatomic) BOOL newTimeControlCreated;
 @property (assign, nonatomic) BOOL newTimeControlSaved;
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
+@property (strong, nonatomic) UIPopoverController *customPopoverController;
 
 @end
 
@@ -454,11 +455,11 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         timeViewController.title = NSLocalizedString(@"Time", nil);
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            UIPopoverController* popover = [[UIPopoverController alloc] initWithContentViewController:timeViewController];
-            popover.delegate = self;
+            self.customPopoverController = [[UIPopoverController alloc] initWithContentViewController:timeViewController];
+            self.customPopoverController.delegate = self;
             UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
             
-            [popover presentPopoverFromRect:cell.bounds inView:cell
+            [self.customPopoverController presentPopoverFromRect:cell.bounds inView:cell
                    permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             
         }
