@@ -12,7 +12,6 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
-//#import "ChessAppDelegate.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -21,8 +20,10 @@
 <CHChessClockTimeControlTableViewControllerDelegate, UIActionSheetDelegate>
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
-@property (retain, nonatomic) IBOutlet UIButton* startClockButton;
 @property (retain, nonatomic) UIViewController* currentViewController;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *startClockButton;
+
 
 @end
 
@@ -34,9 +35,7 @@
 static const NSUInteger CHAddNewTimeControlSection = 0;
 static const NSUInteger CHExistingTimeControlSection = 1;
 static const NSUInteger CHLandscapeMode = 2;
-static const NSUInteger CHRestoreDefaultsSection = 3;
 
-static const NSUInteger CHRestoreDefaultsButtonTag = 1;
 static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (void)viewDidLoad
@@ -48,12 +47,13 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.editButton setTitle:NSLocalizedString(@"Edit", nil)
+                     forState:UIControlStateNormal];
+    [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
+                           forState:UIControlStateNormal];
     
-    [self.startClockButton setBackgroundImage:nil forState:UIControlStateHighlighted];
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7){
-        self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight;
-    }
+    [self.editButton addTarget:self
+                        action:@selector(enterEditMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,7 +61,8 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.currentViewController = nil;
 
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,6 +87,42 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     }
 }
 
+- (void)enterEditMode
+{
+    [self setEditing:YES animated:YES];
+}
+
+- (void)exitEditMode
+{
+    [self setEditing:NO animated:YES];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    NSString *title = editing ?
+    NSLocalizedString(@"Done", nil) :
+    NSLocalizedString(@"Edit", nil);
+    
+    SEL selectorToRemove = editing ?
+    @selector(enterEditMode) :
+    @selector(exitEditMode);
+    
+    SEL selectorToAdd = editing ?
+    @selector(exitEditMode) :
+    @selector(enterEditMode);
+    
+    [self.editButton removeTarget:self
+                           action:selectorToRemove
+                 forControlEvents:UIControlEventTouchUpInside];
+    [self.editButton addTarget:self
+                        action:selectorToAdd
+              forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.editButton setTitle:title forState:UIControlStateNormal];
+}
+
 - (void)saveSettings
 {
     // TODO: The settings should only be saved when there are modifications!
@@ -108,32 +145,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    
-    return cell;
-}
-
-- (UITableViewCell*)restoreDefaultsCell
-{
-    NSString* cellIdentifier = @"CHRestoreDefaultsCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        // This removes the cell rounded background
-        UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        cell.backgroundView = backgroundView;
-        
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        button.frame = cell.bounds;
-        button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        button.tag = CHRestoreDefaultsButtonTag;
-        [button setTitle:NSLocalizedString(@"Restore defaults", nil) forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(restoreDefaultsTapped) forControlEvents:UIControlEventTouchUpInside];
-        button.titleLabel.textColor = [UIColor blackColor];
-        [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [cell.contentView addSubview:button];
     }
     
     return cell;
@@ -227,7 +238,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -241,16 +252,14 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == CHAddNewTimeControlSection ||
-        section == CHRestoreDefaultsSection)
+    if (section == CHAddNewTimeControlSection)
     {
         return 1;
     }
     else if(section == CHLandscapeMode)
     {
-#warning What do we do with delegate?
-//        if(self.m_pAppDelegate.m_bIPad)
-//            return 0;
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            return 0;
         return 1;
     }
     
@@ -280,10 +289,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
             
         case CHLandscapeMode:
             cell = [self orientationCell];
-            break;
-            
-        case CHRestoreDefaultsSection:
-            cell = [self restoreDefaultsCell];
             break;
             
         default:
@@ -373,18 +378,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 }
 
 //------------------------------------------------------------------------------
-#pragma mark - UIActionSheetDelegate methods
-//------------------------------------------------------------------------------
-- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == CHDestructiveButtonIndex) {
-        [self.settingsManager restoreDefaultClockSettings];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHExistingTimeControlSection]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
-//------------------------------------------------------------------------------
 #pragma mark - CHChessClockTimeControlTableViewControllerDelegate
 //------------------------------------------------------------------------------
 - (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController*)viewController
@@ -411,30 +404,11 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 //------------------------------------------------------------------------------
 #pragma mark - IBAction methods
 //------------------------------------------------------------------------------
-- (IBAction)restoreDefaultsTapped
-{
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                               destructiveButtonTitle:NSLocalizedString(@"Restore defaults", nil)
-                                                    otherButtonTitles:nil, nil];
-    
-    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:CHRestoreDefaultsSection]];
-    UIButton* restoreButton = (UIButton*)[cell viewWithTag:CHRestoreDefaultsButtonTag];
-    [actionSheet showFromRect:restoreButton.bounds inView:restoreButton animated:YES];
-}
 
 - (IBAction)startClockTapped
 {
-    /*if (self.chessClockViewController == nil) {
-        NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
-        CHChessClockViewController* chessClockVC = [[CHChessClockViewController alloc] initWithNibName:nibName bundle:nil];
-        self.chessClockViewController = chessClockVC;
-    }
-    
-    //self.chessClockViewController.settingsManager = self.settingsManager;
-    self.currentViewController = self.chessClockViewController;
-    [self.navigationController pushViewController:self.chessClockViewController animated:YES];*/
+    [self.delegate settingsTableViewControllerDidStartClock:self];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

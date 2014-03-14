@@ -16,6 +16,8 @@
 - (void)settingsTableViewController:(id)settingsTableViewController
                   didUpdateSettings:(CHChessClockSettings *)settings;
 
+- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController;
+
 @end
 
 //------------------------------------------------------------------------------

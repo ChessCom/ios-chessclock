@@ -234,7 +234,7 @@ static const float CHShowTenthsTime = 10.0f;
         [timePieceView unhighlightAndActivate:YES];
     }
     
-    UIImage* image = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_pauseButtonNormal"]];
+    UIImage* image = [UIImage imageNamed:@"chessClock_pauseButtonNormal"];
     for (UIButton* button in self.pauseButtons) {
         [button setBackgroundImage:image forState:UIControlStateNormal];
     }
@@ -335,8 +335,8 @@ static const float CHShowTenthsTime = 10.0f;
             imageNameSelected = @"chessClock_playButtonSelected";
         }
         
-        UIImage* imageNormal = [UIImage imageNamed:[CHUtil imageNameWithBaseName:imageNameNormal]];
-        UIImage* imageSelected = [UIImage imageNamed:[CHUtil imageNameWithBaseName:imageNameSelected]];
+        UIImage* imageNormal = [UIImage imageNamed:imageNameNormal];
+        UIImage* imageSelected = [UIImage imageNamed:imageNameSelected];
         
         for (UIButton* button in self.pauseButtons) {
             [button setBackgroundImage:imageNormal forState:UIControlStateNormal];
@@ -352,6 +352,11 @@ static const float CHShowTenthsTime = 10.0f;
                   didUpdateSettings:(CHChessClockSettings *)settings
 {
     self.settingsManager.currentTimeControl = settings;
+}
+
+- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController
+{
+    [self resetClock];
 }
 
 //------------------------------------------------------------------------------

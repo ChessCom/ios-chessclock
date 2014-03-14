@@ -29,7 +29,7 @@
         baseImageName = [baseImageName stringByAppendingString:@"@2x"];
     }
     
-    return [NSString stringWithFormat:@"%@.png", baseImageName];
+    return baseImageName;
 }
 
 + (NSString*)formatTime:(NSTimeInterval)timeInSeconds showTenths:(BOOL)showTenths

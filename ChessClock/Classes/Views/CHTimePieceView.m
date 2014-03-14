@@ -30,8 +30,8 @@
     self.availableTimeLabel.textColor = [UIColor whiteColor];    
     self.timePieceButton.userInteractionEnabled = YES;
     
-    UIImage* imageNormal = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_playingTimePieceNormal"]];
-    UIImage* imageSelected = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_playingTimePieceSelected"]];
+    UIImage* imageNormal = [UIImage imageNamed:@"chessClock_playingTimePieceNormal"];
+    UIImage* imageSelected = [UIImage imageNamed:@"chessClock_playingTimePieceSelected"];
     [self.timePieceButton setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [self.timePieceButton setBackgroundImage:imageSelected forState:UIControlStateHighlighted];
 }
@@ -41,7 +41,7 @@
     self.availableTimeLabel.textColor = [UIColor blackColor];
     self.timePieceButton.userInteractionEnabled = activate;
     
-    UIImage* image = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_notPlayingTimePiece"]];;
+    UIImage* image = [UIImage imageNamed:@"chessClock_notPlayingTimePiece"];
     [self.timePieceButton setBackgroundImage:image forState:UIControlStateNormal];
 }
 
@@ -50,7 +50,7 @@
     self.availableTimeLabel.textColor = [UIColor whiteColor];
     self.timePieceButton.userInteractionEnabled = NO;
 
-    UIImage* image = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_timeUpTimePiece"]];;
+    UIImage* image = [UIImage imageNamed:@"chessClock_timeUpTimePiece"];
     [self.timePieceButton setBackgroundImage:image forState:UIControlStateNormal];
 }
 
@@ -65,7 +65,7 @@
         return;
     }
     
-    UIImage* timeStageNotCompletedImage = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_timeStageNotCompleted"]];
+    UIImage* timeStageNotCompletedImage = [UIImage imageNamed:@"chessClock_timeStageNotCompleted"];
     CGSize timeStagesViewSize = self.timeStagesView.frame.size;
     CGFloat distanceBetweenDots = timeStageNotCompletedImage.size.width + 4.0f;
     float posX = timeStageNotCompletedImage.size.width * 0.5f;
@@ -90,7 +90,7 @@
         UIView* view = [self.timeStagesView.subviews objectAtIndex:stageIndex - 1];
         if ([view isKindOfClass:[UIImageView class]]) {
             UIImageView* imageView = (UIImageView*)view;
-            UIImage* timeStageCompletedImage = [UIImage imageNamed:[CHUtil imageNameWithBaseName:@"chessClock_timeStageCompleted"]];
+            UIImage* timeStageCompletedImage = [UIImage imageNamed:@"chessClock_timeStageCompleted"];
             imageView.image = timeStageCompletedImage;
         }
     }
