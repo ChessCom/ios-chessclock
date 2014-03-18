@@ -69,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F5C044618D8D7D9002046B2 /* ChessGlyph-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ChessGlyph-Regular.otf"; path = "Resources/fonts/ChessGlyph-Regular.otf"; sourceTree = "<group>"; };
 		0FAB79D718C65C010040677B /* CHChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClock.h; sourceTree = "<group>"; };
 		0FAB79D818C65C010040677B /* CHChessClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClock.m; sourceTree = "<group>"; };
 		0FAB79D918C65C010040677B /* CHTimePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTimePiece.h; sourceTree = "<group>"; };
@@ -167,6 +168,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F5C044518D8D79B002046B2 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0F5C044618D8D7D9002046B2 /* ChessGlyph-Regular.otf */,
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
 		0FAB79D618C65C010040677B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +253,7 @@
 		0FC6824418C7E0C70064421D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F5C044518D8D79B002046B2 /* fonts */,
 				F31CC1A318C8C4650072398C /* plist */,
 				0FC6826418C7E16F0064421D /* sounds */,
 				0FC6824518C7E1080064421D /* xibs */,
