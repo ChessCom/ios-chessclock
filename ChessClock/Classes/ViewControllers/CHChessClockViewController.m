@@ -16,8 +16,7 @@
 #import "CHTimePieceView.h"
 
 #import "CHUtil.h"
-
-//#import "ChessAppDelegate.h"
+#import "CHSoundPlayer.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -222,12 +221,6 @@ static const float CHShowTenthsTime = 10.0f;
     self.view.transform = CGAffineTransformMakeRotation(mainViewRotation);
 }
 
-- (void)playSound:(NSString*)soundName
-{
-#warning Sound playing through AppDelegate
-    //[m_pAppDelegate.m_pSoundsManager playSound:soundName];
-}
-
 - (void)pauseClock
 {
     if (!self.chessClock.paused) {
@@ -277,15 +270,13 @@ static const float CHShowTenthsTime = 10.0f;
             for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
                 [timePieceView highlight];
             }
-#warning Sound playing through AppDelegate
-            //[self playSound:SOUND_TIME_PIECE_PLAYER_1];
+            [CHSoundPlayer playSwitch1Sound];
         }
         else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
             for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
                 [timePieceView highlight];
             }
-#warning Sound playing through AppDelegate
-            //[self playSound:SOUND_TIME_PIECE_PLAYER_2];
+            [CHSoundPlayer playSwitch2Sound];
         }
     } else {
         [self.chessClock togglePause];
@@ -429,8 +420,7 @@ static const float CHShowTenthsTime = 10.0f;
         }
     }
 
-#warning Sounds play through App Delegate
-    //[self playSound:SOUND_TIME_PIECE_TIME_ENDED];
+    [CHSoundPlayer playEndSound];
     [self disableIdleTimer:NO];
 }
 
