@@ -21,7 +21,6 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) UIViewController* currentViewController;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *startClockButton;
 
 
@@ -47,13 +46,10 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
-    [self.editButton setTitle:NSLocalizedString(@"Edit", nil)
-                     forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
                            forState:UIControlStateNormal];
-    
-    [self.editButton addTarget:self
-                        action:@selector(enterEditMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,7 +58,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -85,42 +81,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
        [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
                            withObject:self withObject:clockSettings];
     }
-}
-
-- (void)enterEditMode
-{
-    [self setEditing:YES animated:YES];
-}
-
-- (void)exitEditMode
-{
-    [self setEditing:NO animated:YES];
-}
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [super setEditing:editing animated:animated];
-
-    NSString *title = editing ?
-    NSLocalizedString(@"Done", nil) :
-    NSLocalizedString(@"Edit", nil);
-    
-    SEL selectorToRemove = editing ?
-    @selector(enterEditMode) :
-    @selector(exitEditMode);
-    
-    SEL selectorToAdd = editing ?
-    @selector(exitEditMode) :
-    @selector(enterEditMode);
-    
-    [self.editButton removeTarget:self
-                           action:selectorToRemove
-                 forControlEvents:UIControlEventTouchUpInside];
-    [self.editButton addTarget:self
-                        action:selectorToAdd
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.editButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)saveSettings
