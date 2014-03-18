@@ -40,6 +40,7 @@ CHChessClockSettingsTableViewControllerDelegate>
 @property (retain, nonatomic) CHChessClock* chessClock;
 
 @property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @end
 
@@ -66,6 +67,17 @@ static const float CHShowTenthsTime = 10.0f;
     [self registerToApplicationNotification:UIApplicationWillResignActiveNotification];
     
     self.title = NSLocalizedString(@"Clock", nil);
+    
+    BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+    CGFloat fontSize = isiPad ? 82.0f : 46.0f;
+    UIFont *customFont = [UIFont fontWithName:@"ChessGlyph-Regular" size:fontSize];
+    
+    self.settingsButton.titleLabel.font = customFont;
+    self.resetButtonPortrait.titleLabel.font = customFont;
+    
+    for (UIButton* button in self.pauseButtons) {
+        button.titleLabel.font = customFont;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,7 +140,7 @@ static const float CHShowTenthsTime = 10.0f;
 - (CHChessClockSettingsManager *)settingsManager
 {
     if (!_settingsManager) {
-        _settingsManager = [[CHChessClockSettingsManager alloc] initWithUserName:@"pedro"];
+        _settingsManager = [[CHChessClockSettingsManager alloc] initWithUserName:@"settings"];
     }
     return _settingsManager;
 }
@@ -233,11 +245,6 @@ static const float CHShowTenthsTime = 10.0f;
     for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
         [timePieceView unhighlightAndActivate:YES];
     }
-    
-    UIImage* image = [UIImage imageNamed:@"chessClock_pauseButtonNormal"];
-    for (UIButton* button in self.pauseButtons) {
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-    }
 }
 
 - (void)disableIdleTimer:(BOOL)disable
@@ -254,6 +261,8 @@ static const float CHShowTenthsTime = 10.0f;
         if (![UIApplication sharedApplication].idleTimerDisabled) {
             [self disableIdleTimer:YES];
         }
+        
+        [self setPauseButtonsEnabled:YES];
         
         NSUInteger selectedTimePieceId = sender.superview.tag;
         [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
@@ -278,6 +287,11 @@ static const float CHShowTenthsTime = 10.0f;
 #warning Sound playing through AppDelegate
             //[self playSound:SOUND_TIME_PIECE_PLAYER_2];
         }
+    } else {
+        [self.chessClock togglePause];
+        [self disableIdleTimer:!self.chessClock.paused];
+        
+       [self setPauseButtonsEnabled:YES];
     }
 }
 
@@ -326,22 +340,18 @@ static const float CHShowTenthsTime = 10.0f;
     if ([self.chessClock isActive]) {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
-    
-        NSString* imageNameNormal = @"chessClock_pauseButtonNormal";
-        NSString* imageNameSelected = @"chessClock_pauseButtonSelected";
         
-        if (self.chessClock.paused) {
-            imageNameNormal = @"chessClock_playButtonNormal";
-            imageNameSelected = @"chessClock_playButtonSelected";
-        }
-        
-        UIImage* imageNormal = [UIImage imageNamed:imageNameNormal];
-        UIImage* imageSelected = [UIImage imageNamed:imageNameSelected];
-        
-        for (UIButton* button in self.pauseButtons) {
-            [button setBackgroundImage:imageNormal forState:UIControlStateNormal];
-            [button setBackgroundImage:imageSelected forState:UIControlStateHighlighted];
-        }
+        [self setPauseButtonsEnabled:NO];
+    }
+}
+
+- (void)setPauseButtonsEnabled:(BOOL)enabled
+{
+    for (UIButton* button in self.pauseButtons) {
+        NSString *title = enabled ? @"K" : @"";
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setTitle:title forState:UIControlStateHighlighted];
+        button.userInteractionEnabled = enabled;
     }
 }
 
