@@ -244,7 +244,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
 - (IBAction)didTouchUpInsideChessLogoButton:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"http://itunes.com/apps/chess-play-learn"];
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/chess-play-learn/id329218549?mt=8"];
     
     [[UIApplication sharedApplication] openURL:url];
 }
