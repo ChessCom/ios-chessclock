@@ -15,12 +15,12 @@
         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="1" id="7">
             <rect key="frame" x="0.0" y="44" width="320" height="475"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.85461956520000004" green="0.85461956520000004" blue="0.85461956520000004" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <view key="tableFooterView" contentMode="scaleToFill" id="DsW-Bp-bsh">
-                <rect key="frame" x="0.0" y="409" width="320" height="90"/>
+                <rect key="frame" x="0.0" y="264" width="320" height="227"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="I74-kt-R5X">
@@ -34,8 +34,18 @@
                             <action selector="startClockTapped" destination="-1" eventType="touchUpInside" id="1xq-nZ-ZqJ"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r7E-lb-fxO">
+                        <rect key="frame" x="30" y="83" width="260" height="104"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="chess_logo">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didTouchUpInsideChessLogoButton:" destination="-1" eventType="touchUpInside" id="P9N-WD-YmW"/>
+                        </connections>
+                    </button>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             </view>
             <connections>
@@ -45,6 +55,7 @@
         </tableView>
     </objects>
     <resources>
+        <image name="chess_logo" width="260" height="104"/>
         <image name="rectLightOrangeButton" width="4" height="4"/>
         <image name="rectLightOrangeButtonPressed" width="4" height="4"/>
     </resources>
