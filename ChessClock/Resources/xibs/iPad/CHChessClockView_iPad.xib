@@ -10,6 +10,7 @@
                 <outlet property="portraitView" destination="2" id="67"/>
                 <outlet property="resetButtonLandscape" destination="43" id="70"/>
                 <outlet property="resetButtonPortrait" destination="7" id="35"/>
+                <outlet property="settingsButton" destination="6" id="uu0-ib-aPb"/>
                 <outlet property="view" destination="2" id="24"/>
                 <outletCollection property="pauseButtons" destination="5" id="36"/>
                 <outletCollection property="playerOneTimePieceViews" destination="4" id="37"/>
@@ -27,13 +28,13 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7">
                     <rect key="frame" x="594" y="471" width="82" height="82"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="chessClock_resetButtonNormal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="82"/>
+                    <state key="normal" title=":">
+                        <color key="titleColor" red="0.48627450979999998" green="0.47058823529999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chessClock_resetButtonSelected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="resetTapped" destination="-1" eventType="touchUpInside" id="31"/>
@@ -42,13 +43,13 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6">
                     <rect key="frame" x="92" y="470" width="84" height="84"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="chessClock_settingsButtonNormal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="82"/>
+                    <state key="normal" title="·">
+                        <color key="titleColor" red="0.48627450979999998" green="0.47058823529999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chessClock_settingsButtonSelected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="settingsTapped" destination="-1" eventType="touchUpInside" id="34"/>
@@ -57,24 +58,24 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5">
                     <rect key="frame" x="336" y="465" width="96" height="93"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" backgroundImage="chessClock_pauseButtonNormal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="82"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.48627450979999998" green="0.47058823529999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="chessClock_pauseButtonSelected.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="highlighted">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="pauseTapped" destination="-1" eventType="touchUpInside" id="30"/>
                     </connections>
                 </button>
                 <view tag="1" contentMode="scaleToFill" id="4" customClass="CHTimePieceView">
-                    <rect key="frame" x="20" y="624" width="728" height="380"/>
+                    <rect key="frame" x="20" y="624" width="728" height="380.00000173028474"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
-                            <rect key="frame" x="0.0" y="0.0" width="728" height="380"/>
+                            <rect key="frame" x="0.0" y="0.0" width="728" height="380.00000173028474"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                             <state key="normal" backgroundImage="chessClock_notPlayingTimePiece">
@@ -89,7 +90,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moves: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="10">
-                            <rect key="frame" x="303" y="334" width="400" height="21"/>
+                            <rect key="frame" x="303" y="334.00000173028474" width="400" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
@@ -99,11 +100,11 @@
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" id="9">
                             <rect key="frame" x="25" y="151" width="678" height="77"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="65"/>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="78"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" id="8">
-                            <rect key="frame" x="25" y="330" width="106" height="30"/>
+                            <rect key="frame" x="25" y="330.00000173028474" width="106" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -151,7 +152,7 @@
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" id="12">
                             <rect key="frame" x="25" y="151" width="683" height="77"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="65"/>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="78"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -216,7 +217,7 @@
                     </connections>
                 </button>
                 <view tag="1" contentMode="scaleToFill" id="44" customClass="CHTimePieceView">
-                    <rect key="frame" x="20" y="365" width="482" height="383"/>
+                    <rect key="frame" x="20" y="365.00000023655105" width="482" height="383"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="50">
@@ -243,7 +244,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" id="52">
-                            <rect key="frame" x="20" y="153.5" width="442" height="77"/>
+                            <rect key="frame" x="20" y="154" width="442" height="77"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="65"/>
                             <nil key="highlightedColor"/>
@@ -295,7 +296,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" id="49">
-                            <rect key="frame" x="20" y="153.5" width="442" height="77"/>
+                            <rect key="frame" x="20" y="154" width="442" height="77"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="65"/>
                             <nil key="highlightedColor"/>
@@ -317,13 +318,10 @@
     <resources>
         <image name="chessClock_notPlayingTimePiece" width="290" height="220"/>
         <image name="chessClock_notPlayingTimePiece.png" width="580" height="440"/>
-        <image name="chessClock_pauseButtonNormal" width="48" height="47"/>
         <image name="chessClock_pauseButtonNormal.png" width="96" height="93"/>
         <image name="chessClock_pauseButtonSelected.png" width="96" height="93"/>
-        <image name="chessClock_resetButtonNormal" width="41" height="41"/>
         <image name="chessClock_resetButtonNormal.png" width="82" height="82"/>
         <image name="chessClock_resetButtonSelected.png" width="78" height="77"/>
-        <image name="chessClock_settingsButtonNormal" width="42" height="42"/>
         <image name="chessClock_settingsButtonNormal.png" width="84" height="84"/>
         <image name="chessClock_settingsButtonSelected.png" width="84" height="84"/>
     </resources>

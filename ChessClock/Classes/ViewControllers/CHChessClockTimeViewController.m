@@ -219,7 +219,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
     CGFloat rowHeight = rowSize.height;
 
     CGFloat x = transformedPoint.x + (rowWidth * 0.42f);
-    CGFloat y = transformedPoint.y + (rowHeight * 0.27f);
+    CGFloat y = transformedPoint.y + (rowHeight * 0.1f);
     
     return CGPointMake(x, y);
 }

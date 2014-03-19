@@ -12,6 +12,7 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
+#import "CHAppDelegate.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -19,11 +20,8 @@
 @interface CHChessClockSettingsTableViewController()
 <CHChessClockTimeControlTableViewControllerDelegate, UIActionSheetDelegate>
 
-@property (retain, nonatomic) IBOutlet UITableViewCell* orientationTableViewCell;
 @property (retain, nonatomic) UIViewController* currentViewController;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *startClockButton;
-
 
 @end
 
@@ -34,7 +32,6 @@
 
 static const NSUInteger CHAddNewTimeControlSection = 0;
 static const NSUInteger CHExistingTimeControlSection = 1;
-static const NSUInteger CHLandscapeMode = 2;
 
 static const NSUInteger CHDestructiveButtonIndex = 0;
 
@@ -47,13 +44,10 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
-    [self.editButton setTitle:NSLocalizedString(@"Edit", nil)
-                     forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
                            forState:UIControlStateNormal];
-    
-    [self.editButton addTarget:self
-                        action:@selector(enterEditMode) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,7 +56,7 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -85,42 +79,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
        [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
                            withObject:self withObject:clockSettings];
     }
-}
-
-- (void)enterEditMode
-{
-    [self setEditing:YES animated:YES];
-}
-
-- (void)exitEditMode
-{
-    [self setEditing:NO animated:YES];
-}
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [super setEditing:editing animated:animated];
-
-    NSString *title = editing ?
-    NSLocalizedString(@"Done", nil) :
-    NSLocalizedString(@"Edit", nil);
-    
-    SEL selectorToRemove = editing ?
-    @selector(enterEditMode) :
-    @selector(exitEditMode);
-    
-    SEL selectorToAdd = editing ?
-    @selector(exitEditMode) :
-    @selector(enterEditMode);
-    
-    [self.editButton removeTarget:self
-                           action:selectorToRemove
-                 forControlEvents:UIControlEventTouchUpInside];
-    [self.editButton addTarget:self
-                        action:selectorToAdd
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.editButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)saveSettings
@@ -150,31 +108,9 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
     return cell;
 }
 
-- (UITableViewCell*)orientationCell
-{
-    UITableViewCell* cell = [self cellWithIdentifier:@"CHChessClockOrientationCell"];
-    
-    if (cell.accessoryView == nil) {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = NSLocalizedString(@"Landscape Mode", nil);
-        
-        UISwitch* orientationSwitch = [[UISwitch alloc] init];
-        [orientationSwitch addTarget:self action:@selector(landscapeValueChanged:)
-                    forControlEvents:UIControlEventValueChanged];
-        
-        cell.accessoryView = orientationSwitch;
-    }
-    
-    UISwitch* orientationSwitch = (UISwitch*)cell.accessoryView;
-    orientationSwitch.on = [self.settingsManager isLandscape];
-    
-    return cell;
-}
-
-
 - (void)populateNewTimeControlCell:(UITableViewCell*)cell withIndexPath:(NSIndexPath*)indexPath
 {
-    cell.textLabel.text = NSLocalizedString(@"Add new", nil);
+    cell.textLabel.text = NSLocalizedString(@"New Time Control", nil);
 }
 
 - (void)populateExistingTimeControlCell:(UITableViewCell*)cell withIndexPath:(NSIndexPath*)indexPath
@@ -238,28 +174,18 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == CHAddNewTimeControlSection) {
-        return NSLocalizedString(@"Time controls", nil);
-    }
-    
-    return nil;
+    return 1.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == CHAddNewTimeControlSection)
     {
-        return 1;
-    }
-    else if(section == CHLandscapeMode)
-    {
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            return 0;
         return 1;
     }
     
@@ -285,10 +211,6 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
             cell = [self cellWithIdentifier:@"CHExistingTimeControlCell"];
             cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [self populateExistingTimeControlCell:cell withIndexPath:indexPath];
-            break;
-            
-        case CHLandscapeMode:
-            cell = [self orientationCell];
             break;
             
         default:
@@ -320,10 +242,13 @@ static const NSUInteger CHDestructiveButtonIndex = 0;
 #pragma mark - Control Event Handlers
 //------------------------------------------------------------------------------
 
-- (void)landscapeValueChanged:(UISwitch*)sender
+- (IBAction)didTouchUpInsideChessLogoButton:(id)sender
 {
-    [self.settingsManager setIsLandscape:sender.on];
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/chess-play-learn/id329218549?mt=8"];
+    
+    [[UIApplication sharedApplication] openURL:url];
 }
+
 
 //------------------------------------------------------------------------------
 #pragma mark - UITableViewDelegate methods
