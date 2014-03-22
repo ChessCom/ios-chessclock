@@ -250,6 +250,8 @@ static const float CHShowTenthsTime = 10.0f;
 //------------------------------------------------------------------------------
 - (IBAction)timePieceTouched:(UIButton *)sender
 {
+    NSUInteger selectedTimePieceId = sender.superview.tag;
+    
     if (!self.chessClock.paused) {
         if (![UIApplication sharedApplication].idleTimerDisabled) {
             [self disableIdleTimer:YES];
@@ -257,7 +259,7 @@ static const float CHShowTenthsTime = 10.0f;
         
         [self setPauseButtonsEnabled:YES];
         
-        NSUInteger selectedTimePieceId = sender.superview.tag;
+        
         [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
     
         NSArray* selectedTimePieceViews = [self timePieceViewsWithId:selectedTimePieceId];
@@ -265,24 +267,23 @@ static const float CHShowTenthsTime = 10.0f;
         for (CHTimePieceView* selectedTimePieceView in selectedTimePieceViews) {
             [selectedTimePieceView unhighlightAndActivate:NO];
         }
-    
-        if (selectedTimePieceId == ((CHTimePieceView*)[self.playerOneTimePieceViews lastObject]).tag) {
-            for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-                [timePieceView highlight];
-            }
-            [CHSoundPlayer playSwitch1Sound];
-        }
-        else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
-            for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-                [timePieceView highlight];
-            }
-            [CHSoundPlayer playSwitch2Sound];
-        }
     } else {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
-        
-       [self setPauseButtonsEnabled:YES];
+        [self setPauseButtonsEnabled:YES];
+    }
+    
+    if (selectedTimePieceId == ((CHTimePieceView*)[self.playerOneTimePieceViews lastObject]).tag) {
+        for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+            [timePieceView highlight];
+        }
+        [CHSoundPlayer playSwitch1Sound];
+    }
+    else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
+        for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+            [timePieceView highlight];
+        }
+        [CHSoundPlayer playSwitch2Sound];
     }
 }
 
@@ -331,8 +332,16 @@ static const float CHShowTenthsTime = 10.0f;
     if ([self.chessClock isActive]) {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
-        
         [self setPauseButtonsEnabled:NO];
+        
+        // Unhighlight piece
+        for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
+            [timePieceView unhighlightAndActivate:YES];
+        }
+        
+        for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
+            [timePieceView unhighlightAndActivate:YES];
+        }
     }
 }
 
