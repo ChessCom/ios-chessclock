@@ -33,8 +33,6 @@
 static const NSUInteger CHAddNewTimeControlSection = 0;
 static const NSUInteger CHExistingTimeControlSection = 1;
 
-static const NSUInteger CHDestructiveButtonIndex = 0;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
