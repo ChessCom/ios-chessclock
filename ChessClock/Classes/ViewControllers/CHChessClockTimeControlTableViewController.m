@@ -294,7 +294,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
     }
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %d", NSLocalizedString(@"Stage", nil), row + 1];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %u", NSLocalizedString(@"Stage", nil), row + 1];
     cell.detailTextLabel.text = [[self.chessClockSettings.stageManager stageAtIndex:row] description];
     
     UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
@@ -355,7 +355,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             secondsString = NSLocalizedString(@"sec", @"Abbreviation for second");
         }
         
-        incrementValueString = [NSString stringWithFormat:@"%d %@", incrementValue, secondsString];
+        incrementValueString = [NSString stringWithFormat:@"%lu %@", (unsigned long)incrementValue, secondsString];
     }
     
     NSString* detailString = [NSString stringWithFormat:@"%@, %@",

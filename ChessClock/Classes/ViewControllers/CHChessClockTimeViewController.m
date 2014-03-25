@@ -130,7 +130,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
 {
     NSMutableArray* componentArray = [NSMutableArray arrayWithCapacity:maximumValue];
     for (NSUInteger i = 0; i < maximumValue; i++) {
-        [componentArray addObject:[NSNumber numberWithInt:i]];
+        [componentArray addObject:[NSNumber numberWithInt:(int)i]];
     }
 
     return componentArray;
@@ -304,7 +304,7 @@ static const NSUInteger CHPickerRowLabelTag = 10;
     
     NSNumber* componentNumber = [self.components objectAtIndex:component];
     NSNumber* value = [[self.rowsDictionary objectForKey:componentNumber] objectAtIndex:row];
-    label.text = [NSString stringWithFormat:@"%d", [value integerValue]];
+    label.text = [NSString stringWithFormat:@"%ld", (long)[value integerValue]];
 
     return view;
 }

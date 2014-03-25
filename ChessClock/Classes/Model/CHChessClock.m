@@ -57,8 +57,8 @@
         self.playerTwoTimePiece.delegate = self;
         
         self.timePiecesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     self.playerOneTimePiece, [NSNumber numberWithInt:self.playerOneTimePiece.timePieceId],
-                                     self.playerTwoTimePiece, [NSNumber numberWithInt:self.playerTwoTimePiece.timePieceId], nil];
+                                     self.playerOneTimePiece, [NSNumber numberWithInt:(int)self.playerOneTimePiece.timePieceId],
+                                     self.playerTwoTimePiece, [NSNumber numberWithInt:(int)self.playerTwoTimePiece.timePieceId], nil];
         
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
                                                     selector:@selector(updateTime)
@@ -79,7 +79,7 @@
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId
 {
     if (!self.paused) {
-        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:[NSNumber numberWithInt:timePieceId]];
+        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:[NSNumber numberWithInt:(int)timePieceId]];
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];

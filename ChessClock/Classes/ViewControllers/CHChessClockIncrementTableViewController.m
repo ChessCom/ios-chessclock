@@ -135,7 +135,7 @@ static const NSUInteger CHFischerSegmentIndex = 2;
             secondsString = NSLocalizedString(@"sec", @"Abbreviation for second");
         }
         
-        incrementValueString = [NSString stringWithFormat:@"%d %@", incrementValue, secondsString];
+        incrementValueString = [NSString stringWithFormat:@"%lu %@", (unsigned long)incrementValue, secondsString];
     }
     
     cell.detailTextLabel.text = incrementValueString;
