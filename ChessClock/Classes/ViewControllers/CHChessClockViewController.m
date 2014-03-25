@@ -77,22 +77,37 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)updateConstraintConstantsToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     
-    self.firstTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
-    self.firstTimerTrailingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
+     BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
     
-    self.secondTimerLeadingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
-    self.secondTimerBottomConstraint.constant = isLandscape ? 20.0f : IS_SCREEN_4_INCHES ? 344.0f : 286.0f;
-    self.secondTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
-    
-    self.settingsButtonTopConstraint.constant =
-    self.pauseButtonTopConstraint.constant =
-    self.resetButtonTopConstraint.constant = isLandscape ? 36.0f : IS_SCREEN_4_INCHES ? 246.0f : 204.0f;
-    
-    self.settingsButtonLeadingConstraint.constant =
-    self.resetButtonTrailingConstraint.constant = isLandscape ? 63.0f :
-    20.0f;
+    if (!isiPad) {
+        self.firstTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
+        self.firstTimerTrailingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
+        
+        self.secondTimerLeadingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
+        self.secondTimerBottomConstraint.constant = isLandscape ? 20.0f : IS_SCREEN_4_INCHES ? 344.0f : 286.0f;
+        self.secondTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
+        
+        self.settingsButtonTopConstraint.constant =
+        self.pauseButtonTopConstraint.constant =
+        self.resetButtonTopConstraint.constant = isLandscape ? 36.0f : IS_SCREEN_4_INCHES ? 246.0f : 204.0f;
+        
+        self.settingsButtonLeadingConstraint.constant =
+        self.resetButtonTrailingConstraint.constant = isLandscape ? 63.0f :
+        20.0f;
+    } else {
+        self.firstTimerHeightConstraint.constant = isLandscape ? 383.0f : 380.0f;
+        self.firstTimerTrailingConstraint.constant = isLandscape ? 522.0f : 20.0f;
+        
+        self.secondTimerLeadingConstraint.constant = isLandscape ? 522.0f : 20.0f;
+        self.secondTimerBottomConstraint.constant = isLandscape ? 20.0f : 624.0f;
+        self.secondTimerHeightConstraint.constant = isLandscape ? 383.0f : 380.0f;
+        
+        self.settingsButtonTopConstraint.constant =
+        self.pauseButtonTopConstraint.constant =
+        self.resetButtonTopConstraint.constant = isLandscape ? 120.0f : 450.0f;
+    }
 }
 
 - (void)dealloc
