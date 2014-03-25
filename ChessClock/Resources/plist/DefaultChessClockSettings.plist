@@ -6,13 +6,15 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>Bronstein Rapid 25|10</string>
+			<string>Blitz 5|5</string>
+			<key>default</key>
+			<true/>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
-				<string>CHChessClockBronsteinIncrement</string>
+				<string>CHChessClockFischerIncrement</string>
 				<key>incrementValue</key>
-				<integer>10</integer>
+				<integer>5</integer>
 			</dict>
 			<key>timeStages</key>
 			<array>
@@ -20,7 +22,7 @@
 					<key>movesCount</key>
 					<integer>0</integer>
 					<key>maximumTime</key>
-					<string>25</string>
+					<string>5</string>
 				</dict>
 			</array>
 		</dict>
@@ -46,28 +48,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Fischer Blitz 5|5</string>
-			<key>default</key>
-			<true/>
-			<key>increment</key>
-			<dict>
-				<key>type</key>
-				<string>CHChessClockFischerIncrement</string>
-				<key>incrementValue</key>
-				<integer>5</integer>
-			</dict>
-			<key>timeStages</key>
-			<array>
-				<dict>
-					<key>movesCount</key>
-					<integer>0</integer>
-					<key>maximumTime</key>
-					<string>5</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>Delay Bullet 1|2</string>
 			<key>increment</key>
 			<dict>
@@ -83,6 +63,32 @@
 					<integer>0</integer>
 					<key>maximumTime</key>
 					<string>1</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Tournament</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockDelayIncrement</string>
+				<key>incrementValue</key>
+				<integer>5</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>40</integer>
+					<key>maximumTime</key>
+					<string>120</string>
+				</dict>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>60</string>
 				</dict>
 			</array>
 		</dict>
