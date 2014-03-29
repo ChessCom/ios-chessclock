@@ -54,6 +54,8 @@ CHChessClockSettingsTableViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *resetButtonTrailingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *resetButtonTopConstraint;
 
+
+
 @end
 
 //------------------------------------------------------------------------------
@@ -75,7 +77,7 @@ static const float CHShowTenthsTime = 10.0f;
 {
     BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     
-     BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
     
     if (!isiPad) {
         self.firstTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
@@ -104,6 +106,9 @@ static const float CHShowTenthsTime = 10.0f;
         self.pauseButtonTopConstraint.constant =
         self.resetButtonTopConstraint.constant = isLandscape ? 120.0f : 450.0f;
     }
+    
+    CGFloat angle = isLandscape ? 0.0f : M_PI;
+    self.playerTwoTimePieceView.layer.affineTransform = CGAffineTransformMakeRotation(angle);
 }
 
 - (void)dealloc
