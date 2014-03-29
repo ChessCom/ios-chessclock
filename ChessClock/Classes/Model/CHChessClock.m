@@ -79,7 +79,7 @@
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId
 {
     if (!self.paused) {
-        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:[NSNumber numberWithInt:(int)timePieceId]];
+        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:@(timePieceId)];
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];

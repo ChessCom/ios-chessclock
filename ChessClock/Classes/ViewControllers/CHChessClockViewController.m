@@ -26,20 +26,16 @@
 UIActionSheetDelegate,
 CHChessClockSettingsTableViewControllerDelegate>
 
-@property (retain, nonatomic) IBOutlet UIView *portraitView;
-@property (retain, nonatomic) IBOutlet UIView *landscapeView;
+@property (strong, nonatomic) IBOutlet CHTimePieceView *playerOneTimePieceView;
+@property (strong, nonatomic) IBOutlet CHTimePieceView *playerTwoTimePieceView;
 
-@property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerOneTimePieceViews;
-@property (retain, nonatomic) IBOutletCollection(CHTimePieceView) NSArray *playerTwoTimePieceViews;
-
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *pauseButtons;
-@property (weak, nonatomic) IBOutlet UIButton *resetButtonPortrait;
-@property (weak, nonatomic) IBOutlet UIButton *resetButtonLandscape;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
 @property (retain, nonatomic) CHChessClock* chessClock;
-
 @property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+
 
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerTrailingConstraint;
@@ -132,11 +128,8 @@ static const float CHShowTenthsTime = 10.0f;
     UIFont *customFont = [UIFont fontWithName:@"ChessGlyph-Regular" size:fontSize];
     
     self.settingsButton.titleLabel.font = customFont;
-    self.resetButtonPortrait.titleLabel.font = customFont;
-    
-    for (UIButton* button in self.pauseButtons) {
-        button.titleLabel.font = customFont;
-    }
+    self.resetButton.titleLabel.font = customFont;
+    self.pauseButton.titleLabel.font = customFont;
     
     // Set Clock
     self.chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
@@ -188,34 +181,16 @@ static const float CHShowTenthsTime = 10.0f;
     [self performSelectorOnMainThread:@selector(pauseClock) withObject:nil waitUntilDone:NO];
 }
 
-- (NSArray*)timePieceViewsWithId:(NSUInteger)timePieceId
+- (CHTimePieceView *)timePieceViewWithId:(NSUInteger)timePieceId
 {
-    NSMutableArray* timePieceViews = [NSMutableArray array];
-    
-    UIView* portraitTimePieceView = [self.portraitView viewWithTag:timePieceId];
-    UIView* landscapeTimePieceView = [self.landscapeView viewWithTag:timePieceId];
-    
-    if ([portraitTimePieceView isKindOfClass:[CHTimePieceView class]]) {
-        [timePieceViews addObject:portraitTimePieceView];
-    }
-
-    if ([landscapeTimePieceView isKindOfClass:[CHTimePieceView class]]) {
-        [timePieceViews addObject:landscapeTimePieceView];
-    }
-    
-    return timePieceViews;
+    return (CHTimePieceView *)[self.view viewWithTag:timePieceId];
 }
 
 - (void)resetTimeStageDots
 {
     NSUInteger stageCount = [self.chessClock.settings.stageManager stageCount];
-    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-        [timePieceView setTimeControlStageDotCount:stageCount];
-    }
-    
-    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-        [timePieceView setTimeControlStageDotCount:stageCount];
-    }
+    [self.playerOneTimePieceView setTimeControlStageDotCount:stageCount];
+    [self.playerTwoTimePieceView setTimeControlStageDotCount:stageCount];
 }
 
 
@@ -229,13 +204,8 @@ static const float CHShowTenthsTime = 10.0f;
 - (void)resetClock
 {
     [self.chessClock reset];
-    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-        [timePieceView unhighlightAndActivate:YES];
-    }
-    
-    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-        [timePieceView unhighlightAndActivate:YES];
-    }
+    [self.playerOneTimePieceView unhighlightAndActivate:YES];
+    [self.playerTwoTimePieceView unhighlightAndActivate:YES];
 }
 
 - (void)disableIdleTimer:(BOOL)disable
@@ -255,32 +225,26 @@ static const float CHShowTenthsTime = 10.0f;
             [self disableIdleTimer:YES];
         }
         
-        [self setPauseButtonsEnabled:YES];
-        
-        
-        [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
+        [self setPauseButtonEnabled:YES];
     
-        NSArray* selectedTimePieceViews = [self timePieceViewsWithId:selectedTimePieceId];
-        
-        for (CHTimePieceView* selectedTimePieceView in selectedTimePieceViews) {
-            [selectedTimePieceView unhighlightAndActivate:NO];
-        }
+        CHTimePieceView *selectedTimePieceView = [self timePieceViewWithId:selectedTimePieceId];
+        [selectedTimePieceView unhighlightAndActivate:NO];
     } else {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
-        [self setPauseButtonsEnabled:YES];
+        [self setPauseButtonEnabled:YES];
     }
     
-    if (selectedTimePieceId == ((CHTimePieceView*)[self.playerOneTimePieceViews lastObject]).tag) {
-        for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-            [timePieceView highlight];
-        }
+    [self.chessClock touchedTimePieceWithId:selectedTimePieceId];
+    
+    if (selectedTimePieceId == self.playerOneTimePieceView.tag) {
+        [self.playerTwoTimePieceView highlight];
+        [self.playerOneTimePieceView unhighlightAndActivate:NO];
         [CHSoundPlayer playSwitch1Sound];
     }
-    else if (selectedTimePieceId == ((CHTimePieceView*)[self.playerTwoTimePieceViews lastObject]).tag) {
-        for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-            [timePieceView highlight];
-        }
+    else if (selectedTimePieceId == self.playerTwoTimePieceView.tag) {
+        [self.playerOneTimePieceView highlight];
+        [self.playerTwoTimePieceView unhighlightAndActivate:NO];
         [CHSoundPlayer playSwitch2Sound];
     }
 }
@@ -310,15 +274,11 @@ static const float CHShowTenthsTime = 10.0f;
                                                     otherButtonTitles:nil, nil];
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        CGRect bounds = self.resetButtonPortrait.bounds;
-        UIButton* resetButton = self.resetButtonPortrait;
-
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            bounds = self.resetButtonLandscape.bounds;
-            resetButton = self.resetButtonLandscape;
-        }
+        CGRect bounds = self.resetButton.bounds;
     
-        [actionSheet showFromRect:bounds inView:resetButton animated:YES];
+        [actionSheet showFromRect:bounds
+                           inView:self.resetButton
+                         animated:YES];
     }
     else {
         [actionSheet showInView:self.view];
@@ -330,27 +290,21 @@ static const float CHShowTenthsTime = 10.0f;
     if ([self.chessClock isActive]) {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
-        [self setPauseButtonsEnabled:NO];
+        [self setPauseButtonEnabled:NO];
         
         // Unhighlight piece
-        for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-            [timePieceView unhighlightAndActivate:YES];
-        }
-        
-        for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-            [timePieceView unhighlightAndActivate:YES];
-        }
+        [self.playerOneTimePieceView unhighlightAndActivate:YES];
+        [self.playerTwoTimePieceView unhighlightAndActivate:YES];
     }
 }
 
-- (void)setPauseButtonsEnabled:(BOOL)enabled
+- (void)setPauseButtonEnabled:(BOOL)enabled
 {
-    for (UIButton* button in self.pauseButtons) {
-        NSString *title = enabled ? @"K" : @"";
-        [button setTitle:title forState:UIControlStateNormal];
-        [button setTitle:title forState:UIControlStateHighlighted];
-        button.userInteractionEnabled = enabled;
-    }
+    NSString *title = enabled ? @"K" : @"";
+    [self.pauseButton setTitle:title forState:UIControlStateNormal];
+    [self.pauseButton setTitle:title forState:UIControlStateHighlighted];
+    self.pauseButton.userInteractionEnabled = enabled;
+    
 }
 
 //------------------------------------------------------------------------------
@@ -373,26 +327,19 @@ static const float CHShowTenthsTime = 10.0f;
 //------------------------------------------------------------------------------
 - (void)chessClock:(CHChessClock*)chessClock availableTimeUpdatedForTimePiece:(CHTimePiece*)timePiece
 {
-    NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
+    CHTimePieceView *timePieceView = [self timePieceViewWithId:timePiece.timePieceId];
     NSTimeInterval timePieceAvailableTime = timePiece.availableTime;
     BOOL showTenths = timePieceAvailableTime < CHShowTenthsTime;
-    
-    
-    for (CHTimePieceView* timePieceView in timePieceViews) {
-        timePieceView.availableTimeLabel.text = [CHUtil formatTime:timePieceAvailableTime showTenths:showTenths];
-    }
+    timePieceView.availableTimeLabel.text = [CHUtil formatTime:timePieceAvailableTime showTenths:showTenths];
 }
 
 - (void)chessClock:(CHChessClock*)chessClock movesCountUpdatedForTimePiece:(CHTimePiece*)timePiece
 {
-    NSArray* timePieceViews = [self timePieceViewsWithId:timePiece.timePieceId];
+    CHTimePieceView *timePieceView = [self timePieceViewWithId:timePiece.timePieceId];
 
     NSString* movesText = NSLocalizedString(@"Moves", nil);
     movesText = [movesText stringByAppendingFormat:@": %ld", (long)timePiece.movesCount];
-    
-    for (CHTimePieceView* timePieceView in timePieceViews) {
-        timePieceView.movesCountLabel.text = movesText;
-    }
+    timePieceView.movesCountLabel.text = movesText;
 }
 
 - (void)chessClock:(CHChessClock*)chessClock stageUpdatedForTimePiece:(CHTimePiece*)timePiece
@@ -401,33 +348,31 @@ static const float CHShowTenthsTime = 10.0f;
         [self resetTimeStageDots];
     }
     else {
-        NSArray* timePieceViews = [self timePieceViewsWithId:[timePiece timePieceId]];
-        for (CHTimePieceView* timePieceView in timePieceViews) {
+        CHTimePieceView *timePieceView = [self timePieceViewWithId:[timePiece timePieceId]];
             [timePieceView updateTimeControlStage:timePiece.stageIndex];
-        }
     }
 }
 
 - (void)chessClockTimeEnded:(CHChessClock*)chessClock withLastActiveTimePiece:(CHTimePiece *)timePiece
 {
-    for (CHTimePieceView* timePieceView in self.playerOneTimePieceViews) {
-        if (timePieceView.tag == timePiece.timePieceId) {
-            [timePieceView timeEnded];
-        }
-        else {
-            [timePieceView unhighlightAndActivate:NO];
-        }
+    
+    if (self.playerOneTimePieceView.tag == timePiece.timePieceId) {
+        [self.playerOneTimePieceView timeEnded];
+    }
+    else {
+        [self.playerOneTimePieceView unhighlightAndActivate:NO];
     }
     
-    for (CHTimePieceView* timePieceView in self.playerTwoTimePieceViews) {
-        if (timePieceView.tag == timePiece.timePieceId) {
-            [timePieceView timeEnded];
-        }
-        else {
-            [timePieceView unhighlightAndActivate:NO];
-        }
+    
+    
+    if (self.playerTwoTimePieceView.tag == timePiece.timePieceId) {
+        [self.playerTwoTimePieceView timeEnded];
     }
-
+    else {
+        [self.playerTwoTimePieceView unhighlightAndActivate:NO];
+    }
+    
+    
     [CHSoundPlayer playEndSound];
     [self disableIdleTimer:NO];
 }
