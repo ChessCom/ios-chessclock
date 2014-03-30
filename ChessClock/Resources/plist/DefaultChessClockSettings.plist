@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>Blitz 5|5</string>
+			<string>Fischer Blitz 5|0</string>
 			<key>default</key>
 			<true/>
 			<key>increment</key>
@@ -14,7 +14,7 @@
 				<key>type</key>
 				<string>CHChessClockFischerIncrement</string>
 				<key>incrementValue</key>
-				<integer>5</integer>
+				<integer>0</integer>
 			</dict>
 			<key>timeStages</key>
 			<array>
@@ -68,7 +68,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Tournament</string>
+			<string>Tournament 40/2hr, G60, 5s delay</string>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
