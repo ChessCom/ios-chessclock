@@ -22,6 +22,7 @@
 
 @property (retain, nonatomic) UIViewController* currentViewController;
 @property (weak, nonatomic) IBOutlet UIButton *startClockButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 

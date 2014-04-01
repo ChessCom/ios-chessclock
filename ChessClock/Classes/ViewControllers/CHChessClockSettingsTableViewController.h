@@ -23,7 +23,7 @@
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewController
 //------------------------------------------------------------------------------
-@interface CHChessClockSettingsTableViewController : UITableViewController
+@interface CHChessClockSettingsTableViewController : UIViewController
 
 @property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
 @property (weak, nonatomic) id <CHChessClockSettingsTableViewControllerDelegate> delegate;

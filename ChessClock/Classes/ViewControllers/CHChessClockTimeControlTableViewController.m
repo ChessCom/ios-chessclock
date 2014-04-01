@@ -294,7 +294,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
     }
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %u", NSLocalizedString(@"Stage", nil), row + 1];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), row + 1];
     cell.detailTextLabel.text = [[self.chessClockSettings.stageManager stageAtIndex:row] description];
     
     UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
