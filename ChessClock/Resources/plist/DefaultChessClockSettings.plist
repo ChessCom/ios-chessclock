@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>Fischer Blitz 5|0</string>
+			<string>Blitz 5 min</string>
 			<key>default</key>
 			<true/>
 			<key>increment</key>
@@ -28,7 +28,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Fischer Rapid 10|5</string>
+			<string>Rapid 10 | 5</string>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
@@ -48,7 +48,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Delay Bullet 1|2</string>
+			<string>Bullet 1 | 2</string>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
