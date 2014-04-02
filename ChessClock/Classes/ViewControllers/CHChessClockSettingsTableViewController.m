@@ -45,8 +45,27 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    
+    
     [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
                            forState:UIControlStateNormal];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+        
+    if ([self.tableView isEditing]) {
+        // If the tableView is already in edit mode, turn it off. Also change the title of the button to reflect the intended verb (‘Edit’, in this case).
+        [self.tableView setEditing:NO animated:YES];
+        self.navigationItem.rightBarButtonItem.title = @"Edit";
+    }
+    else {
+        self.navigationItem.rightBarButtonItem.title = @"Done";
+        
+        // Turn on edit mode
+        
+        [self.tableView setEditing:YES animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
