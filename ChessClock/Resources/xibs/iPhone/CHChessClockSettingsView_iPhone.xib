@@ -39,11 +39,11 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="zec-ng-Gl1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7E-lb-fxO">
-                                <rect key="frame" x="30" y="16" width="260" height="104"/>
+                                <rect key="frame" x="95" y="14" width="130" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="chess_logo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,7 +90,7 @@
         </view>
     </objects>
     <resources>
-        <image name="chess_logo" width="260" height="104"/>
+        <image name="chess_logo" width="130" height="52"/>
         <image name="rectLightOrangeButton" width="4" height="4"/>
         <image name="rectLightOrangeButtonPressed" width="4" height="4"/>
     </resources>
