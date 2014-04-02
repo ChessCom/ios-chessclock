@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CHChessClockViewController">
             <connections>
+                <outlet property="firstTimerBottomConstraint" destination="Paz-1x-F3n" id="1z2-Up-1N4"/>
                 <outlet property="firstTimerHeightConstraint" destination="OqQ-XG-R9c" id="fBS-Og-OTF"/>
+                <outlet property="firstTimerLeadingConstraint" destination="cyp-W3-2dd" id="hfO-Kc-2nd"/>
                 <outlet property="firstTimerTrailingConstraint" destination="VPh-jW-bZX" id="3vf-Ax-SjO"/>
                 <outlet property="pauseButton" destination="5" id="X0Z-JV-ihy"/>
                 <outlet property="pauseButtonTopConstraint" destination="n1u-dL-TVh" id="lub-sB-lMN"/>
@@ -18,6 +20,7 @@
                 <outlet property="secondTimerBottomConstraint" destination="D3Z-di-dwG" id="dF5-0r-3i0"/>
                 <outlet property="secondTimerHeightConstraint" destination="PZD-QD-dSZ" id="hau-lg-2ll"/>
                 <outlet property="secondTimerLeadingConstraint" destination="poN-oB-ik7" id="xBU-1W-Kwm"/>
+                <outlet property="secondTimerTrailingConstraint" destination="Ndu-aO-hr3" id="ns2-Am-StF"/>
                 <outlet property="settingsButton" destination="6" id="uu0-ib-aPb"/>
                 <outlet property="settingsButtonLeadingConstraint" destination="xdn-J6-HhM" id="iIN-ZQ-jdU"/>
                 <outlet property="settingsButtonTopConstraint" destination="aom-MM-Gst" id="el5-tc-9jB"/>
@@ -75,11 +78,11 @@
                     </connections>
                 </button>
                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4" customClass="CHTimePieceView">
-                    <rect key="frame" x="20" y="624" width="728" height="380"/>
+                    <rect key="frame" x="20" y="624" width="728" height="380.00000059604645"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11">
-                            <rect key="frame" x="0.0" y="0.0" width="728" height="380"/>
+                            <rect key="frame" x="0.0" y="0.0" width="728" height="380.00000059604645"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                             <state key="normal" backgroundImage="chessClock_notPlayingTimePiece">
@@ -94,7 +97,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moves: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="10">
-                            <rect key="frame" x="596" y="325" width="107" height="30"/>
+                            <rect key="frame" x="596" y="325.00000059604645" width="107" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
@@ -111,7 +114,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8">
-                            <rect key="frame" x="25" y="330" width="106" height="30"/>
+                            <rect key="frame" x="25" y="330.00000059604645" width="106" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
