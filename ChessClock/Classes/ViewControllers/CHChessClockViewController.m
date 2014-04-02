@@ -40,10 +40,14 @@ CHChessClockSettingsTableViewControllerDelegate>
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerTrailingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerLeadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerBottomConstraint;
+
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerTrailingConstraint;
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingsButtonLeadingConstraint;
@@ -77,35 +81,65 @@ static const float CHShowTenthsTime = 10.0f;
 {
     BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     
+    CGFloat constraintConstantNear = 20.f;
+    CGFloat constraintConstantFar = isiPad ? 522.f : IS_SCREEN_4_INCHES ? 292.f : 258.f;
+    CGFloat constraintConstantHeightLanscape = isiPad ? 383.f : 150.f;
+    CGFloat constraintConstantHeightPortrait = isiPad ? 380.f :IS_SCREEN_4_INCHES ? 204.f : 170.f;
+    CGFloat constraintConstantButtonTopLandscape = isiPad ? 120.f : 36.f;
+    CGFloat constraintConstantButtonSide = isiPad ? 92.f : 63.f;
+    CGFloat constraintConstantTimerBottom = isiPad ? 624.f : IS_SCREEN_4_INCHES ? 344.f : 286.f;
+    CGFloat constraintConstantButtonTopPortrait = isiPad ? 450.0f : IS_SCREEN_4_INCHES ? 246.f : 204.f;
+    
     BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
     
-    if (!isiPad) {
-        self.firstTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
-        self.firstTimerTrailingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
+    if (isLandscape) {
+        BOOL isLandscapeLeft = toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft;
         
-        self.secondTimerLeadingConstraint.constant = isLandscape ? IS_SCREEN_4_INCHES ? 292.0f : 258.0f : 20.0f;
-        self.secondTimerBottomConstraint.constant = isLandscape ? 20.0f : IS_SCREEN_4_INCHES ? 344.0f : 286.0f;
-        self.secondTimerHeightConstraint.constant = isLandscape ? 150.0f : IS_SCREEN_4_INCHES ? 204.0f : 170.0f;
+        if (isLandscapeLeft) {
+            self.firstTimerLeadingConstraint.constant = constraintConstantNear;
+            self.firstTimerTrailingConstraint.constant = constraintConstantFar;
+            
+            
+            self.secondTimerLeadingConstraint.constant = constraintConstantFar;
+            self.secondTimerTrailingConstraint.constant = constraintConstantNear;
+            
+        } else {
+            self.firstTimerLeadingConstraint.constant = constraintConstantFar;
+            self.firstTimerTrailingConstraint.constant = constraintConstantNear;
+            
+            self.secondTimerLeadingConstraint.constant = constraintConstantNear;
+            self.secondTimerTrailingConstraint.constant = constraintConstantFar;
+            
+        }
+        self.secondTimerHeightConstraint.constant =
+        self.firstTimerHeightConstraint.constant = constraintConstantHeightLanscape;
+        
+        self.firstTimerBottomConstraint.constant =
+        self.secondTimerBottomConstraint.constant = constraintConstantNear;
         
         self.settingsButtonTopConstraint.constant =
         self.pauseButtonTopConstraint.constant =
-        self.resetButtonTopConstraint.constant = isLandscape ? 36.0f : IS_SCREEN_4_INCHES ? 246.0f : 204.0f;
-        
-        self.settingsButtonLeadingConstraint.constant =
-        self.resetButtonTrailingConstraint.constant = isLandscape ? 63.0f :
-        20.0f;
+        self.resetButtonTopConstraint.constant = constraintConstantButtonTopLandscape;
     } else {
-        self.firstTimerHeightConstraint.constant = isLandscape ? 383.0f : 380.0f;
-        self.firstTimerTrailingConstraint.constant = isLandscape ? 522.0f : 20.0f;
         
-        self.secondTimerLeadingConstraint.constant = isLandscape ? 522.0f : 20.0f;
-        self.secondTimerBottomConstraint.constant = isLandscape ? 20.0f : 624.0f;
-        self.secondTimerHeightConstraint.constant = isLandscape ? 383.0f : 380.0f;
+        self.firstTimerLeadingConstraint.constant =
+        self.firstTimerTrailingConstraint.constant =
+        self.secondTimerLeadingConstraint.constant =
+        self.secondTimerTrailingConstraint.constant = constraintConstantNear;
+        
+        self.firstTimerHeightConstraint.constant =
+        self.secondTimerHeightConstraint.constant = constraintConstantHeightPortrait;
+        
+        self.firstTimerBottomConstraint.constant = constraintConstantNear;
+        self.secondTimerBottomConstraint.constant = constraintConstantTimerBottom;
         
         self.settingsButtonTopConstraint.constant =
         self.pauseButtonTopConstraint.constant =
-        self.resetButtonTopConstraint.constant = isLandscape ? 120.0f : 450.0f;
+        self.resetButtonTopConstraint.constant = constraintConstantButtonTopPortrait;
     }
+    
+    self.settingsButtonLeadingConstraint.constant =
+    self.resetButtonTrailingConstraint.constant = constraintConstantButtonSide;
     
     CGFloat angle = isLandscape ? 0.0f : M_PI;
     self.playerTwoTimePieceView.layer.affineTransform = CGAffineTransformMakeRotation(angle);
