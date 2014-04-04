@@ -382,6 +382,7 @@ static const float CHShowTenthsTime = 10.0f;
     NSString* movesText = NSLocalizedString(@"Moves", nil);
     movesText = [movesText stringByAppendingFormat:@": %ld", (long)timePiece.movesCount];
     timePieceView.movesCountLabel.text = movesText;
+    timePieceView.movesCountLabel.hidden = [timePiece isInLastStage];
 }
 
 - (void)chessClock:(CHChessClock*)chessClock stageUpdatedForTimePiece:(CHTimePiece*)timePiece

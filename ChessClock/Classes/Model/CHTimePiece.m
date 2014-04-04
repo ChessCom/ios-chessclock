@@ -83,6 +83,11 @@
     self.stageIndex = 1;
 }
 
+- (BOOL)isInLastStage
+{
+    return self.stageIndex == [self.stageManager stageCount];
+}
+
 //------------------------------------------------------------------------------
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------

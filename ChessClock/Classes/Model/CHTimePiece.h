@@ -44,5 +44,6 @@
 - (void)startWithIncrement:(CHChessClockIncrement*)increment;
 - (void)stopWithIncrement:(CHChessClockIncrement*)increment;
 - (void)reset;
+- (BOOL)isInLastStage;
 
 @end
