@@ -14,8 +14,8 @@
 @interface CHChessClockSettings : NSObject
 
 @property (copy, nonatomic) NSString* name;
-@property (retain, nonatomic) CHChessClockIncrement* increment;
-@property (retain, nonatomic, readonly) CHChessClockTimeControlStageManager* stageManager;
+@property (strong, nonatomic) CHChessClockIncrement* increment;
+@property (strong, nonatomic, readonly) CHChessClockTimeControlStageManager* stageManager;
 
 - (id)initWithName:(NSString*)name increment:(CHChessClockIncrement*)increment
    andStageManager:(CHChessClockTimeControlStageManager*)stageManager;

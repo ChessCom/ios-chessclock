@@ -15,7 +15,7 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockTimeControlStageManager() <NSCoding>
 
-@property (retain, nonatomic) NSMutableArray* timeControlStages;
+@property (strong, nonatomic) NSMutableArray* timeControlStages;
 
 @end
 

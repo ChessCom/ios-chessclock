@@ -18,11 +18,11 @@
 @interface CHChessClock() <CHTimePieceDelegate>
 
 @property (weak, nonatomic) id<CHChessClockDelegate> delegate;
-@property (retain, nonatomic) NSDictionary* timePiecesDictionary;
-@property (retain, nonatomic) CHTimePiece* playerOneTimePiece;
-@property (retain, nonatomic) CHTimePiece* playerTwoTimePiece;
+@property (strong, nonatomic) NSDictionary* timePiecesDictionary;
+@property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
+@property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 @property (weak, nonatomic) CHTimePiece* activePiece;
-@property (retain, nonatomic) NSTimer* timer;
+@property (strong, nonatomic) NSTimer* timer;
 @property (assign, nonatomic) NSTimeInterval interval;
 @property (assign, nonatomic, readwrite) BOOL paused;
 @property (assign, nonatomic) BOOL timeEnded;

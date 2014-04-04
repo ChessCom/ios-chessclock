@@ -29,7 +29,7 @@
 
 @property (weak, nonatomic) id<CHChessClockTimeControlStageTableViewControllerDelegate> delegate;
 
-@property (retain, nonatomic) CHChessClockTimeControlStage* timeControlStage;
-@property (retain, nonatomic) CHChessClockTimeControlStageManager* timeControlStageManager;
+@property (strong, nonatomic) CHChessClockTimeControlStage* timeControlStage;
+@property (strong, nonatomic) CHChessClockTimeControlStageManager* timeControlStageManager;
 
 @end

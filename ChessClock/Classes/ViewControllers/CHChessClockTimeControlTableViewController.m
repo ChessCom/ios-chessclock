@@ -24,7 +24,7 @@
 <CHChessClockIncrementTableViewControllerDelegate, CHChessClockTimeControlStageTableViewControllerDelegate,
 CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
-@property (retain, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
 
 @property (assign, nonatomic) BOOL newTimeControlCreated;
 @property (assign, nonatomic) BOOL newTimeControlSaved;

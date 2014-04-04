@@ -30,7 +30,7 @@
 @interface CHChessClock : NSObject
 
 // Note: We are assuming that both timepieces will share the same settings
-@property (retain, nonatomic) CHChessClockSettings* settings;
+@property (strong, nonatomic) CHChessClockSettings* settings;
 
 @property (assign, nonatomic, readonly) BOOL paused;
 

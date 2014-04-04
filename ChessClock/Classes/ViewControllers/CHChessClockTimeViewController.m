@@ -22,8 +22,8 @@ enum CHTimeComponents {
 @property (weak, nonatomic) IBOutlet UIView *timePickerParentView;
 @property (weak, nonatomic) IBOutlet UIPickerView* timePickerView;
 
-@property (retain, nonatomic) NSMutableArray* components;
-@property (retain, nonatomic) NSDictionary* rowsDictionary;
+@property (strong, nonatomic) NSMutableArray* components;
+@property (strong, nonatomic) NSDictionary* rowsDictionary;
 
 @end
 

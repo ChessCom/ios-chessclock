@@ -25,7 +25,7 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockSettingsTableViewController : UIViewController
 
-@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
+@property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
 @property (weak, nonatomic) id <CHChessClockSettingsTableViewControllerDelegate> delegate;
 
 

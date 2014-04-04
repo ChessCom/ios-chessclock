@@ -17,7 +17,7 @@
 @interface CHChessClockIncrementTableViewController()
 <CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
-@property (retain, nonatomic) NSDictionary* incrementsTypesDictionary;
+@property (strong, nonatomic) NSDictionary* incrementsTypesDictionary;
 @property (assign, nonatomic) NSUInteger selectedIncrementValue;
 @property (strong, nonatomic) UIPopoverController* customPopoverController;
 

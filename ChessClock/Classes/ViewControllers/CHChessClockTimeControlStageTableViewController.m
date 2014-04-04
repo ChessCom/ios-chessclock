@@ -18,7 +18,7 @@
 @interface CHChessClockTimeControlStageTableViewController()
 <CHChessClockTimeViewControllerDelegate, UIActionSheetDelegate, UIPopoverControllerDelegate>
 
-@property (retain, nonatomic) IBOutlet UITableViewCell* movesTableViewCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell* movesTableViewCell;
 @property (assign, nonatomic) NSUInteger stageIndex;
 @property (strong, nonatomic) UIPopoverController *customPopoverController;
 

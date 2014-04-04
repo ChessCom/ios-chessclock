@@ -16,8 +16,8 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockSettingsManager()
 
-@property (retain, nonatomic) NSMutableArray* timeControls;
-@property (retain, nonatomic) NSMutableDictionary* settings;
+@property (strong, nonatomic) NSMutableArray* timeControls;
+@property (strong, nonatomic) NSMutableDictionary* settings;
 
 @end
 

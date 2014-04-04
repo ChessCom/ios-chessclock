@@ -33,8 +33,8 @@ CHChessClockSettingsTableViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 
-@property (retain, nonatomic) CHChessClock* chessClock;
-@property (retain, nonatomic) CHChessClockSettingsManager* settingsManager;
+@property (strong, nonatomic) CHChessClock* chessClock;
+@property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
 
 
 // Constraints
