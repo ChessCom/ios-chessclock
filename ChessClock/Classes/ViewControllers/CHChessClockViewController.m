@@ -355,10 +355,13 @@ static const float CHShowTenthsTime = 10.0f;
     self.settingsManager.currentTimeControl = settings;
 }
 
-- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController
+- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController andReset:(BOOL)reset
 {
-    self.chessClock.settings = self.settingsManager.currentTimeControl;
-    [self resetClock];
+    if (reset)
+    {
+        self.chessClock.settings = self.settingsManager.currentTimeControl;
+        [self resetClock];
+    }
 }
 
 //------------------------------------------------------------------------------

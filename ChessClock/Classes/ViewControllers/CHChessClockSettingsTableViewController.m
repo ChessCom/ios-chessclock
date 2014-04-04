@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *startClockButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) CHChessClockSettings* timeControlUponAppearance;
+
 @end
 
 //------------------------------------------------------------------------------
@@ -40,6 +42,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
  
     CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc] init];
     self.settingsManager = settingsManager;
+    self.timeControlUponAppearance = self.settingsManager.currentTimeControl;
     
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -186,6 +189,12 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     [self.navigationController pushViewController:timeControlViewController animated:YES];
 }
 
+- (void)startClockAndReset:(BOOL)reset
+{
+    [self.delegate settingsTableViewControllerDidStartClock:self andReset:reset];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 //------------------------------------------------------------------------------
 #pragma mark - UITableViewDataSource methods
 //------------------------------------------------------------------------------
@@ -254,18 +263,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     [self.settingsManager moveTimeControlFrom:sourceIndexPath.row to:destinationIndexPath.row];
 }
-
-//------------------------------------------------------------------------------
-#pragma mark - Control Event Handlers
-//------------------------------------------------------------------------------
-
-- (IBAction)didTouchUpInsideChessLogoButton:(id)sender
-{
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/chess-play-learn/id329218549?mt=8"];
-    
-    [[UIApplication sharedApplication] openURL:url];
-}
-
 
 //------------------------------------------------------------------------------
 #pragma mark - UITableViewDelegate methods
@@ -355,11 +352,37 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 //------------------------------------------------------------------------------
 #pragma mark - IBAction methods
 //------------------------------------------------------------------------------
-
 - (IBAction)startClockTapped
 {
-    [self.delegate settingsTableViewControllerDidStartClock:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.timeControlUponAppearance == self.settingsManager.currentTimeControl)
+    {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Reset Clock?", nil)
+                                                                 delegate:self
+                                                        cancelButtonTitle:NSLocalizedString(@"No", nil)
+                                                   destructiveButtonTitle:NSLocalizedString(@"Yes", nil)
+                                                        otherButtonTitles:nil, nil];
+        
+        [actionSheet showInView:self.view];
+    }
+    else
+    {
+        [self startClockAndReset:YES];
+    }
+}
+
+- (IBAction)didTouchUpInsideChessLogoButton:(id)sender
+{
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/chess-play-learn/id329218549?mt=8"];
+    
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - UIActionSheetDelegate methods
+//------------------------------------------------------------------------------
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self startClockAndReset:buttonIndex != actionSheet.cancelButtonIndex];
 }
 
 @end
