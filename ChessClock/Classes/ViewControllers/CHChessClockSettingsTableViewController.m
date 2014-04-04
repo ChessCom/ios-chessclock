@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) CHChessClockSettings* timeControlUponAppearance;
+@property (strong, nonatomic) UIActionSheet* resetActionSheet;
 
 @end
 
@@ -88,9 +89,35 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     [self saveSettings];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        [self.resetActionSheet dismissWithClickedButtonIndex:self.resetActionSheet.cancelButtonIndex animated:NO];
+        [self.resetActionSheet showFromRect:self.startClockButton.bounds inView:self.startClockButton animated:YES];
+    }
+}
+
 //------------------------------------------------------------------------------
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------
+- (UIActionSheet*)resetActionSheet
+{
+    if (_resetActionSheet == nil)
+    {
+        _resetActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Reset Clock?", nil)
+                                                        delegate:self
+                                               cancelButtonTitle:NSLocalizedString(@"No", nil)
+                                          destructiveButtonTitle:NSLocalizedString(@"Yes", nil)
+                                               otherButtonTitles:nil, nil];
+        _resetActionSheet.delegate = self;
+    }
+    
+    return _resetActionSheet;
+}
+
 - (void)updateClockSettings:(CHChessClockSettings*)clockSettings
 {
     self.settingsManager.currentTimeControl = clockSettings;
@@ -360,13 +387,14 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     if (self.timeControlUponAppearance == self.settingsManager.currentTimeControl)
     {
-        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Reset Clock?", nil)
-                                                                 delegate:self
-                                                        cancelButtonTitle:NSLocalizedString(@"No", nil)
-                                                   destructiveButtonTitle:NSLocalizedString(@"Yes", nil)
-                                                        otherButtonTitles:nil, nil];
-        
-        [actionSheet showInView:self.view];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        {
+            [self.resetActionSheet showFromRect:self.startClockButton.bounds inView:self.startClockButton animated:YES];
+        }
+        else
+        {
+            [self.resetActionSheet showInView:self.view];
+        }
     }
     else
     {
@@ -387,6 +415,11 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self startClockAndReset:buttonIndex != actionSheet.cancelButtonIndex];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    self.resetActionSheet = nil;
 }
 
 @end
