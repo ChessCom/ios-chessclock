@@ -327,14 +327,23 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     CHChessClockSettings* settings = viewController.chessClockSettings;
     
-    if (newTimeControlCreated) {
+    if (newTimeControlCreated)
+    {
         [self.settingsManager addTimeControl:settings];
         
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0
                                                     inSection:CHExistingTimeControlSection];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-    else {
+    else
+    {
+        if (self.settingsManager.currentTimeControl == settings)
+        {
+            // So that the clock has the correct state in the case in which the user edits a time control,
+            // and immediately after that, tapped the Start button
+            [self.delegate settingsTableViewController:self didUpdateSettings:settings];
+        }
+        
         NSUInteger savedSettingIndex = [[self.settingsManager allChessClockSettings] indexOfObject:settings];
         if (savedSettingIndex != NSNotFound) {
             NSIndexPath* savedSetttingIndexPath = [NSIndexPath indexPathForRow:savedSettingIndex inSection:CHExistingTimeControlSection];
