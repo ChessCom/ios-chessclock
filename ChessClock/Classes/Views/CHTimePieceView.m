@@ -60,8 +60,9 @@
         [view removeFromSuperview];
     }
     
-    if (dotCount == 1) {
-        self.movesCountLabel.hidden = YES;
+    self.movesCountLabel.hidden = (dotCount == 1);
+    if (dotCount == 1)
+    {
         return;
     }
     
