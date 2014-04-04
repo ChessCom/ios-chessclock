@@ -57,12 +57,15 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 - (void)addTimeControl:(CHChessClockSettings*)settings
 {
     [self.timeControls insertObject:settings atIndex:0];
+    [self saveTimeControls];
 }
 
 - (void)removeTimeControlAtIndex:(NSUInteger)index
 {
-    if (index < [self.timeControls count]) {
+    if (index < [self.timeControls count])
+    {
         [self.timeControls removeObjectAtIndex:index];
+        [self saveTimeControls];
     }
 }
 
