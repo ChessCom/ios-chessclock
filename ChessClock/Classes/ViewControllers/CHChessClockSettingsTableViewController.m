@@ -339,6 +339,10 @@ static const NSUInteger CHExistingTimeControlSection = 1;
             // So that the clock has the correct state in the case in which the user edits a time control,
             // and immediately after that, tapped the Start button
             [self.delegate settingsTableViewController:self didUpdateSettings:settings];
+            
+            // This means the player returned from the time control screen (possibly editing the time control),
+            // so in this case we want to reset the clock as soon as the Start button is tapped
+            self.timeControlUponAppearance = nil;
         }
         
         NSUInteger savedSettingIndex = [[self.settingsManager allChessClockSettings] indexOfObject:settings];
