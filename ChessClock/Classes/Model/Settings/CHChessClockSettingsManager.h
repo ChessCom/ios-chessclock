@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) CHChessClockSettings* currentTimeControl;
 
-- (id)initWithUserName:(NSString*)userName;
+- (id)init;
 
 - (void)addTimeControl:(CHChessClockSettings*)settings;
 - (void)removeTimeControlAtIndex:(NSUInteger)index;

@@ -198,7 +198,7 @@ static const float CHShowTenthsTime = 10.0f;
 - (CHChessClockSettingsManager *)settingsManager
 {
     if (!_settingsManager) {
-        _settingsManager = [[CHChessClockSettingsManager alloc] initWithUserName:@"settings"];
+        _settingsManager = [[CHChessClockSettingsManager alloc] init];
     }
     return _settingsManager;
 }

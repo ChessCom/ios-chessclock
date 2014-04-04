@@ -17,7 +17,6 @@
 @interface CHChessClockSettingsManager()
 
 @property (retain, nonatomic) NSMutableArray* timeControls;
-@property (copy, nonatomic) NSString* userName;
 @property (retain, nonatomic) NSMutableDictionary* settings;
 
 @end
@@ -30,13 +29,13 @@
 static NSString* const CHChessClockCurrentTimeControl = @"CHChessClockCurrentTimeControl";
 static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 
-- (id)initWithUserName:(NSString*)userName
+- (id)init
 {
     self = [super init];
-    if (self) {
-        self.userName = userName;
-        
-        if (![self loadSettings]) {
+    if (self)
+    {
+        if (![self loadSettings])
+        {
             [self loadDefaultSettings];
         }
     }
@@ -193,7 +192,7 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     NSFileManager* fileManager = [[NSFileManager alloc] init];
     NSURL* documentsPath = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     
-    return [documentsPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@.plist", baseName, self.userName]];
+    return [documentsPath URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", baseName]];
 }
 
 - (NSURL*)chessClockTimeControlsPath

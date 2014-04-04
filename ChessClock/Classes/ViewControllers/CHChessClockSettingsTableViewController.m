@@ -38,8 +38,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     [super viewDidLoad];
  
-    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc]
-                                                     initWithUserName:@"settingsManager"];
+    CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc] init];
     self.settingsManager = settingsManager;
     
     self.title = NSLocalizedString(@"Settings", nil);
