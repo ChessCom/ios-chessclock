@@ -57,6 +57,9 @@
 		C00DBBF218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
 		C00DBBFA18C52B8C00DDCB32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C00DBBF818C52B8C00DDCB32 /* InfoPlist.strings */; };
 		C00DBBFC18C52B8C00DDCB32 /* ChessClockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */; };
+		C06831F818F0555F00B7BD96 /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C06831F718F0555F00B7BD96 /* libFlurry_4.4.0.a */; };
+		C06831FA18F0560500B7BD96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06831F918F0560500B7BD96 /* SystemConfiguration.framework */; };
+		C06831FC18F0560E00B7BD96 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06831FB18F0560E00B7BD96 /* Security.framework */; };
 		C096E0AC18CE1382008BAF75 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C096E0AB18CE1382008BAF75 /* Crashlytics.framework */; };
 		F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */; };
 /* End PBXBuildFile section */
@@ -145,6 +148,10 @@
 		C00DBBF718C52B8C00DDCB32 /* ChessClockTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChessClockTests-Info.plist"; sourceTree = "<group>"; };
 		C00DBBF918C52B8C00DDCB32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessClockTests.m; sourceTree = "<group>"; };
+		C06831F618F0555F00B7BD96 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		C06831F718F0555F00B7BD96 /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.4.0.a; sourceTree = "<group>"; };
+		C06831F918F0560500B7BD96 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C06831FB18F0560E00B7BD96 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C096E0AB18CE1382008BAF75 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DefaultChessClockSettings.plist; path = Resources/plist/DefaultChessClockSettings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,8 +161,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C06831FC18F0560E00B7BD96 /* Security.framework in Frameworks */,
+				C06831FA18F0560500B7BD96 /* SystemConfiguration.framework in Frameworks */,
 				0F4000EF18D9074800402B92 /* AudioToolbox.framework in Frameworks */,
 				C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */,
+				C06831F818F0555F00B7BD96 /* libFlurry_4.4.0.a in Frameworks */,
 				C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */,
 				C096E0AC18CE1382008BAF75 /* Crashlytics.framework in Frameworks */,
 				C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */,
@@ -342,6 +352,8 @@
 		C00DBBCC18C52B8C00DDCB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C06831FB18F0560E00B7BD96 /* Security.framework */,
+				C06831F918F0560500B7BD96 /* SystemConfiguration.framework */,
 				0F4000EE18D9074800402B92 /* AudioToolbox.framework */,
 				C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */,
 				C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */,
@@ -397,10 +409,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C06831F518F0555F00B7BD96 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				C06831F618F0555F00B7BD96 /* Flurry.h */,
+				C06831F718F0555F00B7BD96 /* libFlurry_4.4.0.a */,
+			);
+			name = Flurry;
+			path = ThirdParty/Flurry;
+			sourceTree = "<group>";
+		};
 		C096E0A718CE12CB008BAF75 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
 				C096E0AA18CE1382008BAF75 /* Crashlytics */,
+				C06831F518F0555F00B7BD96 /* Flurry */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -702,6 +725,10 @@
 				GCC_PREFIX_HEADER = "ChessClock/ChessClock-Prefix.pch";
 				INFOPLIST_FILE = "ChessClock/ChessClock-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ChessClock/ThirdParty/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -720,6 +747,10 @@
 				GCC_PREFIX_HEADER = "ChessClock/ChessClock-Prefix.pch";
 				INFOPLIST_FILE = "ChessClock/ChessClock-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/ChessClock/ThirdParty/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

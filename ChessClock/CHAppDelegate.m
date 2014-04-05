@@ -12,13 +12,12 @@
 #import "CHChessClockViewController.h"
 
 #import <Crashlytics/Crashlytics.h>
+#import "Flurry.h"
 
 @implementation CHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Crashlytics startWithAPIKey:@"47969ba8b0f44f287503d0c51b95040668dfa536"];
-    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -28,6 +27,9 @@
     [[UINavigationController alloc] initWithRootViewController:rootViewController];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    [Flurry startSession:@"CYCQ6GY9XZCZKVB2VGRV"];
+    [Crashlytics startWithAPIKey:@"47969ba8b0f44f287503d0c51b95040668dfa536"];
     
     return YES;
 }
