@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CHChessClockSettingsTableViewController">
+            <connections>
+                <outlet property="startClockButton" destination="0CZ-v0-sqi" id="orH-5B-bnB"/>
+                <outlet property="tableView" destination="3" id="yE4-9P-Nvl"/>
+                <outlet property="view" destination="pHJ-by-tDF" id="yIj-gd-C1K"/>
+            </connections>
+        </placeholder>
+        <view contentMode="scaleToFill" id="pHJ-by-tDF">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="934"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="nNB-me-uhz">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdj-YO-zKA">
+                                <rect key="frame" x="319" y="24" width="130" height="52"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="chess_logo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchUpInsideChessLogoButton:" destination="-1" eventType="touchUpInside" id="Aqi-TV-VFI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="kdj-YO-zKA" secondAttribute="centerY" id="Uxs-Qc-wDF"/>
+                            <constraint firstAttribute="centerX" secondItem="kdj-YO-zKA" secondAttribute="centerX" id="kA7-Cs-WzO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="R2L-Sa-qkf"/>
+                        <outlet property="delegate" destination="-1" id="SWa-74-fKq"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CZ-v0-sqi">
+                    <rect key="frame" x="41" y="954" width="686" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="z5l-1d-ais"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <state key="normal" title="Button" backgroundImage="rectLightOrangeButton"/>
+                    <state key="selected" backgroundImage="rectLightOrangeButtonPressed"/>
+                    <state key="highlighted" backgroundImage="rectLightOrangeButtonPressed"/>
+                    <connections>
+                        <action selector="startClockTapped" destination="-1" eventType="touchUpInside" id="BOY-Mu-NNr"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtD-gp-9yT">
+                    <rect key="frame" x="0.0" y="934" width="768" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Yj4-sq-hh7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RtD-gp-9yT" firstAttribute="leading" secondItem="pHJ-by-tDF" secondAttribute="leading" id="95N-Qp-hWf"/>
+                <constraint firstAttribute="trailing" secondItem="RtD-gp-9yT" secondAttribute="trailing" id="FFD-xw-6fW"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="pHJ-by-tDF" secondAttribute="leading" id="P89-A1-LFk"/>
+                <constraint firstItem="RtD-gp-9yT" firstAttribute="top" secondItem="3" secondAttribute="bottom" id="XGQ-Ym-Rse"/>
+                <constraint firstItem="0CZ-v0-sqi" firstAttribute="leading" secondItem="pHJ-by-tDF" secondAttribute="leading" constant="41" id="YTa-Zi-tU6"/>
+                <constraint firstAttribute="trailing" secondItem="0CZ-v0-sqi" secondAttribute="trailing" constant="41" id="dJD-gP-js3"/>
+                <constraint firstItem="0CZ-v0-sqi" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="20" id="h7u-Gc-O5E"/>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="nTg-B8-bUA"/>
+                <constraint firstAttribute="bottom" secondItem="0CZ-v0-sqi" secondAttribute="bottom" constant="20" id="pQy-dw-hSI"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="pHJ-by-tDF" secondAttribute="top" id="yYJ-9Q-EWY"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+    <resources>
+        <image name="chess_logo" width="130" height="52"/>
+        <image name="rectLightOrangeButton" width="4" height="4"/>
+        <image name="rectLightOrangeButtonPressed" width="4" height="4"/>
+    </resources>
+</document>

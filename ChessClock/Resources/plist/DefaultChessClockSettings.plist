@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>defaultSettings</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Blitz 5 min</string>
+			<key>default</key>
+			<true/>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>0</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>5</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rapid 10 | 5</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>5</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>10</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Bullet 1 | 2</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockDelayIncrement</string>
+				<key>incrementValue</key>
+				<integer>2</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>1</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Tournament 40/2hr, G60, 5s delay</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockDelayIncrement</string>
+				<key>incrementValue</key>
+				<integer>5</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>40</integer>
+					<key>maximumTime</key>
+					<string>120</string>
+				</dict>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>60</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
