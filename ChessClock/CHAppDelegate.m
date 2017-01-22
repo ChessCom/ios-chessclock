@@ -11,9 +11,6 @@
 #import "CHUtil.h"
 #import "CHChessClockViewController.h"
 
-#import <Crashlytics/Crashlytics.h>
-#import "Flurry.h"
-
 @implementation CHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -27,9 +24,6 @@
     [[UINavigationController alloc] initWithRootViewController:rootViewController];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
-    
-    [Flurry startSession:@"CYCQ6GY9XZCZKVB2VGRV"];
-    [Crashlytics startWithAPIKey:@"47969ba8b0f44f287503d0c51b95040668dfa536"];
     
     return YES;
 }
