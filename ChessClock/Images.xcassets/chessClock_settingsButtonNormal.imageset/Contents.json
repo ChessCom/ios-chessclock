@@ -2,13 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "chessClock_settingsButtonNormal.png"
+      "filename" : "chessClock_settingsButtonNormal.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "chessClock_settingsButtonNormal@2x.png"
+      "filename" : "chessClock_settingsButtonNormal@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
