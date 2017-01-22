@@ -4,11 +4,11 @@
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "fill",
+          "mode" : "tile",
           "width" : 1,
           "height" : 1
         },
-        "capInsets" : {
+        "cap-insets" : {
           "bottom" : 1,
           "top" : 1,
           "right" : 1,
@@ -23,11 +23,11 @@
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "fill",
+          "mode" : "tile",
           "width" : 3,
           "height" : 2
         },
-        "capInsets" : {
+        "cap-insets" : {
           "bottom" : 2,
           "top" : 3,
           "right" : 2,
@@ -37,6 +37,10 @@
       "idiom" : "universal",
       "filename" : "rectLightOrangeButtonPressed@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
