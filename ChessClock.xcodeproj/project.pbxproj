@@ -487,6 +487,7 @@
 						DevelopmentTeam = 64WSYCNXBH;
 					};
 					C00DBBED18C52B8C00DDCB32 = {
+						DevelopmentTeam = 64WSYCNXBH;
 						TestTargetID = C00DBBC918C52B8C00DDCB32;
 					};
 				};
@@ -745,6 +746,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ChessClock.app/ChessClock";
+				DEVELOPMENT_TEAM = 64WSYCNXBH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -768,6 +770,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ChessClock.app/ChessClock";
+				DEVELOPMENT_TEAM = 64WSYCNXBH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
