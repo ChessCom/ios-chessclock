@@ -11,6 +11,9 @@
 #import "CHUtil.h"
 #import "CHChessClockViewController.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 @implementation CHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,6 +26,8 @@
     
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    [Fabric with:@[[Crashlytics class]]];
     
     return YES;
 }
