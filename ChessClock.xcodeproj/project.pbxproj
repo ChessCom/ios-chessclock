@@ -414,19 +414,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C06831F518F0555F00B7BD96 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Flurry;
-			path = ThirdParty/Flurry;
-			sourceTree = "<group>";
-		};
 		C096E0A718CE12CB008BAF75 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
 				C096E0AA18CE1382008BAF75 /* Crashlytics */,
-				C06831F518F0555F00B7BD96 /* Flurry */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
