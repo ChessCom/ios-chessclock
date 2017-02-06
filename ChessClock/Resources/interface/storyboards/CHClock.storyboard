@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="ipad12_9" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,6 +10,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="dOV-kf-Geo">
+            <objects>
+                <navigationController id="FnB-MV-bvs" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lv6-ga-O7N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6O8-Tu-6Cu" kind="relationship" relationship="rootViewController" id="zU8-oF-WHh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptu-P9-SQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1760" y="46"/>
+        </scene>
         <!--Chess Clock View Controller-->
         <scene sceneID="GhF-3b-CgZ">
             <objects>
@@ -19,14 +35,14 @@
                         <viewControllerLayoutGuide type="bottom" id="NBk-Sw-64J"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JYh-4A-bvg">
-                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMI-UK-zVR">
-                                <rect key="frame" x="0.0" y="447" width="1366" height="150"/>
+                                <rect key="frame" x="0.0" y="349.33333333333331" width="414" height="101.33333333333337"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XH-Lj-y4p">
-                                        <rect key="frame" x="1279" y="41" width="67" height="67"/>
+                                        <rect key="frame" x="327" y="16.666666666666686" width="67" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="67" id="WIR-Tb-5ay"/>
                                             <constraint firstAttribute="height" constant="67" id="uoF-5g-FUY"/>
@@ -39,9 +55,12 @@
                                         <state key="highlighted">
                                             <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resetTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="93G-6k-Nbh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJQ-vJ-dRJ">
-                                        <rect key="frame" x="20" y="41" width="67" height="67"/>
+                                        <rect key="frame" x="20" y="16.666666666666686" width="67" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" id="aAM-R9-qqC"/>
                                             <constraint firstAttribute="width" constant="67" id="mhH-wh-SPW"/>
@@ -54,9 +73,12 @@
                                         <state key="highlighted">
                                             <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="settingsTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="4UB-Dm-YJ2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6md-Xa-WjT">
-                                        <rect key="frame" x="649.5" y="41" width="67" height="67"/>
+                                        <rect key="frame" x="173.66666666666666" y="16.666666666666686" width="67" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="67" id="OoA-HL-coM"/>
                                             <constraint firstAttribute="height" constant="67" id="ubk-H3-l5P"/>
@@ -69,6 +91,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pauseTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="bR8-51-mmg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -82,10 +107,10 @@
                                 </constraints>
                             </view>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vj8-dX-iH3" customClass="CHTimePieceView">
-                                <rect key="frame" x="0.0" y="20" width="1366" height="427"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="285.33333333333331"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB9-0e-vOb">
-                                        <rect key="frame" x="0.0" y="0.0" width="1366" height="427"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="285.33333333333331"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <state key="normal" backgroundImage="chessClock_notPlayingTimePiece">
                                             <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -94,9 +119,12 @@
                                         <state key="highlighted">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="timePieceTouched:" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="9Ws-fl-3C2"/>
+                                        </connections>
                                     </button>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OY-eb-dnX">
-                                        <rect key="frame" x="20" y="399" width="61" height="15"/>
+                                        <rect key="frame" x="20" y="257.33333333333331" width="61" height="15"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="61" id="3Ou-n5-Rc3"/>
@@ -104,13 +132,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moves: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="HS4-w3-yQd">
-                                        <rect key="frame" x="1277" y="397" width="69" height="20"/>
+                                        <rect key="frame" x="325" y="255.33333333333331" width="69" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="05K-0K-A0N">
-                                        <rect key="frame" x="577.5" y="167" width="210" height="93"/>
+                                        <rect key="frame" x="101.66666666666669" y="96" width="210" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="210" id="Jvd-sv-DA7"/>
                                         </constraints>
@@ -139,10 +167,10 @@
                                 </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1p-b2-vvD" customClass="CHTimePieceView">
-                                <rect key="frame" x="0.0" y="597" width="1366" height="427"/>
+                                <rect key="frame" x="0.0" y="450.66666666666674" width="414" height="285.33333333333326"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2T1-66-22g">
-                                        <rect key="frame" x="0.0" y="0.0" width="1366" height="427"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="285.33333333333331"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <state key="normal" backgroundImage="chessClock_notPlayingTimePiece">
                                             <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,16 +179,19 @@
                                         <state key="highlighted">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="timePieceTouched:" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="MVx-uP-x8r"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moves: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UJh-4Z-S7F">
-                                        <rect key="frame" x="1277" y="397" width="69" height="20"/>
+                                        <rect key="frame" x="325" y="255.33333333333331" width="69" height="20"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="bgd-Hp-RB6">
-                                        <rect key="frame" x="577.5" y="167" width="210" height="93"/>
+                                        <rect key="frame" x="101.66666666666669" y="96.333333333333314" width="210" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="210" id="Wgx-qb-0jx"/>
                                         </constraints>
@@ -168,7 +199,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-Cw-Jx0">
-                                        <rect key="frame" x="20" y="399" width="61" height="15"/>
+                                        <rect key="frame" x="20" y="257.33333333333331" width="61" height="15"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="4D3-az-5hq"/>
@@ -328,10 +359,18 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="2vV-Yo-ipt"/>
+                    <connections>
+                        <outlet property="pauseButton" destination="6md-Xa-WjT" id="RCj-Ap-U3o"/>
+                        <outlet property="playerOneTimePieceView" destination="v1p-b2-vvD" id="7Uo-AF-HY6"/>
+                        <outlet property="playerTwoTimePieceView" destination="vj8-dX-iH3" id="i5e-NI-QEe"/>
+                        <outlet property="resetButton" destination="2XH-Lj-y4p" id="9x9-8M-x7o"/>
+                        <outlet property="settingsButton" destination="qJQ-vJ-dRJ" id="c8i-P7-vuK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdS-1R-9dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-206" y="46"/>
+            <point key="canvasLocation" x="-964" y="46"/>
         </scene>
     </scenes>
     <resources>
