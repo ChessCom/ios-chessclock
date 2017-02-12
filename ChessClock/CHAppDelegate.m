@@ -10,6 +10,7 @@
 
 #import "CHUtil.h"
 #import "CHChessClockViewController.h"
+#import "UIColor+ChessClock.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -18,18 +19,33 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CHClock" bundle:nil];
-    UINavigationController *navigationController = [storyboard instantiateInitialViewController];
-    
-    self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
-    
-    [Fabric with:@[[Crashlytics class]]];
+    [self configureAppearance];
+    [self configureViewHierarchy];
+    [self configureFabric];
     
     return YES;
+}
+
+- (void)configureAppearance
+{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationBarTintColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor navigationBarTextColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor navigationBarTextColor]}];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+}
+
+- (void)configureViewHierarchy
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CHClock" bundle:nil];
+    UINavigationController *navigationController = [storyboard instantiateInitialViewController];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)configureFabric
+{
+     [Fabric with:@[[Crashlytics class]]];
 }
 
 @end

@@ -25,4 +25,14 @@
     return [UIColor colorWithRed:39.0f / 255.0f green:33.0f / 255.0f blue:27.0f / 255.0f alpha:1.0f];
 }
 
++ (UIColor *)navigationBarTintColor
+{
+    return [UIColor colorWithRed:39.0f / 255.0f green:37.0f / 255.0f blue:34.0f / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)navigationBarTextColor
+{
+    return [UIColor colorWithRed:159.0f / 255.0f green:158.0f / 255.0f blue:157.0f / 255.0f alpha:1.0f];
+}
+
 @end

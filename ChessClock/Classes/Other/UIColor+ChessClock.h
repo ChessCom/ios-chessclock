@@ -11,9 +11,9 @@
 @interface UIColor (ChessClock)
 
 + (UIColor *)selectedTimePieceButtonColor;
-
 + (UIColor *)unselectedTimePieceButtonColor;
-
 + (UIColor *)unselectedTimePieceTextColor;
++ (UIColor *)navigationBarTintColor;
++ (UIColor *)navigationBarTextColor;
 
 @end
