@@ -203,14 +203,7 @@ static const float CHShowTenthsTime = 10.0f;
 {
     [self pauseClock];
  
-    NSString *nibName = [CHUtil nibNameWithBaseName:@"CHChessClockSettingsView"];
-    CHChessClockSettingsTableViewController *settingsViewController =
-    [[CHChessClockSettingsTableViewController alloc] initWithNibName:nibName
-                                                              bundle:nil];
-    settingsViewController.settingsManager = self.settingsManager;
-    settingsViewController.delegate = self;
-    [self.navigationController pushViewController:settingsViewController
-                                         animated:YES];
+    [self performSegueWithIdentifier:NSStringFromClass([CHChessClockSettingsTableViewController class]) sender:nil];
 }
 
 - (IBAction)resetTapped
@@ -256,6 +249,17 @@ static const float CHShowTenthsTime = 10.0f;
     self.pauseButton.userInteractionEnabled = enabled;
     
 }
+
+#pragma mark - UIStoryboard Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[CHChessClockSettingsTableViewController class]]) {
+        
+        ((CHChessClockSettingsTableViewController * )segue.destinationViewController).settingsManager = self.settingsManager;
+        ((CHChessClockSettingsTableViewController * )segue.destinationViewController).delegate = self;
+    }
+}
+
 
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewControllerDelegate methods

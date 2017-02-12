@@ -507,11 +507,113 @@
                         <outlet property="playerTwoTimePieceView" destination="vj8-dX-iH3" id="i5e-NI-QEe"/>
                         <outlet property="resetButton" destination="2XH-Lj-y4p" id="9x9-8M-x7o"/>
                         <outlet property="settingsButton" destination="qJQ-vJ-dRJ" id="c8i-P7-vuK"/>
+                        <segue destination="fio-lt-VYF" kind="show" identifier="CHChessClockSettingsTableViewController" id="u8x-j0-yda"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdS-1R-9dM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-964" y="46"/>
         </scene>
+        <!--Chess Clock Settings Table View Controller-->
+        <scene sceneID="Qig-Gd-JQG">
+            <objects>
+                <viewController id="fio-lt-VYF" customClass="CHChessClockSettingsTableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PMa-NS-pu3"/>
+                        <viewControllerLayoutGuide type="bottom" id="qCK-AQ-Ppq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7X7-7P-vuY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kw5-Sd-3a8">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-W4-6Ax">
+                                        <rect key="frame" x="10" y="498" width="300" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hXq-sS-3MQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Button" backgroundImage="rectLightOrangeButton"/>
+                                        <state key="selected" backgroundImage="rectLightOrangeButtonPressed"/>
+                                        <state key="highlighted" backgroundImage="rectLightOrangeButtonPressed"/>
+                                        <connections>
+                                            <action selector="startClockTapped" destination="fio-lt-VYF" eventType="touchUpInside" id="57G-KB-w5P"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3yc-ke-U0C">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="414"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="2uL-Ng-rvA">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-qN-X1p">
+                                                    <rect key="frame" x="95" y="14" width="130" height="52"/>
+                                                    <state key="normal" image="chess_logo">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTouchUpInsideChessLogoButton:" destination="fio-lt-VYF" eventType="touchUpInside" id="EaS-6N-aRy"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="dMe-qN-X1p" secondAttribute="centerY" id="pgi-yl-vSQ"/>
+                                                <constraint firstAttribute="centerX" secondItem="dMe-qN-X1p" secondAttribute="centerX" id="tqh-0E-bsh"/>
+                                            </constraints>
+                                        </view>
+                                        <connections>
+                                            <outlet property="dataSource" destination="fio-lt-VYF" id="sPp-of-JiS"/>
+                                            <outlet property="delegate" destination="fio-lt-VYF" id="BUp-ik-3NO"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqF-SS-54X">
+                                        <rect key="frame" x="0.0" y="478" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="6BX-cR-2Se"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vkp-W4-6Ax" secondAttribute="trailing" constant="10" id="4Yw-HP-ofS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vkp-W4-6Ax" secondAttribute="bottom" constant="20" id="AKD-oL-6eg"/>
+                                    <constraint firstAttribute="trailing" secondItem="3yc-ke-U0C" secondAttribute="trailing" id="GTZ-jY-CVf"/>
+                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" constant="20" id="Wff-jv-xg9"/>
+                                    <constraint firstItem="3yc-ke-U0C" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="k5f-5h-kqa"/>
+                                    <constraint firstItem="fqF-SS-54X" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" id="lSS-5X-sNy"/>
+                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" constant="10" id="oFU-6Q-upj"/>
+                                    <constraint firstItem="fqF-SS-54X" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="pf9-2e-Zwf"/>
+                                    <constraint firstAttribute="trailing" secondItem="fqF-SS-54X" secondAttribute="trailing" id="qks-Bg-RLG"/>
+                                    <constraint firstItem="3yc-ke-U0C" firstAttribute="top" secondItem="kw5-Sd-3a8" secondAttribute="top" constant="64" id="wmu-1Z-THB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kw5-Sd-3a8" firstAttribute="top" secondItem="7X7-7P-vuY" secondAttribute="top" id="8Y4-zq-dOr"/>
+                            <constraint firstAttribute="trailing" secondItem="kw5-Sd-3a8" secondAttribute="trailing" id="hDl-G3-OtQ"/>
+                            <constraint firstItem="kw5-Sd-3a8" firstAttribute="leading" secondItem="7X7-7P-vuY" secondAttribute="leading" id="nf3-zw-ZFc"/>
+                            <constraint firstItem="qCK-AQ-Ppq" firstAttribute="top" secondItem="kw5-Sd-3a8" secondAttribute="bottom" id="orQ-qc-bbB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="startClockButton" destination="Vkp-W4-6Ax" id="ELd-dP-Icx"/>
+                        <outlet property="tableView" destination="3yc-ke-U0C" id="FMA-Fb-hjv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d55-W8-bQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-199" y="45"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="chess_logo" width="130" height="52"/>
+        <image name="rectLightOrangeButton" width="3" height="3"/>
+        <image name="rectLightOrangeButtonPressed" width="3" height="3"/>
+    </resources>
 </document>
