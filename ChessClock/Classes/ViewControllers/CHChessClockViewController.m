@@ -47,9 +47,7 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        [self updateInterfaceWithTraitCollection:newCollection];
-    } completion:nil];
+    [self updateInterfaceWithTraitCollection:newCollection];
 }
 
 - (void)dealloc
