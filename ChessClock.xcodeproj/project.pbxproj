@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F3EA8761E489CEE0017AC6C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3EA8741E489CEE0017AC6C /* Crashlytics.framework */; };
 		0F3EA8771E489CEE0017AC6C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3EA8751E489CEE0017AC6C /* Fabric.framework */; };
+		0F3EA87B1E48A5630017AC6C /* UIColor+ChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA87A1E48A5630017AC6C /* UIColor+ChessClock.m */; };
 		0F4000EF18D9074800402B92 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4000EE18D9074800402B92 /* AudioToolbox.framework */; };
 		0F4000F218D9076A00402B92 /* CHSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4000F118D9076A00402B92 /* CHSoundPlayer.m */; };
 		0F5438C91E34EF8200DF08AC /* CHChessClockIncrementView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5438BA1E34EF8200DF08AC /* CHChessClockIncrementView_iPad.xib */; };
@@ -76,6 +77,8 @@
 /* Begin PBXFileReference section */
 		0F3EA8741E489CEE0017AC6C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "ChessClock/Third Party/Crashlytics.framework"; sourceTree = SOURCE_ROOT; };
 		0F3EA8751E489CEE0017AC6C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "ChessClock/Third Party/Fabric.framework"; sourceTree = SOURCE_ROOT; };
+		0F3EA8791E48A5630017AC6C /* UIColor+ChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ChessClock.h"; path = "Classes/Other/UIColor+ChessClock.h"; sourceTree = "<group>"; };
+		0F3EA87A1E48A5630017AC6C /* UIColor+ChessClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ChessClock.m"; path = "Classes/Other/UIColor+ChessClock.m"; sourceTree = "<group>"; };
 		0F4000EE18D9074800402B92 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0F4000F018D9076A00402B92 /* CHSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHSoundPlayer.h; path = Classes/Other/CHSoundPlayer.h; sourceTree = "<group>"; };
 		0F4000F118D9076A00402B92 /* CHSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHSoundPlayer.m; path = Classes/Other/CHSoundPlayer.m; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				0FAB7A0B18C667FB0040677B /* CHUtil.m */,
 				0F4000F018D9076A00402B92 /* CHSoundPlayer.h */,
 				0F4000F118D9076A00402B92 /* CHSoundPlayer.m */,
+				0F3EA8791E48A5630017AC6C /* UIColor+ChessClock.h */,
+				0F3EA87A1E48A5630017AC6C /* UIColor+ChessClock.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -583,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FAB7A0C18C667FB0040677B /* CHUtil.m in Sources */,
+				0F3EA87B1E48A5630017AC6C /* UIColor+ChessClock.m in Sources */,
 				0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */,
 				0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */,
 				0F4000F218D9076A00402B92 /* CHSoundPlayer.m in Sources */,

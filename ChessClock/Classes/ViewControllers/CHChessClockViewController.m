@@ -319,8 +319,6 @@ static const float CHShowTenthsTime = 10.0f;
         [self.playerOneTimePieceView unhighlightAndActivate:NO];
     }
     
-    
-    
     if (self.playerTwoTimePieceView.tag == timePiece.timePieceId) {
         [self.playerTwoTimePieceView timeEnded];
     }
