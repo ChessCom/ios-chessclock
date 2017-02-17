@@ -32,6 +32,9 @@
     [[UINavigationBar appearance] setTintColor:[UIColor navigationBarTextColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor navigationBarTextColor]}];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor tableViewCellTextColor]];
+    [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)configureViewHierarchy

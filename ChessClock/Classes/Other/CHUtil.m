@@ -10,19 +10,6 @@
 
 @implementation CHUtil
 
-+ (NSString*)nibNameWithBaseName:(NSString*)baseNibName
-{
-    NSString* platformSuffix = nil;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        platformSuffix = @"_iPhone";
-    }
-    else {
-        platformSuffix = @"_iPad";
-    }
-    
-    return [baseNibName stringByAppendingString:platformSuffix];
-}
-
 + (NSString*)imageNameWithBaseName:(NSString*)baseImageName
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

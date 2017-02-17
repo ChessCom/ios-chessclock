@@ -16,6 +16,7 @@
 #import "CHChessClockTimeControlStage.h"
 #import "CHChessClockTimeViewController.h"
 #import "CHUtil.h"
+#import "UIColor+ChessClock.h"
 
 //------------------------------------------------------------------------------
 #pragma mark Private methods declarations
@@ -176,10 +177,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     switch (indexPath.section) {
         case CHNameSection:
@@ -272,7 +269,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             cell = self.nameTableViewCell;
             
             UITextField* nameTextField = (UITextField*)[cell viewWithTag:CHNameTextFieldTag];
-            nameTextField.placeholder = NSLocalizedString(@"Enter time control name", nil);
+            NSString *placeholderText = NSLocalizedString(@"Enter time control name", nil);
+            nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: [UIColor tableViewCellTextColor]}];
             [nameTextField addTarget:self action:@selector(nameTextFielEditingDidEndOnExit:) forControlEvents:UIControlEventEditingDidEndOnExit];
             [nameTextField addTarget:self action:@selector(nameTextFieldBeingEdited:) forControlEvents:UIControlEventEditingChanged];
         }
@@ -291,10 +289,11 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                        reuseIdentifier:cellIdentifier];
 
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+        [self addStyleToCell:cell];
+        
     }
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %u", NSLocalizedString(@"Stage", nil), row + 1];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), row + 1];
     cell.detailTextLabel.text = [[self.chessClockSettings.stageManager stageAtIndex:row] description];
     
     UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
@@ -308,6 +307,17 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     return cell;
 }
 
+- (void)addStyleToCell:(UITableViewCell *)cell
+{
+    cell.backgroundColor = [UIColor clearColor];
+    cell.tintColor = [UIColor tableViewCellTextColor];
+    cell.textLabel.textColor = [UIColor tableViewCellTextColor];
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
 - (UITableViewCell*)addTimeControlStageCell
 {
     NSString* cellIdentifier = @"CHChessClockNewTimeControlStageCell";
@@ -316,7 +326,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:cellIdentifier];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self addStyleToCell:cell];
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -343,7 +353,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         
         cell.textLabel.text = NSLocalizedString(@"Type", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+        [self addStyleToCell:cell];
     }
     
     NSUInteger incrementValue = self.chessClockSettings.increment.incrementValue;
@@ -449,7 +459,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     if (indexPath.row == 0 && [self.chessClockSettings.stageManager stageCount] == 1) {
         // If there's only one stage, send the player directly to the
         // screen where we can pick the time
-        NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeView"];
+        NSString* nibName = @"CHChessClockTimeView";
         CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                               initWithNibName:nibName bundle:nil];
         
@@ -476,7 +486,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         }
     }
     else {
-        NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeControlStageView"];
+        NSString* nibName = @"CHChessClockTimeControlStageView";
         CHChessClockTimeControlStageTableViewController* stageViewController = [[CHChessClockTimeControlStageTableViewController alloc]
                                                                       initWithNibName:nibName bundle:nil];
         stageViewController.delegate = self;
@@ -490,7 +500,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (void)selectedIncrementCellWithIndexPath:(NSIndexPath*)indexPath
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockIncrementView"];
+    NSString* nibName = @"CHChessClockIncrementView";
     CHChessClockIncrementTableViewController* vc = [[CHChessClockIncrementTableViewController alloc]
                                                     initWithNibName:nibName bundle:nil];
     

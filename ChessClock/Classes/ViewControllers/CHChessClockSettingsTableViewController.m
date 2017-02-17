@@ -180,7 +180,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)timeControlSelected:(CHChessClockSettings*)selectedSettings
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeControlView"];
+    NSString* nibName = @"CHChessClockTimeControlView";
     CHChessClockTimeControlTableViewController* timeControlViewController = [[CHChessClockTimeControlTableViewController alloc]
                                                                    initWithNibName:nibName bundle:nil];
     timeControlViewController.chessClockSettings = selectedSettings;
