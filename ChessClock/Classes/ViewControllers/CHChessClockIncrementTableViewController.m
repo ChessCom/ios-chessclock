@@ -10,6 +10,7 @@
 #import "CHChessClockIncrement.h"
 #import "CHChessClockTimeViewController.h"
 #import "CHUtil.h"
+#import "UIColor+ChessClock.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -88,15 +89,14 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = [UIColor clearColor];
         
-        // This removes the cell rounded background
-        UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        cell.backgroundView = backgroundView;
-
         UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                                 [NSArray arrayWithObjects:@"Delay",
                                                  @"Bronstein", @"Fischer", nil]];
-        
+        segmentedControl.tintColor = [UIColor tableViewCellTextColor];
+        segmentedControl.backgroundColor = [UIColor clearColor];
         segmentedControl.frame = cell.bounds;
         segmentedControl.tag = CHIncrementTypeSegmentedControlTag;
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -117,7 +117,13 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.tintColor = [UIColor tableViewCellTextColor];
+        cell.textLabel.textColor = [UIColor tableViewCellTextColor];
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -145,7 +151,7 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 
 - (void)selectedIncrementValueCell:(UITableViewCell*)cell
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeView"];
+    NSString* nibName = @"CHChessClockTimeView";
     CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                           initWithNibName:nibName bundle:nil];
     timeViewController.maximumMinutes = 60;
@@ -182,10 +188,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     switch (indexPath.section) {
         case CHIncrementTypeSection:

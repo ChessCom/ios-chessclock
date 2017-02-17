@@ -36,30 +36,6 @@ CHChessClockSettingsTableViewControllerDelegate>
 @property (strong, nonatomic) CHChessClock* chessClock;
 @property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
 
-
-// Constraints
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerTrailingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerLeadingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTimerBottomConstraint;
-
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerLeadingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTimerTrailingConstraint;
-
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingsButtonLeadingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *settingsButtonTopConstraint;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pauseButtonTopConstraint;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *resetButtonTrailingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *resetButtonTopConstraint;
-
-
-
 @end
 
 //------------------------------------------------------------------------------
@@ -69,80 +45,9 @@ CHChessClockSettingsTableViewControllerDelegate>
 
 static const float CHShowTenthsTime = 10.0f;
 
-#pragma mark - Rotation Constraints
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                duration:(NSTimeInterval)duration
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self updateConstraintConstantsToInterfaceOrientation:toInterfaceOrientation];
-}
-
-- (void)updateConstraintConstantsToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
-    
-    CGFloat constraintConstantNear = 20.f;
-    CGFloat constraintConstantFar = isiPad ? 522.f : IS_SCREEN_4_INCHES ? 292.f : 258.f;
-    CGFloat constraintConstantHeightLanscape = isiPad ? 383.f : 150.f;
-    CGFloat constraintConstantHeightPortrait = isiPad ? 380.f :IS_SCREEN_4_INCHES ? 204.f : 170.f;
-    CGFloat constraintConstantButtonTopLandscape = isiPad ? 120.f : 36.f;
-    CGFloat constraintConstantButtonSide = isiPad ? 92.f : 63.f;
-    CGFloat constraintConstantTimerBottom = isiPad ? 624.f : IS_SCREEN_4_INCHES ? 344.f : 286.f;
-    CGFloat constraintConstantButtonTopPortrait = isiPad ? 450.0f : IS_SCREEN_4_INCHES ? 246.f : 204.f;
-    
-    BOOL isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
-    
-    if (isLandscape) {
-        BOOL isLandscapeLeft = toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft;
-        
-        if (isLandscapeLeft) {
-            self.firstTimerLeadingConstraint.constant = constraintConstantNear;
-            self.firstTimerTrailingConstraint.constant = constraintConstantFar;
-            
-            
-            self.secondTimerLeadingConstraint.constant = constraintConstantFar;
-            self.secondTimerTrailingConstraint.constant = constraintConstantNear;
-            
-        } else {
-            self.firstTimerLeadingConstraint.constant = constraintConstantFar;
-            self.firstTimerTrailingConstraint.constant = constraintConstantNear;
-            
-            self.secondTimerLeadingConstraint.constant = constraintConstantNear;
-            self.secondTimerTrailingConstraint.constant = constraintConstantFar;
-            
-        }
-        self.secondTimerHeightConstraint.constant =
-        self.firstTimerHeightConstraint.constant = constraintConstantHeightLanscape;
-        
-        self.firstTimerBottomConstraint.constant =
-        self.secondTimerBottomConstraint.constant = constraintConstantNear;
-        
-        self.settingsButtonTopConstraint.constant =
-        self.pauseButtonTopConstraint.constant =
-        self.resetButtonTopConstraint.constant = constraintConstantButtonTopLandscape;
-    } else {
-        
-        self.firstTimerLeadingConstraint.constant =
-        self.firstTimerTrailingConstraint.constant =
-        self.secondTimerLeadingConstraint.constant =
-        self.secondTimerTrailingConstraint.constant = constraintConstantNear;
-        
-        self.firstTimerHeightConstraint.constant =
-        self.secondTimerHeightConstraint.constant = constraintConstantHeightPortrait;
-        
-        self.firstTimerBottomConstraint.constant = constraintConstantNear;
-        self.secondTimerBottomConstraint.constant = constraintConstantTimerBottom;
-        
-        self.settingsButtonTopConstraint.constant =
-        self.pauseButtonTopConstraint.constant =
-        self.resetButtonTopConstraint.constant = constraintConstantButtonTopPortrait;
-    }
-    
-    self.settingsButtonLeadingConstraint.constant =
-    self.resetButtonTrailingConstraint.constant = constraintConstantButtonSide;
-    
-    CGFloat angle = isLandscape ? 0.0f : M_PI;
-    self.playerTwoTimePieceView.layer.affineTransform = CGAffineTransformMakeRotation(angle);
+    [self updateInterfaceWithTraitCollection:newCollection];
 }
 
 - (void)dealloc
@@ -181,14 +86,20 @@ static const float CHShowTenthsTime = 10.0f;
 {
     [super viewWillAppear:animated];
     
-    [self updateConstraintConstantsToInterfaceOrientation:self.interfaceOrientation];
-    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    [self updateInterfaceWithTraitCollection:self.traitCollection];
 }
 
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
+}
+
+- (void)updateInterfaceWithTraitCollection:(UITraitCollection *)traitCollection
+{
+    CGFloat angle = traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular ? M_PI : 0.0f;
+    self.playerTwoTimePieceView.layer.affineTransform = CGAffineTransformMakeRotation(angle);
 }
 
 //------------------------------------------------------------------------------
@@ -292,14 +203,7 @@ static const float CHShowTenthsTime = 10.0f;
 {
     [self pauseClock];
  
-    NSString *nibName = [CHUtil nibNameWithBaseName:@"CHChessClockSettingsView"];
-    CHChessClockSettingsTableViewController *settingsViewController =
-    [[CHChessClockSettingsTableViewController alloc] initWithNibName:nibName
-                                                              bundle:nil];
-    settingsViewController.settingsManager = self.settingsManager;
-    settingsViewController.delegate = self;
-    [self.navigationController pushViewController:settingsViewController
-                                         animated:YES];
+    [self performSegueWithIdentifier:NSStringFromClass([CHChessClockSettingsTableViewController class]) sender:nil];
 }
 
 - (IBAction)resetTapped
@@ -345,6 +249,17 @@ static const float CHShowTenthsTime = 10.0f;
     self.pauseButton.userInteractionEnabled = enabled;
     
 }
+
+#pragma mark - UIStoryboard Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[CHChessClockSettingsTableViewController class]]) {
+        
+        ((CHChessClockSettingsTableViewController * )segue.destinationViewController).settingsManager = self.settingsManager;
+        ((CHChessClockSettingsTableViewController * )segue.destinationViewController).delegate = self;
+    }
+}
+
 
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewControllerDelegate methods
@@ -405,8 +320,6 @@ static const float CHShowTenthsTime = 10.0f;
     else {
         [self.playerOneTimePieceView unhighlightAndActivate:NO];
     }
-    
-    
     
     if (self.playerTwoTimePieceView.tag == timePiece.timePieceId) {
         [self.playerTwoTimePieceView timeEnded];

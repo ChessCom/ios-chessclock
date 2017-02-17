@@ -13,6 +13,7 @@
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHUtil.h"
 #import "CHAppDelegate.h"
+#import "UIColor+ChessClock.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -47,8 +48,9 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+
     [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
                            forState:UIControlStateNormal];
 }
@@ -107,15 +109,9 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     [self.settingsManager saveTimeControls];
 }
 
-- (UIColor*)selectedSettingTextColor
-{
-    return [UIColor colorWithRed:50.0f / 255.0f green:79.0f / 255.0f blue:133.0f / 255.0f alpha:1.0f];
-}
-
 - (void)selectCell:(UITableViewCell*)cell
 {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    cell.textLabel.textColor = [self selectedSettingTextColor];
 }
 
 - (UITableViewCell*)cellWithIdentifier:(NSString*)identifier
@@ -124,6 +120,14 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.tintColor = [UIColor tableViewCellTextColor];
+    cell.textLabel.textColor = [UIColor tableViewCellTextColor];
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     
     return cell;
 }
@@ -140,11 +144,9 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     
     if (settings == self.settingsManager.currentTimeControl) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cell.textLabel.textColor = [self selectedSettingTextColor];
     }
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.textColor = [UIColor blackColor];
     }
 }
 
@@ -166,7 +168,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
             UITableViewCell* lastSelectedCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:lastSelectedIndex
                                                                                                     inSection:CHExistingTimeControlSection]];
             lastSelectedCell.accessoryType = UITableViewCellAccessoryNone;
-            lastSelectedCell.textLabel.textColor = [UIColor blackColor];
             
             // Add checkmark to the newly selected cell
             UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -179,7 +180,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)timeControlSelected:(CHChessClockSettings*)selectedSettings
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeControlView"];
+    NSString* nibName = @"CHChessClockTimeControlView";
     CHChessClockTimeControlTableViewController* timeControlViewController = [[CHChessClockTimeControlTableViewController alloc]
                                                                    initWithNibName:nibName bundle:nil];
     timeControlViewController.chessClockSettings = selectedSettings;
@@ -205,7 +206,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.f;
+    return 0.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -220,10 +221,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     
     switch (indexPath.section) {
@@ -242,8 +239,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
         default:
             break;
     }
-    
-    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
     
     return cell;
 }

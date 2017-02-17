@@ -204,7 +204,7 @@ static const NSUInteger CHMaxMoves = 99;
 
 - (void)selectedTimeCell:(UITableViewCell*)cell
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeView"];
+    NSString* nibName = @"CHChessClockTimeView";
     CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                           initWithNibName:nibName bundle:nil];
     timeViewController.delegate = self;
@@ -282,10 +282,6 @@ static const NSUInteger CHMaxMoves = 99;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     switch (indexPath.section) {
         case CHMovesCountSection:

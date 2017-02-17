@@ -10,22 +10,45 @@
 
 #import "CHUtil.h"
 #import "CHChessClockViewController.h"
+#import "UIColor+ChessClock.h"
+
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation CHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    NSString *baseNibName = [CHUtil nibNameWithBaseName:@"CHChessClockView"];
-    CHChessClockViewController *rootViewController = [[CHChessClockViewController alloc] initWithNibName:baseNibName bundle:nil];
-    UINavigationController *navigationController =
-    [[UINavigationController alloc] initWithRootViewController:rootViewController];
-    self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
+    [self configureAppearance];
+    [self configureViewHierarchy];
+    [self configureFabric];
     
     return YES;
+}
+
+- (void)configureAppearance
+{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationBarTintColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor navigationBarTextColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor navigationBarTextColor]}];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor tableViewCellTextColor]];
+    [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void)configureViewHierarchy
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CHClock" bundle:nil];
+    UINavigationController *navigationController = [storyboard instantiateInitialViewController];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)configureFabric
+{
+     [Fabric with:@[[Crashlytics class]]];
 }
 
 @end
