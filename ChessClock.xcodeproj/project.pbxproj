@@ -12,6 +12,7 @@
 		0F3EA87B1E48A5630017AC6C /* UIColor+ChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA87A1E48A5630017AC6C /* UIColor+ChessClock.m */; };
 		0F4000EF18D9074800402B92 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4000EE18D9074800402B92 /* AudioToolbox.framework */; };
 		0F4000F218D9076A00402B92 /* CHSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4000F118D9076A00402B92 /* CHSoundPlayer.m */; };
+		0F52D2461E56EAFE00077F3C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2451E56EAFE00077F3C /* Launch Screen.storyboard */; };
 		0F5438C91E34EF8200DF08AC /* CHChessClockIncrementView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5438BA1E34EF8200DF08AC /* CHChessClockIncrementView_iPad.xib */; };
 		0F5438CB1E34EF8200DF08AC /* CHChessClockTimeControlStageView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5438BC1E34EF8200DF08AC /* CHChessClockTimeControlStageView_iPad.xib */; };
 		0F5438CC1E34EF8200DF08AC /* CHChessClockTimeControlView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5438BD1E34EF8200DF08AC /* CHChessClockTimeControlView_iPad.xib */; };
@@ -80,6 +81,7 @@
 		0F4000EE18D9074800402B92 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0F4000F018D9076A00402B92 /* CHSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHSoundPlayer.h; path = Classes/Other/CHSoundPlayer.h; sourceTree = "<group>"; };
 		0F4000F118D9076A00402B92 /* CHSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHSoundPlayer.m; path = Classes/Other/CHSoundPlayer.m; sourceTree = "<group>"; };
+		0F52D2451E56EAFE00077F3C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "Resources/interface/storyboards/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0F5438BA1E34EF8200DF08AC /* CHChessClockIncrementView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHChessClockIncrementView_iPad.xib; sourceTree = "<group>"; };
 		0F5438BC1E34EF8200DF08AC /* CHChessClockTimeControlStageView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHChessClockTimeControlStageView_iPad.xib; sourceTree = "<group>"; };
 		0F5438BD1E34EF8200DF08AC /* CHChessClockTimeControlView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHChessClockTimeControlView_iPad.xib; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		0F5438B71E34EF5300DF08AC /* storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				0F52D2451E56EAFE00077F3C /* Launch Screen.storyboard */,
 				0F5438D71E34EFF700DF08AC /* CHClock.storyboard */,
 			);
 			name = storyboards;
@@ -535,6 +538,7 @@
 				0F5438D31E34EF8200DF08AC /* CHChessClockTimeControlStageView_iPhone.xib in Resources */,
 				0F5438CD1E34EF8200DF08AC /* CHChessClockTimeView_iPad.xib in Resources */,
 				0F5438D81E34EFF700DF08AC /* CHClock.storyboard in Resources */,
+				0F52D2461E56EAFE00077F3C /* Launch Screen.storyboard in Resources */,
 				0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */,
 				0F5438CB1E34EF8200DF08AC /* CHChessClockTimeControlStageView_iPad.xib in Resources */,
 				0FC6826818C7E16F0064421D /* chess_clock_switch1.mp3 in Resources */,
@@ -730,7 +734,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 64WSYCNXBH;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/ChessClock/Third\\ Party";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -749,7 +752,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 64WSYCNXBH;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/ChessClock/Third\\ Party";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
