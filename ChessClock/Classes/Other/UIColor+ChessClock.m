@@ -35,4 +35,9 @@
     return [UIColor colorWithRed:159.0f / 255.0f green:158.0f / 255.0f blue:157.0f / 255.0f alpha:1.0f];
 }
 
++ (UIColor *)tableViewCellTextColor
+{
+    return [UIColor colorWithRed:201.0f / 255.0f green:200.0f / 255.0f blue:200.0f / 255.0f alpha:1.0f];
+}
+
 @end

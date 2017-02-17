@@ -530,27 +530,30 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-W4-6Ax">
-                                        <rect key="frame" x="10" y="498" width="300" height="50"/>
+                                        <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                                        <color key="backgroundColor" red="0.8901960784313725" green="0.5607843137254902" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="hXq-sS-3MQ"/>
+                                            <constraint firstAttribute="height" constant="60" id="hXq-sS-3MQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <state key="normal" title="Button" backgroundImage="rectLightOrangeButton"/>
+                                        <state key="normal" title="Button"/>
                                         <state key="selected" backgroundImage="rectLightOrangeButtonPressed"/>
                                         <state key="highlighted" backgroundImage="rectLightOrangeButtonPressed"/>
                                         <connections>
                                             <action selector="startClockTapped" destination="fio-lt-VYF" eventType="touchUpInside" id="57G-KB-w5P"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3yc-ke-U0C">
-                                        <rect key="frame" x="0.0" y="64" width="320" height="414"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3yc-ke-U0C">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="444"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" red="0.15294117647058825" green="0.14509803921568626" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="2uL-Ng-rvA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-qN-X1p">
-                                                    <rect key="frame" x="95" y="14" width="130" height="52"/>
+                                                    <rect key="frame" x="84" y="20" width="152" height="57"/>
                                                     <state key="normal" image="chess_logo">
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -558,11 +561,31 @@
                                                         <action selector="didTouchUpInsideChessLogoButton:" destination="fio-lt-VYF" eventType="touchUpInside" id="EaS-6N-aRy"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free online play, lessons and puzzles." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GF-vU-DLw">
+                                                    <rect key="frame" x="24" y="94" width="272" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.78823529411764703" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0D-Bu-SZD">
+                                                    <rect key="frame" x="0.0" y="131" width="320" height="1"/>
+                                                    <color key="backgroundColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="RTp-7e-jFU"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="dMe-qN-X1p" secondAttribute="centerY" id="pgi-yl-vSQ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6GF-vU-DLw" secondAttribute="trailing" constant="10" id="3Az-rT-gSx"/>
+                                                <constraint firstItem="6GF-vU-DLw" firstAttribute="centerX" secondItem="2uL-Ng-rvA" secondAttribute="centerX" id="FfA-iA-FtR"/>
+                                                <constraint firstItem="dMe-qN-X1p" firstAttribute="top" secondItem="2uL-Ng-rvA" secondAttribute="top" constant="20" id="fDd-so-DIw"/>
+                                                <constraint firstItem="6GF-vU-DLw" firstAttribute="top" secondItem="dMe-qN-X1p" secondAttribute="bottom" constant="17" id="gf6-D3-iD6"/>
+                                                <constraint firstAttribute="bottom" secondItem="U0D-Bu-SZD" secondAttribute="bottom" id="k1H-Tj-EQD"/>
+                                                <constraint firstItem="6GF-vU-DLw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2uL-Ng-rvA" secondAttribute="leading" constant="10" id="kia-Cb-ITA"/>
+                                                <constraint firstItem="U0D-Bu-SZD" firstAttribute="leading" secondItem="2uL-Ng-rvA" secondAttribute="leading" id="knd-lB-gBJ"/>
                                                 <constraint firstAttribute="centerX" secondItem="dMe-qN-X1p" secondAttribute="centerX" id="tqh-0E-bsh"/>
+                                                <constraint firstAttribute="trailing" secondItem="U0D-Bu-SZD" secondAttribute="trailing" id="xcm-3X-GcD"/>
                                             </constraints>
                                         </view>
                                         <connections>
@@ -571,29 +594,29 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqF-SS-54X">
-                                        <rect key="frame" x="0.0" y="478" width="320" height="1"/>
-                                        <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="508" width="320" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="6BX-cR-2Se"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Vkp-W4-6Ax" secondAttribute="trailing" constant="10" id="4Yw-HP-ofS"/>
-                                    <constraint firstAttribute="bottom" secondItem="Vkp-W4-6Ax" secondAttribute="bottom" constant="20" id="AKD-oL-6eg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vkp-W4-6Ax" secondAttribute="trailing" id="4Yw-HP-ofS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vkp-W4-6Ax" secondAttribute="bottom" id="AKD-oL-6eg"/>
                                     <constraint firstAttribute="trailing" secondItem="3yc-ke-U0C" secondAttribute="trailing" id="GTZ-jY-CVf"/>
-                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" constant="20" id="Wff-jv-xg9"/>
+                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" id="Wff-jv-xg9"/>
                                     <constraint firstItem="3yc-ke-U0C" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="k5f-5h-kqa"/>
                                     <constraint firstItem="fqF-SS-54X" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" id="lSS-5X-sNy"/>
-                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" constant="10" id="oFU-6Q-upj"/>
+                                    <constraint firstItem="Vkp-W4-6Ax" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="oFU-6Q-upj"/>
                                     <constraint firstItem="fqF-SS-54X" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="pf9-2e-Zwf"/>
                                     <constraint firstAttribute="trailing" secondItem="fqF-SS-54X" secondAttribute="trailing" id="qks-Bg-RLG"/>
                                     <constraint firstItem="3yc-ke-U0C" firstAttribute="top" secondItem="kw5-Sd-3a8" secondAttribute="top" constant="64" id="wmu-1Z-THB"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.19215686274509802" green="0.1803921568627451" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kw5-Sd-3a8" firstAttribute="top" secondItem="7X7-7P-vuY" secondAttribute="top" id="8Y4-zq-dOr"/>
                             <constraint firstAttribute="trailing" secondItem="kw5-Sd-3a8" secondAttribute="trailing" id="hDl-G3-OtQ"/>
@@ -608,12 +631,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d55-W8-bQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199" y="45"/>
+            <point key="canvasLocation" x="-200.625" y="44.366197183098592"/>
         </scene>
     </scenes>
     <resources>
-        <image name="chess_logo" width="130" height="52"/>
-        <image name="rectLightOrangeButton" width="3" height="3"/>
+        <image name="chess_logo" width="152" height="57"/>
         <image name="rectLightOrangeButtonPressed" width="3" height="3"/>
     </resources>
 </document>

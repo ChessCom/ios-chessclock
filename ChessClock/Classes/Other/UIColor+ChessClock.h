@@ -15,5 +15,5 @@
 + (UIColor *)unselectedTimePieceTextColor;
 + (UIColor *)navigationBarTintColor;
 + (UIColor *)navigationBarTextColor;
-
++ (UIColor *)tableViewCellTextColor;
 @end
