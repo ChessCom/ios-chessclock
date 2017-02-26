@@ -17,12 +17,12 @@
 
 + (UIColor *)unselectedTimePieceButtonColor
 {
-    return [UIColor colorWithRed:69.0f / 255.0f green:65.0f / 255.0f blue:61.0f / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:86.0f / 255.0f green:81.0f / 255.0f blue:76.0f / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)unselectedTimePieceTextColor
 {
-    return [UIColor colorWithRed:39.0f / 255.0f green:33.0f / 255.0f blue:27.0f / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:21.0f / 255.0f green:20.0f / 255.0f blue:18.0f / 255.0f alpha:1.0f];
 }
 
 + (UIColor *)navigationBarTintColor
