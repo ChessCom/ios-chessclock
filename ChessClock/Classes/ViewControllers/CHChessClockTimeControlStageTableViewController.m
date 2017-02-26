@@ -310,6 +310,8 @@ static const NSUInteger CHMaxMoves = 99;
             break;
     }
     
+    
+    cell.separatorInset = UIEdgeInsetsZero;
     return cell;
 }
 
