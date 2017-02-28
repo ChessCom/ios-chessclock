@@ -34,6 +34,9 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor tableViewCellTextColor]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont systemFontOfSize:14.0f]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setMinimumScaleFactor:0.5f];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setAdjustsFontSizeToFitWidth:YES];
     [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
 }
 
