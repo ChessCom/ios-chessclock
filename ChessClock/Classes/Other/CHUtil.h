@@ -10,7 +10,6 @@
 
 @interface CHUtil : NSObject
 
-+ (NSString*)nibNameWithBaseName:(NSString*)baseNibName;
 + (NSString*)imageNameWithBaseName:(NSString*)baseImageName;
 + (NSString*)formatTime:(NSTimeInterval)timeInSeconds showTenths:(BOOL)showTenths;
 

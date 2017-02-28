@@ -1,3 +1,4 @@
 xcuserdata/
 .svn/
 *.xccheckout
+.DS_Store
