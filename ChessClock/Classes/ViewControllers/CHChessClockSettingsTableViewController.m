@@ -48,9 +48,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-
     [self.startClockButton setTitle:NSLocalizedString(@"Start", nil)
                            forState:UIControlStateNormal];
 }
@@ -124,7 +121,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     cell.backgroundColor = [UIColor clearColor];
     cell.tintColor = [UIColor tableViewCellTextColor];
     cell.textLabel.textColor = [UIColor tableViewCellTextColor];
-    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.separatorInset = UIEdgeInsetsZero;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

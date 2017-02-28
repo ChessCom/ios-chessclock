@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -116,38 +116,38 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Jub-Bs-jWi"/>
+                                        <exclude reference="874-90-csg"/>
                                         <exclude reference="NSw-Ep-wHK"/>
                                         <exclude reference="P54-85-xsS"/>
-                                        <exclude reference="874-90-csg"/>
+                                        <exclude reference="Jub-Bs-jWi"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="bma-9Y-bba"/>
-                                        <exclude reference="P54-85-xsS"/>
                                         <exclude reference="874-90-csg"/>
                                         <exclude reference="mL7-Ed-PiL"/>
+                                        <exclude reference="P54-85-xsS"/>
+                                        <exclude reference="bma-9Y-bba"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
                                     <mask key="constraints">
+                                        <exclude reference="mL7-Ed-PiL"/>
+                                        <include reference="NSw-Ep-wHK"/>
                                         <include reference="Jub-Bs-jWi"/>
                                         <exclude reference="bma-9Y-bba"/>
-                                        <include reference="NSw-Ep-wHK"/>
-                                        <exclude reference="mL7-Ed-PiL"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="bma-9Y-bba"/>
                                         <exclude reference="mL7-Ed-PiL"/>
+                                        <exclude reference="bma-9Y-bba"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
-                                        <exclude reference="bma-9Y-bba"/>
                                         <exclude reference="mL7-Ed-PiL"/>
+                                        <exclude reference="bma-9Y-bba"/>
                                     </mask>
                                 </variation>
                             </view>
