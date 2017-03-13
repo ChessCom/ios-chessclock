@@ -11,6 +11,7 @@
 #import "CHChessClockTimeViewController.h"
 #import "CHUtil.h"
 #import "UIColor+ChessClock.h"
+#import "CHTableViewHeader.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -43,6 +44,15 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     
     self.title = NSLocalizedString(@"Increment", nil);
     self.selectedIncrementValue = self.increment.incrementValue;
+    
+    NSString *tableViewHeaderIdentifier = NSStringFromClass([CHTableViewHeader class]);
+    [self.tableView registerNib: [UINib nibWithNibName:tableViewHeaderIdentifier
+                                                bundle:nil]
+                    forHeaderFooterViewReuseIdentifier:tableViewHeaderIdentifier];
+    
+    self.tableView.sectionHeaderHeight = self.tableView.sectionFooterHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = self.tableView.estimatedSectionFooterHeight = 10;
+    self.tableView.estimatedRowHeight = 20;
 }
 
 //------------------------------------------------------------------------------
@@ -206,24 +216,6 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (section == CHIncrementTypeSection) {
-        return NSLocalizedString(@"Type", nil);
-    }
-    
-    return nil;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-
-    if (section == CHIncrementTypeSection) {
-        return [self.increment incrementDescription];
-    }
-    
-    return nil;
-}
-
 //------------------------------------------------------------------------------
 #pragma mark - UITableViewDelegate methods
 //------------------------------------------------------------------------------
@@ -237,6 +229,36 @@ static const NSUInteger CHFischerSegmentIndex = 2;
         default:
             break;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CHTableViewHeader *headerView = nil;
+    if (section == CHIncrementTypeSection) {
+        headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([CHTableViewHeader class])];
+        headerView.titleLabel.text = NSLocalizedString(@"Type", nil);
+    }
+    return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    CHTableViewHeader *footerView = nil;
+    if (section == CHIncrementTypeSection) {
+        footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([CHTableViewHeader class])];
+        footerView.titleLabel.text = [self.increment incrementDescription];
+    }
+    return footerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (section == CHIncrementTypeSection) ? UITableViewAutomaticDimension : 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return (section == CHIncrementTypeSection) ? UITableViewAutomaticDimension : 0;
 }
 
 //------------------------------------------------------------------------------
