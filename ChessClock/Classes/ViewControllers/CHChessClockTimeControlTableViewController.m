@@ -17,6 +17,7 @@
 #import "CHChessClockTimeViewController.h"
 #import "CHUtil.h"
 #import "UIColor+ChessClock.h"
+#import "CHTableViewHeader.h"
 
 //------------------------------------------------------------------------------
 #pragma mark Private methods declarations
@@ -81,6 +82,15 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     else {
         self.newTimeControlCreated = NO;
     }
+    
+    NSString *tableViewHeaderIdentifier = NSStringFromClass([CHTableViewHeader class]);
+    [self.tableView registerNib: [UINib nibWithNibName:tableViewHeaderIdentifier
+                                                bundle:nil]
+                    forHeaderFooterViewReuseIdentifier:tableViewHeaderIdentifier];
+    
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = 10;
+    self.tableView.estimatedRowHeight = 20;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -114,39 +124,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     return CHSectionCount;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    switch (section) {
-        case CHNameSection:
-            return NSLocalizedString(@"Name", nil);
-            break;
-            
-        case CHExistingTimeControlStagesSection:
-            return NSLocalizedString(@"Stages", nil);
-            break;
-
-        case CHNewTimeControlStageSection:
-            if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
-                // If the number of time control stages is the maximum, it means that
-                // that the new time control stage section was deleted. Treat this
-                // section as the increment section
-                return NSLocalizedString(@"Increment", nil);
-            }
-            
-            return nil;
-            break;
-
-        case CHIncrementSection:
-            return NSLocalizedString(@"Increment", nil);
-            break;
-            
-        default:
-            break;
-    }
-    
-    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -253,6 +230,55 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self removeTimeStageAtIndex:indexPath.row];
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CHTableViewHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([CHTableViewHeader class])];
+    
+    switch (section) {
+        case CHNameSection:
+            headerView.titleLabel.text = NSLocalizedString(@"Name", nil);
+            break;
+            
+        case CHExistingTimeControlStagesSection:
+            headerView.titleLabel.text = NSLocalizedString(@"Stages", nil);
+            break;
+            
+        case CHNewTimeControlStageSection:
+            if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+                // If the number of time control stages is the maximum, it means that
+                // that the new time control stage section was deleted. Treat this
+                // section as the increment section
+                headerView.titleLabel.text = NSLocalizedString(@"Increment", nil);
+            }
+            
+            break;
+            
+        case CHIncrementSection:
+            headerView.titleLabel.text = NSLocalizedString(@"Increment", nil);
+            break;
+            
+        default:
+            break;
+    }
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case CHNameSection:
+        case CHExistingTimeControlStagesSection:
+        case CHIncrementSection:
+            return UITableViewAutomaticDimension;
+            
+        case CHNewTimeControlStageSection:
+            return ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) ? UITableViewAutomaticDimension : 0;
+        
+        default: return 0;
     }
 }
 
