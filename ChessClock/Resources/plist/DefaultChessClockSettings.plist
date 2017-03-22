@@ -6,7 +6,49 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>Blitz 5 min</string>
+			<string>3 min</string>
+			<key>default</key>
+			<true/>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>0</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>3</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>3 min | 2 sec</string>
+			<key>increment</key>
+			<dict>
+				<key>type</key>
+				<string>CHChessClockFischerIncrement</string>
+				<key>incrementValue</key>
+				<integer>2</integer>
+			</dict>
+			<key>timeStages</key>
+			<array>
+				<dict>
+					<key>movesCount</key>
+					<integer>0</integer>
+					<key>maximumTime</key>
+					<string>3</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>5 min</string>
 			<key>default</key>
 			<true/>
 			<key>increment</key>
@@ -28,31 +70,11 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Rapid 10 | 5</string>
+			<string>15 min | 2 sec</string>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
 				<string>CHChessClockFischerIncrement</string>
-				<key>incrementValue</key>
-				<integer>5</integer>
-			</dict>
-			<key>timeStages</key>
-			<array>
-				<dict>
-					<key>movesCount</key>
-					<integer>0</integer>
-					<key>maximumTime</key>
-					<string>10</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Bullet 1 | 2</string>
-			<key>increment</key>
-			<dict>
-				<key>type</key>
-				<string>CHChessClockDelayIncrement</string>
 				<key>incrementValue</key>
 				<integer>2</integer>
 			</dict>
@@ -62,13 +84,13 @@
 					<key>movesCount</key>
 					<integer>0</integer>
 					<key>maximumTime</key>
-					<string>1</string>
+					<string>15</string>
 				</dict>
 			</array>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Tournament 40/2hr, G60, 5s delay</string>
+			<string>2 hr (40 moves) + 1 hr (5 sec delay)</string>
 			<key>increment</key>
 			<dict>
 				<key>type</key>
