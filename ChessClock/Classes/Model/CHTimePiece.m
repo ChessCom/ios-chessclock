@@ -10,6 +10,7 @@
 #import "CHChessClockIncrement.h"
 #import "CHChessClockTimeControlStageManager.h"
 #import "CHChessClockTimeControlStage.h"
+#import "CHChessClockSettings.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -19,6 +20,7 @@
 @property (assign, nonatomic, readwrite) NSUInteger stageIndex;
 @property (assign, nonatomic, readwrite) NSTimeInterval availableTime;
 @property (assign, nonatomic, readwrite) NSUInteger movesCount;
+@property (strong, nonatomic) CHChessClockSettings *settings;
 
 @end
 
@@ -27,12 +29,14 @@
 //------------------------------------------------------------------------------
 @implementation CHTimePiece
 
-- (id)initWithTimePieceId:(NSUInteger)timePieceId andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager
+- (id)initWithTimePieceId:(NSUInteger)timePieceId
+                 settings:(CHChessClockSettings *)settings
+andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
+        self.settings = settings;
         _timePieceId = timePieceId;
-        self.stageManager = stageManager;
+        self.stageManager = self.settings.stageManager;
         self.stageIndex = 1;
         
         CHChessClockTimeControlStage* stage = [stageManager stageAtIndex:_stageIndex];
@@ -52,6 +56,8 @@
             self.stageIndex++;
         }
     }
+    
+    [self.settings.increment updateWithDelta:delta andTimePiece:self];
 }
 
 - (void)increaseAvailableTimeBy:(float)incrementValue
@@ -59,9 +65,21 @@
     self.availableTime += incrementValue;
 }
 
+- (void)start
+{
+    CHChessClockIncrement *increment = self.settings.increment;
+    [self startWithIncrement:increment];
+}
+
 - (void)startWithIncrement:(CHChessClockIncrement*)increment
 {
     [increment timePieceStarted:self];
+}
+
+- (void)stop
+{
+    CHChessClockIncrement *increment = self.settings.increment;
+    [self stopWithIncrement:increment];
 }
 
 - (void)stopWithIncrement:(CHChessClockIncrement*)increment
@@ -78,8 +96,9 @@
     }
 }
 
-- (void)reset
+- (void)resetWithSettings:(CHChessClockSettings *)settings
 {
+    self.settings = settings;
     self.stageIndex = 1;
 }
 
@@ -94,6 +113,7 @@
 - (void)setAvailableTime:(NSTimeInterval)availableTime
 {
     _availableTime = availableTime;
+    
     [self.delegate timePieceAvailableTimeUpdated:self];
 }
 

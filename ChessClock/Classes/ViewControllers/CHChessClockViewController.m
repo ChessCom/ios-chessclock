@@ -76,8 +76,9 @@ static const float CHShowTenthsTime = 10.0f;
     self.pauseButton.titleLabel.font = customFont;
     
     // Set Clock
-    self.chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
-                                                 andDelegate:self];
+    self.chessClock = [[CHChessClock alloc] initWithPlayerOneSettings:self.settingsManager.playerOneSettings
+                                                    playerTwoSettings:self.settingsManager.playerTwoSettings
+                                                          andDelegate:self];
     
     [self resetClock];
 }
@@ -138,11 +139,12 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)resetTimeStageDots
 {
-    NSUInteger stageCount = [self.chessClock.settings.stageManager stageCount];
-    [self.playerOneTimePieceView setTimeControlStageDotCount:stageCount];
-    [self.playerTwoTimePieceView setTimeControlStageDotCount:stageCount];
+    NSUInteger playerOneStageCount = self.settingsManager.playerOneSettings.stageManager.stageCount;
+    NSUInteger playerTwoStageCount = self.settingsManager.playerTwoSettings.stageManager.stageCount;
+    
+    [self.playerOneTimePieceView setTimeControlStageDotCount:playerOneStageCount];
+    [self.playerTwoTimePieceView setTimeControlStageDotCount:playerTwoStageCount];
 }
-
 
 - (void)pauseClock
 {
@@ -153,7 +155,8 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)resetClock
 {
-    [self.chessClock reset];
+    [self.chessClock resetWithPlayerOneSettings:self.settingsManager.playerOneSettings
+                              playerTwoSettings:self.settingsManager.playerTwoSettings];
     [self.playerOneTimePieceView unhighlightAndActivate:YES];
     [self.playerTwoTimePieceView unhighlightAndActivate:YES];
 }
@@ -272,9 +275,7 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController andReset:(BOOL)reset
 {
-    if (reset)
-    {
-        self.chessClock.settings = self.settingsManager.currentTimeControl;
+    if (reset) {
         [self resetClock];
     }
 }

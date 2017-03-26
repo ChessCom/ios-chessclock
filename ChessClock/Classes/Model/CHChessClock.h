@@ -29,18 +29,16 @@
 //------------------------------------------------------------------------------
 @interface CHChessClock : NSObject
 
-// Note: We are assuming that both timepieces will share the same settings
-@property (strong, nonatomic) CHChessClockSettings* settings;
-
 @property (assign, nonatomic, readonly) BOOL paused;
 
-- (id)initWithSettings:(CHChessClockSettings*)settings
-           andDelegate:(id<CHChessClockDelegate>)delegate;
-
+- (instancetype)initWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
+                        playerTwoSettings:(CHChessClockSettings *)playerTwoSettings
+                              andDelegate:(id<CHChessClockDelegate>)delegate;
 - (void)cleanup;
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId;
 - (void)togglePause;
-- (void)reset;
+- (void)resetWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
+                 playerTwoSettings:(CHChessClockSettings *)playerTwoSettings;
 - (BOOL)isActive;
 
 @end

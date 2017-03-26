@@ -214,4 +214,15 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     [self saveSettings];
 }
 
+#warning For now return currentTimeControl
+- (CHChessClockSettings *)playerOneSettings
+{
+    return self.currentTimeControl;
+}
+
+- (CHChessClockSettings *)playerTwoSettings
+{
+    return self.currentTimeControl;
+}
+
 @end
