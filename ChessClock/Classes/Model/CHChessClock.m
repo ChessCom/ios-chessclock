@@ -41,11 +41,9 @@
     if (self = [super init]) {
         self.delegate = delegate;
         self.playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:1
-                                                                  settings:playerOneSettings
-                                                andTimeControlStageManager:playerOneSettings.stageManager];
+                                                                  settings:playerOneSettings];
         self.playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:2
-                                                                  settings:playerTwoSettings
-                                                andTimeControlStageManager:playerTwoSettings.stageManager];
+                                                                  settings:playerTwoSettings];
         
         self.playerOneTimePiece.delegate = self;
         self.playerTwoTimePiece.delegate = self;

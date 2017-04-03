@@ -41,8 +41,7 @@
 @property (readonly, nonatomic) CHChessClockSettings *settings;
 
 - (id)initWithTimePieceId:(NSUInteger)timePieceId
-                 settings:(CHChessClockSettings *)settings
-andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager;
+                 settings:(CHChessClockSettings *)settings;
 
 - (void)updateWithDelta:(NSTimeInterval)delta;
 - (void)increaseAvailableTimeBy:(float)incrementValue;

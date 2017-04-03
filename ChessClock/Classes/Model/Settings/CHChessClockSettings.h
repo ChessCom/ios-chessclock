@@ -17,7 +17,8 @@
 @property (strong, nonatomic) CHChessClockIncrement* increment;
 @property (strong, nonatomic, readonly) CHChessClockTimeControlStageManager* stageManager;
 
-- (id)initWithName:(NSString*)name increment:(CHChessClockIncrement*)increment
+- (id)initWithName:(NSString*)name
+         increment:(CHChessClockIncrement*)increment
    andStageManager:(CHChessClockTimeControlStageManager*)stageManager;
 
 @end

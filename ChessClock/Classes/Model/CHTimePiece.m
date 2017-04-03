@@ -31,7 +31,6 @@
 
 - (id)initWithTimePieceId:(NSUInteger)timePieceId
                  settings:(CHChessClockSettings *)settings
-andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager
 {
     if (self = [super init]) {
         self.settings = settings;
@@ -39,7 +38,7 @@ andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager
         self.stageManager = self.settings.stageManager;
         self.stageIndex = 1;
         
-        CHChessClockTimeControlStage* stage = [stageManager stageAtIndex:_stageIndex];
+        CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:_stageIndex];
         self.availableTime = stage.maximumTime;
         self.movesCount = 0;
     }

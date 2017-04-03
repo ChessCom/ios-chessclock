@@ -12,9 +12,8 @@
 
 @interface CHChessClockSettingsManager : NSObject
 
-@property (weak, nonatomic) CHChessClockSettings* currentTimeControl;
-@property (readonly, nonatomic) CHChessClockSettings *playerOneSettings;
-@property (readonly, nonatomic) CHChessClockSettings *playerTwoSettings;
+@property (strong, nonatomic) CHChessClockSettings *playerOneSettings;
+@property (strong, nonatomic) CHChessClockSettings *playerTwoSettings;
 
 - (id)init;
 
