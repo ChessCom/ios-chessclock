@@ -11,6 +11,7 @@
 #import "CHChessClockSettingsManager.h"
 #import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
+#import "CHChessClockTimeControlTabBarController.h"
 #import "CHUtil.h"
 #import "CHAppDelegate.h"
 #import "UIColor+ChessClock.h"
@@ -180,20 +181,26 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)timeControlSelected:(CHChessClockSettings*)selectedSettings
 {
-    NSString* nibName = @"CHChessClockTimeControlView";
-    CHChessClockTimeControlTableViewController* timeControlViewController = [[CHChessClockTimeControlTableViewController alloc]
-                                                                   initWithNibName:nibName bundle:nil];
-    timeControlViewController.chessClockSettings = selectedSettings;
-    timeControlViewController.delegate = self;
-    self.currentViewController = timeControlViewController;
-    
-    [self.navigationController pushViewController:timeControlViewController animated:YES];
+    NSString *segueIdentifier = NSStringFromClass([CHChessClockTimeControlTabBarController class]);
+    [self performSegueWithIdentifier:segueIdentifier sender:nil];
 }
 
 - (void)startClockAndReset:(BOOL)reset
 {
     [self.delegate settingsTableViewControllerDidStartClock:self andReset:reset];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIStoryboard Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[CHChessClockTimeControlTabBarController class]]) {
+        CHChessClockTimeControlTabBarController *tabBarController = (CHChessClockTimeControlTabBarController *)segue.destinationViewController;
+   
+        tabBarController.settingsManager = self.settingsManager;
+        tabBarController.timeControlTableViewDelegate = self;
+        self.currentViewController = tabBarController;
+    }
 }
 
 //------------------------------------------------------------------------------

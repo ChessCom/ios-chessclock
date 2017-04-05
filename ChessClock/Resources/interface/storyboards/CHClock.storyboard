@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -627,15 +627,92 @@
                     <connections>
                         <outlet property="startClockButton" destination="Vkp-W4-6Ax" id="ELd-dP-Icx"/>
                         <outlet property="tableView" destination="3yc-ke-U0C" id="FMA-Fb-hjv"/>
+                        <segue destination="Ux3-0T-dpr" kind="show" identifier="CHChessClockTimeControlTabBarController" id="QRv-Bd-HJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d55-W8-bQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200.625" y="44.366197183098592"/>
+            <point key="canvasLocation" x="-219" y="45"/>
+        </scene>
+        <!--Chess Clock Time Control Table View Controller-->
+        <scene sceneID="hOV-aw-FaT">
+            <objects>
+                <tableViewController id="6dl-g1-g01" customClass="CHChessClockTimeControlTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Ej-xp-oH7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.19215686269999999" green="0.18039215689999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="4Up-bp-BOj">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haF-4b-aT9">
+                                    <rect key="frame" x="8" y="8" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </switch>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <connections>
+                            <outlet property="dataSource" destination="6dl-g1-g01" id="bq8-EU-5RA"/>
+                            <outlet property="delegate" destination="6dl-g1-g01" id="gKQ-FE-k5D"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" image="tabBarUser" selectedImage="tabBarUser" id="oKo-vw-pV7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUZ-Yr-ejH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Pw7-TE-i4e">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </switch>
+            </objects>
+            <point key="canvasLocation" x="2041.875" y="303.16901408450707"/>
+        </scene>
+        <!--Chess Clock Time Control Table View Controller-->
+        <scene sceneID="CFM-ch-F89">
+            <objects>
+                <tableViewController id="8Eo-80-SMa" customClass="CHChessClockTimeControlTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rvo-2k-SAU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.19215686269999999" green="0.18039215689999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="8Eo-80-SMa" id="G69-Du-lap"/>
+                            <outlet property="delegate" destination="8Eo-80-SMa" id="AEf-tT-QMJ"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" image="tabBarUser" selectedImage="tabBarUser" id="EYM-eb-cLn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MMS-FV-URQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2021" y="-409"/>
+        </scene>
+        <!--Chess Clock Time Control Tab Bar Controller-->
+        <scene sceneID="s19-6l-c0t">
+            <objects>
+                <tabBarController id="Ux3-0T-dpr" customClass="CHChessClockTimeControlTabBarController" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="TQv-Ky-R1d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8Eo-80-SMa" kind="relationship" relationship="viewControllers" id="YDS-uj-dT5"/>
+                        <segue destination="6dl-g1-g01" kind="relationship" relationship="viewControllers" id="BmV-jv-pC9"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rny-TO-vUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="503" y="45"/>
         </scene>
     </scenes>
     <resources>
         <image name="chess_logo" width="152" height="57"/>
         <image name="rectLightOrangeButtonPressed" width="3" height="3"/>
+        <image name="tabBarUser" width="25" height="21"/>
     </resources>
 </document>

@@ -32,6 +32,8 @@
     [[UINavigationBar appearance] setTintColor:[UIColor navigationBarTextColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor navigationBarTextColor]}];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UITabBar appearance] setBarTintColor:[UIColor navigationBarTintColor]];
+    [[UITabBar appearance] setTintColor:[UIColor navigationBarTextColor]];
 }
 
 - (void)configureViewHierarchy

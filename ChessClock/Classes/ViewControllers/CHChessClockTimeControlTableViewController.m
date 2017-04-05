@@ -54,7 +54,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Time Control", nil);
     self.newTimeControlSaved = NO;
     
     if (self.chessClockSettings == nil) {
@@ -99,6 +98,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     
     [self.navigationController setNavigationBarHidden:NO
                                              animated:YES];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
