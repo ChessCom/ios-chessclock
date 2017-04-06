@@ -16,8 +16,11 @@
 //------------------------------------------------------------------------------
 @protocol CHChessClockTimeControlTableViewControllerDelegate <NSObject>
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController*)viewController
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
                  newTimeControlCreated:(BOOL)newTimeControlCreated;
+
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
+                               setName:(NSString *)name;
 
 @end
 
@@ -28,5 +31,7 @@
 
 @property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDelegate> delegate;
 @property (strong, nonatomic) CHChessClockSettings* chessClockSettings;
+
+- (void)save;
 
 @end

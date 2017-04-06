@@ -59,14 +59,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     if (self.chessClockSettings == nil) {
         self.newTimeControlCreated = YES;
         
-        UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc]
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                               target:self action:@selector(saveButtonTapped)];
-
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-        
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-        
         // The user wants to create new time control. By default, use a Fischer
         // increment, and a single time stage
         CHChessClockFischerIncrement* increment = [[CHChessClockFischerIncrement alloc] initWithIncrementValue:5];
@@ -540,7 +532,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 #pragma mark - IBActions
 //------------------------------------------------------------------------------
-- (IBAction)saveButtonTapped
+- (void)save
 {
     self.newTimeControlSaved = YES;
 
@@ -548,7 +540,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.chessClockSettings.name = nameTextField.text;
 
     [self.delegate timeControlTableViewController:self newTimeControlCreated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)nameTextFielEditingDidEndOnExit:(UITextField*)sender
@@ -559,12 +550,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 - (IBAction)nameTextFieldBeingEdited:(UITextField*)sender
 {
     NSString* name = [self validateName];
-    if (name != nil) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    }
-    else {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    }
+    [self.delegate timeControlTableViewController:self setName:name];
 }
 
 //------------------------------------------------------------------------------

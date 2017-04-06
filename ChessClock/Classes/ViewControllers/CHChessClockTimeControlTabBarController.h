@@ -9,11 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class CHChessClockSettingsManager;
-@protocol CHChessClockTimeControlTableViewControllerDelegate;
+
+@class CHChessClockTimeControlTabBarController;
+
+@protocol CHCHessClockTimeControlTabBarControllerDelegate <NSObject>
+
+- (void)timeControlTabBarViewController:(CHChessClockTimeControlTabBarController *)viewController
+                  newTimeControlCreated:(BOOL)newTimeControlCreated;
+
+@end
 
 @interface CHChessClockTimeControlTabBarController : UITabBarController
 
 - (void)setSettingsManager:(CHChessClockSettingsManager *)settingsManager;
-- (void)setTimeControlTableViewDelegate:(id<CHChessClockTimeControlTableViewControllerDelegate>)delegate;
+@property(weak, nonatomic) id<CHCHessClockTimeControlTabBarControllerDelegate> timeControlTabBarDelegate;
 
 @end
