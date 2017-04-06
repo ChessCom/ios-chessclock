@@ -195,7 +195,7 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
             if ([settings.name isEqualToString:playerOneSettingsName]) {
                 self.playerOneSettings = settings;
             }
-            else if ([settings.name isEqualToString:playerTwoSettingsName]) {
+            if ([settings.name isEqualToString:playerTwoSettingsName]) {
                 self.playerTwoSettings = settings;
             }
         }
