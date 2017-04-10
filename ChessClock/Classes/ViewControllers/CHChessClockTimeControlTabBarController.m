@@ -26,24 +26,17 @@
     self.playerOneTimeControlTableViewController.delegate = self;
     self.playerTwoTimeControlTableViewController.delegate = self;
     
-    if (!self.playerOneTimeControlTableViewController.chessClockSettings ||
-        !self.playerTwoTimeControlTableViewController.chessClockSettings) {
-        
-        UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc]
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                               target:self action:@selector(saveButtonTapped)];
-        
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     self.playerOneTimeControlTableViewController.title = NSLocalizedString(@"Player One", nil);
     self.playerTwoTimeControlTableViewController.title = NSLocalizedString(@"Player Two", nil);
+    
+    self.title = NSLocalizedString(@"Time Controls", nil);
+    
+    UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                           target:self action:@selector(saveButtonTapped)];
+    
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)setSettingsManager:(CHChessClockSettingsManager *)settingsManager
