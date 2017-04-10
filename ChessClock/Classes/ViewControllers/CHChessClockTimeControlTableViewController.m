@@ -19,6 +19,9 @@
 #import "UIColor+ChessClock.h"
 #import "CHTableViewHeader.h"
 
+
+static const NSInteger kAddButtonTag = 1000;
+
 //------------------------------------------------------------------------------
 #pragma mark Private methods declarations
 //------------------------------------------------------------------------------
@@ -32,6 +35,8 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 @property (assign, nonatomic) BOOL newTimeControlSaved;
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
 @property (strong, nonatomic) UIPopoverController *customPopoverController;
+@property (weak, nonatomic) IBOutlet UISwitch *duplicatePlayerOneSwitch;
+@property (readonly, nonatomic) BOOL shouldDuplicatePlayerOne;
 
 @end
 
@@ -82,6 +87,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 10;
     self.tableView.estimatedRowHeight = 20;
+    
+    self.duplicatePlayerOneSwitch.on = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -107,6 +114,11 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     self.dataSource.timeControlName = self.nameTextField.text;
+}
+
+- (BOOL)shouldDuplicatePlayerOne
+{
+    return self.duplicatePlayerOneSwitch.on;
 }
 
 //------------------------------------------------------------------------------
@@ -197,6 +209,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.shouldDuplicatePlayerOne && self.duplicatePlayerOneSwitch) {
+        return;
+    }
+    
     switch (indexPath.section) {
         case CHNameSection:
             [self selectedNameCellWithIndexPath:indexPath];
@@ -290,15 +306,19 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             cell = self.nameTableViewCell;
             
             UITextField* nameTextField = (UITextField*)[cell viewWithTag:CHNameTextFieldTag];
-            NSString *placeholderText = NSLocalizedString(@"Enter time control name", nil);
-            nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: [UIColor tableViewCellTextColor]}];
             [nameTextField addTarget:self action:@selector(nameTextFielEditingDidEndOnExit:) forControlEvents:UIControlEventEditingDidEndOnExit];
             [nameTextField addTarget:self action:@selector(nameTextFieldBeingEdited:) forControlEvents:UIControlEventEditingChanged];
         }
     }
-    
+
     UITextField* nameTextField = (UITextField*)[cell viewWithTag:CHNameTextFieldTag];
     nameTextField.text = self.dataSource.timeControlName;
+    nameTextField.enabled = !self.shouldDuplicatePlayerOne;
+
+    NSString *placeholderText = NSLocalizedString(@"Enter time control name", nil);
+    UIColor *textColor = self.shouldDuplicatePlayerOne ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
+    nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText
+                                                                          attributes:@{NSForegroundColorAttributeName: textColor}];
     return cell;
 }
 
@@ -309,11 +329,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                        reuseIdentifier:cellIdentifier];
-
-        [self addStyleToCell:cell];
-        
     }
-
+    
+    [self addStyleToCell:cell];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), row + 1];
     cell.detailTextLabel.text = [[self.chessClockSettings.stageManager stageAtIndex:row] description];
     
@@ -332,11 +350,14 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     cell.backgroundColor = [UIColor clearColor];
     cell.tintColor = [UIColor tableViewCellTextColor];
-    cell.textLabel.textColor = [UIColor tableViewCellTextColor];
     cell.separatorInset = UIEdgeInsetsZero;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+
+    cell.textLabel.textColor = cell.detailTextLabel.textColor =
+    self.shouldDuplicatePlayerOne ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
 }
 
 - (UITableViewCell*)addTimeControlStageCell
@@ -347,8 +368,6 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:cellIdentifier];
         
-        [self addStyleToCell:cell];
-        
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView = backgroundView;
@@ -358,8 +377,14 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         addButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [addButton setTitle:NSLocalizedString(@"Add stage", nil) forState:UIControlStateNormal];
         [addButton addTarget:self action:@selector(addStageButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [addButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
+        addButton.tag = kAddButtonTag;
         [cell.contentView addSubview:addButton];
     }
+    
+    UIButton *addButton = [cell viewWithTag:kAddButtonTag];
+    addButton.enabled = !self.shouldDuplicatePlayerOne;
+    [self addStyleToCell:cell];
     
     return cell;
 }
@@ -374,9 +399,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         
         cell.textLabel.text = NSLocalizedString(@"Type", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        [self addStyleToCell:cell];
     }
     
+    [self addStyleToCell:cell];
     NSUInteger incrementValue = self.chessClockSettings.increment.incrementValue;
     NSString* incrementValueString = [CHUtil formatTime:incrementValue showTenths:NO];
     
@@ -542,6 +567,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.chessClockSettings.name = nameTextField.text;
 
     [self.delegate timeControlTableViewController:self newTimeControlCreated:YES];
+}
+- (IBAction)duplicateSwitchValueChanged:(UISwitch *)sender
+{
+    [self.tableView reloadData];
 }
 
 - (IBAction)nameTextFielEditingDidEndOnExit:(UITextField*)sender
