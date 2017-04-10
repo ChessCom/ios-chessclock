@@ -21,7 +21,6 @@
 
 @interface CHChessClockTimeControlTabBarController : UITabBarController
 
-- (void)setSettingsManager:(CHChessClockSettingsManager *)settingsManager;
 @property(weak, nonatomic) id<CHCHessClockTimeControlTabBarControllerDelegate> timeControlTabBarDelegate;
 
 

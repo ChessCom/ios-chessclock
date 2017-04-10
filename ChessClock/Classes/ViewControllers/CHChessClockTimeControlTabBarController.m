@@ -44,12 +44,6 @@ CHChessClockTimeControlTableViewControllerDataSource>
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void)setSettingsManager:(CHChessClockSettingsManager *)settingsManager
-{
-//    self.playerOneTimeControlTableViewController.chessClockSettings = settingsManager.playerOneSettings;
-//    self.playerTwoTimeControlTableViewController.chessClockSettings = settingsManager.playerTwoSettings;
-}
-
 - (IBAction)saveButtonTapped
 {
     [self.playerOneTimeControlTableViewController save];

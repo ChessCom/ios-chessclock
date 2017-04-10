@@ -196,8 +196,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     if ([segue.destinationViewController isKindOfClass:[CHChessClockTimeControlTabBarController class]]) {
         CHChessClockTimeControlTabBarController *tabBarController = (CHChessClockTimeControlTabBarController *)segue.destinationViewController;
-   
-        tabBarController.settingsManager = self.settingsManager;
         tabBarController.timeControlTabBarDelegate = self;
         self.currentViewController = tabBarController;
     }
