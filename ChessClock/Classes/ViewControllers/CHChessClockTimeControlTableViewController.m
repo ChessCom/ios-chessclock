@@ -105,6 +105,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             [self.delegate timeControlTableViewController:self newTimeControlCreated:NO];
         }
     }
+    
+    self.dataSource.timeControlName = self.nameTextField.text;
 }
 
 //------------------------------------------------------------------------------
@@ -296,7 +298,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     UITextField* nameTextField = (UITextField*)[cell viewWithTag:CHNameTextFieldTag];
-    nameTextField.text = self.chessClockSettings.name;
+    nameTextField.text = self.dataSource.timeControlName;
     return cell;
 }
 

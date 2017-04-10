@@ -10,7 +10,9 @@
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHChessClockSettingsManager.h"
 
-@interface CHChessClockTimeControlTabBarController () <CHChessClockTimeControlTableViewControllerDelegate>
+@interface CHChessClockTimeControlTabBarController ()
+<CHChessClockTimeControlTableViewControllerDelegate,
+CHChessClockTimeControlTableViewControllerDataSource>
 
 @property (readonly, nonatomic) CHChessClockTimeControlTableViewController *playerOneTimeControlTableViewController;
 @property (readonly, nonatomic) CHChessClockTimeControlTableViewController *playerTwoTimeControlTableViewController;
@@ -18,6 +20,7 @@
 @end
 
 @implementation CHChessClockTimeControlTabBarController
+@synthesize timeControlName;
 
 - (void)viewDidLoad
 {
@@ -25,6 +28,8 @@
     
     self.playerOneTimeControlTableViewController.delegate = self;
     self.playerTwoTimeControlTableViewController.delegate = self;
+    self.playerOneTimeControlTableViewController.dataSource = self;
+    self.playerTwoTimeControlTableViewController.dataSource = self;
     
     self.playerOneTimeControlTableViewController.title = NSLocalizedString(@"Player One", nil);
     self.playerTwoTimeControlTableViewController.title = NSLocalizedString(@"Player Two", nil);
@@ -41,8 +46,8 @@
 
 - (void)setSettingsManager:(CHChessClockSettingsManager *)settingsManager
 {
-    self.playerOneTimeControlTableViewController.chessClockSettings = settingsManager.playerOneSettings;
-    self.playerTwoTimeControlTableViewController.chessClockSettings = settingsManager.playerTwoSettings;
+//    self.playerOneTimeControlTableViewController.chessClockSettings = settingsManager.playerOneSettings;
+//    self.playerTwoTimeControlTableViewController.chessClockSettings = settingsManager.playerTwoSettings;
 }
 
 - (IBAction)saveButtonTapped

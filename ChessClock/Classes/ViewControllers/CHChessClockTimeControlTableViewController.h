@@ -24,12 +24,22 @@
 
 @end
 
+@protocol CHChessClockTimeControlTableViewControllerDataSource <NSObject>
+
+//- (NSString *) timeControlName;
+//- (void)setTimeControlName:(NSString *)timeControlName;
+
+@property (strong, nonatomic) NSString *timeControlName;
+
+@end
+
 //------------------------------------------------------------------------------
 #pragma mark - CHTimeControlTableViewController
 //------------------------------------------------------------------------------
 @interface CHChessClockTimeControlTableViewController : UITableViewController
 
 @property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDataSource> dataSource;
 @property (strong, nonatomic) CHChessClockSettings* chessClockSettings;
 
 - (void)save;
