@@ -321,41 +321,35 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 #pragma mark - CHCHessClockTimeControlTabBarControllerDelegate
 //------------------------------------------------------------------------------
 - (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
-              newTimeControlCreated:(BOOL)newTimeControlCreated
+                 createdTimeControl:(CHChessClockSettings *)timeControl
 {
-    
-    
-    
-//    CHChessClockSettings* settings = viewController.chessClockSettings;
-//    
-//    if (newTimeControlCreated)
-//    {
-//        [self.settingsManager addTimeControl:settings];
-//        
-//        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0
-//                                                    inSection:CHExistingTimeControlSection];
-//        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    }
-//    else
-//    {
-//        #warning add two
-//        if (self.settingsManager.playerOneSettings == settings)
-//        {
-//            // So that the clock has the correct state in the case in which the user edits a time control,
-//            // and immediately after that, tapped the Start button
-//            [self.delegate settingsTableViewController:self didUpdateSettings:settings];
-//            
-//            // This means the player returned from the time control screen (possibly editing the time control),
-//            // so in this case we want to reset the clock as soon as the Start button is tapped
-//            self.timeControlUponAppearance = nil;
-//        }
-//        
-//        NSUInteger savedSettingIndex = [[self.settingsManager allChessClockSettings] indexOfObject:settings];
-//        if (savedSettingIndex != NSNotFound) {
-//            NSIndexPath* savedSetttingIndexPath = [NSIndexPath indexPathForRow:savedSettingIndex inSection:CHExistingTimeControlSection];
-//            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:savedSetttingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//        }
-//    }
+    //[self.settingsManager addTimeControl:settings];
+    //
+    //        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0
+    //                                                    inSection:CHExistingTimeControlSection];
+    //        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
+                 updatedTimeControl:(CHChessClockSettings *)timeControl
+{
+    //        if (self.settingsManager.playerOneSettings == settings)
+    //        {
+    //            // So that the clock has the correct state in the case in which the user edits a time control,
+    //            // and immediately after that, tapped the Start button
+    //            [self.delegate settingsTableViewController:self didUpdateSettings:settings];
+    //
+    //            // This means the player returned from the time control screen (possibly editing the time control),
+    //            // so in this case we want to reset the clock as soon as the Start button is tapped
+    //            self.timeControlUponAppearance = nil;
+    //        }
+    //
+    //        NSUInteger savedSettingIndex = [[self.settingsManager allChessClockSettings] indexOfObject:settings];
+    //        if (savedSettingIndex != NSNotFound) {
+    //            NSIndexPath* savedSetttingIndexPath = [NSIndexPath indexPathForRow:savedSettingIndex inSection:CHExistingTimeControlSection];
+    //            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:savedSetttingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //        }
+    //    }
 }
 
 //------------------------------------------------------------------------------

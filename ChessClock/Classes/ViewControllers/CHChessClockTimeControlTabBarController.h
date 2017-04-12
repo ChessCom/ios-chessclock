@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class CHChessClockSettingsManager;
-
 @class CHChessClockTimeControlTabBarController;
 
 @protocol CHCHessClockTimeControlTabBarControllerDelegate <NSObject>
 
 - (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
-              newTimeControlCreated:(BOOL)newTimeControlCreated;
+              createdTimeControl:(CHChessClockSettings *)timeControl;
+
+- (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
+                 updatedTimeControl:(CHChessClockSettings *)timeControl;
 
 @end
 

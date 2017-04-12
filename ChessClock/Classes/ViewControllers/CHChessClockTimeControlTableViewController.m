@@ -109,7 +109,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         NSString* name = [self validateName];
         if (name != nil) {
             self.chessClockSettings.name = name;
-            [self.delegate timeControlTableViewController:self newTimeControlCreated:NO];
+            [self.delegate timeControlTableViewController:self
+                                       updatedTimeControl:self.chessClockSettings];
         }
     }
     
@@ -566,8 +567,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     UITextField* nameTextField = [self nameTextField];
     self.chessClockSettings.name = nameTextField.text;
 
-    [self.delegate timeControlTableViewController:self newTimeControlCreated:YES];
+    [self.delegate timeControlTableViewController:self
+                               createdTimeControl:self.chessClockSettings];
 }
+
 - (IBAction)duplicateSwitchValueChanged:(UISwitch *)sender
 {
     [self.tableView reloadData];
