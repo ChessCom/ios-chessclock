@@ -65,7 +65,7 @@ CHChessClockTimeControlTableViewControllerDataSource>
 - (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController*)viewController
                  newTimeControlCreated:(BOOL)newTimeControlCreated
 {
-   [self.timeControlTabBarDelegate timeControlTabBarViewController:self newTimeControlCreated:newTimeControlCreated];
+   [self.timeControlTabBarDelegate timeControlTabBarController:self newTimeControlCreated:newTimeControlCreated];
 }
 
 - (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController setName:(NSString *)name

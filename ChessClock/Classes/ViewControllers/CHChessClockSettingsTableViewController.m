@@ -318,10 +318,10 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 }
 
 //------------------------------------------------------------------------------
-#pragma mark - CHChessClockTimeControlTableViewControllerDelegate
+#pragma mark - CHCHessClockTimeControlTabBarControllerDelegate
 //------------------------------------------------------------------------------
-- (void)timeControlTabBarViewController:(CHChessClockTimeControlTabBarController *)viewController
-                  newTimeControlCreated:(BOOL)newTimeControlCreated
+- (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
+              newTimeControlCreated:(BOOL)newTimeControlCreated
 {
     
     

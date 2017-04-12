@@ -14,8 +14,8 @@
 
 @protocol CHCHessClockTimeControlTabBarControllerDelegate <NSObject>
 
-- (void)timeControlTabBarViewController:(CHChessClockTimeControlTabBarController *)viewController
-                  newTimeControlCreated:(BOOL)newTimeControlCreated;
+- (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
+              newTimeControlCreated:(BOOL)newTimeControlCreated;
 
 @end
 
