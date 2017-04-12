@@ -62,13 +62,20 @@ CHChessClockTimeControlTableViewControllerDataSource>
     return self.viewControllers.lastObject;
 }
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController*)viewController
-                 newTimeControlCreated:(BOOL)newTimeControlCreated
+- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
+                    createdTimeControl:(CHChessClockSettings *)timeControl
 {
-   [self.timeControlTabBarDelegate timeControlTabBarController:self newTimeControlCreated:newTimeControlCreated];
+    [self.timeControlTabBarDelegate timeControlTabBarController:self createdTimeControl:timeControl];
 }
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController setName:(NSString *)name
+- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
+                    updatedTimeControl:(CHChessClockSettings *)timeControl
+{
+    [self.timeControlTabBarDelegate timeControlTabBarController:self updatedTimeControl:timeControl];
+}
+
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
+                               setName:(NSString *)name
 {
     if (name) {
         self.navigationItem.rightBarButtonItem.enabled = YES;

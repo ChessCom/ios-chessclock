@@ -19,7 +19,6 @@
 #import "UIColor+ChessClock.h"
 #import "CHTableViewHeader.h"
 
-
 static const NSInteger kAddButtonTag = 1000;
 
 //------------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 
 @class CHChessClockSettingsManager;
 @class CHChessClockTimeControlTabBarController;
+@class CHChessClockSettings;
 
 @protocol CHCHessClockTimeControlTabBarControllerDelegate <NSObject>
 

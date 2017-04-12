@@ -16,10 +16,10 @@
 //------------------------------------------------------------------------------
 @protocol CHChessClockTimeControlTableViewControllerDelegate <NSObject>
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
                  createdTimeControl:(CHChessClockSettings *)timeControl;
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
                  updatedTimeControl:(CHChessClockSettings *)timeControl;
 
 
