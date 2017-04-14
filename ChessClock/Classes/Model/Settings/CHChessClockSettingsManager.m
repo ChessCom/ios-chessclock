@@ -8,6 +8,7 @@
 
 #import "CHChessClockSettingsManager.h"
 #import "CHChessClockSettings.h"
+#import "CHChessClockTimeControl.h"
 #import "CHChessClockIncrement.h"
 #import "CHChessClockTimeControlStageManager.h"
 
@@ -16,8 +17,8 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockSettingsManager()
 
-@property (strong, nonatomic) NSMutableArray* timeControls;
-@property (strong, nonatomic) NSMutableDictionary* settings;
+@property (strong, nonatomic) NSMutableArray<CHChessClockTimeControl *>* timeControls;
+@property (strong, nonatomic) NSMutableDictionary* preferences;
 
 @end
 
@@ -26,9 +27,7 @@
 //------------------------------------------------------------------------------
 @implementation CHChessClockSettingsManager
 
-static NSString *const CHChessClockPlayerOneSettings = @"CHChessClockPlayerOneSettings";
-static NSString *const CHChessClockPlayerTwoSettings = @"CHChessClockPlayerTwoSettings";
-static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
+static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeControlNameKey";
 
 - (id)init
 {
@@ -42,20 +41,9 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     return self;
 }
 
-- (void)setIsLandscape:(BOOL)isLandscape
+- (void)addTimeControl:(CHChessClockTimeControl *)timeControl
 {
-    [self.settings setObject:[NSNumber numberWithBool:isLandscape] forKey:CHChessClockIsLandscape];
-    [self saveSettings];
-}
-
-- (BOOL)isLandscape
-{
-    return [[self.settings objectForKey:CHChessClockIsLandscape] boolValue];
-}
-
-- (void)addTimeControl:(CHChessClockSettings*)settings
-{
-    [self.timeControls insertObject:settings atIndex:0];
+    [self.timeControls insertObject:timeControl atIndex:0];
     [self saveTimeControls];
 }
 
@@ -67,14 +55,15 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     }
 }
 
-- (void)moveTimeControlFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex
+- (void)moveTimeControlFrom:(NSUInteger)sourceIndex
+                         to:(NSUInteger)destinationIndex
 {
-    CHChessClockSettings* settingToMove = [self.timeControls objectAtIndex:sourceIndex];
+    CHChessClockTimeControl* timeControlToMove = [self.timeControls objectAtIndex:sourceIndex];
     [self.timeControls removeObjectAtIndex:sourceIndex];
-    [self.timeControls insertObject:settingToMove atIndex:destinationIndex];
+    [self.timeControls insertObject:timeControlToMove atIndex:destinationIndex];
 }
 
-- (NSArray*)allChessClockSettings
+- (NSArray<CHChessClockTimeControl *> *)allTimeControls
 {
     return [NSArray arrayWithArray:self.timeControls];
 }
@@ -87,10 +76,10 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     }
 }
 
-- (void)saveSettings
+- (void)savePreferences
 {
-    NSURL* chessClockSettingsPath = [self chessClockSettingsPath];
-    if (![NSKeyedArchiver archiveRootObject:self.settings toFile:[chessClockSettingsPath path]]) {
+    NSURL* chessClockPreferencesPath = [self chessClockPreferencesPath];
+    if (![NSKeyedArchiver archiveRootObject:self.preferences toFile:[chessClockPreferencesPath path]]) {
         NSLog(@"Couldn't save Chess clock settings!");
     }
 }
@@ -108,48 +97,42 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------
 
-- (void)setPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
+- (void)setTimeControl:(CHChessClockTimeControl *)timeControl
 {
-    if (_playerOneSettings != playerOneSettings) {
-        _playerOneSettings = playerOneSettings;
-        [self saveSettingsName:_playerOneSettings.name forKey:CHChessClockPlayerOneSettings];
-    }
-}
-
-- (void)setPlayerTwoSettings:(CHChessClockSettings *)playerTwoSettings
-{
-    if (_playerTwoSettings != playerTwoSettings) {
-        _playerTwoSettings = playerTwoSettings;
-        [self saveSettingsName:_playerTwoSettings.name forKey:CHChessClockPlayerTwoSettings];
+    if (_timeControl != timeControl) {
+        _timeControl = timeControl;
+        [self.preferences  setObject:_timeControl.name forKey:CHChessClockTimeControlNameKey];
+        [self savePreferences];
     }
 }
 
 - (void)loadDefaultSettings
 {
-    self.settings = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                     [NSNumber numberWithBool:NO], CHChessClockIsLandscape, nil];
+    self.preferences = [NSMutableDictionary dictionary];
 
     NSString* defaultTimeControlsPath =
     [[NSBundle mainBundle] pathForResource:@"DefaultChessClockSettings"
                                     ofType:@"plist"];
     
-    NSArray* defaultTimeControls =
-    [[NSDictionary dictionaryWithContentsOfFile:defaultTimeControlsPath] objectForKey:@"defaultSettings"];
-    NSMutableArray* allTimeControls = [NSMutableArray arrayWithCapacity:[defaultTimeControls count]];
+    NSArray* defaultSettings =
+    [[NSDictionary dictionaryWithContentsOfFile:defaultTimeControlsPath]
+     objectForKey:@"defaultSettings"];
     
-    for (NSDictionary* timeControlDefinition in defaultTimeControls) {
+    NSMutableArray* allTimeControls = [NSMutableArray arrayWithCapacity:[defaultSettings count]];
+    
+    for (NSDictionary* settingsDefinitions in defaultSettings) {
         
-        NSString* name = [timeControlDefinition objectForKey:@"name"];
-                
+        NSString* name = [settingsDefinitions objectForKey:@"name"];
+        
         // Create the increment
-        NSDictionary* incrementDefinition = [timeControlDefinition objectForKey:@"increment"];
+        NSDictionary* incrementDefinition = [settingsDefinitions objectForKey:@"increment"];
         NSString* incrementType = [incrementDefinition objectForKey:@"type"];
         NSUInteger incrementValue = [[incrementDefinition objectForKey:@"incrementValue"] integerValue];
         Class incrementClass = NSClassFromString(incrementType);
         CHChessClockIncrement* increment = [[incrementClass alloc] initWithIncrementValue:incrementValue];
         
         // Create the time control stages manager
-        NSDictionary* timeStagesDefinition = [timeControlDefinition objectForKey:@"timeStages"];
+        NSDictionary* timeStagesDefinition = [settingsDefinitions objectForKey:@"timeStages"];
         CHChessClockTimeControlStageManager* timeControlStageManager = [[CHChessClockTimeControlStageManager alloc] init];
         
         for (NSDictionary* timeStageDefinition in timeStagesDefinition) {
@@ -159,16 +142,25 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
         }
         
         // Create the clock settings
-        CHChessClockSettings* settings = [[CHChessClockSettings alloc] initWithName:name
-                                                                          increment:increment
-                                                                    andStageManager:timeControlStageManager];
+        CHChessClockSettings *playerOneSettings =
+        [[CHChessClockSettings alloc] initWithIncrement:increment
+                                           stageManager:timeControlStageManager];
         
-        [allTimeControls addObject:settings];
+        CHChessClockSettings *playerTwoSettings =
+        [[CHChessClockSettings alloc] initWithIncrement:increment
+                                           stageManager:timeControlStageManager];
+
+        // For defaults, we have the same settings for player one and two
+        CHChessClockTimeControl *timeControl =
+        [[CHChessClockTimeControl alloc] initWithName:name
+                                    playerOneSettings:playerOneSettings
+                                    playerTwoSettings:playerTwoSettings];
         
-        if ([timeControlDefinition objectForKey:@"default"]) {
-            self.playerOneSettings = settings;
-            self.playerTwoSettings = settings;
+        if ([settingsDefinitions objectForKey:@"default"]) {
+            self.timeControl = timeControl;
         }
+        
+        [allTimeControls addObject:timeControl];
     }
     
     self.timeControls = allTimeControls;
@@ -179,29 +171,24 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
 {
     NSFileManager* fileManager = [[NSFileManager alloc] init];
     NSString* timeControlsPath = [[self chessClockTimeControlsPath] path];
-    NSString* settingsPath = [[self chessClockSettingsPath] path];
+    NSString* preferencePath = [[self chessClockPreferencesPath] path];
     
-    if ([fileManager fileExistsAtPath:settingsPath]) {
-        self.settings = [NSKeyedUnarchiver unarchiveObjectWithFile:settingsPath];
+    if ([fileManager fileExistsAtPath:preferencePath]) {
+        self.preferences = [NSKeyedUnarchiver unarchiveObjectWithFile:preferencePath];
     }
     
     if ([fileManager fileExistsAtPath:timeControlsPath]) {
         self.timeControls = [NSKeyedUnarchiver unarchiveObjectWithFile:timeControlsPath];
         
-        NSString* playerOneSettingsName = [self.settings objectForKey:CHChessClockPlayerOneSettings];
-        NSString *playerTwoSettingsName = [self.settings objectForKey:CHChessClockPlayerTwoSettings];
-        
-        for (CHChessClockSettings* settings in self.timeControls) {
-            if ([settings.name isEqualToString:playerOneSettingsName]) {
-                self.playerOneSettings = settings;
-            }
-            if ([settings.name isEqualToString:playerTwoSettingsName]) {
-                self.playerTwoSettings = settings;
+        NSString *timeControlName = [self.preferences objectForKey:CHChessClockTimeControlNameKey];
+        for (CHChessClockTimeControl* timeControl in self.timeControls) {
+            if ([timeControl.name isEqualToString:timeControlName]) {
+                self.timeControl = timeControl;
             }
         }
     }
     
-    return self.timeControls != nil && self.settings != nil;
+    return self.timeControls != nil && self.preferences != nil;
 }
 
 - (NSURL*)chessClockFilePathWithBaseName:(NSString*)baseName
@@ -217,16 +204,9 @@ static NSString *const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     return [self chessClockFilePathWithBaseName:@"chessClockTimeControls"];
 }
 
-- (NSURL*)chessClockSettingsPath
+- (NSURL*)chessClockPreferencesPath
 {
-    return [self chessClockFilePathWithBaseName:@"chessClockSettings"];
-}
-
-- (void)saveSettingsName:(NSString *)name forKey:key
-{
-    
-    [self.settings setObject:name forKey:key];
-    [self saveSettings];
+    return [self chessClockFilePathWithBaseName:@"chessClockPreferences"];
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @class CHChessClock;
 @class CHTimePiece;
-@class CHChessClockSettings;
+@class CHChessClockTimeControl;
 
 //------------------------------------------------------------------------------
 #pragma mark - CHEChessClockDelegate protocol
@@ -31,14 +31,12 @@
 
 @property (assign, nonatomic, readonly) BOOL paused;
 
-- (instancetype)initWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
-                        playerTwoSettings:(CHChessClockSettings *)playerTwoSettings
-                              andDelegate:(id<CHChessClockDelegate>)delegate;
+- (instancetype)initWithTimeControl:(CHChessClockTimeControl *)timeControl
+                           delegate:(id<CHChessClockDelegate>)delegate;
 - (void)cleanup;
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId;
 - (void)togglePause;
-- (void)resetWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
-                 playerTwoSettings:(CHChessClockSettings *)playerTwoSettings;
+- (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl;
 - (BOOL)isActive;
 
 @end

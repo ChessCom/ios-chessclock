@@ -15,6 +15,7 @@
 #import "CHUtil.h"
 #import "CHAppDelegate.h"
 #import "UIColor+ChessClock.h"
+#import "CHChessClockTimeControl.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -26,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startClockButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) CHChessClockSettings* timeControlUponAppearance;
+@property (strong, nonatomic) CHChessClockTimeControl* timeControlUponAppearance;
 
 @end
 
@@ -44,8 +45,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
  
     CHChessClockSettingsManager* settingsManager = [[CHChessClockSettingsManager alloc] init];
     self.settingsManager = settingsManager;
-    #warning add two
-    self.timeControlUponAppearance = self.settingsManager.playerOneSettings;
+    self.timeControlUponAppearance = self.settingsManager.timeControl;
     
     self.title = NSLocalizedString(@"Settings", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -92,15 +92,14 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 //------------------------------------------------------------------------------
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------
-- (void)updateClockSettings:(CHChessClockSettings*)clockSettings
+- (void)updateClockTimeControl:(CHChessClockTimeControl *)timeControl
 {
-#warning add two
-    self.settingsManager.playerOneSettings = clockSettings;
-    
-    if ([self.delegate respondsToSelector:@selector(settingsTableViewController:didUpdateSettings:)]) {
-       [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
-                           withObject:self withObject:clockSettings];
-    }
+    self.settingsManager.timeControl = timeControl;
+#warning fix delegate
+//    if ([self.delegate respondsToSelector:@selector(settingsTableViewController:didUpdateSettings:)]) {
+//       [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
+//                           withObject:self withObject:clockSettings];
+//    }
 }
 
 - (void)saveSettings
@@ -139,33 +138,28 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)populateExistingTimeControlCell:(UITableViewCell*)cell withIndexPath:(NSIndexPath*)indexPath
 {
-    CHChessClockSettings* settings = [[self.settingsManager allChessClockSettings] objectAtIndex:indexPath.row];
-    cell.textLabel.text = settings.name;
-    #warning add two
-    if (settings == self.settingsManager.playerOneSettings) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    CHChessClockTimeControl* timeControl = [[self.settingsManager allTimeControls] objectAtIndex:indexPath.row];
+    cell.textLabel.text = timeControl.name;
+    cell.accessoryType = timeControl == self.settingsManager.timeControl ?
+    UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 - (void)existingTimeControlSelectedAtIndexPath:(NSIndexPath*)indexPath inTableView:(UITableView*)tableView
 {
-    CHChessClockSettings* selectedSetting = [[self.settingsManager allChessClockSettings] objectAtIndex:indexPath.row];
+    CHChessClockTimeControl* selectedTimeControl = [[self.settingsManager allTimeControls] objectAtIndex:indexPath.row];
     
     if ([tableView isEditing]) {
-        [self timeControlSelected:selectedSetting];
+        [self timeControlSelected:selectedTimeControl];
     }
     else {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        #warning add two
-        CHChessClockSettings* lastSelectedSetting = self.settingsManager.playerOneSettings;
         
-        if (selectedSetting != lastSelectedSetting) {
+        CHChessClockTimeControl* lastSelectedTimeControl = self.settingsManager.timeControl;
+        
+        if (selectedTimeControl != lastSelectedTimeControl) {
             
             // Remove the check mark from the last selected cell
-            NSUInteger lastSelectedIndex = [[self.settingsManager allChessClockSettings] indexOfObject:lastSelectedSetting];
+            NSUInteger lastSelectedIndex = [[self.settingsManager allTimeControls] indexOfObject:lastSelectedTimeControl];
             UITableViewCell* lastSelectedCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:lastSelectedIndex
                                                                                                     inSection:CHExistingTimeControlSection]];
             lastSelectedCell.accessoryType = UITableViewCellAccessoryNone;
@@ -174,12 +168,12 @@ static const NSUInteger CHExistingTimeControlSection = 1;
             UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
             [self selectCell:cell];
             
-            [self updateClockSettings:selectedSetting];
+            [self updateClockTimeControl:selectedTimeControl];
         }
     }
 }
 
-- (void)timeControlSelected:(CHChessClockSettings*)selectedSettings
+- (void)timeControlSelected:(CHChessClockTimeControl *)selectedTimeControl
 {
     NSString *segueIdentifier = NSStringFromClass([CHChessClockTimeControlTabBarController class]);
     [self performSegueWithIdentifier:segueIdentifier sender:nil];
@@ -221,7 +215,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
         return 1;
     }
     
-    return [[self.settingsManager allChessClockSettings] count];
+    return [[self.settingsManager allTimeControls] count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -286,9 +280,9 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        if ([[self.settingsManager allChessClockSettings] count] > 1) {
+        if ([[self.settingsManager allTimeControls] count] > 1) {
             #warning add two
-            NSUInteger selectedSettingIndex = [[self.settingsManager allChessClockSettings] indexOfObject:self.settingsManager.playerOneSettings];
+            NSUInteger selectedSettingIndex = [[self.settingsManager allTimeControls] indexOfObject:self.settingsManager.timeControl];
             NSUInteger settingToDeleteIndex = indexPath.row;
         
             [self.settingsManager removeTimeControlAtIndex:settingToDeleteIndex];
@@ -300,7 +294,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:CHExistingTimeControlSection];
                 [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
-                [self updateClockSettings:[[self.settingsManager allChessClockSettings] objectAtIndex:0]];
+                [self updateClockTimeControl:[[self.settingsManager allTimeControls] objectAtIndex:0]];
             
                 UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
                 [self selectCell:cell];
@@ -357,8 +351,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 //------------------------------------------------------------------------------
 - (IBAction)startClockTapped
 {
-    #warning add two
-    if (self.timeControlUponAppearance == self.settingsManager.playerOneSettings)
+    if (self.timeControlUponAppearance == self.settingsManager.timeControl)
     {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reset Clock?", nil)
                                                         message:nil

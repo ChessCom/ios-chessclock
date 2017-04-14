@@ -68,11 +68,13 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         CHChessClockFischerIncrement* increment = [[CHChessClockFischerIncrement alloc] initWithIncrementValue:5];
         CHChessClockTimeControlStageManager* stageManager = [[CHChessClockTimeControlStageManager alloc] init];
         [stageManager addTimeStageWithMovesCount:0 andMaximumTime:300];
+
+#warning Missing
         
-        CHChessClockSettings* clockSettings = [[CHChessClockSettings alloc] initWithName:nil
-                                                                               increment:increment
-                                                                         andStageManager:stageManager];
-        self.chessClockSettings = clockSettings;
+//        CHChessClockSettings* clockSettings = [[CHChessClockSettings alloc] initWithName:nil
+//                                                                               increment:increment
+//                                                                         andStageManager:stageManager];
+//        self.chessClockSettings = clockSettings;
     }
     else {
         self.newTimeControlCreated = NO;
@@ -107,7 +109,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     if (!self.newTimeControlSaved && !self.newTimeControlCreated) {
         NSString* name = [self validateName];
         if (name != nil) {
-            self.chessClockSettings.name = name;
+#warning missing
+            //            self.chessClockSettings.name = name;
             [self.delegate timeControlTableViewController:self
                                        updatedTimeControl:self.chessClockSettings];
         }
@@ -564,7 +567,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.newTimeControlSaved = YES;
 
     UITextField* nameTextField = [self nameTextField];
-    self.chessClockSettings.name = nameTextField.text;
+#warning missing
+    //self.chessClockSettings.name = nameTextField.text;
 
     [self.delegate timeControlTableViewController:self
                                createdTimeControl:self.chessClockSettings];

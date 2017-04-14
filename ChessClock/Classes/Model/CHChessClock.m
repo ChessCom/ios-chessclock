@@ -11,6 +11,7 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockIncrement.h"
 #import "CHChessClockTimeControlStageManager.h"
+#import "CHChessClockTimeControl.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -34,16 +35,15 @@
 //------------------------------------------------------------------------------
 @implementation CHChessClock
 
-- (instancetype)initWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
-                        playerTwoSettings:(CHChessClockSettings *)playerTwoSettings
-                              andDelegate:(id<CHChessClockDelegate>)delegate
+- (instancetype)initWithTimeControl:(CHChessClockTimeControl *)timeControl
+                           delegate:(id<CHChessClockDelegate>)delegate
 {
     if (self = [super init]) {
         self.delegate = delegate;
         self.playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:1
-                                                                  settings:playerOneSettings];
+                                                                  settings:timeControl.playerOneSettings];
         self.playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:2
-                                                                  settings:playerTwoSettings];
+                                                                  settings:timeControl.playerTwoSettings];
         
         self.playerOneTimePiece.delegate = self;
         self.playerTwoTimePiece.delegate = self;
@@ -119,8 +119,7 @@
     }
 }
 
-- (void)resetWithPlayerOneSettings:(CHChessClockSettings *)playerOneSettings
-                 playerTwoSettings:(CHChessClockSettings *)playerTwoSettings
+- (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl
 {
     if (self.activePiece != nil) {
         self.paused = NO;
@@ -129,8 +128,8 @@
     }
     
     // Reset all time pieces
-    [self.playerOneTimePiece resetWithSettings:playerOneSettings];
-    [self.playerTwoTimePiece resetWithSettings:playerTwoSettings];
+    [self.playerOneTimePiece resetWithSettings:timeControl.playerOneSettings];
+    [self.playerTwoTimePiece resetWithSettings:timeControl.playerTwoSettings];
 }
 
 - (BOOL)isActive
