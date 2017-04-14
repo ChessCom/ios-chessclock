@@ -268,16 +268,16 @@ static const float CHShowTenthsTime = 10.0f;
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewControllerDelegate methods
 //------------------------------------------------------------------------------
-- (void)settingsTableViewController:(id)settingsTableViewController
-                  didUpdateSettings:(CHChessClockSettings *)settings
+- (void)settingsTableViewController:(CHChessClockSettingsTableViewController *)viewController
+               didUpdateTimeControl:(CHChessClockTimeControl *)timeControl
 {
-#warning add two
-//    self.settingsManager.playerOneSettings = settings;
+    self.settingsManager.timeControl = timeControl;
 }
 
-- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController andReset:(BOOL)reset
+- (void)settingsTableViewControllerDidStartClock:(CHChessClockSettingsTableViewController *)viewController
+                                     byResetting:(BOOL)didReset
 {
-    if (reset) {
+    if (didReset) {
         [self resetClock];
     }
 }

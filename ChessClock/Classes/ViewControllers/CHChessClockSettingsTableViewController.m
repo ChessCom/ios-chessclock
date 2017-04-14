@@ -56,7 +56,6 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-        
     if ([self.tableView isEditing]) {
         // If the tableView is already in edit mode, turn it off. Also change the title of the button to reflect the intended verb (‘Edit’, in this case).
         [self.tableView setEditing:NO animated:YES];
@@ -64,27 +63,22 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     }
     else {
         self.navigationItem.rightBarButtonItem.title = @"Done";
-        
-        // Turn on edit mode
-        
         [self.tableView setEditing:YES animated:YES];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.currentViewController = nil;
-
     [super viewWillAppear:animated];
-    
+    self.currentViewController = nil;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    if(self.currentViewController == nil)
+    if(self.currentViewController == nil) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+    }
     [super viewWillDisappear:animated];
     [self saveSettings];
 }
@@ -95,11 +89,8 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 - (void)updateClockTimeControl:(CHChessClockTimeControl *)timeControl
 {
     self.settingsManager.timeControl = timeControl;
-#warning fix delegate
-//    if ([self.delegate respondsToSelector:@selector(settingsTableViewController:didUpdateSettings:)]) {
-//       [self.delegate performSelector:@selector(settingsTableViewController:didUpdateSettings:)
-//                           withObject:self withObject:clockSettings];
-//    }
+
+    [self.delegate settingsTableViewController:self didUpdateTimeControl:timeControl];
 }
 
 - (void)saveSettings
@@ -181,7 +172,7 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)startClockAndReset:(BOOL)reset
 {
-    [self.delegate settingsTableViewControllerDidStartClock:self andReset:reset];
+    [self.delegate settingsTableViewControllerDidStartClock:self byResetting:reset];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
