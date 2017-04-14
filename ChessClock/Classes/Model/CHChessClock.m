@@ -19,7 +19,6 @@
 @interface CHChessClock() <CHTimePieceDelegate>
 
 @property (weak, nonatomic) id<CHChessClockDelegate> delegate;
-@property (strong, nonatomic) NSDictionary* timePiecesDictionary;
 @property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
 @property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 @property (weak, nonatomic) CHTimePiece* activePiece;
@@ -48,10 +47,6 @@
         self.playerOneTimePiece.delegate = self;
         self.playerTwoTimePiece.delegate = self;
         
-        self.timePiecesDictionary =
-        @{ @(self.playerOneTimePiece.timePieceId) : self.playerOneTimePiece,
-           @(self.playerTwoTimePiece.timePieceId) : self.playerTwoTimePiece };
-        
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
                                                     selector:@selector(updateTime)
                                                     userInfo:nil repeats:YES];
@@ -71,7 +66,8 @@
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId
 {
     if (!self.paused) {
-        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:@(timePieceId)];
+        CHTimePiece* touchedTimePiece =
+        timePieceId == 0 ? self.playerOneTimePiece : self.playerTwoTimePiece;
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];
