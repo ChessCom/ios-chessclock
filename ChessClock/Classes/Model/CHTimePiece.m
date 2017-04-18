@@ -21,6 +21,7 @@
 @property (assign, nonatomic, readwrite) NSTimeInterval availableTime;
 @property (assign, nonatomic, readwrite) NSUInteger movesCount;
 @property (strong, nonatomic) CHChessClockSettings *settings;
+@property (assign, nonatomic) NSUInteger timePieceId;
 
 @end
 
@@ -34,13 +35,8 @@
 {
     if (self = [super init]) {
         self.settings = settings;
-        _timePieceId = timePieceId;
-        self.stageManager = self.settings.stageManager;
-        self.stageIndex = 1;
-        
-        CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:_stageIndex];
-        self.availableTime = stage.maximumTime;
-        self.movesCount = 0;
+        self.timePieceId = timePieceId;
+        [self reset];
     }
     
     return self;
@@ -98,7 +94,16 @@
 - (void)resetWithSettings:(CHChessClockSettings *)settings
 {
     self.settings = settings;
+    [self reset];
+}
+
+- (void)reset
+{
+    self.stageManager = self.settings.stageManager;
+    CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:_stageIndex];
+    self.availableTime = stage.maximumTime;
     self.stageIndex = 1;
+    self.movesCount = 0;
 }
 
 - (BOOL)isInLastStage
