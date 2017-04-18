@@ -9,6 +9,7 @@
 #import "CHChessClockTimeControlTabBarController.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHChessClockSettingsManager.h"
+#import "CHChessClockTimeControl.h"
 
 @interface CHChessClockTimeControlTabBarController ()
 <CHChessClockTimeControlTableViewControllerDelegate,
@@ -27,11 +28,11 @@ CHChessClockTimeControlTableViewControllerDataSource>
     [super viewDidLoad];
     
     self.playerOneTimeControlTableViewController.delegate = self;
-    self.playerTwoTimeControlTableViewController.delegate = self;
     self.playerOneTimeControlTableViewController.dataSource = self;
-    self.playerTwoTimeControlTableViewController.dataSource = self;
-    
     self.playerOneTimeControlTableViewController.title = NSLocalizedString(@"Player One", nil);
+    
+    self.playerTwoTimeControlTableViewController.delegate = self;
+    self.playerTwoTimeControlTableViewController.dataSource = self;
     self.playerTwoTimeControlTableViewController.title = NSLocalizedString(@"Player Two", nil);
     
     self.title = NSLocalizedString(@"Time Controls", nil);
@@ -42,12 +43,29 @@ CHChessClockTimeControlTableViewControllerDataSource>
     
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+    self.timeControlName = self.timeControl.name;
 }
 
 - (IBAction)saveButtonTapped
 {
-    [self.playerOneTimeControlTableViewController save];
-    [self.playerTwoTimeControlTableViewController save];
+    BOOL isNewTimeControl = NO;
+    
+    if (!self.timeControl) {
+        self.timeControl = [[CHChessClockTimeControl alloc] init];
+        isNewTimeControl = YES;
+    }
+
+    self.timeControl.name = timeControlName;
+    self.timeControl.playerOneSettings = self.playerOneTimeControlTableViewController.settings;
+    self.timeControl.playerTwoSettings = self.playerTwoTimeControlTableViewController.settings;
+    
+    if (isNewTimeControl) {
+        [self.timeControlTabBarDelegate timeControlTabBarController:self createdTimeControl:self.timeControl];
+    } else {
+        [self.timeControlTabBarDelegate timeControlTabBarController:self updatedTimeControl:self.timeControl];
+    }
+
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -62,27 +80,11 @@ CHChessClockTimeControlTableViewControllerDataSource>
     return self.viewControllers.lastObject;
 }
 
-- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
-                    createdTimeControl:(CHChessClockSettings *)timeControl
-{
-    [self.timeControlTabBarDelegate timeControlTabBarController:self createdTimeControl:timeControl];
-}
-
-- (void)timeControlTableViewController:(CHChessClockTimeControlTabBarController *)viewController
-                    updatedTimeControl:(CHChessClockSettings *)timeControl
-{
-    [self.timeControlTabBarDelegate timeControlTabBarController:self updatedTimeControl:timeControl];
-}
-
 - (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController
                                setName:(NSString *)name
 {
-    if (name) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    }
-    else {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    }
+    self.timeControlName = name;
+    self.navigationItem.rightBarButtonItem.enabled = (name != nil);
 }
 
 @end

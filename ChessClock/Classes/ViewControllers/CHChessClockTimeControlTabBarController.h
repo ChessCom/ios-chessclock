@@ -8,23 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@class CHChessClockSettingsManager;
 @class CHChessClockTimeControlTabBarController;
-@class CHChessClockSettings;
+@class CHChessClockTimeControl;
 
 @protocol CHCHessClockTimeControlTabBarControllerDelegate <NSObject>
 
 - (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
-              createdTimeControl:(CHChessClockSettings *)timeControl;
+              createdTimeControl:(CHChessClockTimeControl *)timeControl;
 
 - (void)timeControlTabBarController:(CHChessClockTimeControlTabBarController *)viewController
-                 updatedTimeControl:(CHChessClockSettings *)timeControl;
+                 updatedTimeControl:(CHChessClockTimeControl *)timeControl;
 
 @end
 
 @interface CHChessClockTimeControlTabBarController : UITabBarController
 
-@property(weak, nonatomic) id<CHCHessClockTimeControlTabBarControllerDelegate> timeControlTabBarDelegate;
-
+@property (weak, nonatomic) id<CHCHessClockTimeControlTabBarControllerDelegate> timeControlTabBarDelegate;
+@property (strong, nonatomic) CHChessClockTimeControl* timeControl;
 
 @end

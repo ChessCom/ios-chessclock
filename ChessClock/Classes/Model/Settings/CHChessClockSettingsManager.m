@@ -101,7 +101,7 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
 {
     if (_timeControl != timeControl) {
         _timeControl = timeControl;
-        [self.preferences  setObject:_timeControl.name forKey:CHChessClockTimeControlNameKey];
+        [self.preferences setObject:_timeControl.name forKey:CHChessClockTimeControlNameKey];
         [self savePreferences];
     }
 }
@@ -151,11 +151,11 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
                                            stageManager:timeControlStageManager];
 
         // For defaults, we have the same settings for player one and two
-        CHChessClockTimeControl *timeControl =
-        [[CHChessClockTimeControl alloc] initWithName:name
-                                    playerOneSettings:playerOneSettings
-                                    playerTwoSettings:playerTwoSettings];
-        
+        CHChessClockTimeControl *timeControl = [CHChessClockTimeControl new];
+        timeControl.name = name;
+        timeControl.playerOneSettings = playerOneSettings;
+        timeControl.playerTwoSettings = playerTwoSettings;
+
         if ([settingsDefinitions objectForKey:@"default"]) {
             self.timeControl = timeControl;
         }

@@ -49,9 +49,7 @@ static const NSUInteger CHExistingTimeControlStagesSection = 1;
 static const NSUInteger CHNewTimeControlStageSection = 2;
 static const NSUInteger CHIncrementSection = 3;
 static const NSUInteger CHSectionCount = 4;
-
 static const NSUInteger CHNameTextFieldTag = 1;
-
 static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (void)viewDidLoad
@@ -60,7 +58,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     
     self.newTimeControlSaved = NO;
     
-    if (self.chessClockSettings == nil) {
+    if (self.settings == nil) {
         self.newTimeControlCreated = YES;
         
         // The user wants to create new time control. By default, use a Fischer
@@ -68,13 +66,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         CHChessClockFischerIncrement* increment = [[CHChessClockFischerIncrement alloc] initWithIncrementValue:5];
         CHChessClockTimeControlStageManager* stageManager = [[CHChessClockTimeControlStageManager alloc] init];
         [stageManager addTimeStageWithMovesCount:0 andMaximumTime:300];
-
-#warning Missing
         
-//        CHChessClockSettings* clockSettings = [[CHChessClockSettings alloc] initWithName:nil
-//                                                                               increment:increment
-//                                                                         andStageManager:stageManager];
-//        self.chessClockSettings = clockSettings;
+        self.settings = [[CHChessClockSettings alloc] initWithIncrement:increment
+                                                           stageManager:stageManager];
     }
     else {
         self.newTimeControlCreated = NO;
@@ -109,10 +103,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     if (!self.newTimeControlSaved && !self.newTimeControlCreated) {
         NSString* name = [self validateName];
         if (name != nil) {
-#warning missing
-            //            self.chessClockSettings.name = name;
-            [self.delegate timeControlTableViewController:self
-                                       updatedTimeControl:self.chessClockSettings];
+           // [self.delegate timeControlTableViewControllerShouldSave:self];
         }
     }
     
@@ -129,7 +120,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
         return CHSectionCount - 1;
     }
     
@@ -144,7 +135,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             break;
             
         case CHExistingTimeControlStagesSection:
-            return [self.chessClockSettings.stageManager stageCount];
+            return [self.settings.stageManager stageCount];
             break;
             
         case CHNewTimeControlStageSection:
@@ -175,7 +166,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             break;
             
         case CHNewTimeControlStageSection:
-            if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
                 // If the number of time control stages is the maximum, it means that
                 // that the new time control section was deleted. Treat this
                 // section as the increment section
@@ -226,7 +217,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             break;
         
         case CHNewTimeControlStageSection:
-            if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
                 [self selectedIncrementCellWithIndexPath:indexPath];
             }
             break;
@@ -261,7 +252,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             break;
             
         case CHNewTimeControlStageSection:
-            if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
                 // If the number of time control stages is the maximum, it means that
                 // that the new time control stage section was deleted. Treat this
                 // section as the increment section
@@ -290,7 +281,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             return UITableViewAutomaticDimension;
             
         case CHNewTimeControlStageSection:
-            return ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) ? UITableViewAutomaticDimension : 0;
+            return ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) ? UITableViewAutomaticDimension : 0;
         
         default: return 0;
     }
@@ -336,10 +327,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     
     [self addStyleToCell:cell];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), row + 1];
-    cell.detailTextLabel.text = [[self.chessClockSettings.stageManager stageAtIndex:row] description];
+    cell.detailTextLabel.text = [[self.settings.stageManager stageAtIndex:row] description];
     
     UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
-    if (idiom == UIUserInterfaceIdiomPad && [self.chessClockSettings.stageManager stageCount] == 1) {
+    if (idiom == UIUserInterfaceIdiomPad && [self.settings.stageManager stageCount] == 1) {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else {
@@ -405,7 +396,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     [self addStyleToCell:cell];
-    NSUInteger incrementValue = self.chessClockSettings.increment.incrementValue;
+    NSUInteger incrementValue = self.settings.increment.incrementValue;
     NSString* incrementValueString = [CHUtil formatTime:incrementValue showTenths:NO];
     
     if (incrementValue < 60) {
@@ -418,7 +409,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     NSString* detailString = [NSString stringWithFormat:@"%@, %@",
-                              [self.chessClockSettings.increment description], incrementValueString];
+                              [self.settings.increment description], incrementValueString];
     
     cell.detailTextLabel.text = detailString;
     return cell;
@@ -438,7 +429,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (void)removeTimeStageAtIndex:(NSUInteger)timeStageIndex
 {
-    [self.chessClockSettings.stageManager removeTimeStageAtIndex:timeStageIndex];
+    [self.settings.stageManager removeTimeStageAtIndex:timeStageIndex];
     
     [self.tableView beginUpdates];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHExistingTimeControlStagesSection]
@@ -470,9 +461,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     CHChessClockTimeControlStage* stage = [[CHChessClockTimeControlStage alloc]
                                            initWithMovesCount:0 andMaximumTime:300];
     
-    [self.chessClockSettings.stageManager addTimeStage:stage];
+    [self.settings.stageManager addTimeStage:stage];
     
-    NSUInteger stageCount = [self.chessClockSettings.stageManager stageCount];
+    NSUInteger stageCount = [self.settings.stageManager stageCount];
     
     [self.tableView beginUpdates];
 
@@ -490,7 +481,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 - (void)reloadRowWithStage:(CHChessClockTimeControlStage*)stage
 {
     if (stage != nil) {
-        NSUInteger stageIndex = [self.chessClockSettings.stageManager indexOfStage:stage];
+        NSUInteger stageIndex = [self.settings.stageManager indexOfStage:stage];
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:stageIndex inSection:CHExistingTimeControlStagesSection];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
@@ -505,14 +496,14 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (void)selectedExistingTimeControllCellWithIndexPath:(NSIndexPath*)indexPath
 {
-    if (indexPath.row == 0 && [self.chessClockSettings.stageManager stageCount] == 1) {
+    if (indexPath.row == 0 && [self.settings.stageManager stageCount] == 1) {
         // If there's only one stage, send the player directly to the
         // screen where we can pick the time
         NSString* nibName = @"CHChessClockTimeView";
         CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                               initWithNibName:nibName bundle:nil];
         
-        self.stageToUpdate = [self.chessClockSettings.stageManager stageAtIndex:indexPath.row];
+        self.stageToUpdate = [self.settings.stageManager stageAtIndex:indexPath.row];
         
         timeViewController.delegate = self;
         timeViewController.maximumHours = 11;
@@ -540,8 +531,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
                                                                       initWithNibName:nibName bundle:nil];
         stageViewController.delegate = self;
         stageViewController.title = [self.tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-        stageViewController.timeControlStageManager = self.chessClockSettings.stageManager;
-        stageViewController.timeControlStage = [self.chessClockSettings.stageManager stageAtIndex:indexPath.row];
+        stageViewController.timeControlStageManager = self.settings.stageManager;
+        stageViewController.timeControlStage = [self.settings.stageManager stageAtIndex:indexPath.row];
         
         [self.navigationController pushViewController:stageViewController animated:YES];
     }
@@ -553,7 +544,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     CHChessClockIncrementTableViewController* vc = [[CHChessClockIncrementTableViewController alloc]
                                                     initWithNibName:nibName bundle:nil];
     
-    vc.increment = self.chessClockSettings.increment;
+    vc.increment = self.settings.increment;
     vc.delegate = self;
 
     [self.navigationController pushViewController:vc animated:YES];
@@ -562,17 +553,11 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 #pragma mark - IBActions
 //------------------------------------------------------------------------------
-- (void)save
-{
-    self.newTimeControlSaved = YES;
-
-    UITextField* nameTextField = [self nameTextField];
-#warning missing
-    //self.chessClockSettings.name = nameTextField.text;
-
-    [self.delegate timeControlTableViewController:self
-                               createdTimeControl:self.chessClockSettings];
-}
+//- (void)save
+//{
+//    self.newTimeControlSaved = YES;
+//    //[self.delegate timeControlTableViewControllerShouldSave:self];
+//}
 
 - (IBAction)duplicateSwitchValueChanged:(UISwitch *)sender
 {
@@ -604,10 +589,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (void)chessClockIncrementTableViewControllerUpdatedIncrement:(CHChessClockIncrementTableViewController*)viewController
 {
-    self.chessClockSettings.increment = viewController.increment;
+    self.settings.increment = viewController.increment;
     
     NSUInteger section = CHIncrementSection;
-    if ([self.chessClockSettings.stageManager stageCount] == CHMaxTimeControlStages) {
+    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
         // If the number of time control stages is the maximum, it means that
         // that the new time control section was deleted. The increment section
         // is now the "new time control stage" section
@@ -628,7 +613,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
 - (void)timeControlStageTableViewControllerStageDeleted:(CHChessClockTimeControlStageTableViewController*)viewController
 {
-    NSUInteger stageIndex = [self.chessClockSettings.stageManager indexOfStage:viewController.timeControlStage];
+    NSUInteger stageIndex = [self.settings.stageManager indexOfStage:viewController.timeControlStage];
     [self removeTimeStageAtIndex:stageIndex];
 }
 

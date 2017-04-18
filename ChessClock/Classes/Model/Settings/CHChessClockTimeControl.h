@@ -12,12 +12,8 @@
 
 @interface CHChessClockTimeControl : NSObject
 
-- (instancetype)initWithName:(NSString *)name
-           playerOneSettings:(CHChessClockSettings *)playerOneSettings
-           playerTwoSettings:(CHChessClockSettings *)playerTwoSettings;
-
-@property (readonly, nonatomic) NSString *name;
-@property (readonly, nonatomic) CHChessClockSettings *playerOneSettings;
-@property (readonly, nonatomic) CHChessClockSettings *playerTwoSettings;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) CHChessClockSettings *playerOneSettings;
+@property (strong, nonatomic) CHChessClockSettings *playerTwoSettings;
 
 @end

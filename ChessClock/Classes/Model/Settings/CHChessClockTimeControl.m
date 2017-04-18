@@ -15,27 +15,9 @@ static NSString* const CHPlayerTwoNameKey = @"playerTwoSettings";
 
 
 @interface CHChessClockTimeControl () <NSCoding>
-
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) CHChessClockSettings *playerOneSettings;
-@property (strong, nonatomic) CHChessClockSettings *playerTwoSettings;
-
 @end
 
 @implementation CHChessClockTimeControl
-
-- (instancetype)initWithName:(NSString *)name
-           playerOneSettings:(CHChessClockSettings *)playerOneSettings
-           playerTwoSettings:(CHChessClockSettings *)playerTwoSettings
-{
-    if (self = [super init]) {
-        self.name = name;
-        self.playerOneSettings = playerOneSettings;
-        self.playerTwoSettings = playerTwoSettings;
-    }
-    
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
