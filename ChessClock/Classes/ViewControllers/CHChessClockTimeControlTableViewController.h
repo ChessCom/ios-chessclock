@@ -35,7 +35,8 @@
 @property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDelegate> delegate;
 @property (weak, nonatomic) id<CHChessClockTimeControlTableViewControllerDataSource> dataSource;
 @property (strong, nonatomic) CHChessClockSettings* settings;
+@property (readonly, nonatomic) BOOL shouldDuplicatePlayerOne;
 
-- (void)save;
+- (void)createDefaultSettings;
 
 @end

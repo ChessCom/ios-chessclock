@@ -31,6 +31,7 @@ CHChessClockTimeControlTableViewControllerDataSource>
     self.playerOneTimeControlTableViewController.dataSource = self;
     self.playerOneTimeControlTableViewController.title = NSLocalizedString(@"Player One", nil);
     
+    
     self.playerTwoTimeControlTableViewController.delegate = self;
     self.playerTwoTimeControlTableViewController.dataSource = self;
     self.playerTwoTimeControlTableViewController.title = NSLocalizedString(@"Player Two", nil);
@@ -45,6 +46,14 @@ CHChessClockTimeControlTableViewControllerDataSource>
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     self.timeControlName = self.timeControl.name;
+    
+    if (self.timeControl) {
+        self.playerOneTimeControlTableViewController.settings = self.timeControl.playerOneSettings;
+        self.playerTwoTimeControlTableViewController.settings = self.timeControl.playerTwoSettings;
+    } else {
+        [self.playerOneTimeControlTableViewController createDefaultSettings];
+        [self.playerTwoTimeControlTableViewController createDefaultSettings];
+    }
 }
 
 - (IBAction)saveButtonTapped

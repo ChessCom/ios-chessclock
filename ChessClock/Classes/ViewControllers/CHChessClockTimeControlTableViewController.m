@@ -30,12 +30,9 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
 
-@property (assign, nonatomic) BOOL newTimeControlCreated;
-@property (assign, nonatomic) BOOL newTimeControlSaved;
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
 @property (strong, nonatomic) UIPopoverController *customPopoverController;
 @property (weak, nonatomic) IBOutlet UISwitch *duplicatePlayerOneSwitch;
-@property (readonly, nonatomic) BOOL shouldDuplicatePlayerOne;
 
 @end
 
@@ -55,25 +52,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.newTimeControlSaved = NO;
-    
-    if (self.settings == nil) {
-        self.newTimeControlCreated = YES;
-        
-        // The user wants to create new time control. By default, use a Fischer
-        // increment, and a single time stage
-        CHChessClockFischerIncrement* increment = [[CHChessClockFischerIncrement alloc] initWithIncrementValue:5];
-        CHChessClockTimeControlStageManager* stageManager = [[CHChessClockTimeControlStageManager alloc] init];
-        [stageManager addTimeStageWithMovesCount:0 andMaximumTime:300];
-        
-        self.settings = [[CHChessClockSettings alloc] initWithIncrement:increment
-                                                           stageManager:stageManager];
-    }
-    else {
-        self.newTimeControlCreated = NO;
-    }
-    
+
     NSString *tableViewHeaderIdentifier = NSStringFromClass([CHTableViewHeader class]);
     [self.tableView registerNib: [UINib nibWithNibName:tableViewHeaderIdentifier
                                                 bundle:nil]
@@ -100,14 +79,20 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     [super viewWillDisappear:animated];
     
-    if (!self.newTimeControlSaved && !self.newTimeControlCreated) {
-        NSString* name = [self validateName];
-        if (name != nil) {
-           // [self.delegate timeControlTableViewControllerShouldSave:self];
-        }
-    }
-    
     self.dataSource.timeControlName = self.nameTextField.text;
+}
+
+- (void)createDefaultSettings
+{
+    CHChessClockFischerIncrement* increment = [[CHChessClockFischerIncrement alloc] initWithIncrementValue:5];
+    CHChessClockTimeControlStageManager* stageManager = [[CHChessClockTimeControlStageManager alloc] init];
+    [stageManager addTimeStageWithMovesCount:0 andMaximumTime:300];
+    
+    
+    // The user wants to create new time control. By default, use a Fischer
+    // increment, and a single time stage
+    self.settings = [[CHChessClockSettings alloc] initWithIncrement:increment
+                                                       stageManager:stageManager];
 }
 
 - (BOOL)shouldDuplicatePlayerOne
@@ -203,7 +188,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shouldDuplicatePlayerOne && self.duplicatePlayerOneSwitch) {
+    if (self.shouldDuplicatePlayerOne) {
         return;
     }
     
@@ -311,8 +296,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
     NSString *placeholderText = NSLocalizedString(@"Enter time control name", nil);
     UIColor *textColor = self.shouldDuplicatePlayerOne ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
-    nameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText
-                                                                          attributes:@{NSForegroundColorAttributeName: textColor}];
+    nameTextField.attributedPlaceholder =
+    [[NSAttributedString alloc] initWithString:placeholderText
+                                    attributes:@{NSForegroundColorAttributeName: textColor}];
     return cell;
 }
 
