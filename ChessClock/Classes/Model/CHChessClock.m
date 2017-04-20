@@ -67,7 +67,7 @@
 {
     if (!self.paused) {
         CHTimePiece* touchedTimePiece =
-        timePieceId == 0 ? self.playerOneTimePiece : self.playerTwoTimePiece;
+        timePieceId == 1 ? self.playerOneTimePiece : self.playerTwoTimePiece;
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];
