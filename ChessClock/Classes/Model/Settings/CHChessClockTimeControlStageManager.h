@@ -22,4 +22,6 @@
 - (CHChessClockTimeControlStage*)stageAtIndex:(NSUInteger)stageIndex;
 - (NSUInteger)indexOfStage:(CHChessClockTimeControlStage*)stage;
 
+@property (readonly, nonatomic) NSMutableArray* timeControlStages;
+
 @end

@@ -155,6 +155,7 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
         timeControl.name = name;
         timeControl.playerOneSettings = playerOneSettings;
         timeControl.playerTwoSettings = playerTwoSettings;
+        timeControl.shouldDuplicateSettings = YES;
 
         if ([settingsDefinitions objectForKey:@"default"]) {
             self.timeControl = timeControl;

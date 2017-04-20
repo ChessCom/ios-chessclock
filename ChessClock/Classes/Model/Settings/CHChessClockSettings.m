@@ -14,8 +14,6 @@
 //------------------------------------------------------------------------------
 @interface CHChessClockSettings() <NSCoding>
 
-@property (strong, nonatomic) CHChessClockTimeControlStageManager* stageManager;
-
 @end
 
 //------------------------------------------------------------------------------

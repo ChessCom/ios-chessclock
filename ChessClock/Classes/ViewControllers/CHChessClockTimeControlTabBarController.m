@@ -17,6 +17,8 @@ CHChessClockTimeControlTableViewControllerDataSource>
 
 @property (readonly, nonatomic) CHChessClockTimeControlTableViewController *playerOneTimeControlTableViewController;
 @property (readonly, nonatomic) CHChessClockTimeControlTableViewController *playerTwoTimeControlTableViewController;
+@property (assign, nonatomic) BOOL isNewTimeControl;
+@property (assign, nonatomic) BOOL shouldDuplicateSettings;
 
 @end
 
@@ -30,7 +32,6 @@ CHChessClockTimeControlTableViewControllerDataSource>
     self.playerOneTimeControlTableViewController.delegate = self;
     self.playerOneTimeControlTableViewController.dataSource = self;
     self.playerOneTimeControlTableViewController.title = NSLocalizedString(@"Player One", nil);
-    
     
     self.playerTwoTimeControlTableViewController.delegate = self;
     self.playerTwoTimeControlTableViewController.dataSource = self;
@@ -50,9 +51,13 @@ CHChessClockTimeControlTableViewControllerDataSource>
     if (self.timeControl) {
         self.playerOneTimeControlTableViewController.settings = self.timeControl.playerOneSettings;
         self.playerTwoTimeControlTableViewController.settings = self.timeControl.playerTwoSettings;
+        self.shouldDuplicateSettings = self.timeControl.shouldDuplicateSettings;
     } else {
+        self.timeControl = [[CHChessClockTimeControl alloc] init];
+        self.isNewTimeControl = YES;
         [self.playerOneTimeControlTableViewController createDefaultSettings];
         [self.playerTwoTimeControlTableViewController createDefaultSettings];
+        self.shouldDuplicateSettings = YES;
     }
 }
 
@@ -64,24 +69,17 @@ CHChessClockTimeControlTableViewControllerDataSource>
 
 - (IBAction)saveButtonTapped
 {
-    BOOL isNewTimeControl = NO;
-    
-    if (!self.timeControl) {
-        self.timeControl = [[CHChessClockTimeControl alloc] init];
-        isNewTimeControl = YES;
-    }
-
     self.timeControl.name = timeControlName;
     self.timeControl.playerOneSettings = self.playerOneTimeControlTableViewController.settings;
     self.timeControl.playerTwoSettings = self.playerTwoTimeControlTableViewController.settings;
+    self.timeControl.shouldDuplicateSettings = self.shouldDuplicateSettings;
     
-    if (isNewTimeControl) {
+    if (self.isNewTimeControl) {
         [self.timeControlTabBarDelegate timeControlTabBarController:self createdTimeControl:self.timeControl];
     } else {
         [self.timeControlTabBarDelegate timeControlTabBarController:self updatedTimeControl:self.timeControl];
     }
 
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -100,6 +98,16 @@ CHChessClockTimeControlTableViewControllerDataSource>
 {
     self.timeControlName = name;
     self.navigationItem.rightBarButtonItem.enabled = (name != nil);
+}
+
+- (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController didUpdateShouldDuplicateSettings:(BOOL)shouldDuplicate
+{
+    self.shouldDuplicateSettings = shouldDuplicate;
+}
+
+- (BOOL)timeControlTableViewcontrollerShouldDuplicateSettings:(CHChessClockTimeControlTableViewController *)viewController
+{
+    return viewController == self.playerOneTimeControlTableViewController ? NO : self.shouldDuplicateSettings;
 }
 
 @end

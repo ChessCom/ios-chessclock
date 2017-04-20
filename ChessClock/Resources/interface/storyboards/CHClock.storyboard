@@ -677,7 +677,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" image="tabBarUser" selectedImage="tabBarUser" id="oKo-vw-pV7"/>
                     <connections>
-                        <outlet property="duplicatePlayerOneSwitch" destination="hnM-Bl-072" id="dGt-dE-bWv"/>
+                        <outlet property="duplicateSettingsSwitch" destination="hnM-Bl-072" id="fit-WE-yLB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUZ-Yr-ejH" userLabel="First Responder" sceneMemberID="firstResponder"/>

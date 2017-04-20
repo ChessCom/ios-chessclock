@@ -8,11 +8,14 @@
 
 #import "CHChessClockTimeControl.h"
 #import "CHChessClockSettings.h"
+#import "CHChessClockIncrement.h"
+#import "CHChessClockTimeControlStageManager.h"
+#import "CHChessClockTimeControlStage.h"
 
 static NSString* const CHNameArchiveKey = @"name";
 static NSString* const CHPlayerOneNameKey = @"playerOneSettings";
 static NSString* const CHPlayerTwoNameKey = @"playerTwoSettings";
-
+static NSString* const CHShouldDuplicateSettingsKey = @"shouldDuplicateSettings";
 
 @interface CHChessClockTimeControl () <NSCoding>
 @end
@@ -26,6 +29,7 @@ static NSString* const CHPlayerTwoNameKey = @"playerTwoSettings";
         self.name = [aDecoder decodeObjectForKey:CHNameArchiveKey];
         self.playerOneSettings = [aDecoder decodeObjectForKey:CHPlayerOneNameKey];
         self.playerTwoSettings = [aDecoder decodeObjectForKey:CHPlayerTwoNameKey];
+        self.shouldDuplicateSettings = [[aDecoder decodeObjectForKey:CHShouldDuplicateSettingsKey] boolValue];
     }
     
     return self;
@@ -36,6 +40,23 @@ static NSString* const CHPlayerTwoNameKey = @"playerTwoSettings";
     [aCoder encodeObject:_name forKey:CHNameArchiveKey];
     [aCoder encodeObject:_playerOneSettings forKey:CHPlayerOneNameKey];
     [aCoder encodeObject:_playerTwoSettings forKey:CHPlayerTwoNameKey];
+    [aCoder encodeObject:@(_shouldDuplicateSettings) forKey:CHShouldDuplicateSettingsKey];
+}
+
+- (void)setShouldDuplicateSettings:(BOOL)shouldDuplicateSettings
+{
+    _shouldDuplicateSettings = shouldDuplicateSettings;
+    if (shouldDuplicateSettings) {
+        CHChessClockIncrement *increment = [[CHChessClockIncrement alloc] initWithIncrementValue:self.playerOneSettings.increment.incrementValue];
+        CHChessClockTimeControlStageManager *stageManager = [[CHChessClockTimeControlStageManager alloc] init];
+        
+        for (CHChessClockTimeControlStage *stage in self.playerOneSettings.stageManager.timeControlStages) {
+            CHChessClockTimeControlStage *newStage = [[CHChessClockTimeControlStage alloc] initWithMovesCount:stage.movesCount andMaximumTime:stage.maximumTime];
+            [stageManager addTimeStage:newStage];
+        }
+        
+        self.playerTwoSettings = [[CHChessClockSettings alloc] initWithIncrement:increment stageManager:stageManager];
+    }
 }
 
 @end

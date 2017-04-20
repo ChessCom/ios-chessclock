@@ -15,5 +15,6 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) CHChessClockSettings *playerOneSettings;
 @property (strong, nonatomic) CHChessClockSettings *playerTwoSettings;
+@property (assign, nonatomic) BOOL shouldDuplicateSettings;
 
 @end

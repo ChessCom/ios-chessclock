@@ -29,10 +29,10 @@ static const NSInteger kAddButtonTag = 1000;
 CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
+@property (weak, nonatomic) IBOutlet UISwitch *duplicateSettingsSwitch;
 
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
 @property (strong, nonatomic) UIPopoverController *customPopoverController;
-@property (weak, nonatomic) IBOutlet UISwitch *duplicatePlayerOneSwitch;
 
 @end
 
@@ -62,7 +62,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.tableView.estimatedSectionHeaderHeight = 10;
     self.tableView.estimatedRowHeight = 20;
     
-    self.duplicatePlayerOneSwitch.on = YES;
+    self.duplicateSettingsSwitch.on = [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -88,16 +88,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     CHChessClockTimeControlStageManager* stageManager = [[CHChessClockTimeControlStageManager alloc] init];
     [stageManager addTimeStageWithMovesCount:0 andMaximumTime:300];
     
-    
     // The user wants to create new time control. By default, use a Fischer
     // increment, and a single time stage
     self.settings = [[CHChessClockSettings alloc] initWithIncrement:increment
                                                        stageManager:stageManager];
-}
-
-- (BOOL)shouldDuplicatePlayerOne
-{
-    return self.duplicatePlayerOneSwitch.on;
 }
 
 //------------------------------------------------------------------------------
@@ -188,7 +182,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shouldDuplicatePlayerOne) {
+    if ([self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]) {
         return;
     }
     
@@ -292,10 +286,10 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 
     UITextField* nameTextField = (UITextField*)[cell viewWithTag:CHNameTextFieldTag];
     nameTextField.text = self.dataSource.timeControlName;
-    nameTextField.enabled = !self.shouldDuplicatePlayerOne;
+    nameTextField.enabled = ![self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
 
     NSString *placeholderText = NSLocalizedString(@"Enter time control name", nil);
-    UIColor *textColor = self.shouldDuplicatePlayerOne ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
+    UIColor *textColor = [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self] ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
     nameTextField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:placeholderText
                                     attributes:@{NSForegroundColorAttributeName: textColor}];
@@ -337,7 +331,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     
 
     cell.textLabel.textColor = cell.detailTextLabel.textColor =
-    self.shouldDuplicatePlayerOne ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
+    [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self] ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
 }
 
 - (UITableViewCell*)addTimeControlStageCell
@@ -363,7 +357,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
     
     UIButton *addButton = [cell viewWithTag:kAddButtonTag];
-    addButton.enabled = !self.shouldDuplicatePlayerOne;
+    addButton.enabled = ![self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
     [self addStyleToCell:cell];
     
     return cell;
@@ -539,14 +533,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 #pragma mark - IBActions
 //------------------------------------------------------------------------------
-//- (void)save
-//{
-//    self.newTimeControlSaved = YES;
-//    //[self.delegate timeControlTableViewControllerShouldSave:self];
-//}
-
 - (IBAction)duplicateSwitchValueChanged:(UISwitch *)sender
 {
+    [self.delegate timeControlTableViewController:self didUpdateShouldDuplicateSettings:sender.on];
     [self.tableView reloadData];
 }
 
