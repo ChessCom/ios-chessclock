@@ -56,6 +56,12 @@ CHChessClockTimeControlTableViewControllerDataSource>
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.rightBarButtonItem.enabled = (self.timeControlName != nil);
+}
+
 - (IBAction)saveButtonTapped
 {
     BOOL isNewTimeControl = NO;
