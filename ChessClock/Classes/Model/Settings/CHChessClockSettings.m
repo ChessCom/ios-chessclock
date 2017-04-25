@@ -29,8 +29,8 @@ static NSString* const CHTimeStagesManagerArchiveKey = @"timeStagesManager";
 {
     self = [super init];
     if (self) {
-        self.increment = increment;
-        self.stageManager = stageManager;
+        _increment = increment;
+        _stageManager = stageManager;
     }
     
     return self;
@@ -40,8 +40,8 @@ static NSString* const CHTimeStagesManagerArchiveKey = @"timeStagesManager";
 {
     self = [super init];
     if (self) {
-        self.increment = [aDecoder decodeObjectForKey:CHIncrementArchiveKey];
-        self.stageManager = [aDecoder decodeObjectForKey:CHTimeStagesManagerArchiveKey];
+        _increment = [aDecoder decodeObjectForKey:CHIncrementArchiveKey];
+        _stageManager = [aDecoder decodeObjectForKey:CHTimeStagesManagerArchiveKey];
     }
     
     return self;
