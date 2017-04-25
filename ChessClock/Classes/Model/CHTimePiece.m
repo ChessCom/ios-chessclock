@@ -34,8 +34,8 @@
                  settings:(CHChessClockSettings *)settings
 {
     if (self = [super init]) {
-        self.settings = settings;
-        self.timePieceId = timePieceId;
+        _settings = settings;
+        _timePieceId = timePieceId;
         [self reset];
     }
     

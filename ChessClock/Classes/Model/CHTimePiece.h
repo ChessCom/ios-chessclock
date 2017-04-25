@@ -33,12 +33,12 @@
 @property (assign, nonatomic) BOOL updateAvailableTime;
 @property (strong, nonatomic) CHChessClockTimeControlStageManager* stageManager;
 
-@property (nonatomic, readonly) NSUInteger timePieceId;
+@property (assign, nonatomic, readonly) NSUInteger timePieceId;
 @property (assign, nonatomic, readonly) NSUInteger stageIndex;
 @property (assign, nonatomic, readonly) NSTimeInterval availableTime;
 @property (assign, nonatomic, readonly) NSUInteger movesCount;
 
-@property (readonly, nonatomic) CHChessClockSettings *settings;
+@property (nonatomic, readonly) CHChessClockSettings *settings;
 
 - (id)initWithTimePieceId:(NSUInteger)timePieceId
                  settings:(CHChessClockSettings *)settings;
