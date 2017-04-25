@@ -26,10 +26,10 @@ static NSString* const CHShouldDuplicateSettingsKey = @"shouldDuplicateSettings"
 {
     self = [super init];
     if (self) {
-        self.name = [aDecoder decodeObjectForKey:CHNameArchiveKey];
-        self.playerOneSettings = [aDecoder decodeObjectForKey:CHPlayerOneNameKey];
-        self.playerTwoSettings = [aDecoder decodeObjectForKey:CHPlayerTwoNameKey];
-        self.shouldDuplicateSettings = [[aDecoder decodeObjectForKey:CHShouldDuplicateSettingsKey] boolValue];
+        _name = [aDecoder decodeObjectForKey:CHNameArchiveKey];
+        _playerOneSettings = [aDecoder decodeObjectForKey:CHPlayerOneNameKey];
+        _playerTwoSettings = [aDecoder decodeObjectForKey:CHPlayerTwoNameKey];
+        _shouldDuplicateSettings = [[aDecoder decodeObjectForKey:CHShouldDuplicateSettingsKey] boolValue];
     }
     
     return self;
