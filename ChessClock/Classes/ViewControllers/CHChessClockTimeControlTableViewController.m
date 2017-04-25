@@ -359,7 +359,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     UIButton *addButton = [cell viewWithTag:kAddButtonTag];
     addButton.enabled = ![self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
     [self addStyleToCell:cell];
-    
+        
     return cell;
 }
 
