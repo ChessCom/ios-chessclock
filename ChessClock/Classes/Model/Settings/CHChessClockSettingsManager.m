@@ -202,12 +202,12 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
 
 - (NSURL*)chessClockTimeControlsPath
 {
-    return [self chessClockFilePathWithBaseName:@"chessClockTimeControls"];
+    return [self chessClockFilePathWithBaseName:@"chessClockTimeControls-v2.0"];
 }
 
 - (NSURL*)chessClockPreferencesPath
 {
-    return [self chessClockFilePathWithBaseName:@"chessClockPreferences"];
+    return [self chessClockFilePathWithBaseName:@"chessClockPreferences-v2.0"];
 }
 
 @end
