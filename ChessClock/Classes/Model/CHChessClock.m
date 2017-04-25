@@ -13,6 +13,9 @@
 #import "CHChessClockTimeControlStageManager.h"
 #import "CHChessClockTimeControl.h"
 
+static const NSInteger CHChessClockFirstTimePieceID = 1;
+static const NSInteger CHChessClockSecondTimePieceID = 2;
+
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
 //------------------------------------------------------------------------------
@@ -38,18 +41,18 @@
                            delegate:(id<CHChessClockDelegate>)delegate
 {
     if (self = [super init]) {
-        self.delegate = delegate;
-        self.playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:1
-                                                                  settings:timeControl.playerOneSettings];
-        self.playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:2
-                                                                  settings:timeControl.playerTwoSettings];
+        _delegate = delegate;
+        _playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:CHChessClockFirstTimePieceID
+                                                              settings:timeControl.playerOneSettings];
+        _playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:CHChessClockSecondTimePieceID
+                                                              settings:timeControl.playerTwoSettings];
         
-        self.playerOneTimePiece.delegate = self;
-        self.playerTwoTimePiece.delegate = self;
+        _playerOneTimePiece.delegate = self;
+        _playerTwoTimePiece.delegate = self;
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
-                                                    selector:@selector(updateTime)
-                                                    userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
+                                                selector:@selector(updateTime)
+                                                userInfo:nil repeats:YES];
     }
     
     return self;
@@ -67,7 +70,8 @@
 {
     if (!self.paused) {
         CHTimePiece* touchedTimePiece =
-        timePieceId == 1 ? self.playerOneTimePiece : self.playerTwoTimePiece;
+        timePieceId == CHChessClockFirstTimePieceID ?
+        self.playerOneTimePiece : self.playerTwoTimePiece;
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];
