@@ -128,8 +128,8 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
         NSDictionary* incrementDefinition = [settingsDefinitions objectForKey:@"increment"];
         NSString* incrementType = [incrementDefinition objectForKey:@"type"];
         NSUInteger incrementValue = [[incrementDefinition objectForKey:@"incrementValue"] integerValue];
-        Class incrementClass = NSClassFromString(incrementType);
-        CHChessClockIncrement* increment = [[incrementClass alloc] initWithIncrementValue:incrementValue];
+        Class IncrementClass = NSClassFromString(incrementType);
+        CHChessClockIncrement* increment = [[IncrementClass alloc] initWithIncrementValue:incrementValue];
         
         // Create the time control stages manager
         NSDictionary* timeStagesDefinition = [settingsDefinitions objectForKey:@"timeStages"];

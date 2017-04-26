@@ -47,7 +47,8 @@ static NSString* const CHShouldDuplicateSettingsKey = @"shouldDuplicateSettings"
 {
     _shouldDuplicateSettings = shouldDuplicateSettings;
     if (shouldDuplicateSettings) {
-        CHChessClockIncrement *increment = [[CHChessClockIncrement alloc] initWithIncrementValue:self.playerOneSettings.increment.incrementValue];
+        Class IncrementClass = [self.playerOneSettings.increment class];
+        CHChessClockIncrement *increment = [[IncrementClass alloc] initWithIncrementValue:self.playerOneSettings.increment.incrementValue];
         CHChessClockTimeControlStageManager *stageManager = [[CHChessClockTimeControlStageManager alloc] init];
         
         for (CHChessClockTimeControlStage *stage in self.playerOneSettings.stageManager.timeControlStages) {
