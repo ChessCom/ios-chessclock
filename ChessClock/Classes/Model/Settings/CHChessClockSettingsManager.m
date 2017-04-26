@@ -122,8 +122,7 @@ static NSString* const CHChessClockIsLandscape = @"CHChessClockIsLandscape";
     self.settings = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                      [NSNumber numberWithBool:NO], CHChessClockIsLandscape, nil];
 
-    NSString* defaultTimeControlsPath = [[NSBundle mainBundle] pathForResource:@"DefaultChessClockSettings"
-                                                                    ofType:@"plist"];
+    NSString* defaultTimeControlsPath = [[NSBundle mainBundle] pathForResource:@"DefaultChessClockSettings" ofType:@"plist"];
     
     NSArray* defaultTimeControls = [[NSDictionary dictionaryWithContentsOfFile:defaultTimeControlsPath] objectForKey:@"defaultSettings"];
     NSMutableArray* allTimeControls = [NSMutableArray arrayWithCapacity:[defaultTimeControls count]];
