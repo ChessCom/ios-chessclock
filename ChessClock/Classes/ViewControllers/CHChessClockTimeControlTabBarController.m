@@ -44,7 +44,6 @@ CHChessClockTimeControlTableViewControllerDataSource>
                                            target:self action:@selector(saveButtonTapped)];
     
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     self.timeControlName = self.timeControl.name;
     
@@ -64,7 +63,7 @@ CHChessClockTimeControlTableViewControllerDataSource>
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.rightBarButtonItem.enabled = (self.timeControlName != nil);
+    [self updateRightBarButtonItem];
 }
 
 - (IBAction)saveButtonTapped
@@ -97,7 +96,7 @@ CHChessClockTimeControlTableViewControllerDataSource>
                                setName:(NSString *)name
 {
     self.timeControlName = name;
-    self.navigationItem.rightBarButtonItem.enabled = (name != nil);
+    [self updateRightBarButtonItem];
 }
 
 - (void)timeControlTableViewController:(CHChessClockTimeControlTableViewController *)viewController didUpdateShouldDuplicateSettings:(BOOL)shouldDuplicate
@@ -108,6 +107,11 @@ CHChessClockTimeControlTableViewControllerDataSource>
 - (BOOL)timeControlTableViewcontrollerShouldDuplicateSettings:(CHChessClockTimeControlTableViewController *)viewController
 {
     return viewController == self.playerOneTimeControlTableViewController ? NO : self.shouldDuplicateSettings;
+}
+
+- (void)updateRightBarButtonItem
+{
+    self.navigationItem.rightBarButtonItem.enabled = (self.timeControlName.length > 0);
 }
 
 @end
