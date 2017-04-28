@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E154a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FnB-MV-bvs">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -661,13 +661,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fz9-B5-0lB">
-                            <rect key="frame" x="263" y="14" width="51" height="31"/>
+                            <rect key="frame" x="256" y="14" width="51" height="31"/>
                             <connections>
                                 <action selector="duplicateSwitchValueChanged:" destination="6dl-g1-g01" eventType="valueChanged" id="V2h-hQ-jf3"/>
                             </connections>
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Same as Player One" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLN-W7-dqN">
-                            <rect key="frame" x="8" y="19" width="247" height="21"/>
+                            <rect key="frame" x="15" y="19" width="233" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.78823529410000004" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -675,8 +675,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="mLN-W7-dqN" firstAttribute="leading" secondItem="v39-qM-dbT" secondAttribute="leading" constant="8" id="0IB-Vu-AZp"/>
-                        <constraint firstAttribute="trailing" secondItem="fz9-B5-0lB" secondAttribute="trailing" constant="8" id="20w-D8-kfj"/>
+                        <constraint firstItem="mLN-W7-dqN" firstAttribute="leading" secondItem="v39-qM-dbT" secondAttribute="leading" constant="15" id="0IB-Vu-AZp"/>
+                        <constraint firstAttribute="trailing" secondItem="fz9-B5-0lB" secondAttribute="trailing" constant="15" id="20w-D8-kfj"/>
                         <constraint firstItem="fz9-B5-0lB" firstAttribute="centerY" secondItem="v39-qM-dbT" secondAttribute="centerY" id="Eda-Zo-ExR"/>
                         <constraint firstItem="fz9-B5-0lB" firstAttribute="leading" secondItem="mLN-W7-dqN" secondAttribute="trailing" constant="8" id="Yav-BQ-Ani"/>
                         <constraint firstItem="mLN-W7-dqN" firstAttribute="centerY" secondItem="v39-qM-dbT" secondAttribute="centerY" id="noC-h3-PnJ"/>
