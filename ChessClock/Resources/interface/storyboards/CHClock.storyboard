@@ -644,47 +644,44 @@
                         <color key="backgroundColor" red="0.19215686269999999" green="0.18039215689999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="O09-Mc-d7R">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hnM-Bl-072">
-                                    <rect key="frame" x="8" y="8" width="51" height="31"/>
-                                    <connections>
-                                        <action selector="duplicateSwitchValueChanged:" destination="6dl-g1-g01" eventType="valueChanged" id="mjl-Tz-pm2"/>
-                                    </connections>
-                                </switch>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Same as Player One" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-wq-2FD">
-                                    <rect key="frame" x="65" y="13" width="247" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.78823529410000004" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="jRL-wq-2FD" secondAttribute="trailing" constant="8" id="Nr1-Ye-3up"/>
-                                <constraint firstItem="hnM-Bl-072" firstAttribute="leading" secondItem="O09-Mc-d7R" secondAttribute="leading" constant="8" id="TRJ-Ac-ShO"/>
-                                <constraint firstItem="hnM-Bl-072" firstAttribute="centerY" secondItem="O09-Mc-d7R" secondAttribute="centerY" id="bqp-sf-jwc"/>
-                                <constraint firstItem="jRL-wq-2FD" firstAttribute="leading" secondItem="hnM-Bl-072" secondAttribute="trailing" constant="8" id="oCu-Pg-i58"/>
-                                <constraint firstItem="jRL-wq-2FD" firstAttribute="centerY" secondItem="O09-Mc-d7R" secondAttribute="centerY" id="pLI-As-JIv"/>
-                            </constraints>
-                        </view>
                         <connections>
                             <outlet property="dataSource" destination="6dl-g1-g01" id="bq8-EU-5RA"/>
                             <outlet property="delegate" destination="6dl-g1-g01" id="gKQ-FE-k5D"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" image="tabBarUser" selectedImage="tabBarUser" id="oKo-vw-pV7"/>
+                    <tabBarItem key="tabBarItem" image="tabBarUser2" selectedImage="tabBarUser" id="oKo-vw-pV7"/>
                     <connections>
-                        <outlet property="duplicateSettingsSwitch" destination="hnM-Bl-072" id="fit-WE-yLB"/>
+                        <outlet property="duplicateSettingsSwitch" destination="fz9-B5-0lB" id="wOQ-j1-3jI"/>
+                        <outlet property="tableFooterView" destination="v39-qM-dbT" id="Tc5-PP-PMJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUZ-Yr-ejH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Pw7-TE-i4e">
-                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                <view contentMode="scaleToFill" id="v39-qM-dbT">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </switch>
+                    <subviews>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fz9-B5-0lB">
+                            <rect key="frame" x="263" y="14" width="51" height="31"/>
+                            <connections>
+                                <action selector="duplicateSwitchValueChanged:" destination="6dl-g1-g01" eventType="valueChanged" id="V2h-hQ-jf3"/>
+                            </connections>
+                        </switch>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Same as Player One" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLN-W7-dqN">
+                            <rect key="frame" x="8" y="19" width="247" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.78823529410000004" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="mLN-W7-dqN" firstAttribute="leading" secondItem="v39-qM-dbT" secondAttribute="leading" constant="8" id="0IB-Vu-AZp"/>
+                        <constraint firstAttribute="trailing" secondItem="fz9-B5-0lB" secondAttribute="trailing" constant="8" id="20w-D8-kfj"/>
+                        <constraint firstItem="fz9-B5-0lB" firstAttribute="centerY" secondItem="v39-qM-dbT" secondAttribute="centerY" id="Eda-Zo-ExR"/>
+                        <constraint firstItem="fz9-B5-0lB" firstAttribute="leading" secondItem="mLN-W7-dqN" secondAttribute="trailing" constant="8" id="Yav-BQ-Ani"/>
+                        <constraint firstItem="mLN-W7-dqN" firstAttribute="centerY" secondItem="v39-qM-dbT" secondAttribute="centerY" id="noC-h3-PnJ"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="2041.875" y="303.16901408450707"/>
         </scene>
@@ -698,21 +695,16 @@
                         <color key="backgroundColor" red="0.19215686269999999" green="0.18039215689999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="DsH-P8-aDX">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
                         <connections>
                             <outlet property="dataSource" destination="8Eo-80-SMa" id="G69-Du-lap"/>
                             <outlet property="delegate" destination="8Eo-80-SMa" id="AEf-tT-QMJ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" image="tabBarUser" selectedImage="tabBarUser" id="EYM-eb-cLn"/>
+                    <tabBarItem key="tabBarItem" image="tabBarUser2" selectedImage="tabBarUser" id="EYM-eb-cLn"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMS-FV-URQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2021" y="-409"/>
+            <point key="canvasLocation" x="2018" y="-486"/>
         </scene>
         <!--Chess Clock Time Control Tab Bar Controller-->
         <scene sceneID="s19-6l-c0t">
@@ -736,6 +728,7 @@
     <resources>
         <image name="chess_logo" width="152" height="57"/>
         <image name="rectLightOrangeButtonPressed" width="3" height="3"/>
-        <image name="tabBarUser" width="25" height="21"/>
+        <image name="tabBarUser" width="25" height="25"/>
+        <image name="tabBarUser2" width="25" height="25"/>
     </resources>
 </document>

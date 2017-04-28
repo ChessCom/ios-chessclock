@@ -58,6 +58,8 @@ CHChessClockTimeControlTableViewControllerDataSource>
         [self.playerTwoTimeControlTableViewController createDefaultSettings];
         self.shouldDuplicateSettings = YES;
     }
+    
+    self.tabBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated

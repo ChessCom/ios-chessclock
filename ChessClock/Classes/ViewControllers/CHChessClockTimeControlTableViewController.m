@@ -30,6 +30,7 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
 @property (weak, nonatomic) IBOutlet UISwitch *duplicateSettingsSwitch;
+@property (strong, nonatomic) IBOutlet UIView *tableFooterView;
 
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
 @property (strong, nonatomic) UIPopoverController *customPopoverController;
@@ -63,6 +64,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     self.tableView.estimatedRowHeight = 20;
     
     self.duplicateSettingsSwitch.on = [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
+    
+    self.tableView.tableFooterView = self.tableFooterView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
