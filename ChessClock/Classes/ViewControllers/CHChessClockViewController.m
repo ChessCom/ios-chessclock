@@ -19,6 +19,9 @@
 #import "CHUtil.h"
 #import "CHSoundPlayer.h"
 
+#import "DimmedPresentationController.h"
+#import "CHChessClockTimeUpdateViewController.h"
+
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
 //------------------------------------------------------------------------------
@@ -253,6 +256,17 @@ static const float CHShowTenthsTime = 10.0f;
         [self.playerOneTimePieceView unhighlightAndActivate:YES];
         [self.playerTwoTimePieceView unhighlightAndActivate:YES];
     }
+}
+
+- (IBAction)timeUpdateTapped
+{
+    CHChessClockTimeUpdateViewController *timeUpdateViewController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CHChessClockTimeUpdateViewController class])];
+    
+    DimmedPresentationController *presentationController = [[DimmedPresentationController alloc] init];
+    
+    [presentationController presentViewController:timeUpdateViewController
+                               fromViewController:self
+                            presentationAnimation:DimmedPresentationAnimationFadeIn];
 }
 
 - (void)setPauseButtonEnabled:(BOOL)enabled
