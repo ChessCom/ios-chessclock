@@ -19,7 +19,7 @@
 #import "CHUtil.h"
 #import "CHSoundPlayer.h"
 
-#import "DimmedPresentationController.h"
+#import "CustomPresentationController.h"
 #import "CHChessClockTimeUpdateViewController.h"
 
 //------------------------------------------------------------------------------
@@ -28,7 +28,8 @@
 @interface CHChessClockViewController()
 <CHChessClockDelegate,
 UIActionSheetDelegate,
-CHChessClockSettingsTableViewControllerDelegate>
+CHChessClockSettingsTableViewControllerDelegate,
+CHChessClockTimeUpdateViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerOneTimePieceView;
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerTwoTimePieceView;
@@ -39,6 +40,8 @@ CHChessClockSettingsTableViewControllerDelegate>
 
 @property (strong, nonatomic) CHChessClock* chessClock;
 @property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
+
+@property (strong, nonatomic) CustomPresentationController *presentationController;
 
 @end
 
@@ -65,6 +68,8 @@ static const float CHShowTenthsTime = 10.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.presentationController = [[CustomPresentationController alloc] init];
     
     [self registerToApplicationNotification:UIApplicationDidEnterBackgroundNotification];
     [self registerToApplicationNotification:UIApplicationWillResignActiveNotification];
@@ -256,17 +261,18 @@ static const float CHShowTenthsTime = 10.0f;
         [self.playerOneTimePieceView unhighlightAndActivate:YES];
         [self.playerTwoTimePieceView unhighlightAndActivate:YES];
     }
+    
+    [self timeUpdateTapped];
 }
 
 - (IBAction)timeUpdateTapped
 {
     CHChessClockTimeUpdateViewController *timeUpdateViewController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CHChessClockTimeUpdateViewController class])];
+    timeUpdateViewController.delegate = self;
     
-    DimmedPresentationController *presentationController = [[DimmedPresentationController alloc] init];
-    
-    [presentationController presentViewController:timeUpdateViewController
+    [self.presentationController presentViewController:timeUpdateViewController
                                fromViewController:self
-                            presentationAnimation:DimmedPresentationAnimationFadeIn];
+                            presentationAnimation:CustomPresentationAnimationFadeIn];
 }
 
 - (void)setPauseButtonEnabled:(BOOL)enabled
@@ -276,6 +282,12 @@ static const float CHShowTenthsTime = 10.0f;
     [self.pauseButton setTitle:title forState:UIControlStateHighlighted];
     self.pauseButton.userInteractionEnabled = enabled;
     
+}
+
+#pragma mark - CHChessClockTimeUpdateViewController delegate
+- (void)timeUpdateViewControllerShouldDismiss:(CHChessClockTimeUpdateViewController *)viewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIStoryboard Segue

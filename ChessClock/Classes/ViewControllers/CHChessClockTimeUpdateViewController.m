@@ -26,4 +26,9 @@
     return YES;
 }
 
+- (IBAction)mainViewWasPressed:(id)sender
+{
+    [self.delegate timeUpdateViewControllerShouldDismiss:self];
+}
+
 @end

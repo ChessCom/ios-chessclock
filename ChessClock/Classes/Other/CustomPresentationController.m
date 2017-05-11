@@ -1,56 +1,58 @@
 //
-//  DimmedPresentationController.m
-//  ChessClock
+//  CustomPresentationController.m
+//  Chess.com
 //
-//  Created by Pedro Mancheno on 2017-05-03.
-//  Copyright © 2017 Chess.com. All rights reserved.
+//  Created by Pedro Mancheno on 27/11/14.
+//  Copyright (c) 2017 psbt. All rights reserved.
 //
 
-#import "DimmedPresentationController.h"
+#import "CustomPresentationController.h"
 
-static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
+static const CGFloat CustomPresentationAnimationDuration = 0.25f;
 
-/**
- * Presents a view controller modally by superposing it's view on top of the
- * presenting's view, but retaining it's context.
- *
- * Useful for creating a modal presentation with a dimmed background.
- */
+@interface CustomPresentationController () <UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate>
 
-@implementation DimmedPresentationController
+@property (assign, nonatomic) BOOL isPresenting;
+@property (assign, nonatomic) CustomPresentationAnimation animation;
+@property (assign, nonatomic) CGFloat duration;
+
+
+@end
+
+@implementation CustomPresentationController
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.duration = DimmedPresentationControllerAnimationDuration;
+        self.duration = CustomPresentationAnimationDuration;
     }
     
     return self;
 }
 
-- (void)presentViewController:(UIViewController *)willPresentViewController
+- (void)presentViewController:(UIViewController *)presentedViewController
            fromViewController:(UIViewController *)presentingViewController
-        presentationAnimation:(DimmedPresentationAnimation)animation
+        presentationAnimation:(CustomPresentationAnimation)animation
 {
     self.animation = animation;
-    willPresentViewController.modalPresentationStyle = UIModalPresentationCustom;
-    willPresentViewController.transitioningDelegate = self;
-    willPresentViewController.modalPresentationCapturesStatusBarAppearance = YES;
+    presentedViewController.modalPresentationStyle = UIModalPresentationCustom;
+    presentedViewController.transitioningDelegate = self;
+    presentedViewController.modalPresentationCapturesStatusBarAppearance = YES;
     
-    [willPresentViewController setNeedsStatusBarAppearanceUpdate];
+    [presentedViewController setNeedsStatusBarAppearanceUpdate];
     
     //this means the same controller is already pushed, lets skip this call then
-    if ([presentingViewController.presentedViewController isKindOfClass:willPresentViewController.class]) {
+    if ([presentingViewController.presentedViewController isKindOfClass:presentedViewController.class]) {
         return;
     }
-    [presentingViewController presentViewController:willPresentViewController
+    [presentingViewController presentViewController:presentedViewController
                                            animated:YES
                                          completion:nil];
 }
 
 - (void)presentViewController:(UIViewController *)presentedViewController
            fromViewController:(UIViewController *)presentingViewController
-        presentationAnimation:(DimmedPresentationAnimation)animation
+        presentationAnimation:(CustomPresentationAnimation)animation
                      duration:(CGFloat)duration
 {
     self.duration = duration;
@@ -83,7 +85,7 @@ static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning> )transitionContext
 {
-    return DimmedPresentationControllerAnimationDuration;
+    return CustomPresentationAnimationDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning> )transitionContext
@@ -94,7 +96,7 @@ static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
     UIView *firstView = firstVC.view;
     UIView *secondView = secondVC.view;
     
-    BOOL isBottomToTopAnimation = self.animation == DimmedPresentationAnimationBottomToTop;
+    BOOL isBottomToTopAnimation = self.animation == CustomPresentationAnimationBottomToTop;
     
     if (self.isPresenting) {
         [containerView addSubview:secondView];
@@ -106,7 +108,7 @@ static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
         
         secondView.alpha = isBottomToTopAnimation ? 1.f : 0.f;
         
-        [UIView animateWithDuration:DimmedPresentationControllerAnimationDuration
+        [UIView animateWithDuration:CustomPresentationAnimationDuration
                          animations: ^{
                              if (isBottomToTopAnimation) {
                                  secondView.frame = containerView.frame;
@@ -119,7 +121,7 @@ static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
                          }];
     }
     else {
-        [UIView animateWithDuration:DimmedPresentationControllerAnimationDuration
+        [UIView animateWithDuration:CustomPresentationAnimationDuration
                          animations: ^{
                              if (isBottomToTopAnimation) {
                                  firstView.frame = (CGRect) {
@@ -138,3 +140,4 @@ static const CGFloat DimmedPresentationControllerAnimationDuration = 0.25f;
 }
 
 @end
+
