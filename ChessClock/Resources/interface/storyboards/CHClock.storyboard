@@ -100,16 +100,31 @@
                                             <action selector="resetTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="93G-6k-Nbh"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7E1-Y5-gRn" userLabel="Time Update">
+                                        <rect key="frame" x="126.5" y="5.5" width="67" height="67"/>
+                                        <fontDescription key="fontDescription" name="ChessGlyph-Regular" family="Chess Glyph" pointSize="50"/>
+                                        <state key="normal" title="Z">
+                                            <color key="titleColor" red="0.33725490200000002" green="0.31764705879999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.33725490200000002" green="0.31764705879999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timeUpdateTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="VhG-nG-6hh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="2XH-Lj-y4p" firstAttribute="leading" secondItem="6md-Xa-WjT" secondAttribute="trailing" constant="42" id="874-90-csg"/>
+                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="centerX" secondItem="6md-Xa-WjT" secondAttribute="centerX" id="8OZ-oW-VKh"/>
+                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="height" secondItem="6md-Xa-WjT" secondAttribute="height" id="8n8-ZE-SyF"/>
                                     <constraint firstItem="2XH-Lj-y4p" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="G90-hK-MGm"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="leading" secondItem="6md-Xa-WjT" secondAttribute="trailing" constant="74" id="Jub-Bs-jWi"/>
                                     <constraint firstAttribute="centerX" secondItem="6md-Xa-WjT" secondAttribute="centerX" id="Mgb-UI-lko"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="leading" secondItem="2XH-Lj-y4p" secondAttribute="trailing" constant="74" id="NSw-Ep-wHK"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="NU2-et-tec"/>
+                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="width" secondItem="6md-Xa-WjT" secondAttribute="width" id="NVk-Nq-o5q"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="leading" secondItem="qJQ-vJ-dRJ" secondAttribute="trailing" constant="42" id="P54-85-xsS"/>
+                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="PM5-GT-3fC"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="leading" secondItem="IMI-UK-zVR" secondAttribute="leading" constant="20" id="bma-9Y-bba"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="centerY" secondItem="IMI-UK-zVR" secondAttribute="centerY" id="dUz-r1-lKt"/>
                                     <constraint firstAttribute="trailing" secondItem="2XH-Lj-y4p" secondAttribute="trailing" constant="20" id="mL7-Ed-PiL"/>
@@ -516,6 +531,7 @@
                         <outlet property="playerTwoTimePieceView" destination="vj8-dX-iH3" id="i5e-NI-QEe"/>
                         <outlet property="resetButton" destination="2XH-Lj-y4p" id="9x9-8M-x7o"/>
                         <outlet property="settingsButton" destination="qJQ-vJ-dRJ" id="c8i-P7-vuK"/>
+                        <outlet property="timeUpdateButton" destination="7E1-Y5-gRn" id="XJC-eE-rIo"/>
                         <segue destination="fio-lt-VYF" kind="show" identifier="CHChessClockSettingsTableViewController" id="u8x-j0-yda"/>
                     </connections>
                 </viewController>

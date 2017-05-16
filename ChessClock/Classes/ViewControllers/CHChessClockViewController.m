@@ -37,6 +37,7 @@ CHChessClockTimeUpdateViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *timeUpdateButton;
 
 @property (strong, nonatomic) CHChessClock* chessClock;
 @property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
@@ -252,7 +253,7 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (IBAction)pauseTapped
 {
-    if ([self.chessClock isActive]) {
+    if (self.chessClock.isActive) {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
         [self setPauseButtonEnabled:NO];
@@ -261,8 +262,6 @@ static const float CHShowTenthsTime = 10.0f;
         [self.playerOneTimePieceView unhighlightAndActivate:YES];
         [self.playerTwoTimePieceView unhighlightAndActivate:YES];
     }
-    
-    [self timeUpdateTapped];
 }
 
 - (IBAction)timeUpdateTapped
@@ -282,6 +281,7 @@ static const float CHShowTenthsTime = 10.0f;
     [self.pauseButton setTitle:title forState:UIControlStateHighlighted];
     self.pauseButton.userInteractionEnabled = enabled;
     
+    self.timeUpdateButton.hidden = enabled;
 }
 
 #pragma mark - CHChessClockTimeUpdateViewController delegate
