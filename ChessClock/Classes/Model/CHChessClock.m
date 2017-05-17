@@ -22,8 +22,6 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
 @interface CHChessClock() <CHTimePieceDelegate>
 
 @property (weak, nonatomic) id<CHChessClockDelegate> delegate;
-@property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
-@property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 @property (weak, nonatomic) CHTimePiece* activePiece;
 @property (strong, nonatomic) NSTimer* timer;
 @property (assign, nonatomic) NSTimeInterval interval;

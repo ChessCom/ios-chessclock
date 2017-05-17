@@ -268,8 +268,12 @@ static const float CHShowTenthsTime = 10.0f;
 {
     CHChessClockTimeUpdateViewController *timeUpdateViewController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([CHChessClockTimeUpdateViewController class])];
     timeUpdateViewController.delegate = self;
+    timeUpdateViewController.playerOneTimePiece = self.chessClock.playerOneTimePiece;
+    timeUpdateViewController.playerTwoTimePiece = self.chessClock.playerTwoTimePiece;
     
-    [self.presentationController presentViewController:timeUpdateViewController
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:timeUpdateViewController];
+    
+    [self.presentationController presentViewController:navigationController
                                fromViewController:self
                             presentationAnimation:CustomPresentationAnimationFadeIn];
 }

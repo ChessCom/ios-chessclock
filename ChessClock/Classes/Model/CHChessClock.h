@@ -30,6 +30,8 @@
 @interface CHChessClock : NSObject
 
 @property (assign, nonatomic, readonly) BOOL paused;
+@property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
+@property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 
 - (instancetype)initWithTimeControl:(CHChessClockTimeControl *)timeControl
                            delegate:(id<CHChessClockDelegate>)delegate;

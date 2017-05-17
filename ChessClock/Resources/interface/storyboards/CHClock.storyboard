@@ -745,10 +745,30 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPQ-8q-0cG">
                                 <rect key="frame" x="40" y="220" width="240" height="128"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d70-Tb-4bf">
+                                        <rect key="frame" x="97" y="74" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="playerOneButtonWasPressed:" destination="fM1-wN-SmX" eventType="touchUpInside" id="du5-zN-eCk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIY-1j-u06">
+                                        <rect key="frame" x="97" y="24" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="playerTwoButtonWasPressed:" destination="fM1-wN-SmX" eventType="touchUpInside" id="Oat-Vd-MNo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.26274509800000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="HRd-bQ-Eg7"/>
+                                    <constraint firstItem="d70-Tb-4bf" firstAttribute="centerX" secondItem="VPQ-8q-0cG" secondAttribute="centerX" id="R0K-xd-OMz"/>
+                                    <constraint firstItem="MIY-1j-u06" firstAttribute="centerX" secondItem="VPQ-8q-0cG" secondAttribute="centerX" id="e08-46-QJy"/>
                                     <constraint firstAttribute="width" constant="240" id="fAB-Zm-xoN"/>
+                                    <constraint firstItem="MIY-1j-u06" firstAttribute="centerY" secondItem="VPQ-8q-0cG" secondAttribute="centerY" constant="-25" id="wmZ-05-E7U"/>
+                                    <constraint firstItem="d70-Tb-4bf" firstAttribute="centerY" secondItem="VPQ-8q-0cG" secondAttribute="centerY" constant="25" id="yNs-zI-PdL"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -761,6 +781,10 @@
                             <outletCollection property="gestureRecognizers" destination="Abf-gH-vr8" appends="YES" id="rKx-MZ-GMa"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="playerOneTimeButton" destination="d70-Tb-4bf" id="nJW-S0-QP7"/>
+                        <outlet property="playerTwoTimeButton" destination="MIY-1j-u06" id="ncv-li-ngC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-rj-lpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Abf-gH-vr8">
@@ -769,7 +793,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2837" y="-487"/>
+            <point key="canvasLocation" x="2836.875" y="-488.02816901408454"/>
         </scene>
         <!--Chess Clock Time Control Tab Bar Controller-->
         <scene sceneID="s19-6l-c0t">
