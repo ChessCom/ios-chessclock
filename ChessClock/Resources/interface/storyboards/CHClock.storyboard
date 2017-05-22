@@ -100,31 +100,16 @@
                                             <action selector="resetTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="93G-6k-Nbh"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7E1-Y5-gRn" userLabel="Time Update">
-                                        <rect key="frame" x="126.5" y="5.5" width="67" height="67"/>
-                                        <fontDescription key="fontDescription" name="ChessGlyph-Regular" family="Chess Glyph" pointSize="50"/>
-                                        <state key="normal" title="Z">
-                                            <color key="titleColor" red="0.33725490200000002" green="0.31764705879999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.33725490200000002" green="0.31764705879999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="timeUpdateTapped" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="VhG-nG-6hh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="2XH-Lj-y4p" firstAttribute="leading" secondItem="6md-Xa-WjT" secondAttribute="trailing" constant="42" id="874-90-csg"/>
-                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="centerX" secondItem="6md-Xa-WjT" secondAttribute="centerX" id="8OZ-oW-VKh"/>
-                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="height" secondItem="6md-Xa-WjT" secondAttribute="height" id="8n8-ZE-SyF"/>
                                     <constraint firstItem="2XH-Lj-y4p" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="G90-hK-MGm"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="leading" secondItem="6md-Xa-WjT" secondAttribute="trailing" constant="74" id="Jub-Bs-jWi"/>
                                     <constraint firstAttribute="centerX" secondItem="6md-Xa-WjT" secondAttribute="centerX" id="Mgb-UI-lko"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="leading" secondItem="2XH-Lj-y4p" secondAttribute="trailing" constant="74" id="NSw-Ep-wHK"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="NU2-et-tec"/>
-                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="width" secondItem="6md-Xa-WjT" secondAttribute="width" id="NVk-Nq-o5q"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="leading" secondItem="qJQ-vJ-dRJ" secondAttribute="trailing" constant="42" id="P54-85-xsS"/>
-                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="centerY" secondItem="6md-Xa-WjT" secondAttribute="centerY" id="PM5-GT-3fC"/>
                                     <constraint firstItem="qJQ-vJ-dRJ" firstAttribute="leading" secondItem="IMI-UK-zVR" secondAttribute="leading" constant="20" id="bma-9Y-bba"/>
                                     <constraint firstItem="6md-Xa-WjT" firstAttribute="centerY" secondItem="IMI-UK-zVR" secondAttribute="centerY" id="dUz-r1-lKt"/>
                                     <constraint firstAttribute="trailing" secondItem="2XH-Lj-y4p" secondAttribute="trailing" constant="20" id="mL7-Ed-PiL"/>
@@ -225,6 +210,20 @@
                                             <constraint firstAttribute="width" constant="61" id="cHH-Aj-dMj"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7E1-Y5-gRn" userLabel="Time Update">
+                                        <rect key="frame" x="253" y="0.0" width="67" height="67"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="iFA-Zb-lCu"/>
+                                            <constraint firstAttribute="width" constant="67" id="xkP-C0-Uoe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ChessGlyph-Regular" family="Chess Glyph" pointSize="50"/>
+                                        <state key="normal" title="Z">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updatePlayerOneTimeButtonWasPressed:" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="9Jv-HY-rgb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -239,9 +238,11 @@
                                     <constraint firstItem="2T1-66-22g" firstAttribute="leading" secondItem="v1p-b2-vvD" secondAttribute="leading" id="Vby-u0-vT9"/>
                                     <constraint firstAttribute="trailing" secondItem="2T1-66-22g" secondAttribute="trailing" id="dxo-a8-Hkm"/>
                                     <constraint firstItem="2T1-66-22g" firstAttribute="top" secondItem="v1p-b2-vvD" secondAttribute="top" id="gUX-16-IjE"/>
+                                    <constraint firstItem="7E1-Y5-gRn" firstAttribute="top" secondItem="v1p-b2-vvD" secondAttribute="top" id="hbt-Ip-odO"/>
                                     <constraint firstAttribute="centerX" secondItem="bgd-Hp-RB6" secondAttribute="centerX" id="llu-8w-TRa"/>
                                     <constraint firstAttribute="bottom" secondItem="2T1-66-22g" secondAttribute="bottom" id="o8g-9L-dHu"/>
                                     <constraint firstAttribute="centerY" secondItem="bgd-Hp-RB6" secondAttribute="centerY" id="rsq-5r-DC4"/>
+                                    <constraint firstAttribute="trailing" secondItem="7E1-Y5-gRn" secondAttribute="trailing" id="sC1-xV-f4Q"/>
                                     <constraint firstAttribute="trailing" secondItem="UJh-4Z-S7F" secondAttribute="trailing" constant="15" id="u8B-IM-y2P"/>
                                 </constraints>
                                 <connections>
@@ -309,9 +310,24 @@
                                             </mask>
                                         </variation>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjr-dA-K94" userLabel="Time Update">
+                                        <rect key="frame" x="253" y="0.0" width="67" height="67"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="67" id="CWL-Ev-Gt8"/>
+                                            <constraint firstAttribute="height" constant="67" id="SAx-St-J7T"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ChessGlyph-Regular" family="Chess Glyph" pointSize="50"/>
+                                        <state key="normal" title="Z">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updatePlayerTwoTimeButtonWasPressed:" destination="6O8-Tu-6Cu" eventType="touchUpInside" id="NF8-VN-kxa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="cjr-dA-K94" firstAttribute="top" secondItem="vj8-dX-iH3" secondAttribute="top" id="4t0-l5-LIz"/>
                                     <constraint firstAttribute="trailing" secondItem="eB9-0e-vOb" secondAttribute="trailing" id="5Se-qz-4ea"/>
                                     <constraint firstAttribute="bottom" secondItem="6OY-eb-dnX" secondAttribute="bottom" constant="13" id="Guo-CJ-JpH"/>
                                     <constraint firstItem="05K-0K-A0N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vj8-dX-iH3" secondAttribute="leading" constant="20" id="KVd-93-CKI">
@@ -327,6 +343,7 @@
                                         <variation key="heightClass=compact" constant="15"/>
                                         <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                                     </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="cjr-dA-K94" secondAttribute="trailing" id="lFA-tb-REO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="05K-0K-A0N" secondAttribute="trailing" constant="20" id="tgd-rN-2gW">
                                         <variation key="heightClass=compact" constant="20"/>
                                     </constraint>
@@ -531,7 +548,8 @@
                         <outlet property="playerTwoTimePieceView" destination="vj8-dX-iH3" id="i5e-NI-QEe"/>
                         <outlet property="resetButton" destination="2XH-Lj-y4p" id="9x9-8M-x7o"/>
                         <outlet property="settingsButton" destination="qJQ-vJ-dRJ" id="c8i-P7-vuK"/>
-                        <outlet property="timeUpdateButton" destination="7E1-Y5-gRn" id="XJC-eE-rIo"/>
+                        <outletCollection property="timeUpdateButtons" destination="cjr-dA-K94" id="l2R-qd-VnT"/>
+                        <outletCollection property="timeUpdateButtons" destination="7E1-Y5-gRn" id="cuQ-a9-uEA"/>
                         <segue destination="fio-lt-VYF" kind="show" identifier="CHChessClockSettingsTableViewController" id="u8x-j0-yda"/>
                     </connections>
                 </viewController>
@@ -730,74 +748,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMS-FV-URQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2018" y="-486"/>
-        </scene>
-        <!--Chess Clock Time Update View Controller-->
-        <scene sceneID="iXj-CM-kfY">
-            <objects>
-                <viewController storyboardIdentifier="CHChessClockTimeUpdateViewController" id="fM1-wN-SmX" customClass="CHChessClockTimeUpdateViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Psa-hQ-tF1"/>
-                        <viewControllerLayoutGuide type="bottom" id="OwC-ud-VJv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gpj-J5-gqd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPQ-8q-0cG">
-                                <rect key="frame" x="40" y="220" width="240" height="128"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d70-Tb-4bf">
-                                        <rect key="frame" x="97" y="74" width="46" height="30"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playerOneButtonWasPressed:" destination="fM1-wN-SmX" eventType="touchUpInside" id="du5-zN-eCk"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIY-1j-u06">
-                                        <rect key="frame" x="97" y="24" width="46" height="30"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playerTwoButtonWasPressed:" destination="fM1-wN-SmX" eventType="touchUpInside" id="Oat-Vd-MNo"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.33725490200000002" green="0.31764705879999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="HRd-bQ-Eg7"/>
-                                    <constraint firstItem="d70-Tb-4bf" firstAttribute="centerX" secondItem="VPQ-8q-0cG" secondAttribute="centerX" id="R0K-xd-OMz"/>
-                                    <constraint firstItem="MIY-1j-u06" firstAttribute="centerX" secondItem="VPQ-8q-0cG" secondAttribute="centerX" id="e08-46-QJy"/>
-                                    <constraint firstAttribute="width" constant="240" id="fAB-Zm-xoN"/>
-                                    <constraint firstItem="MIY-1j-u06" firstAttribute="centerY" secondItem="VPQ-8q-0cG" secondAttribute="centerY" constant="-25" id="wmZ-05-E7U"/>
-                                    <constraint firstItem="d70-Tb-4bf" firstAttribute="centerY" secondItem="VPQ-8q-0cG" secondAttribute="centerY" constant="25" id="yNs-zI-PdL"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="VPQ-8q-0cG" firstAttribute="centerX" secondItem="gpj-J5-gqd" secondAttribute="centerX" id="fAf-mI-8ee"/>
-                            <constraint firstItem="VPQ-8q-0cG" firstAttribute="centerY" secondItem="gpj-J5-gqd" secondAttribute="centerY" id="hoN-4D-R1Z"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Abf-gH-vr8" appends="YES" id="rKx-MZ-GMa"/>
-                        </connections>
-                    </view>
-                    <connections>
-                        <outlet property="playerOneTimeButton" destination="d70-Tb-4bf" id="nJW-S0-QP7"/>
-                        <outlet property="playerTwoTimeButton" destination="MIY-1j-u06" id="ncv-li-ngC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OdF-rj-lpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Abf-gH-vr8">
-                    <connections>
-                        <action selector="mainViewWasPressed:" destination="fM1-wN-SmX" id="7bR-WE-Bsb"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2836.875" y="-488.02816901408454"/>
         </scene>
         <!--Chess Clock Time Control Tab Bar Controller-->
         <scene sceneID="s19-6l-c0t">
