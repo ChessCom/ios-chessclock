@@ -56,6 +56,13 @@ static const NSUInteger CHPickerRowLabelTag = 10;
     self.preferredContentSize = CGSizeMake(320.0f, self.timePickerView.bounds.size.height);
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
