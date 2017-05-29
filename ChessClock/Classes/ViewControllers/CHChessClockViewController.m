@@ -14,6 +14,7 @@
 #import "CHChessClockSettingsManager.h"
 #import "CHTimePiece.h"
 #import "CHTimePieceView.h"
+#import "CHChessClockTimeControl.h"
 
 #import "CHUtil.h"
 #import "CHSoundPlayer.h"
@@ -76,8 +77,8 @@ static const float CHShowTenthsTime = 10.0f;
     self.pauseButton.titleLabel.font = customFont;
     
     // Set Clock
-    self.chessClock = [[CHChessClock alloc] initWithSettings:self.settingsManager.currentTimeControl
-                                                 andDelegate:self];
+    self.chessClock = [[CHChessClock alloc] initWithTimeControl:self.settingsManager.timeControl
+                                                       delegate:self];
     
     [self resetClock];
 }
@@ -89,6 +90,16 @@ static const float CHShowTenthsTime = 10.0f;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [self updateInterfaceWithTraitCollection:self.traitCollection];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    CGFloat currentFloatSize = self.playerOneTimePieceView.availableTimeLabel.font.pointSize;
+    
+    self.playerOneTimePieceView.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:currentFloatSize weight:UIFontWeightBold];
+    self.playerTwoTimePieceView.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:currentFloatSize weight:UIFontWeightBold];
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -138,11 +149,14 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)resetTimeStageDots
 {
-    NSUInteger stageCount = [self.chessClock.settings.stageManager stageCount];
-    [self.playerOneTimePieceView setTimeControlStageDotCount:stageCount];
-    [self.playerTwoTimePieceView setTimeControlStageDotCount:stageCount];
+    CHChessClockTimeControl *timeControl = self.settingsManager.timeControl;
+    
+    NSUInteger playerOneStageCount = timeControl.playerOneSettings.stageManager.stageCount;
+    NSUInteger playerTwoStageCount = timeControl.playerTwoSettings.stageManager.stageCount;
+    
+    [self.playerOneTimePieceView setTimeControlStageDotCount:playerOneStageCount];
+    [self.playerTwoTimePieceView setTimeControlStageDotCount:playerTwoStageCount];
 }
-
 
 - (void)pauseClock
 {
@@ -153,7 +167,7 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)resetClock
 {
-    [self.chessClock reset];
+    [self.chessClock resetWithTimeControl:self.settingsManager.timeControl];
     [self.playerOneTimePieceView unhighlightAndActivate:YES];
     [self.playerTwoTimePieceView unhighlightAndActivate:YES];
 }
@@ -264,17 +278,16 @@ static const float CHShowTenthsTime = 10.0f;
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewControllerDelegate methods
 //------------------------------------------------------------------------------
-- (void)settingsTableViewController:(id)settingsTableViewController
-                  didUpdateSettings:(CHChessClockSettings *)settings
+- (void)settingsTableViewController:(CHChessClockSettingsTableViewController *)viewController
+               didUpdateTimeControl:(CHChessClockTimeControl *)timeControl
 {
-    self.settingsManager.currentTimeControl = settings;
+    self.settingsManager.timeControl = timeControl;
 }
 
-- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController andReset:(BOOL)reset
+- (void)settingsTableViewControllerDidStartClock:(CHChessClockSettingsTableViewController *)viewController
+                                     byResetting:(BOOL)didReset
 {
-    if (reset)
-    {
-        self.chessClock.settings = self.settingsManager.currentTimeControl;
+    if (didReset) {
         [self resetClock];
     }
 }

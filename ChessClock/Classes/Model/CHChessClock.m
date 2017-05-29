@@ -11,6 +11,10 @@
 #import "CHChessClockSettings.h"
 #import "CHChessClockIncrement.h"
 #import "CHChessClockTimeControlStageManager.h"
+#import "CHChessClockTimeControl.h"
+
+static const NSInteger CHChessClockFirstTimePieceID = 1;
+static const NSInteger CHChessClockSecondTimePieceID = 2;
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -18,7 +22,6 @@
 @interface CHChessClock() <CHTimePieceDelegate>
 
 @property (weak, nonatomic) id<CHChessClockDelegate> delegate;
-@property (strong, nonatomic) NSDictionary* timePiecesDictionary;
 @property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
 @property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 @property (weak, nonatomic) CHTimePiece* activePiece;
@@ -34,35 +37,22 @@
 //------------------------------------------------------------------------------
 @implementation CHChessClock
 
-- (id)initWithSettings:(CHChessClockSettings*)settings
-           andDelegate:(id<CHChessClockDelegate>)delegate
+- (instancetype)initWithTimeControl:(CHChessClockTimeControl *)timeControl
+                           delegate:(id<CHChessClockDelegate>)delegate
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
+        _delegate = delegate;
+        _playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:CHChessClockFirstTimePieceID
+                                                              settings:timeControl.playerOneSettings];
+        _playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:CHChessClockSecondTimePieceID
+                                                              settings:timeControl.playerTwoSettings];
         
-        self.delegate = delegate;
-        self.settings = settings;
+        _playerOneTimePiece.delegate = self;
+        _playerTwoTimePiece.delegate = self;
         
-        // We are assuming that each one of the players will have the same starting conditions. That's why
-        // we use the same time control stage manager for both
-        CHTimePiece* playerOneTimePiece = [[CHTimePiece alloc] initWithTimePieceId:1
-                                                        andTimeControlStageManager:settings.stageManager];
-        self.playerOneTimePiece = playerOneTimePiece;
-        self.playerOneTimePiece.delegate = self;
-        
-        CHTimePiece* playerTwoTimePiece = [[CHTimePiece alloc] initWithTimePieceId:2
-                                                        andTimeControlStageManager:settings.stageManager];
-        
-        self.playerTwoTimePiece = playerTwoTimePiece;
-        self.playerTwoTimePiece.delegate = self;
-        
-        self.timePiecesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     self.playerOneTimePiece, [NSNumber numberWithInt:(int)self.playerOneTimePiece.timePieceId],
-                                     self.playerTwoTimePiece, [NSNumber numberWithInt:(int)self.playerTwoTimePiece.timePieceId], nil];
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
-                                                    selector:@selector(updateTime)
-                                                    userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self
+                                                selector:@selector(updateTime)
+                                                userInfo:nil repeats:YES];
     }
     
     return self;
@@ -79,7 +69,9 @@
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId
 {
     if (!self.paused) {
-        CHTimePiece* touchedTimePiece = [self.timePiecesDictionary objectForKey:@(timePieceId)];
+        CHTimePiece* touchedTimePiece =
+        timePieceId == CHChessClockFirstTimePieceID ?
+        self.playerOneTimePiece : self.playerTwoTimePiece;
     
         if (self.activePiece == nil) {
             [self activateOtherTimePiece:touchedTimePiece];
@@ -92,7 +84,7 @@
                 // calculations that depend on the available time are made
                 [self updateChessClock];
                 
-                [touchedTimePiece stopWithIncrement:self.settings.increment];
+                [touchedTimePiece stop];
                 [self activateOtherTimePiece:touchedTimePiece];
             }
         }
@@ -109,7 +101,7 @@
     }
     
     self.interval = [[NSDate date] timeIntervalSince1970];
-    [self.activePiece startWithIncrement:self.settings.increment];
+    [self.activePiece start];
 }
 
 - (void)togglePause
@@ -127,7 +119,7 @@
     }
 }
 
-- (void)reset
+- (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl
 {
     if (self.activePiece != nil) {
         self.paused = NO;
@@ -136,9 +128,8 @@
     }
     
     // Reset all time pieces
-    for (CHTimePiece* timePiece in self.timePiecesDictionary.allValues) {
-        [timePiece reset];
-    }
+    [self.playerOneTimePiece resetWithSettings:timeControl.playerOneSettings];
+    [self.playerTwoTimePiece resetWithSettings:timeControl.playerTwoSettings];
 }
 
 - (BOOL)isActive
@@ -162,20 +153,8 @@
     NSTimeInterval currentInterval = [[NSDate date] timeIntervalSince1970];
     NSTimeInterval delta = currentInterval - self.interval;
     [self.activePiece updateWithDelta:delta];
-    [self.settings.increment updateWithDelta:delta andTimePiece:self.activePiece];
     
     return currentInterval;
-}
-
-- (void)setSettings:(CHChessClockSettings *)settings
-{
-    if (_settings != settings) {
-        _settings = settings;
-        
-        for (CHTimePiece* currentTimePiece in [self.timePiecesDictionary allValues]) {
-            currentTimePiece.stageManager = _settings.stageManager;
-        }
-    }
 }
 
 //------------------------------------------------------------------------------
@@ -186,7 +165,7 @@
     [self.delegate chessClock:self availableTimeUpdatedForTimePiece:timePiece];
     
     if (timePiece.availableTime <= 0.0f &&
-        timePiece.stageIndex == [self.settings.stageManager stageCount])
+        timePiece.stageIndex == [timePiece.settings.stageManager stageCount])
     {
         self.activePiece = nil;
         self.timeEnded = YES;

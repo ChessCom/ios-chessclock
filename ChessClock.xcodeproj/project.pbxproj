@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F127BFA1E9FA296009B432C /* CHChessClockTimeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F127BF91E9FA296009B432C /* CHChessClockTimeControl.m */; };
 		0F3EA8761E489CEE0017AC6C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3EA8741E489CEE0017AC6C /* Crashlytics.framework */; };
 		0F3EA8771E489CEE0017AC6C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3EA8751E489CEE0017AC6C /* Fabric.framework */; };
 		0F3EA87B1E48A5630017AC6C /* UIColor+ChessClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA87A1E48A5630017AC6C /* UIColor+ChessClock.m */; };
@@ -44,6 +45,7 @@
 		0FC6826818C7E16F0064421D /* chess_clock_switch1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826518C7E16F0064421D /* chess_clock_switch1.mp3 */; };
 		0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */; };
 		0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */; };
+		0FFC10E41E92756A00353C08 /* CHChessClockTimeControlTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
 		C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
@@ -72,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F127BF81E9FA296009B432C /* CHChessClockTimeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControl.h; sourceTree = "<group>"; };
+		0F127BF91E9FA296009B432C /* CHChessClockTimeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControl.m; sourceTree = "<group>"; };
 		0F3EA8741E489CEE0017AC6C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "ChessClock/Third Party/Crashlytics.framework"; sourceTree = SOURCE_ROOT; };
 		0F3EA8751E489CEE0017AC6C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "ChessClock/Third Party/Fabric.framework"; sourceTree = SOURCE_ROOT; };
 		0F3EA8791E48A5630017AC6C /* UIColor+ChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ChessClock.h"; path = "Classes/Other/UIColor+ChessClock.h"; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 		0FC6826518C7E16F0064421D /* chess_clock_switch1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_switch1.mp3; sourceTree = "<group>"; };
 		0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_switch2.mp3; sourceTree = "<group>"; };
 		0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_time_ended.mp3; sourceTree = "<group>"; };
+		0FFC10E21E92756A00353C08 /* CHChessClockTimeControlTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlTabBarController.h; sourceTree = "<group>"; };
+		0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlTabBarController.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -253,6 +259,8 @@
 				0FAB79E918C65C010040677B /* CHChessClockTimeControlStage.m */,
 				0FAB79EA18C65C010040677B /* CHChessClockTimeControlStageManager.h */,
 				0FAB79EB18C65C010040677B /* CHChessClockTimeControlStageManager.m */,
+				0F127BF81E9FA296009B432C /* CHChessClockTimeControl.h */,
+				0F127BF91E9FA296009B432C /* CHChessClockTimeControl.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -272,6 +280,8 @@
 				0FAB79F618C65C010040677B /* CHChessClockTimeViewController.m */,
 				0FAB79F718C65C010040677B /* CHChessClockViewController.h */,
 				0FAB79F818C65C010040677B /* CHChessClockViewController.m */,
+				0FFC10E21E92756A00353C08 /* CHChessClockTimeControlTabBarController.h */,
+				0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */,
 			);
 			name = ViewControllers;
 			path = Classes/ViewControllers;
@@ -565,6 +575,7 @@
 				0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */,
 				0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */,
 				0F4000F218D9076A00402B92 /* CHSoundPlayer.m in Sources */,
+				0F127BFA1E9FA296009B432C /* CHChessClockTimeControl.m in Sources */,
 				0FAB79FB18C65C010040677B /* CHChessClockBronsteinIncrement.m in Sources */,
 				0FAB7A1018C680110040677B /* CHTimePieceView.m in Sources */,
 				0FAB7A0118C65C010040677B /* CHChessClockTimeControlStage.m in Sources */,
@@ -574,6 +585,7 @@
 				C00DBBDA18C52B8C00DDCB32 /* main.m in Sources */,
 				0FAB7A0018C65C010040677B /* CHChessClockSettingsManager.m in Sources */,
 				0F9FF0C81E75ABC70015B1E4 /* CHTableViewHeader.m in Sources */,
+				0FFC10E41E92756A00353C08 /* CHChessClockTimeControlTabBarController.m in Sources */,
 				0FAB7A0418C65C010040677B /* CHChessClockSettingsTableViewController.m in Sources */,
 				0FAB7A0618C65C010040677B /* CHChessClockTimeControlTableViewController.m in Sources */,
 				C00DBBDE18C52B8C00DDCB32 /* CHAppDelegate.m in Sources */,

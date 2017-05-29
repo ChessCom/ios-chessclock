@@ -13,11 +13,10 @@
 
 @interface CHChessClockSettings : NSObject
 
-@property (copy, nonatomic) NSString* name;
 @property (strong, nonatomic) CHChessClockIncrement* increment;
-@property (strong, nonatomic, readonly) CHChessClockTimeControlStageManager* stageManager;
+@property (strong, nonatomic) CHChessClockTimeControlStageManager* stageManager;
 
-- (id)initWithName:(NSString*)name increment:(CHChessClockIncrement*)increment
-   andStageManager:(CHChessClockTimeControlStageManager*)stageManager;
+- (id)initWithIncrement:(CHChessClockIncrement*)increment
+           stageManager:(CHChessClockTimeControlStageManager*)stageManager;
 
 @end

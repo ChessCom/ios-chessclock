@@ -10,7 +10,7 @@
 
 @class CHChessClock;
 @class CHTimePiece;
-@class CHChessClockSettings;
+@class CHChessClockTimeControl;
 
 //------------------------------------------------------------------------------
 #pragma mark - CHEChessClockDelegate protocol
@@ -29,18 +29,14 @@
 //------------------------------------------------------------------------------
 @interface CHChessClock : NSObject
 
-// Note: We are assuming that both timepieces will share the same settings
-@property (strong, nonatomic) CHChessClockSettings* settings;
-
 @property (assign, nonatomic, readonly) BOOL paused;
 
-- (id)initWithSettings:(CHChessClockSettings*)settings
-           andDelegate:(id<CHChessClockDelegate>)delegate;
-
+- (instancetype)initWithTimeControl:(CHChessClockTimeControl *)timeControl
+                           delegate:(id<CHChessClockDelegate>)delegate;
 - (void)cleanup;
 - (void)touchedTimePieceWithId:(NSUInteger)timePieceId;
 - (void)togglePause;
-- (void)reset;
+- (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl;
 - (BOOL)isActive;
 
 @end

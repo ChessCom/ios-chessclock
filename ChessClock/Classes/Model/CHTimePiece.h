@@ -11,6 +11,7 @@
 @class CHTimePiece;
 @class CHChessClockIncrement;
 @class CHChessClockTimeControlStageManager;
+@class CHChessClockSettings;
 
 //------------------------------------------------------------------------------
 #pragma mark - CHTimePieceDelegate
@@ -37,13 +38,16 @@
 @property (assign, nonatomic, readonly) NSTimeInterval availableTime;
 @property (assign, nonatomic, readonly) NSUInteger movesCount;
 
-- (id)initWithTimePieceId:(NSUInteger)timePieceId andTimeControlStageManager:(CHChessClockTimeControlStageManager*)stageManager;
+@property (nonatomic, readonly) CHChessClockSettings *settings;
+
+- (id)initWithTimePieceId:(NSUInteger)timePieceId
+                 settings:(CHChessClockSettings *)settings;
 
 - (void)updateWithDelta:(NSTimeInterval)delta;
 - (void)increaseAvailableTimeBy:(float)incrementValue;
-- (void)startWithIncrement:(CHChessClockIncrement*)increment;
-- (void)stopWithIncrement:(CHChessClockIncrement*)increment;
-- (void)reset;
+- (void)start;
+- (void)stop;
+- (void)resetWithSettings:(CHChessClockSettings *)settings;
 - (BOOL)isInLastStage;
 
 @end

@@ -8,23 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class CHChessClockSettings;
+@class CHChessClockTimeControl;
 
 @interface CHChessClockSettingsManager : NSObject
 
-@property (weak, nonatomic) CHChessClockSettings* currentTimeControl;
+@property (strong, nonatomic) CHChessClockTimeControl *timeControl;
 
-- (id)init;
-
-- (void)addTimeControl:(CHChessClockSettings*)settings;
+- (void)addTimeControl:(CHChessClockTimeControl *)timeControl;
 - (void)removeTimeControlAtIndex:(NSUInteger)index;
-- (void)moveTimeControlFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex;
+- (void)moveTimeControlFrom:(NSUInteger)sourceIndex
+                         to:(NSUInteger)destinationIndex;
 
-- (NSArray*)allChessClockSettings;
+- (NSArray<CHChessClockTimeControl *> *)allTimeControls;
+
 - (void)saveTimeControls;
 - (void)restoreDefaultClockSettings;
-
-- (void)setIsLandscape:(BOOL)isLandscape;
-- (BOOL)isLandscape;
 
 @end
