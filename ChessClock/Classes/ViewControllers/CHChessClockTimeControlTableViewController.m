@@ -103,9 +103,9 @@ static const NSInteger kAddButtonTag = 1000;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
+    /*if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
         return CHSectionCount - 1;
-    }
+    }*/
     
     return CHSectionCount;
 }
@@ -122,7 +122,7 @@ static const NSInteger kAddButtonTag = 1000;
             break;
             
         case CHNewTimeControlStageSection:
-            return 1;
+            return [self.settings.stageManager stageCount] == CHMaxTimeControlStages ? 0 : 1;
             break;
             
         case CHIncrementSection:
@@ -149,15 +149,7 @@ static const NSInteger kAddButtonTag = 1000;
             break;
             
         case CHNewTimeControlStageSection:
-            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-                // If the number of time control stages is the maximum, it means that
-                // that the new time control section was deleted. Treat this
-                // section as the increment section
-                cell = [self incrementTypeCell];
-            }
-            else {
-                cell = [self addTimeControlStageCell];
-            }
+            cell = [self addTimeControlStageCell];
             
             break;
             
