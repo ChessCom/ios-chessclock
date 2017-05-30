@@ -37,7 +37,7 @@ CHChessClockTimeControlTableViewControllerDataSource>
     self.playerTwoTimeControlTableViewController.dataSource = self;
     self.playerTwoTimeControlTableViewController.title = NSLocalizedString(@"Player Two", nil);
     
-    self.title = NSLocalizedString(@"Time Controls", nil);
+    self.title = NSLocalizedString(@"Time Control", nil);
     
     UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc]
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemSave
