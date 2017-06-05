@@ -266,20 +266,8 @@ static const NSInteger kAddButtonTag = 1000;
     else {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-
     return cell;
 }
-
-/*- (UITableViewCell *)timeControlAddStageCell
-{
-    UITableViewCell *cell = [self timeControlStageCell];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), self.settings.stageManager.stageCount + 1];
-    cell.detailTextLabel.text = @"--";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    return cell;
-}*/
 
 - (UITableViewCell *)timeControlStageCell
 {
