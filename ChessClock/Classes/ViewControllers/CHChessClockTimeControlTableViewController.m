@@ -26,12 +26,12 @@
 <CHChessClockIncrementTableViewControllerDelegate, CHChessClockTimeControlStageTableViewControllerDelegate,
 CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
-@property (weak, nonatomic) IBOutlet UISwitch *duplicateSettingsSwitch;
-@property (strong, nonatomic) IBOutlet UIView *tableFooterView;
+@property (weak, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
+@property (weak, nonatomic) IBOutlet UISwitch* duplicateSettingsSwitch;
+@property (weak, nonatomic) IBOutlet UIView* tableFooterView;
 
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
-@property (strong, nonatomic) UIPopoverController *customPopoverController;
+@property (strong, nonatomic) UIPopoverController* customPopoverController;
 
 @end
 
@@ -41,14 +41,14 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 @implementation CHChessClockTimeControlTableViewController
 
 static const NSUInteger CHNameSection = 0;
-static const NSUInteger CHExistingTimeControlStagesSection = 1;
-static const NSUInteger CHNewTimeControlStageSection = 2;
-static const NSUInteger CHIncrementSection = 3;
-static const NSUInteger CHSectionCount = 4;
+static const NSUInteger CHTimeControlStagesSection = 1;
+static const NSUInteger CHIncrementSection = 2;
+static const NSUInteger CHSectionCount = 3;
+
 static const NSUInteger CHNameTextFieldTag = 1;
 static const NSUInteger CHNameLabelTag = 2;
-static const NSUInteger CHMaxTimeControlStages = 3;
 
+static const NSUInteger CHMaxTimeControlStages = 3;
 static const NSInteger kAddButtonTag = 1000;
 
 - (void)viewDidLoad
@@ -117,13 +117,17 @@ static const NSInteger kAddButtonTag = 1000;
             return 1;
             break;
             
-        case CHExistingTimeControlStagesSection:
-            return [self.settings.stageManager stageCount];
-            break;
+        case CHTimeControlStagesSection:
+        {
+            NSUInteger stageCount = [self.settings.stageManager stageCount];
+            if ([self.settings.stageManager stageCount] != CHMaxTimeControlStages)
+            {
+                stageCount += 1;
+            }
             
-        case CHNewTimeControlStageSection:
-            return [self.settings.stageManager stageCount] == CHMaxTimeControlStages ? 0 : 1;
+            return stageCount;
             break;
+        }
             
         case CHIncrementSection:
             return 2;
@@ -144,13 +148,16 @@ static const NSInteger kAddButtonTag = 1000;
             cell = [self nameCell];
             break;
             
-        case CHExistingTimeControlStagesSection:
-            cell = [self timeControlStageCellForRow:indexPath.row];
-            break;
-            
-        case CHNewTimeControlStageSection:
-            cell = [self addTimeControlStageCell];
-            
+        case CHTimeControlStagesSection:
+            if (indexPath.row < [self.settings.stageManager stageCount])
+            {
+                cell = [self timeControlStageCellForRow:indexPath.row];
+            }
+            else
+            {
+                cell = [self addTimeControlStageCell];
+            }
+
             break;
             
         case CHIncrementSection:
@@ -170,7 +177,7 @@ static const NSInteger kAddButtonTag = 1000;
     // Allow editing (deleting rows) if the row is:
     // - One of the time control stages
     // - Not the first time control stage row (we always need at least one stage)
-    return indexPath.section == CHExistingTimeControlStagesSection && indexPath.row != 0;
+    return indexPath.section == CHTimeControlStagesSection && indexPath.row != 0;
 }
 
 //------------------------------------------------------------------------------
@@ -187,15 +194,13 @@ static const NSInteger kAddButtonTag = 1000;
             [self selectedNameCellWithIndexPath:indexPath];
             break;
             
-        case CHExistingTimeControlStagesSection:
-            [self selectedExistingTimeControllCellWithIndexPath:indexPath];
+        case CHTimeControlStagesSection:
+            if (indexPath.row < [self.settings.stageManager stageCount]) {
+                [self selectedExistingTimeControllCellWithIndexPath:indexPath];
+            }
+            
             break;
         
-        case CHNewTimeControlStageSection:
-            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-                [self selectedIncrementCellWithIndexPath:indexPath];
-            }
-            break;
             
         case CHIncrementSection:
             [self selectedIncrementCellWithIndexPath:indexPath];
@@ -391,17 +396,8 @@ static const NSInteger kAddButtonTag = 1000;
 - (void)removeTimeStageAtIndex:(NSUInteger)timeStageIndex
 {
     [self.settings.stageManager removeTimeStageAtIndex:timeStageIndex];
-    
-    [self.tableView beginUpdates];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHExistingTimeControlStagesSection]
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHTimeControlStagesSection]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    if ([self.tableView numberOfSections] < CHSectionCount) {
-        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:CHNewTimeControlStageSection]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    [self.tableView endUpdates];
 }
 
 - (UITextField*)nameTextField
@@ -424,14 +420,15 @@ static const NSInteger kAddButtonTag = 1000;
     
     [self.settings.stageManager addTimeStage:stage];
     
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHTimeControlStagesSection]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)reloadRowWithStage:(CHChessClockTimeControlStage*)stage
 {
     if (stage != nil) {
         NSUInteger stageIndex = [self.settings.stageManager indexOfStage:stage];
-        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:stageIndex inSection:CHExistingTimeControlStagesSection];
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:stageIndex inSection:CHTimeControlStagesSection];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -535,15 +532,7 @@ static const NSInteger kAddButtonTag = 1000;
 {
     self.settings.increment = viewController.increment;
     
-    NSUInteger section = CHIncrementSection;
-    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-        // If the number of time control stages is the maximum, it means that
-        // that the new time control section was deleted. The increment section
-        // is now the "new time control stage" section
-        section = CHNewTimeControlStageSection;
-    }
-    
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:CHIncrementSection];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
