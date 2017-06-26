@@ -573,13 +573,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-W4-6Ax">
-                                        <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="513" width="320" height="55"/>
                                         <color key="backgroundColor" red="0.8901960784313725" green="0.5607843137254902" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="hXq-sS-3MQ"/>
+                                            <constraint firstAttribute="height" constant="55" id="hXq-sS-3MQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <state key="normal" title="Button"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <size key="titleShadowOffset" width="1" height="0.0"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" red="0.59215686274509804" green="0.30588235294117649" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <state key="selected" backgroundImage="rectLightOrangeButtonPressed"/>
                                         <state key="highlighted" backgroundImage="rectLightOrangeButtonPressed"/>
                                         <connections>
@@ -587,7 +590,7 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3yc-ke-U0C">
-                                        <rect key="frame" x="0.0" y="64" width="320" height="444"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="449"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" red="0.15294117647058825" green="0.14509803921568626" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -636,13 +639,6 @@
                                             <outlet property="delegate" destination="fio-lt-VYF" id="BUp-ik-3NO"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqF-SS-54X">
-                                        <rect key="frame" x="0.0" y="508" width="320" height="1"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="6BX-cR-2Se"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -651,10 +647,7 @@
                                     <constraint firstAttribute="trailing" secondItem="3yc-ke-U0C" secondAttribute="trailing" id="GTZ-jY-CVf"/>
                                     <constraint firstItem="Vkp-W4-6Ax" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" id="Wff-jv-xg9"/>
                                     <constraint firstItem="3yc-ke-U0C" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="k5f-5h-kqa"/>
-                                    <constraint firstItem="fqF-SS-54X" firstAttribute="top" secondItem="3yc-ke-U0C" secondAttribute="bottom" id="lSS-5X-sNy"/>
                                     <constraint firstItem="Vkp-W4-6Ax" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="oFU-6Q-upj"/>
-                                    <constraint firstItem="fqF-SS-54X" firstAttribute="leading" secondItem="kw5-Sd-3a8" secondAttribute="leading" id="pf9-2e-Zwf"/>
-                                    <constraint firstAttribute="trailing" secondItem="fqF-SS-54X" secondAttribute="trailing" id="qks-Bg-RLG"/>
                                     <constraint firstItem="3yc-ke-U0C" firstAttribute="top" secondItem="kw5-Sd-3a8" secondAttribute="top" constant="64" id="wmu-1Z-THB"/>
                                 </constraints>
                             </view>
