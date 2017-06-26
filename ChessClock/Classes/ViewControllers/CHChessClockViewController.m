@@ -19,13 +19,16 @@
 #import "CHUtil.h"
 #import "CHSoundPlayer.h"
 
+#import "CHChessClockTimeViewController.h"
+
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
 //------------------------------------------------------------------------------
 @interface CHChessClockViewController()
 <CHChessClockDelegate,
 UIActionSheetDelegate,
-CHChessClockSettingsTableViewControllerDelegate>
+CHChessClockSettingsTableViewControllerDelegate,
+CHChessClockTimeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerOneTimePieceView;
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerTwoTimePieceView;
@@ -36,6 +39,9 @@ CHChessClockSettingsTableViewControllerDelegate>
 
 @property (strong, nonatomic) CHChessClock* chessClock;
 @property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
+@property (weak, nonatomic) CHTimePiece *currentTimePiece;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *timeUpdateButtons;
 
 @end
 
@@ -244,7 +250,7 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (IBAction)pauseTapped
 {
-    if ([self.chessClock isActive]) {
+    if (self.chessClock.isActive) {
         [self.chessClock togglePause];
         [self disableIdleTimer:!self.chessClock.paused];
         [self setPauseButtonEnabled:NO];
@@ -255,6 +261,42 @@ static const float CHShowTenthsTime = 10.0f;
     }
 }
 
+- (IBAction)updatePlayerOneTimeButtonWasPressed:(id)sender
+{
+    [self presentTimeViewControllerWithTimeControlStage:self.chessClock.playerOneTimePiece];
+}
+
+- (IBAction)updatePlayerTwoTimeButtonWasPressed:(id)sender
+{
+    [self presentTimeViewControllerWithTimeControlStage:self.chessClock.playerTwoTimePiece];
+}
+
+- (void)presentTimeViewControllerWithTimeControlStage:(CHTimePiece *)timePiece
+{
+    self.currentTimePiece = timePiece;
+    
+    NSString* nibName = @"CHChessClockTimeView";
+    CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
+                                                          initWithNibName:nibName bundle:nil];
+    timeViewController.delegate = self;
+    timeViewController.maximumHours = 11;
+    timeViewController.maximumMinutes = 60;
+    timeViewController.maximumSeconds = 60;
+    timeViewController.selectedTime = timePiece.availableTime;
+    timeViewController.title = NSLocalizedString(@"Time", nil);
+    
+    [self.navigationController pushViewController:timeViewController animated:YES];
+}
+
+#pragma mark - CHChessClockTimeViewController delegate
+
+- (void)chessClockTimeViewController:(CHChessClockTimeViewController*)timeViewController
+              closedWithSelectedTime:(NSUInteger)timeInSeconds
+{
+    self.currentTimePiece.updateAvailableTime = YES;
+    [self.currentTimePiece updateWithDelta:self.currentTimePiece.availableTime - timeInSeconds];
+}
+
 - (void)setPauseButtonEnabled:(BOOL)enabled
 {
     NSString *title = enabled ? @"K" : @"";
@@ -262,6 +304,9 @@ static const float CHShowTenthsTime = 10.0f;
     [self.pauseButton setTitle:title forState:UIControlStateHighlighted];
     self.pauseButton.userInteractionEnabled = enabled;
     
+    [self.timeUpdateButtons enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL * _Nonnull stop) {
+        button.hidden = enabled;
+    }];
 }
 
 #pragma mark - UIStoryboard Segue
@@ -273,7 +318,6 @@ static const float CHShowTenthsTime = 10.0f;
         ((CHChessClockSettingsTableViewController * )segue.destinationViewController).delegate = self;
     }
 }
-
 
 //------------------------------------------------------------------------------
 #pragma mark - CHChessClockSettingsTableViewControllerDelegate methods

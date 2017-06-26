@@ -19,8 +19,6 @@
 #import "UIColor+ChessClock.h"
 #import "CHTableViewHeader.h"
 
-static const NSInteger kAddButtonTag = 1000;
-
 //------------------------------------------------------------------------------
 #pragma mark Private methods declarations
 //------------------------------------------------------------------------------
@@ -28,12 +26,12 @@ static const NSInteger kAddButtonTag = 1000;
 <CHChessClockIncrementTableViewControllerDelegate, CHChessClockTimeControlStageTableViewControllerDelegate,
 CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
-@property (weak, nonatomic) IBOutlet UISwitch *duplicateSettingsSwitch;
-@property (strong, nonatomic) IBOutlet UIView *tableFooterView;
+@property (weak, nonatomic) IBOutlet UITableViewCell* nameTableViewCell;
+@property (weak, nonatomic) IBOutlet UISwitch* duplicateSettingsSwitch;
+@property (weak, nonatomic) IBOutlet UIView* tableFooterView;
 
 @property (weak, nonatomic) CHChessClockTimeControlStage* stageToUpdate;
-@property (strong, nonatomic) UIPopoverController *customPopoverController;
+@property (strong, nonatomic) UIPopoverController* customPopoverController;
 
 @end
 
@@ -43,12 +41,15 @@ CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
 @implementation CHChessClockTimeControlTableViewController
 
 static const NSUInteger CHNameSection = 0;
-static const NSUInteger CHExistingTimeControlStagesSection = 1;
-static const NSUInteger CHNewTimeControlStageSection = 2;
-static const NSUInteger CHIncrementSection = 3;
-static const NSUInteger CHSectionCount = 4;
+static const NSUInteger CHTimeControlStagesSection = 1;
+static const NSUInteger CHIncrementSection = 2;
+static const NSUInteger CHSectionCount = 3;
+
 static const NSUInteger CHNameTextFieldTag = 1;
+static const NSUInteger CHNameLabelTag = 2;
+
 static const NSUInteger CHMaxTimeControlStages = 3;
+static const NSInteger kAddButtonTag = 1000;
 
 - (void)viewDidLoad
 {
@@ -102,9 +103,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
+    /*if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
         return CHSectionCount - 1;
-    }
+    }*/
     
     return CHSectionCount;
 }
@@ -116,16 +117,20 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             return 1;
             break;
             
-        case CHExistingTimeControlStagesSection:
-            return [self.settings.stageManager stageCount];
-            break;
+        case CHTimeControlStagesSection:
+        {
+            NSUInteger stageCount = [self.settings.stageManager stageCount];
+            if ([self.settings.stageManager stageCount] != CHMaxTimeControlStages)
+            {
+                stageCount += 1;
+            }
             
-        case CHNewTimeControlStageSection:
-            return 1;
+            return stageCount;
             break;
+        }
             
         case CHIncrementSection:
-            return 1;
+            return 2;
             break;
             
         default:
@@ -143,25 +148,20 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             cell = [self nameCell];
             break;
             
-        case CHExistingTimeControlStagesSection:
-            cell = [self timeControlStageCellForRow:indexPath.row];
-            break;
-            
-        case CHNewTimeControlStageSection:
-            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-                // If the number of time control stages is the maximum, it means that
-                // that the new time control section was deleted. Treat this
-                // section as the increment section
-                cell = [self incrementCell];
+        case CHTimeControlStagesSection:
+            if (indexPath.row < [self.settings.stageManager stageCount])
+            {
+                cell = [self timeControlStageCellForRow:indexPath.row];
             }
-            else {
+            else
+            {
                 cell = [self addTimeControlStageCell];
             }
-            
+
             break;
             
         case CHIncrementSection:
-            cell = [self incrementCell];
+            cell = indexPath.row == 0 ? [self incrementTypeCell] : [self incrementValueCell];
             break;
             
         default:
@@ -177,7 +177,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     // Allow editing (deleting rows) if the row is:
     // - One of the time control stages
     // - Not the first time control stage row (we always need at least one stage)
-    return indexPath.section == CHExistingTimeControlStagesSection && indexPath.row != 0;
+    return indexPath.section == CHTimeControlStagesSection && indexPath.row != 0;
 }
 
 //------------------------------------------------------------------------------
@@ -194,15 +194,13 @@ static const NSUInteger CHMaxTimeControlStages = 3;
             [self selectedNameCellWithIndexPath:indexPath];
             break;
             
-        case CHExistingTimeControlStagesSection:
-            [self selectedExistingTimeControllCellWithIndexPath:indexPath];
+        case CHTimeControlStagesSection:
+            if (indexPath.row < [self.settings.stageManager stageCount]) {
+                [self selectedExistingTimeControllCellWithIndexPath:indexPath];
+            }
+            
             break;
         
-        case CHNewTimeControlStageSection:
-            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-                [self selectedIncrementCellWithIndexPath:indexPath];
-            }
-            break;
             
         case CHIncrementSection:
             [self selectedIncrementCellWithIndexPath:indexPath];
@@ -220,53 +218,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    CHTableViewHeader *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([CHTableViewHeader class])];
-    
-    switch (section) {
-        case CHNameSection:
-            headerView.titleLabel.text = NSLocalizedString(@"Name", nil);
-            break;
-            
-        case CHExistingTimeControlStagesSection:
-            headerView.titleLabel.text = NSLocalizedString(@"Stages", nil);
-            break;
-            
-        case CHNewTimeControlStageSection:
-            if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-                // If the number of time control stages is the maximum, it means that
-                // that the new time control stage section was deleted. Treat this
-                // section as the increment section
-                headerView.titleLabel.text = NSLocalizedString(@"Increment", nil);
-            }
-            
-            break;
-            
-        case CHIncrementSection:
-            headerView.titleLabel.text = NSLocalizedString(@"Increment", nil);
-            break;
-            
-        default:
-            break;
-    }
-    
-    return headerView;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case CHNameSection:
-        case CHExistingTimeControlStagesSection:
-        case CHIncrementSection:
-            return UITableViewAutomaticDimension;
-            
-        case CHNewTimeControlStageSection:
-            return ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) ? UITableViewAutomaticDimension : 0;
-        
-        default: return 0;
-    }
+    return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -296,19 +250,17 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     nameTextField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:placeholderText
                                     attributes:@{NSForegroundColorAttributeName: textColor}];
+    
+    
+    UILabel *nameLabel = [(UILabel *)cell viewWithTag:CHNameLabelTag];
+    nameLabel.textColor = [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self] ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
     return cell;
 }
 
-- (UITableViewCell*)timeControlStageCellForRow:(NSUInteger)row
+- (UITableViewCell *)timeControlStageCellForRow:(NSUInteger)row
 {
-    NSString* cellIdentifier = @"CHChessClockTimeControlStageCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:cellIdentifier];
-    }
+    UITableViewCell *cell = [self timeControlStageCell];
     
-    [self addStyleToCell:cell];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %lu", NSLocalizedString(@"Stage", nil), row + 1];
     cell.detailTextLabel.text = [[self.settings.stageManager stageAtIndex:row] description];
     
@@ -319,7 +271,19 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     else {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    return cell;
+}
 
+- (UITableViewCell *)timeControlStageCell
+{
+    NSString* cellIdentifier = @"CHChessClockTimeControlStageCell";
+    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                      reuseIdentifier:cellIdentifier];
+    }
+    
+    [self addStyleToCell:cell];
     return cell;
 }
 
@@ -366,19 +330,39 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     return cell;
 }
 
-- (UITableViewCell*)incrementCell
+- (UITableViewCell *)incrementTypeCell
 {
-    NSString* cellIdentifier = @"CHChessClockIncrementCell";
+    NSString* cellIdentifier = @"CHChessClockIncrementTypeCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                        reuseIdentifier:cellIdentifier];
         
-        cell.textLabel.text = NSLocalizedString(@"Type", nil);
+        cell.textLabel.text = NSLocalizedString(@"Increment Type", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     [self addStyleToCell:cell];
+    
+    NSString* detailString = [NSString stringWithFormat:@"%@",
+                              [self.settings.increment description]];
+    
+    cell.detailTextLabel.text = detailString;
+    return cell;
+}
+
+- (UITableViewCell *)incrementValueCell
+{
+    NSString* cellIdentifier = @"CHChessClockIncrementValueCell";
+    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                      reuseIdentifier:cellIdentifier];
+        
+        cell.textLabel.text = NSLocalizedString(@"Increment", nil);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     NSUInteger incrementValue = self.settings.increment.incrementValue;
     NSString* incrementValueString = [CHUtil formatTime:incrementValue showTenths:NO];
     
@@ -391,10 +375,9 @@ static const NSUInteger CHMaxTimeControlStages = 3;
         incrementValueString = [NSString stringWithFormat:@"%lu %@", (unsigned long)incrementValue, secondsString];
     }
     
-    NSString* detailString = [NSString stringWithFormat:@"%@, %@",
-                              [self.settings.increment description], incrementValueString];
+    [self addStyleToCell:cell];
     
-    cell.detailTextLabel.text = detailString;
+    cell.detailTextLabel.text = incrementValueString;
     return cell;
 }
 
@@ -413,17 +396,8 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 - (void)removeTimeStageAtIndex:(NSUInteger)timeStageIndex
 {
     [self.settings.stageManager removeTimeStageAtIndex:timeStageIndex];
-    
-    [self.tableView beginUpdates];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHExistingTimeControlStagesSection]
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHTimeControlStagesSection]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    if ([self.tableView numberOfSections] < CHSectionCount) {
-        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:CHNewTimeControlStageSection]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    [self.tableView endUpdates];
 }
 
 - (UITextField*)nameTextField
@@ -446,26 +420,15 @@ static const NSUInteger CHMaxTimeControlStages = 3;
     
     [self.settings.stageManager addTimeStage:stage];
     
-    NSUInteger stageCount = [self.settings.stageManager stageCount];
-    
-    [self.tableView beginUpdates];
-
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHExistingTimeControlStagesSection]
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHTimeControlStagesSection]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    if (stageCount == CHMaxTimeControlStages) {
-        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:CHNewTimeControlStageSection]
-                      withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-    [self.tableView endUpdates];
 }
 
 - (void)reloadRowWithStage:(CHChessClockTimeControlStage*)stage
 {
     if (stage != nil) {
         NSUInteger stageIndex = [self.settings.stageManager indexOfStage:stage];
-        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:stageIndex inSection:CHExistingTimeControlStagesSection];
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:stageIndex inSection:CHTimeControlStagesSection];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -569,15 +532,7 @@ static const NSUInteger CHMaxTimeControlStages = 3;
 {
     self.settings.increment = viewController.increment;
     
-    NSUInteger section = CHIncrementSection;
-    if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-        // If the number of time control stages is the maximum, it means that
-        // that the new time control section was deleted. The increment section
-        // is now the "new time control stage" section
-        section = CHNewTimeControlStageSection;
-    }
-    
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:CHIncrementSection];
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
