@@ -46,6 +46,8 @@
 		0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */; };
 		0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */; };
 		0FFC10E41E92756A00353C08 /* CHChessClockTimeControlTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */; };
+		A20E8EFE1F02C02400A2DFE6 /* CHIncrementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */; };
+		A20E8F001F02C04100A2DFE6 /* CHIncrementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */; };
 		A25BFE0B1F02A16B00F216B7 /* CHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
@@ -137,6 +139,9 @@
 		0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_time_ended.mp3; sourceTree = "<group>"; };
 		0FFC10E21E92756A00353C08 /* CHChessClockTimeControlTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlTabBarController.h; sourceTree = "<group>"; };
 		0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlTabBarController.m; sourceTree = "<group>"; };
+		A20E8EFC1F02C02400A2DFE6 /* CHIncrementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHIncrementCell.h; path = Classes/Views/CHIncrementCell.h; sourceTree = "<group>"; };
+		A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHIncrementCell.m; path = Classes/Views/CHIncrementCell.m; sourceTree = "<group>"; };
+		A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHIncrementCell.xib; sourceTree = "<group>"; };
 		A25BFE091F02A16B00F216B7 /* CHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTableViewCell.h; path = Classes/Views/CHTableViewCell.h; sourceTree = "<group>"; };
 		A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTableViewCell.m; path = Classes/Views/CHTableViewCell.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,11 +216,12 @@
 			isa = PBXGroup;
 			children = (
 				0F52D2491E56EF0700077F3C /* CHChessClockIncrementView.xib */,
+				0F52D24A1E56EF0700077F3C /* CHChessClockStageMovesCell.xib */,
+				0F52D24B1E56EF0700077F3C /* CHChessClockTimeControlNameCell.xib */,
 				0F52D24C1E56EF0700077F3C /* CHChessClockTimeControlStageView.xib */,
 				0F52D24D1E56EF0700077F3C /* CHChessClockTimeControlView.xib */,
 				0F52D24E1E56EF0700077F3C /* CHChessClockTimeView.xib */,
-				0F52D24A1E56EF0700077F3C /* CHChessClockStageMovesCell.xib */,
-				0F52D24B1E56EF0700077F3C /* CHChessClockTimeControlNameCell.xib */,
+				A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */,
 				0F9FF0C41E75AB970015B1E4 /* CHTableViewHeader.xib */,
 			);
 			name = xibs;
@@ -306,6 +312,8 @@
 		0FAB7A0D18C67FF00040677B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A20E8EFC1F02C02400A2DFE6 /* CHIncrementCell.h */,
+				A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */,
 				A25BFE091F02A16B00F216B7 /* CHTableViewCell.h */,
 				A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */,
 				0F9FF0C61E75ABC70015B1E4 /* CHTableViewHeader.h */,
@@ -541,6 +549,7 @@
 				0F9FF0C51E75AB970015B1E4 /* CHTableViewHeader.xib in Resources */,
 				0F52D2511E56EF0700077F3C /* CHChessClockTimeControlNameCell.xib in Resources */,
 				0F52D24F1E56EF0700077F3C /* CHChessClockIncrementView.xib in Resources */,
+				A20E8F001F02C04100A2DFE6 /* CHIncrementCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,6 +609,7 @@
 				0FAB7A0318C65C010040677B /* CHChessClockIncrementTableViewController.m in Sources */,
 				0FAB79FF18C65C010040677B /* CHChessClockSettings.m in Sources */,
 				0FAB7A0818C65C010040677B /* CHChessClockViewController.m in Sources */,
+				A20E8EFE1F02C02400A2DFE6 /* CHIncrementCell.m in Sources */,
 				0FAB79FD18C65C010040677B /* CHChessClockFischerIncrement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
