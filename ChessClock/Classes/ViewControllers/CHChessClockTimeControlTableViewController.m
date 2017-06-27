@@ -132,7 +132,7 @@ static const NSInteger kAddButtonTag = 1000;
         }
             
         case CHIncrementSection:
-            return 2;
+            return 1;
             break;
             
         default:
@@ -163,7 +163,7 @@ static const NSInteger kAddButtonTag = 1000;
             break;
             
         case CHIncrementSection:
-            cell = indexPath.row == 0 ? [self incrementTypeCell] : [self incrementValueCell];
+            cell = [self incrementCell];
             break;
             
         default:
@@ -321,28 +321,7 @@ static const NSInteger kAddButtonTag = 1000;
     return cell;
 }
 
-- (CHTableViewCell*)incrementTypeCell
-{
-    NSString* cellIdentifier = @"CHChessClockIncrementTypeCell";
-    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:cellIdentifier];
-        
-        cell.textLabel.text = NSLocalizedString(@"Increment Type", nil);
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    [cell setupStyleWithShouldDuplicateSettings:[self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]];
-    
-    NSString* detailString = [NSString stringWithFormat:@"%@",
-                              [self.settings.increment description]];
-    
-    cell.detailTextLabel.text = detailString;
-    return cell;
-}
-
-- (CHTableViewCell*)incrementValueCell
+- (CHTableViewCell*)incrementCell
 {
     NSString* cellIdentifier = @"CHChessClockIncrementValueCell";
     CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -363,7 +342,8 @@ static const NSInteger kAddButtonTag = 1000;
             secondsString = NSLocalizedString(@"sec", @"Abbreviation for second");
         }
         
-        incrementValueString = [NSString stringWithFormat:@"%lu %@", (unsigned long)incrementValue, secondsString];
+        incrementValueString = [NSString stringWithFormat:@"%@, %lu %@", [self.settings.increment description],
+                                (unsigned long)incrementValue, secondsString];
     }
     
     [cell setupStyleWithShouldDuplicateSettings:[self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]];
