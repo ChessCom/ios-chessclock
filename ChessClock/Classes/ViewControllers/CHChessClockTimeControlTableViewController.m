@@ -7,17 +7,21 @@
 //
 
 #import "CHChessClockTimeControlTableViewController.h"
-#import "CHChessClockSettings.h"
 #import "CHChessClockIncrementTableViewController.h"
 #import "CHChessClockTimeControlStageTableViewController.h"
+#import "CHChessClockTimeViewController.h"
+
+#import "CHTableViewHeader.h"
+#import "CHTableViewCell.h"
+
+#import "CHChessClockSettings.h"
 #import "CHChessClockIncrement.h"
 #import "CHChessClockFischerIncrement.h"
 #import "CHChessClockTimeControlStageManager.h"
 #import "CHChessClockTimeControlStage.h"
-#import "CHChessClockTimeViewController.h"
+
 #import "CHUtil.h"
 #import "UIColor+ChessClock.h"
-#import "CHTableViewHeader.h"
 
 //------------------------------------------------------------------------------
 #pragma mark Private methods declarations
@@ -274,39 +278,26 @@ static const NSInteger kAddButtonTag = 1000;
     return cell;
 }
 
-- (UITableViewCell *)timeControlStageCell
+- (CHTableViewCell*)timeControlStageCell
 {
     NSString* cellIdentifier = @"CHChessClockTimeControlStageCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier:cellIdentifier];
     }
     
-    [self addStyleToCell:cell];
+    [cell setupStyleWithShouldDuplicateSettings:[self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]];
+    
     return cell;
 }
 
-- (void)addStyleToCell:(UITableViewCell *)cell
-{
-    cell.backgroundColor = [UIColor clearColor];
-    cell.tintColor = [UIColor tableViewCellTextColor];
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-
-    cell.textLabel.textColor = cell.detailTextLabel.textColor =
-    [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self] ? [UIColor darkGrayColor] : [UIColor tableViewCellTextColor];
-}
-
-- (UITableViewCell*)addTimeControlStageCell
+- (CHTableViewCell*)addTimeControlStageCell
 {
     NSString* cellIdentifier = @"CHChessClockNewTimeControlStageCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:cellIdentifier];
         
         // This removes the cell rounded background
@@ -323,26 +314,28 @@ static const NSInteger kAddButtonTag = 1000;
         [cell.contentView addSubview:addButton];
     }
     
-    UIButton *addButton = [cell viewWithTag:kAddButtonTag];
-    addButton.enabled = ![self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
-    [self addStyleToCell:cell];
+    UIButton* addButton = [cell viewWithTag:kAddButtonTag];
+    
+    BOOL shouldDuplicateSettings = [self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self];
+    addButton.enabled = !shouldDuplicateSettings;
+    [cell setupStyleWithShouldDuplicateSettings:shouldDuplicateSettings];
         
     return cell;
 }
 
-- (UITableViewCell *)incrementTypeCell
+- (CHTableViewCell*)incrementTypeCell
 {
     NSString* cellIdentifier = @"CHChessClockIncrementTypeCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                        reuseIdentifier:cellIdentifier];
         
         cell.textLabel.text = NSLocalizedString(@"Increment Type", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    [self addStyleToCell:cell];
+    [cell setupStyleWithShouldDuplicateSettings:[self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]];
     
     NSString* detailString = [NSString stringWithFormat:@"%@",
                               [self.settings.increment description]];
@@ -351,12 +344,12 @@ static const NSInteger kAddButtonTag = 1000;
     return cell;
 }
 
-- (UITableViewCell *)incrementValueCell
+- (CHTableViewCell*)incrementValueCell
 {
     NSString* cellIdentifier = @"CHChessClockIncrementValueCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier:cellIdentifier];
         
         cell.textLabel.text = NSLocalizedString(@"Increment", nil);
@@ -375,7 +368,7 @@ static const NSInteger kAddButtonTag = 1000;
         incrementValueString = [NSString stringWithFormat:@"%lu %@", (unsigned long)incrementValue, secondsString];
     }
     
-    [self addStyleToCell:cell];
+    [cell setupStyleWithShouldDuplicateSettings:[self.dataSource timeControlTableViewcontrollerShouldDuplicateSettings:self]];
     
     cell.detailTextLabel.text = incrementValueString;
     return cell;

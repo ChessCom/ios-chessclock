@@ -8,14 +8,18 @@
 
 #import "CHChessClockSettingsTableViewController.h"
 #import "CHChessClockViewController.h"
-#import "CHChessClockSettingsManager.h"
-#import "CHChessClockSettings.h"
 #import "CHChessClockTimeControlTableViewController.h"
 #import "CHChessClockTimeControlTabBarController.h"
+
+#import "CHTableViewCell.h"
+
+#import "CHChessClockTimeControl.h"
+#import "CHChessClockSettingsManager.h"
+#import "CHChessClockSettings.h"
+
 #import "CHUtil.h"
 #import "CHAppDelegate.h"
 #import "UIColor+ChessClock.h"
-#import "CHChessClockTimeControl.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -71,8 +75,15 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.currentViewController = nil;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    NSIndexPath* selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    if (selectedIndexPath != nil)
+    {
+        [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -107,18 +118,12 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (UITableViewCell*)cellWithIdentifier:(NSString*)identifier
 {
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.tintColor = [UIColor tableViewCellTextColor];
-    cell.textLabel.textColor = [UIColor tableViewCellTextColor];
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    [cell setupStyle];
     
     return cell;
 }

@@ -7,11 +7,14 @@
 //
 
 #import "CHChessClockIncrementTableViewController.h"
-#import "CHChessClockIncrement.h"
 #import "CHChessClockTimeViewController.h"
+
+#import "CHTableViewHeader.h"
+#import "CHTableViewCell.h"
+
+#import "CHChessClockIncrement.h"
 #import "CHUtil.h"
 #import "UIColor+ChessClock.h"
-#import "CHTableViewHeader.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -95,12 +98,10 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 - (UITableViewCell*)incrementTypeCell
 {
     NSString* reuseIdentifier = @"CHIncrementTypeCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        [cell setupStyle];
         
         UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:
                                                 [NSArray arrayWithObjects:@"Delay",
@@ -124,17 +125,10 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 - (UITableViewCell*)incrementValueCell
 {
     NSString* reuseIdentifier = @"CHIncrementValueCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.tintColor = [UIColor tableViewCellTextColor];
-        cell.textLabel.textColor = [UIColor tableViewCellTextColor];
-        cell.preservesSuperviewLayoutMargins = NO;
-        cell.separatorInset = UIEdgeInsetsZero;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+        [cell setupStyle];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

@@ -613,13 +613,6 @@
                                                     <color key="textColor" red="0.78823529411764703" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0D-Bu-SZD">
-                                                    <rect key="frame" x="0.0" y="131" width="320" height="1"/>
-                                                    <color key="backgroundColor" red="0.1529411765" green="0.1450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="RTp-7e-jFU"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -627,11 +620,8 @@
                                                 <constraint firstItem="6GF-vU-DLw" firstAttribute="centerX" secondItem="2uL-Ng-rvA" secondAttribute="centerX" id="FfA-iA-FtR"/>
                                                 <constraint firstItem="dMe-qN-X1p" firstAttribute="top" secondItem="2uL-Ng-rvA" secondAttribute="top" constant="20" id="fDd-so-DIw"/>
                                                 <constraint firstItem="6GF-vU-DLw" firstAttribute="top" secondItem="dMe-qN-X1p" secondAttribute="bottom" constant="17" id="gf6-D3-iD6"/>
-                                                <constraint firstAttribute="bottom" secondItem="U0D-Bu-SZD" secondAttribute="bottom" id="k1H-Tj-EQD"/>
                                                 <constraint firstItem="6GF-vU-DLw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2uL-Ng-rvA" secondAttribute="leading" constant="10" id="kia-Cb-ITA"/>
-                                                <constraint firstItem="U0D-Bu-SZD" firstAttribute="leading" secondItem="2uL-Ng-rvA" secondAttribute="leading" id="knd-lB-gBJ"/>
                                                 <constraint firstAttribute="centerX" secondItem="dMe-qN-X1p" secondAttribute="centerX" id="tqh-0E-bsh"/>
-                                                <constraint firstAttribute="trailing" secondItem="U0D-Bu-SZD" secondAttribute="trailing" id="xcm-3X-GcD"/>
                                             </constraints>
                                         </view>
                                         <connections>

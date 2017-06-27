@@ -46,6 +46,7 @@
 		0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */; };
 		0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */; };
 		0FFC10E41E92756A00353C08 /* CHChessClockTimeControlTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */; };
+		A25BFE0B1F02A16B00F216B7 /* CHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
 		C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
@@ -136,6 +137,8 @@
 		0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_time_ended.mp3; sourceTree = "<group>"; };
 		0FFC10E21E92756A00353C08 /* CHChessClockTimeControlTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlTabBarController.h; sourceTree = "<group>"; };
 		0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlTabBarController.m; sourceTree = "<group>"; };
+		A25BFE091F02A16B00F216B7 /* CHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTableViewCell.h; path = Classes/Views/CHTableViewCell.h; sourceTree = "<group>"; };
+		A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTableViewCell.m; path = Classes/Views/CHTableViewCell.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -303,10 +306,12 @@
 		0FAB7A0D18C67FF00040677B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0FAB7A0E18C680110040677B /* CHTimePieceView.h */,
-				0FAB7A0F18C680110040677B /* CHTimePieceView.m */,
+				A25BFE091F02A16B00F216B7 /* CHTableViewCell.h */,
+				A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */,
 				0F9FF0C61E75ABC70015B1E4 /* CHTableViewHeader.h */,
 				0F9FF0C71E75ABC70015B1E4 /* CHTableViewHeader.m */,
+				0FAB7A0E18C680110040677B /* CHTimePieceView.h */,
+				0FAB7A0F18C680110040677B /* CHTimePieceView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -572,6 +577,7 @@
 			files = (
 				0FAB7A0C18C667FB0040677B /* CHUtil.m in Sources */,
 				0F3EA87B1E48A5630017AC6C /* UIColor+ChessClock.m in Sources */,
+				A25BFE0B1F02A16B00F216B7 /* CHTableViewCell.m in Sources */,
 				0FAB7A0718C65C010040677B /* CHChessClockTimeViewController.m in Sources */,
 				0FAB79FE18C65C010040677B /* CHChessClockIncrement.m in Sources */,
 				0F4000F218D9076A00402B92 /* CHSoundPlayer.m in Sources */,
