@@ -79,8 +79,6 @@ static const NSInteger kAddButtonTag = 1000;
     
     [self.navigationController setNavigationBarHidden:NO
                                              animated:YES];
-    
-    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -525,8 +523,8 @@ static const NSInteger kAddButtonTag = 1000;
 {
     self.settings.increment = viewController.increment;
     
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:CHIncrementSection];
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHIncrementSection]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 //------------------------------------------------------------------------------
