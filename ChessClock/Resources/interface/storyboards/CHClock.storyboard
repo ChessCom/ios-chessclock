@@ -574,7 +574,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-W4-6Ax">
                                         <rect key="frame" x="0.0" y="513" width="320" height="55"/>
-                                        <color key="backgroundColor" red="0.8901960784313725" green="0.5607843137254902" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.88235294117647056" green="0.5607843137254902" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="hXq-sS-3MQ"/>
                                         </constraints>
