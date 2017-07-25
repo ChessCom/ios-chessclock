@@ -53,11 +53,20 @@ static NSString* const CHTimeStagesArchiveKey = @"timeStages";
 - (void)addTimeStage:(CHChessClockTimeControlStage*)stage
 {
     // Set a default move count to the existing stages
-    for (CHChessClockTimeControlStage* stage in self.timeControlStages) {
+    [self.timeControlStages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CHChessClockTimeControlStage* stage = obj;
+        
         if (stage.movesCount == 0) {
-            stage.movesCount = 1;
+            if (idx == 0)
+            {
+                stage.movesCount = 40;
+            }
+            else if (idx == 1)
+            {
+                stage.movesCount = 20;
+            }
         }
-    }
+    }];
     
     [self.timeControlStages addObject:stage];
 }
