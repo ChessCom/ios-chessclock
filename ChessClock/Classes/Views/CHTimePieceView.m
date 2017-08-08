@@ -26,6 +26,16 @@
 //------------------------------------------------------------------------------
 @implementation CHTimePieceView
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+    CGFloat fontSize = isiPad ? 200.0 : 90.0;
+    self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
+                                                                    weight:UIFontWeightBold];
+}
+
 - (void)highlight
 {
     self.availableTimeLabel.textColor = [UIColor whiteColor];    

@@ -98,16 +98,6 @@ static const float CHShowTenthsTime = 10.0f;
     [self updateInterfaceWithTraitCollection:self.traitCollection];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    CGFloat currentFloatSize = self.playerOneTimePieceView.availableTimeLabel.font.pointSize;
-    
-    self.playerOneTimePieceView.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:currentFloatSize weight:UIFontWeightBold];
-    self.playerTwoTimePieceView.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:currentFloatSize weight:UIFontWeightBold];
-}
-
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
