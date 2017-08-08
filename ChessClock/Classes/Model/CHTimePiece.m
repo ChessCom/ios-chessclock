@@ -48,7 +48,6 @@
         self.availableTime -= delta;
         if (self.availableTime < 0.0f) {
             self.availableTime = 0.0f;
-            self.stageIndex++;
         }
     }
     

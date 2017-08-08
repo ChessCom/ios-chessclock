@@ -370,7 +370,6 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)chessClockTimeEnded:(CHChessClock*)chessClock withLastActiveTimePiece:(CHTimePiece *)timePiece
 {
-    
     if (self.playerOneTimePieceView.tag == timePiece.timePieceId) {
         [self.playerOneTimePieceView timeEnded];
     }

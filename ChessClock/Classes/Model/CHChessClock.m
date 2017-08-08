@@ -162,8 +162,7 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
 {
     [self.delegate chessClock:self availableTimeUpdatedForTimePiece:timePiece];
     
-    if (timePiece.availableTime <= 0.0f &&
-        timePiece.stageIndex == [timePiece.settings.stageManager stageCount])
+    if (timePiece.availableTime <= 0.0f && self.activePiece != nil)
     {
         self.activePiece = nil;
         self.timeEnded = YES;
