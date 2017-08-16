@@ -12,7 +12,10 @@
 
 + (UIColor *)selectedTimePieceButtonColor;
 + (UIColor *)unselectedTimePieceButtonColor;
++ (UIColor *)timeEndedButtonColor;
+
 + (UIColor *)unselectedTimePieceTextColor;
+
 + (UIColor *)navigationBarTintColor;
 + (UIColor *)navigationBarTextColor;
 + (UIColor *)tableViewCellTextColor;

@@ -57,7 +57,7 @@
     self.availableTimeLabel.textColor = [UIColor whiteColor];
     self.timePieceButton.userInteractionEnabled = NO;
 
-    self.backgroundColor = [UIColor selectedTimePieceButtonColor];
+    self.backgroundColor = [UIColor timeEndedButtonColor];
 }
 
 - (void)setTimeControlStageDotCount:(NSUInteger)dotCount

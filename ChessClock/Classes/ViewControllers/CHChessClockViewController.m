@@ -33,9 +33,9 @@ CHChessClockTimeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerOneTimePieceView;
 @property (strong, nonatomic) IBOutlet CHTimePieceView *playerTwoTimePieceView;
 
-@property (weak, nonatomic) IBOutlet UIButton *resetButton;
-@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton* resetButton;
+@property (weak, nonatomic) IBOutlet UIButton* pauseButton;
+@property (weak, nonatomic) IBOutlet UIButton* settingsButton;
 
 @property (strong, nonatomic) CHChessClock* chessClock;
 @property (strong, nonatomic) CHChessClockSettingsManager* settingsManager;
@@ -156,13 +156,14 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)pauseClock
 {
-    if (!self.chessClock.paused) {
+    if (!self.chessClock.paused && !self.chessClock.timeEnded) {
         [self pauseTapped];
     }
 }
 
 - (void)resetClock
 {
+    self.pauseButton.hidden = NO;
     [self.chessClock resetWithTimeControl:self.settingsManager.timeControl];
     [self.playerOneTimePieceView unhighlightAndActivate:YES];
     [self.playerTwoTimePieceView unhighlightAndActivate:YES];
@@ -360,6 +361,8 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)chessClockTimeEnded:(CHChessClock*)chessClock withLastActiveTimePiece:(CHTimePiece *)timePiece
 {
+    self.pauseButton.hidden = YES;
+    
     if (self.playerOneTimePieceView.tag == timePiece.timePieceId) {
         [self.playerOneTimePieceView timeEnded];
     }
