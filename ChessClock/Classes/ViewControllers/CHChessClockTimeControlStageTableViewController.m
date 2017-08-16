@@ -11,6 +11,7 @@
 #import "CHChessClockTimeViewController.h"
 #import "CHChessClockTimeControlStageManager.h"
 #import "CHUtil.h"
+#import "UIColor+ChessClock.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -97,8 +98,8 @@ static const NSUInteger CHMaxMoves = 99;
                                        reuseIdentifier:cellIdentifier];
         
         cell.textLabel.text = NSLocalizedString(@"Time", nil);
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+        
+        [self addStyleToCell:cell];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -124,9 +125,9 @@ static const NSUInteger CHMaxMoves = 99;
             [movesTextField addTarget:self action:@selector(movesTextFieldBeingEdited:) forControlEvents:UIControlEventEditingChanged];
         }
     }
-    
 
     [self updateMovesCountTextFieldWithCell:cell];
+    [self addStyleToCell:cell];
     return cell;
 }
 
@@ -138,7 +139,7 @@ static const NSUInteger CHMaxMoves = 99;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:cellIdentifier];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self addStyleToCell:cell];
         
         // This removes the cell rounded background
         UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -154,6 +155,17 @@ static const NSUInteger CHMaxMoves = 99;
     }
     
     return cell;
+}
+
+- (void)addStyleToCell:(UITableViewCell *)cell
+{
+    cell.backgroundColor = [UIColor clearColor];
+    cell.tintColor = [UIColor tableViewCellTextColor];
+    cell.textLabel.textColor = [UIColor tableViewCellTextColor];
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (IBAction)movesTextFieldBeingEdited:(UITextField*)sender
@@ -204,7 +216,7 @@ static const NSUInteger CHMaxMoves = 99;
 
 - (void)selectedTimeCell:(UITableViewCell*)cell
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeView"];
+    NSString* nibName = @"CHChessClockTimeView";
     CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                           initWithNibName:nibName bundle:nil];
     timeViewController.delegate = self;
@@ -282,10 +294,6 @@ static const NSUInteger CHMaxMoves = 99;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     switch (indexPath.section) {
         case CHMovesCountSection:
@@ -314,6 +322,8 @@ static const NSUInteger CHMaxMoves = 99;
             break;
     }
     
+    
+    cell.separatorInset = UIEdgeInsetsZero;
     return cell;
 }
 

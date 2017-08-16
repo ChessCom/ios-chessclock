@@ -8,6 +8,7 @@
 
 #import "CHTimePieceView.h"
 #import "CHUtil.h"
+#import "UIColor+ChessClock.h"
 #import <QuartzCore/QuartzCore.h>
 
 //------------------------------------------------------------------------------
@@ -25,24 +26,30 @@
 //------------------------------------------------------------------------------
 @implementation CHTimePieceView
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+    CGFloat fontSize = isiPad ? 200.0 : 90.0;
+    self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
+                                                                    weight:UIFontWeightBold];
+}
+
 - (void)highlight
 {
     self.availableTimeLabel.textColor = [UIColor whiteColor];    
     self.timePieceButton.userInteractionEnabled = YES;
     
-    UIImage* imageNormal = [UIImage imageNamed:@"chessClock_playingTimePieceNormal"];
-    UIImage* imageSelected = [UIImage imageNamed:@"chessClock_playingTimePieceSelected"];
-    [self.timePieceButton setBackgroundImage:imageNormal forState:UIControlStateNormal];
-    [self.timePieceButton setBackgroundImage:imageSelected forState:UIControlStateHighlighted];
+    self.backgroundColor = [UIColor selectedTimePieceButtonColor];
 }
 
 - (void)unhighlightAndActivate:(BOOL)activate
 {
-    self.availableTimeLabel.textColor = [UIColor blackColor];
+    self.availableTimeLabel.textColor = [UIColor unselectedTimePieceTextColor];
     self.timePieceButton.userInteractionEnabled = activate;
     
-    UIImage* image = [UIImage imageNamed:@"chessClock_notPlayingTimePiece"];
-    [self.timePieceButton setBackgroundImage:image forState:UIControlStateNormal];
+    self.backgroundColor = [UIColor unselectedTimePieceButtonColor];
 }
 
 - (void)timeEnded
@@ -50,8 +57,7 @@
     self.availableTimeLabel.textColor = [UIColor whiteColor];
     self.timePieceButton.userInteractionEnabled = NO;
 
-    UIImage* image = [UIImage imageNamed:@"chessClock_timeUpTimePiece"];
-    [self.timePieceButton setBackgroundImage:image forState:UIControlStateNormal];
+    self.backgroundColor = [UIColor selectedTimePieceButtonColor];
 }
 
 - (void)setTimeControlStageDotCount:(NSUInteger)dotCount

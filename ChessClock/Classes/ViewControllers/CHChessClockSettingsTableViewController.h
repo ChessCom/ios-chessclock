@@ -10,13 +10,16 @@
 
 @class CHChessClockSettingsManager;
 @class CHChessClockSettings;
+@class CHChessClockSettingsTableViewController;
+@class CHChessClockTimeControl;
 
 @protocol CHChessClockSettingsTableViewControllerDelegate <NSObject>
 
-- (void)settingsTableViewController:(id)settingsTableViewController
-                  didUpdateSettings:(CHChessClockSettings *)settings;
+- (void)settingsTableViewController:(CHChessClockSettingsTableViewController *)viewController
+               didUpdateTimeControl:(CHChessClockTimeControl *)timeControl;
 
-- (void)settingsTableViewControllerDidStartClock:(id)settingsTableViewController andReset:(BOOL)reset;
+- (void)settingsTableViewControllerDidStartClock:(CHChessClockSettingsTableViewController *)viewController
+                                     byResetting:(BOOL)didReset;
 
 @end
 

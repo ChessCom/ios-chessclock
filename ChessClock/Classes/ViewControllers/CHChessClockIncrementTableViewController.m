@@ -7,15 +7,20 @@
 //
 
 #import "CHChessClockIncrementTableViewController.h"
-#import "CHChessClockIncrement.h"
 #import "CHChessClockTimeViewController.h"
+
+#import "CHTableViewHeader.h"
+#import "CHIncrementCell.h"
+
+#import "CHChessClockIncrement.h"
 #import "CHUtil.h"
+#import "UIColor+ChessClock.h"
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
 //------------------------------------------------------------------------------
 @interface CHChessClockIncrementTableViewController()
-<CHChessClockTimeViewControllerDelegate, UIPopoverControllerDelegate>
+<CHChessClockTimeViewControllerDelegate, CHIncrementCellDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) NSDictionary* incrementsTypesDictionary;
 @property (assign, nonatomic) NSUInteger selectedIncrementValue;
@@ -30,11 +35,13 @@
 
 static const NSUInteger CHIncrementTypeSection = 0;
 static const NSUInteger CHIncrementValueSection = 1;
-static const NSUInteger CHIncrementTypeSegmentedControlTag = 1;
 
 static const NSUInteger CHDelaySegmentIndex = 0;
 static const NSUInteger CHBronsteinSegmentIndex = 1;
 static const NSUInteger CHFischerSegmentIndex = 2;
+
+static NSString* const CHIncrementCellIdentifier = @"CHIncrementCell";
+
 
 - (void)viewDidLoad
 {
@@ -42,6 +49,18 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     
     self.title = NSLocalizedString(@"Increment", nil);
     self.selectedIncrementValue = self.increment.incrementValue;
+    
+    NSString *tableViewHeaderIdentifier = NSStringFromClass([CHTableViewHeader class]);
+    [self.tableView registerNib: [UINib nibWithNibName:tableViewHeaderIdentifier
+                                                bundle:nil]
+                    forHeaderFooterViewReuseIdentifier:tableViewHeaderIdentifier];
+    
+    self.tableView.sectionHeaderHeight = self.tableView.sectionFooterHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = self.tableView.estimatedSectionFooterHeight = 10;
+    self.tableView.estimatedRowHeight = 20;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:CHIncrementCellIdentifier bundle:nil]
+         forCellReuseIdentifier:CHIncrementCellIdentifier];
 }
 
 //------------------------------------------------------------------------------
@@ -58,55 +77,19 @@ static const NSUInteger CHFischerSegmentIndex = 2;
     }
     
     return _incrementsTypesDictionary;
+    
+    return nil;
 }
 
-- (void)incrementTypeChanged:(UISegmentedControl*)sender
+- (CHIncrementCell*)incrementTypeCellForIndexPath:(NSIndexPath*)indexPath
 {
-    NSString* selectedIncrementClassName = nil;
-    
-    for (NSString* incrementClassName in self.incrementsTypesDictionary) {
-        if ([[self.incrementsTypesDictionary objectForKey:incrementClassName] integerValue] == sender.selectedSegmentIndex) {
-            selectedIncrementClassName = incrementClassName;
-            break;
-        }
-    }
-    
-    CHChessClockIncrement* increment = [[NSClassFromString(selectedIncrementClassName) alloc]
-                                        initWithIncrementValue:self.selectedIncrementValue];
-    self.increment = increment;
-    
-    [self.delegate chessClockIncrementTableViewControllerUpdatedIncrement:self];
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:CHIncrementTypeSection]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (UITableViewCell*)incrementTypeCell
-{
-    NSString* reuseIdentifier = @"CHIncrementTypeCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        // This removes the cell rounded background
-        UIView* backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        cell.backgroundView = backgroundView;
-
-        UISegmentedControl* segmentedControl = [[UISegmentedControl alloc] initWithItems:
-                                                [NSArray arrayWithObjects:@"Delay",
-                                                 @"Bronstein", @"Fischer", nil]];
-        
-        segmentedControl.frame = cell.bounds;
-        segmentedControl.tag = CHIncrementTypeSegmentedControlTag;
-        segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        [segmentedControl addTarget:self action:@selector(incrementTypeChanged:) forControlEvents:UIControlEventValueChanged];
-        [cell.contentView addSubview:segmentedControl];
-    }
+    CHIncrementCell* cell = [self.tableView dequeueReusableCellWithIdentifier:CHIncrementCellIdentifier
+                                                                 forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.descriptionLabel.text = [self.increment incrementDescription];
     
     NSString* incrementClassName = NSStringFromClass([self.increment class]);
-    UISegmentedControl* segmentedControl = (UISegmentedControl*)[cell viewWithTag:CHIncrementTypeSegmentedControlTag];
-    [segmentedControl setSelectedSegmentIndex:[[self.incrementsTypesDictionary objectForKey:incrementClassName] integerValue]];
+    [cell.segmentedControl setSelectedSegmentIndex:[[self.incrementsTypesDictionary objectForKey:incrementClassName] integerValue]];
 
     return cell;
 }
@@ -114,10 +97,10 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 - (UITableViewCell*)incrementValueCell
 {
     NSString* reuseIdentifier = @"CHIncrementValueCell";
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    CHTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0f];
+        cell = [[CHTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+        [cell setupStyle];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -145,7 +128,7 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 
 - (void)selectedIncrementValueCell:(UITableViewCell*)cell
 {
-    NSString* nibName = [CHUtil nibNameWithBaseName:@"CHChessClockTimeView"];
+    NSString* nibName = @"CHChessClockTimeView";
     CHChessClockTimeViewController* timeViewController = [[CHChessClockTimeViewController alloc]
                                                           initWithNibName:nibName bundle:nil];
     timeViewController.maximumMinutes = 60;
@@ -182,43 +165,21 @@ static const NSUInteger CHFischerSegmentIndex = 2;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7)
-    {
-        tableView.tintColor = [UIColor blackColor];
-    }
     UITableViewCell* cell = nil;
     switch (indexPath.section) {
         case CHIncrementTypeSection:
-            cell = [self incrementTypeCell];
+            cell = [self incrementTypeCellForIndexPath:indexPath];
             break;
 
         case CHIncrementValueSection:
             cell = [self incrementValueCell];
+            [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
             
         default:
             break;
     }
 
-    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:15]];
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (section == CHIncrementTypeSection) {
-        return NSLocalizedString(@"Type", nil);
-    }
-    
-    return nil;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-
-    if (section == CHIncrementTypeSection) {
-        return [self.increment incrementDescription];
-    }
-    
-    return nil;
 }
 
 //------------------------------------------------------------------------------
@@ -234,6 +195,26 @@ static const NSUInteger CHFischerSegmentIndex = 2;
         default:
             break;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CHTableViewHeader *headerView = nil;
+    if (section == CHIncrementTypeSection) {
+        headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([CHTableViewHeader class])];
+        headerView.titleLabel.text = NSLocalizedString(@"Type", nil);
+    }
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (section == CHIncrementTypeSection) ? UITableViewAutomaticDimension : 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -258,6 +239,28 @@ static const NSUInteger CHFischerSegmentIndex = 2;
                   withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self.delegate chessClockIncrementTableViewControllerUpdatedIncrement:self];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - CHIncrementCellDelegate
+//------------------------------------------------------------------------------
+- (void)incrementCell:(CHIncrementCell*)cell changedToIncrementWithIndex:(NSUInteger)index
+{
+    NSString* selectedIncrementClassName = nil;
+    
+    for (NSString* incrementClassName in self.incrementsTypesDictionary) {
+        if ([[self.incrementsTypesDictionary objectForKey:incrementClassName] integerValue] == index) {
+            selectedIncrementClassName = incrementClassName;
+            break;
+        }
+    }
+    
+    CHChessClockIncrement* increment = [[NSClassFromString(selectedIncrementClassName) alloc]
+                                        initWithIncrementValue:self.selectedIncrementValue];
+    self.increment = increment;
+    [self.delegate chessClockIncrementTableViewControllerUpdatedIncrement:self];
+    
+    [self.tableView reloadData];
 }
 
 @end

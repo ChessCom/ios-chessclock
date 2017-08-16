@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chess_logo.png",
+      "filename" : "logoWhiteCopy3@2x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chess_logo@2x.png",
+      "filename" : "logoWhiteCopy3@3x.png",
       "scale" : "2x"
     },
     {
