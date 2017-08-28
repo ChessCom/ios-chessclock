@@ -8,32 +8,79 @@
 
 #import "CHSoundPlayer.h"
 
-#import <AudioToolbox/AudioToolbox.h>
+#import "OALSimpleAudio.h"
 
+//------------------------------------------------------------------------------
+#pragma mark - Private methods declarations
+//------------------------------------------------------------------------------
+@interface CHSoundPlayer()
+
+@property (strong, nonatomic) OALSimpleAudio* oalSimpleAudio;
+
+@end
+
+//------------------------------------------------------------------------------
+#pragma mark - CHSoundPlayer implementation
+//------------------------------------------------------------------------------
 @implementation CHSoundPlayer
 
-+ (void)playSwitch1Sound
+static NSString* const kCHSwitchOneSoundName = @"chess_clock_switch1";
+static NSString* const kCHSwitchTwoSoundName = @"chess_clock_switch2";
+static NSString* const kCHTimeEndedSoundName = @"chess_clock_time_ended";
+
++ (instancetype)sharedSoundPlayer
 {
-    [self playSoundWithName:@"chess_clock_switch1" ofType:@"mp3"];
+    static dispatch_once_t predicate = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&predicate, ^{
+        _sharedObject = [[self alloc] init];
+    });
+    
+    return _sharedObject;
 }
 
-+ (void)playSwitch2Sound
+- (id)init
 {
-    [self playSoundWithName:@"chess_clock_switch2" ofType:@"mp3"];
+    self = [super init];
+    if (self)
+    {
+        _oalSimpleAudio = [OALSimpleAudio sharedInstance];
+        _oalSimpleAudio.allowIpod = YES;
+        _oalSimpleAudio.useHardwareIfAvailable = NO;
+        _oalSimpleAudio.honorSilentSwitch = YES;
+    }
+    
+    return self;
 }
 
-+ (void)playEndSound
+- (void)preloadSounds
 {
-    [self playSoundWithName:@"chess_clock_time_ended" ofType:@"mp3"];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
 }
 
-+ (void)playSoundWithName:(NSString *)name ofType:(NSString *)type
+- (void)playSwitch1Sound
 {
-    NSString *soundPath = [[NSBundle mainBundle] pathForResource:name
-                                                          ofType:type];
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
-    AudioServicesPlaySystemSound (soundID);
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
+}
+
+- (void)playSwitch2Sound
+{
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
+}
+
+- (void)playEndSound
+{
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - Private methods definitions
+//------------------------------------------------------------------------------
+- (NSString*)soundPathForSoundName:(NSString*)soundName
+{
+    return [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
 }
 
 @end

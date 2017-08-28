@@ -201,12 +201,12 @@ static const float CHShowTenthsTime = 10.0f;
     if (selectedTimePieceId == self.playerOneTimePieceView.tag) {
         [self.playerTwoTimePieceView highlight];
         [self.playerOneTimePieceView unhighlightAndActivate:NO];
-        [CHSoundPlayer playSwitch1Sound];
+        [[CHSoundPlayer sharedSoundPlayer] playSwitch1Sound];
     }
     else if (selectedTimePieceId == self.playerTwoTimePieceView.tag) {
         [self.playerOneTimePieceView highlight];
         [self.playerTwoTimePieceView unhighlightAndActivate:NO];
-        [CHSoundPlayer playSwitch2Sound];
+        [[CHSoundPlayer sharedSoundPlayer] playSwitch2Sound];
     }
 }
 
@@ -378,7 +378,7 @@ static const float CHShowTenthsTime = 10.0f;
     }
     
     
-    [CHSoundPlayer playEndSound];
+    [[CHSoundPlayer sharedSoundPlayer] playEndSound];
     [self disableIdleTimer:NO];
 }
 

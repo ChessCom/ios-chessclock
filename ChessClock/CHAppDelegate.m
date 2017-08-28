@@ -8,8 +8,10 @@
 
 #import "CHAppDelegate.h"
 
-#import "CHUtil.h"
 #import "CHChessClockViewController.h"
+
+#import "CHUtil.h"
+#import "CHSoundPlayer.h"
 #import "UIColor+ChessClock.h"
 
 #import <Fabric/Fabric.h>
@@ -22,6 +24,7 @@
     [self configureAppearance];
     [self configureViewHierarchy];
     [self configureFabric];
+    [[CHSoundPlayer sharedSoundPlayer] preloadSounds];
     
     return YES;
 }

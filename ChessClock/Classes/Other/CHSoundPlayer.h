@@ -10,8 +10,11 @@
 
 @interface CHSoundPlayer : NSObject
 
-+ (void)playSwitch1Sound;
-+ (void)playSwitch2Sound;
-+ (void)playEndSound;
++ (instancetype)sharedSoundPlayer;
+
+- (void)preloadSounds;
+- (void)playSwitch1Sound;
+- (void)playSwitch2Sound;
+- (void)playEndSound;
 
 @end
