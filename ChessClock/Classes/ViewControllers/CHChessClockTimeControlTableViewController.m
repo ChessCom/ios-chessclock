@@ -105,10 +105,6 @@ static const NSInteger kAddButtonTag = 1000;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    /*if ([self.settings.stageManager stageCount] == CHMaxTimeControlStages) {
-        return CHSectionCount - 1;
-    }*/
-    
     return CHSectionCount;
 }
 
