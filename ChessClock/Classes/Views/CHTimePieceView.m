@@ -32,8 +32,16 @@
     
     BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     CGFloat fontSize = isiPad ? 200.0 : 90.0;
-    self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
-                                                                    weight:UIFontWeightBold];
+    
+    if ([UIFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)])
+    {
+        self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
+                                                                        weight:UIFontWeightBold];
+    }
+    else
+    {
+        self.availableTimeLabel.font = [UIFont boldSystemFontOfSize:fontSize];
+    }
 }
 
 - (void)highlight
