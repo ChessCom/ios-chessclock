@@ -82,11 +82,12 @@
     
     CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:self.stageIndex - 1];
     
-    if (self.movesCount < stage.movesCount) {
-        self.movesCount += 1;
-        if (self.movesCount >= stage.movesCount) {
-            self.stageIndex++;
-        }
+    self.movesCount += 1;
+    
+    if (self.movesCount >= stage.movesCount &&
+        ![self isInLastStage])
+    {
+        self.stageIndex++;
     }
 }
 
@@ -105,14 +106,14 @@
     self.movesCount = 0;
 }
 
+//------------------------------------------------------------------------------
+#pragma mark - Private methods definitions
+//------------------------------------------------------------------------------
 - (BOOL)isInLastStage
 {
     return self.stageIndex == [self.stageManager stageCount];
 }
 
-//------------------------------------------------------------------------------
-#pragma mark - Private methods definitions
-//------------------------------------------------------------------------------
 - (void)setAvailableTime:(NSTimeInterval)availableTime
 {
     _availableTime = availableTime;
@@ -153,8 +154,6 @@
     else {
         self.availableTime += nextStage.maximumTime;
     }
-    
-    self.movesCount = 0;
 }
 
 @end

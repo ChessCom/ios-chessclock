@@ -48,6 +48,5 @@
 - (void)start;
 - (void)stop;
 - (void)resetWithSettings:(CHChessClockSettings *)settings;
-- (BOOL)isInLastStage;
 
 @end
