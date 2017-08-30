@@ -26,7 +26,10 @@
 
 static NSString* const kCHSwitchOneSoundName = @"switch1";
 static NSString* const kCHSwitchTwoSoundName = @"switch2";
+static NSString* const kCHStartSoundName = @"start";
 static NSString* const kCHTimeEndedSoundName = @"timeEnded";
+static NSString* const kCHResetSoundName = @"reset";
+static NSString* const kCHPauseSoundName = @"pause";
 
 + (instancetype)sharedSoundPlayer
 {
@@ -70,9 +73,24 @@ static NSString* const kCHTimeEndedSoundName = @"timeEnded";
     [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
 }
 
+- (void)playStartSound
+{
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHStartSoundName]];
+}
+
 - (void)playEndSound
 {
     [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
+}
+
+- (void)playResetSound
+{
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHResetSoundName]];
+}
+
+- (void)playPauseSound
+{
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHPauseSoundName]];
 }
 
 //------------------------------------------------------------------------------

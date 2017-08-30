@@ -15,6 +15,9 @@
 - (void)preloadSounds;
 - (void)playSwitch1Sound;
 - (void)playSwitch2Sound;
+- (void)playStartSound;
 - (void)playEndSound;
+- (void)playResetSound;
+- (void)playPauseSound;
 
 @end
