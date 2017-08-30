@@ -24,9 +24,9 @@
 //------------------------------------------------------------------------------
 @implementation CHSoundPlayer
 
-static NSString* const kCHSwitchOneSoundName = @"chess_clock_switch1";
-static NSString* const kCHSwitchTwoSoundName = @"chess_clock_switch2";
-static NSString* const kCHTimeEndedSoundName = @"chess_clock_time_ended";
+static NSString* const kCHSwitchOneSoundName = @"switch1";
+static NSString* const kCHSwitchTwoSoundName = @"switch2";
+static NSString* const kCHTimeEndedSoundName = @"timeEnded";
 
 + (instancetype)sharedSoundPlayer
 {
@@ -80,7 +80,7 @@ static NSString* const kCHTimeEndedSoundName = @"chess_clock_time_ended";
 //------------------------------------------------------------------------------
 - (NSString*)soundPathForSoundName:(NSString*)soundName
 {
-    return [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
+    return [[NSBundle mainBundle] pathForResource:soundName ofType:@"wav"];
 }
 
 @end
