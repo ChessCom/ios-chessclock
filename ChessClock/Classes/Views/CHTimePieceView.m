@@ -74,7 +74,6 @@
         [view removeFromSuperview];
     }
     
-    self.movesCountLabel.hidden = (dotCount == 1);
     if (dotCount == 1)
     {
         return;
