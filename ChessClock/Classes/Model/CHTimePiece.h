@@ -19,7 +19,7 @@
 @protocol CHTimePieceDelegate <NSObject>
 
 - (void)timePieceAvailableTimeUpdated:(CHTimePiece*)timePiece;
-- (void)timePieceMovesCountUpdated:(CHTimePiece*)timePiece;
+- (void)timePieceTotalMovesCountUpdated:(CHTimePiece*)timePiece;
 - (void)timePieceUpdatedStage:(CHTimePiece*)timePiece;
 
 @end
@@ -36,7 +36,7 @@
 @property (assign, nonatomic, readonly) NSUInteger timePieceId;
 @property (assign, nonatomic, readonly) NSUInteger stageIndex;
 @property (assign, nonatomic, readonly) NSTimeInterval availableTime;
-@property (assign, nonatomic, readonly) NSUInteger movesCount;
+@property (assign, nonatomic, readonly) NSUInteger totalMovesCount;
 
 @property (nonatomic, readonly) CHChessClockSettings *settings;
 

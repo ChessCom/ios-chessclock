@@ -170,7 +170,7 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
     }
 }
 
-- (void)timePieceMovesCountUpdated:(CHTimePiece*)timePiece
+- (void)timePieceTotalMovesCountUpdated:(CHTimePiece*)timePiece
 {
     [self.delegate chessClock:self movesCountUpdatedForTimePiece:timePiece];
 }

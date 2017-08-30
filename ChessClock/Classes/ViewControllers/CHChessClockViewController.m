@@ -340,8 +340,8 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (void)chessClock:(CHChessClock*)chessClock movesCountUpdatedForTimePiece:(CHTimePiece*)timePiece
 {
-    CHTimePieceView *timePieceView = [self timePieceViewWithId:timePiece.timePieceId];
-    timePieceView.movesCountLabel.text = [@(timePiece.movesCount) stringValue];
+    CHTimePieceView* timePieceView = [self timePieceViewWithId:timePiece.timePieceId];
+    timePieceView.movesCountLabel.text = [@(timePiece.totalMovesCount) stringValue];
 }
 
 - (void)chessClock:(CHChessClock*)chessClock stageUpdatedForTimePiece:(CHTimePiece*)timePiece
