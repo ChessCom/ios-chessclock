@@ -119,11 +119,9 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
 
 - (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl
 {
-    if (self.activePiece != nil) {
-        self.paused = NO;
-        self.activePiece = nil;
-        self.timeEnded = NO;
-    }
+    self.paused = NO;
+    self.activePiece = nil;
+    self.timeEnded = NO;
     
     // Reset all time pieces
     [self.playerOneTimePiece resetWithSettings:timeControl.playerOneSettings];
