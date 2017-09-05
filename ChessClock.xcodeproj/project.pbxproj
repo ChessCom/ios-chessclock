@@ -45,8 +45,8 @@
 		A20BE2691F27B79D002A7A2F /* ChessGlyph-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20BE2681F27B79D002A7A2F /* ChessGlyph-Regular.ttf */; };
 		A20E8EFE1F02C02400A2DFE6 /* CHIncrementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */; };
 		A20E8F001F02C04100A2DFE6 /* CHIncrementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */; };
-		A255BEC51F575F1400AB36D6 /* switch1.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC31F575F1400AB36D6 /* switch1.wav */; };
-		A255BEC61F575F1400AB36D6 /* switch2.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC41F575F1400AB36D6 /* switch2.wav */; };
+		A22187621F5EF65700650368 /* switch1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A22187601F5EF65700650368 /* switch1.mp3 */; };
+		A22187631F5EF65700650368 /* switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A22187611F5EF65700650368 /* switch2.mp3 */; };
 		A255BEC81F575F8B00AB36D6 /* timeEnded.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC71F575F8B00AB36D6 /* timeEnded.wav */; };
 		A255BECA1F57617D00AB36D6 /* reset.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC91F57617D00AB36D6 /* reset.wav */; };
 		A255BECC1F57620000AB36D6 /* pause.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BECB1F57620000AB36D6 /* pause.wav */; };
@@ -149,8 +149,8 @@
 		A20E8EFC1F02C02400A2DFE6 /* CHIncrementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHIncrementCell.h; path = Classes/Views/CHIncrementCell.h; sourceTree = "<group>"; };
 		A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHIncrementCell.m; path = Classes/Views/CHIncrementCell.m; sourceTree = "<group>"; };
 		A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHIncrementCell.xib; sourceTree = "<group>"; };
-		A255BEC31F575F1400AB36D6 /* switch1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = switch1.wav; sourceTree = "<group>"; };
-		A255BEC41F575F1400AB36D6 /* switch2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = switch2.wav; sourceTree = "<group>"; };
+		A22187601F5EF65700650368 /* switch1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switch1.mp3; sourceTree = "<group>"; };
+		A22187611F5EF65700650368 /* switch2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switch2.mp3; sourceTree = "<group>"; };
 		A255BEC71F575F8B00AB36D6 /* timeEnded.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timeEnded.wav; sourceTree = "<group>"; };
 		A255BEC91F57617D00AB36D6 /* reset.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reset.wav; sourceTree = "<group>"; };
 		A255BECB1F57620000AB36D6 /* pause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pause.wav; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 				A255BECB1F57620000AB36D6 /* pause.wav */,
 				A255BEC91F57617D00AB36D6 /* reset.wav */,
 				A255BECD1F57644B00AB36D6 /* start.wav */,
-				A255BEC31F575F1400AB36D6 /* switch1.wav */,
-				A255BEC41F575F1400AB36D6 /* switch2.wav */,
+				A22187601F5EF65700650368 /* switch1.mp3 */,
+				A22187611F5EF65700650368 /* switch2.mp3 */,
 				A255BEC71F575F8B00AB36D6 /* timeEnded.wav */,
 			);
 			name = sounds;
@@ -573,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F52D2531E56EF0700077F3C /* CHChessClockTimeControlView.xib in Resources */,
+				A22187631F5EF65700650368 /* switch2.mp3 in Resources */,
 				C00DBBE918C52B8C00DDCB32 /* Images.xcassets in Resources */,
 				A255BEC81F575F8B00AB36D6 /* timeEnded.wav in Resources */,
 				A255BECE1F57644B00AB36D6 /* start.wav in Resources */,
@@ -582,11 +583,10 @@
 				0F52D2521E56EF0700077F3C /* CHChessClockTimeControlStageView.xib in Resources */,
 				A20BE2691F27B79D002A7A2F /* ChessGlyph-Regular.ttf in Resources */,
 				0F52D2501E56EF0700077F3C /* CHChessClockStageMovesCell.xib in Resources */,
-				A255BEC61F575F1400AB36D6 /* switch2.wav in Resources */,
 				A255BECA1F57617D00AB36D6 /* reset.wav in Resources */,
 				F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */,
-				A255BEC51F575F1400AB36D6 /* switch1.wav in Resources */,
 				A255BECC1F57620000AB36D6 /* pause.wav in Resources */,
+				A22187621F5EF65700650368 /* switch1.mp3 in Resources */,
 				C00DBBD818C52B8C00DDCB32 /* InfoPlist.strings in Resources */,
 				0F9FF0C51E75AB970015B1E4 /* CHTableViewHeader.xib in Resources */,
 				0F52D2511E56EF0700077F3C /* CHChessClockTimeControlNameCell.xib in Resources */,

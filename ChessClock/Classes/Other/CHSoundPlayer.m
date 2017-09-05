@@ -58,47 +58,56 @@ static NSString* const kCHPauseSoundName = @"pause";
 
 - (void)preloadSounds
 {
-    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
-    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
-    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchOneSoundName withIsWav:NO]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName withIsWav:NO]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHStartSoundName withIsWav:YES]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHTimeEndedSoundName withIsWav:YES]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHResetSoundName withIsWav:YES]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHPauseSoundName withIsWav:YES]];
 }
 
 - (void)playSwitch1Sound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchOneSoundName withIsWav:NO]];
 }
 
 - (void)playSwitch2Sound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName withIsWav:NO]];
 }
 
 - (void)playStartSound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHStartSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHStartSoundName withIsWav:YES]];
 }
 
 - (void)playEndSound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHTimeEndedSoundName withIsWav:YES]];
 }
 
 - (void)playResetSound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHResetSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHResetSoundName withIsWav:YES]];
 }
 
 - (void)playPauseSound
 {
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHPauseSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHPauseSoundName withIsWav:YES]];
 }
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------
-- (NSString*)soundPathForSoundName:(NSString*)soundName
+- (NSString*)soundPathForSoundName:(NSString*)soundName withIsWav:(BOOL)isWav
 {
-    return [[NSBundle mainBundle] pathForResource:soundName ofType:@"wav"];
+    NSString* type = @"wav";
+    if (!isWav)
+    {
+        type = @"mp3";
+    }
+    
+    return [[NSBundle mainBundle] pathForResource:soundName ofType:type];
 }
 
 @end
