@@ -87,11 +87,6 @@ static const float CHShowTenthsTime = 10.0f;
                                                        delegate:self];
     
     [self resetClockWithPlaySound:NO];
-    
-    UITapGestureRecognizer* recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeSwitchSounds)];
-    recognizer.numberOfTapsRequired = 2;
-    recognizer.numberOfTouchesRequired = 2;
-    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -198,11 +193,6 @@ static const float CHShowTenthsTime = 10.0f;
         [self.playerOneTimePieceView unhighlightAndActivate:YES];
         [self.playerTwoTimePieceView unhighlightAndActivate:YES];
     }
-}
-
-- (void)changeSwitchSounds
-{
-    [[CHSoundPlayer sharedSoundPlayer] moveToNextSwitchSound];
 }
 
 //------------------------------------------------------------------------------

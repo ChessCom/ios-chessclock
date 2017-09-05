@@ -20,6 +20,4 @@
 - (void)playResetSound;
 - (void)playPauseSound;
 
-- (void)moveToNextSwitchSound;
-
 @end

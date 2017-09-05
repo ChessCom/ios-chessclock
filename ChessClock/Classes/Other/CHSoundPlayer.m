@@ -16,7 +16,6 @@
 @interface CHSoundPlayer()
 
 @property (strong, nonatomic) OALSimpleAudio* oalSimpleAudio;
-@property (assign, nonatomic) NSUInteger currentSwitchSoundIndex;
 
 @end
 
@@ -25,12 +24,12 @@
 //------------------------------------------------------------------------------
 @implementation CHSoundPlayer
 
+static NSString* const kCHSwitchOneSoundName = @"switch1";
+static NSString* const kCHSwitchTwoSoundName = @"switch2";
 static NSString* const kCHStartSoundName = @"start";
 static NSString* const kCHTimeEndedSoundName = @"timeEnded";
 static NSString* const kCHResetSoundName = @"reset";
 static NSString* const kCHPauseSoundName = @"pause";
-
-static const NSUInteger kCHSwitchSoundsCount = 4;
 
 + (instancetype)sharedSoundPlayer
 {
@@ -52,7 +51,6 @@ static const NSUInteger kCHSwitchSoundsCount = 4;
         _oalSimpleAudio.allowIpod = YES;
         _oalSimpleAudio.useHardwareIfAvailable = NO;
         _oalSimpleAudio.honorSilentSwitch = YES;
-        _currentSwitchSoundIndex = 0;
     }
     
     return self;
@@ -60,28 +58,19 @@ static const NSUInteger kCHSwitchSoundsCount = 4;
 
 - (void)preloadSounds
 {
-    for (NSUInteger i = 0; i < kCHSwitchSoundsCount; i++)
-    {
-        NSString* switchOneSound = [self soundPathForSoundName:[self switchSoundNameWithIsForPlayerOne:YES currentSoundIndex:i]];
-        NSString* switchTwoSound = [self soundPathForSoundName:[self switchSoundNameWithIsForPlayerOne:NO currentSoundIndex:i]];
-        
-        [self.oalSimpleAudio preloadEffect:switchOneSound];
-        [self.oalSimpleAudio preloadEffect:switchTwoSound];
-    }
-    
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
+    [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
     [self.oalSimpleAudio preloadEffect:[self soundPathForSoundName:kCHTimeEndedSoundName]];
 }
 
 - (void)playSwitch1Sound
 {
-    NSString* switchSoundName = [self switchSoundNameWithIsForPlayerOne:YES currentSoundIndex:self.currentSwitchSoundIndex];
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:switchSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchOneSoundName]];
 }
 
 - (void)playSwitch2Sound
 {
-    NSString* switchSoundName = [self switchSoundNameWithIsForPlayerOne:NO currentSoundIndex:self.currentSwitchSoundIndex];
-    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:switchSoundName]];
+    [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHSwitchTwoSoundName]];
 }
 
 - (void)playStartSound
@@ -104,34 +93,12 @@ static const NSUInteger kCHSwitchSoundsCount = 4;
     [self.oalSimpleAudio playEffect:[self soundPathForSoundName:kCHPauseSoundName]];
 }
 
-- (void)moveToNextSwitchSound
-{
-    self.currentSwitchSoundIndex++;
-    
-    if (self.currentSwitchSoundIndex >= kCHSwitchSoundsCount)
-    {
-        self.currentSwitchSoundIndex = 0;
-    }
-}
-
 //------------------------------------------------------------------------------
 #pragma mark - Private methods definitions
 //------------------------------------------------------------------------------
 - (NSString*)soundPathForSoundName:(NSString*)soundName
 {
-    NSString* type = @"wav";
-    if ([soundName isEqualToString:@"switch1_0"] ||
-        [soundName isEqualToString:@"switch2_0"])
-    {
-        type = @"mp3";
-    }
-    
-    return [[NSBundle mainBundle] pathForResource:soundName ofType:type];
-}
-
-- (NSString*)switchSoundNameWithIsForPlayerOne:(BOOL)isForPlayerOne currentSoundIndex:(NSUInteger)currentSoundIndex
-{
-    return [NSString stringWithFormat:@"switch%@_%@", isForPlayerOne ? @(1) : @(2), @(currentSoundIndex)];
+    return [[NSBundle mainBundle] pathForResource:soundName ofType:@"wav"];
 }
 
 @end
