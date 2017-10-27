@@ -43,6 +43,7 @@
 
 static const NSUInteger CHAddNewTimeControlSection = 0;
 static const NSUInteger CHExistingTimeControlSection = 1;
+static const NSUInteger CHVersionSection = 2;
 
 - (void)viewDidLoad
 {
@@ -130,6 +131,9 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 
 - (void)populateNewTimeControlCell:(UITableViewCell*)cell withIndexPath:(NSIndexPath*)indexPath
 {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    cell.textLabel.textAlignment = NSTextAlignmentNatural;
     cell.textLabel.text = NSLocalizedString(@"New Time Control", nil);
 }
 
@@ -137,8 +141,21 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 {
     CHChessClockTimeControl* timeControl = [[self.settingsManager allTimeControls] objectAtIndex:indexPath.row];
     cell.textLabel.text = timeControl.name;
-    cell.accessoryType = timeControl == self.settingsManager.timeControl ?
-    UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    cell.textLabel.textAlignment = NSTextAlignmentNatural;
+    cell.accessoryType = timeControl == self.settingsManager.timeControl ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+}
+
+- (void)populateVersionCell:(UITableViewCell*)cell
+{
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:13];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString* versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    cell.textLabel.text = [NSString stringWithFormat:@"v%@ (%@)", shortVersionString, versionString];
 }
 
 - (void)existingTimeControlSelectedAtIndexPath:(NSIndexPath*)indexPath inTableView:(UITableView*)tableView
@@ -199,17 +216,18 @@ static const NSUInteger CHExistingTimeControlSection = 1;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.f;
+    return 0.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == CHAddNewTimeControlSection)
+    if (section == CHAddNewTimeControlSection ||
+        section == CHVersionSection)
     {
         return 1;
     }
@@ -224,14 +242,17 @@ static const NSUInteger CHExistingTimeControlSection = 1;
     switch (indexPath.section) {
         case CHAddNewTimeControlSection:
             cell = [self cellWithIdentifier:@"CHAddNewTimeControlCell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [self populateNewTimeControlCell:cell withIndexPath:indexPath];
             break;
             
         case CHExistingTimeControlSection:
             cell = [self cellWithIdentifier:@"CHExistingTimeControlCell"];
-            cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [self populateExistingTimeControlCell:cell withIndexPath:indexPath];
+            break;
+            
+        case CHVersionSection:
+            cell = [self cellWithIdentifier:@"CHVersionCell"];
+            [self populateVersionCell:cell];
             break;
             
         default:

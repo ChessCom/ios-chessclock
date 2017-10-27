@@ -30,6 +30,8 @@
 @interface CHChessClock : NSObject
 
 @property (assign, nonatomic, readonly) BOOL paused;
+@property (assign, nonatomic, readonly) BOOL timeEnded;
+
 @property (strong, nonatomic) CHTimePiece* playerOneTimePiece;
 @property (strong, nonatomic) CHTimePiece* playerTwoTimePiece;
 

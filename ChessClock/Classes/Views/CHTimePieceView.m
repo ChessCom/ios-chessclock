@@ -32,8 +32,16 @@
     
     BOOL isiPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     CGFloat fontSize = isiPad ? 200.0 : 90.0;
-    self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
-                                                                    weight:UIFontWeightBold];
+    
+    if ([UIFont respondsToSelector:@selector(monospacedDigitSystemFontOfSize:weight:)])
+    {
+        self.availableTimeLabel.font = [UIFont monospacedDigitSystemFontOfSize:fontSize
+                                                                        weight:UIFontWeightBold];
+    }
+    else
+    {
+        self.availableTimeLabel.font = [UIFont boldSystemFontOfSize:fontSize];
+    }
 }
 
 - (void)highlight
@@ -57,7 +65,7 @@
     self.availableTimeLabel.textColor = [UIColor whiteColor];
     self.timePieceButton.userInteractionEnabled = NO;
 
-    self.backgroundColor = [UIColor selectedTimePieceButtonColor];
+    self.backgroundColor = [UIColor timeEndedButtonColor];
 }
 
 - (void)setTimeControlStageDotCount:(NSUInteger)dotCount
@@ -66,7 +74,6 @@
         [view removeFromSuperview];
     }
     
-    self.movesCountLabel.hidden = (dotCount == 1);
     if (dotCount == 1)
     {
         return;

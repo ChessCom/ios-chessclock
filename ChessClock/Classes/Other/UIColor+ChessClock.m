@@ -20,6 +20,11 @@
     return [UIColor colorWithRed:86.0f / 255.0f green:81.0f / 255.0f blue:76.0f / 255.0f alpha:1.0f];
 }
 
++ (UIColor *)timeEndedButtonColor
+{
+    return [UIColor colorWithRed:179.0f / 255.0f green:52.0f / 255.0f blue:48.0f / 255.0f alpha:1.0f];
+}
+
 + (UIColor *)unselectedTimePieceTextColor
 {
     return [UIColor colorWithRed:21.0f / 255.0f green:20.0f / 255.0f blue:18.0f / 255.0f alpha:1.0f];

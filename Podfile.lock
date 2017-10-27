@@ -1,0 +1,12 @@
+PODS:
+  - ObjectAL-for-iPhone (2.6.0)
+
+DEPENDENCIES:
+  - ObjectAL-for-iPhone (= 2.6.0)
+
+SPEC CHECKSUMS:
+  ObjectAL-for-iPhone: 939215eb4b83c30ffe6dd9a637c47d1610db4e40
+
+PODFILE CHECKSUM: 2b67e50b7a1cd89859fa00950a1b6c6b2a1944b4
+
+COCOAPODS: 1.2.0

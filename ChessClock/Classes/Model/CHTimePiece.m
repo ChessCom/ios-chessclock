@@ -19,8 +19,9 @@
 
 @property (assign, nonatomic, readwrite) NSUInteger stageIndex;
 @property (assign, nonatomic, readwrite) NSTimeInterval availableTime;
-@property (assign, nonatomic, readwrite) NSUInteger movesCount;
-@property (strong, nonatomic) CHChessClockSettings *settings;
+@property (assign, nonatomic, readwrite) NSUInteger totalMovesCount;
+@property (assign, nonatomic, readwrite) NSUInteger movesCountInCurrentStage;
+@property (strong, nonatomic) CHChessClockSettings* settings;
 @property (assign, nonatomic) NSUInteger timePieceId;
 
 @end
@@ -82,9 +83,11 @@
     
     CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:self.stageIndex - 1];
     
-    if (self.movesCount < stage.movesCount) {
-        self.movesCount += 1;
-        if (self.movesCount >= stage.movesCount) {
+    self.totalMovesCount += 1;
+    
+    if (self.movesCountInCurrentStage < stage.movesCount) {
+        self.movesCountInCurrentStage += 1;
+        if (self.movesCountInCurrentStage >= stage.movesCount) {
             self.stageIndex++;
         }
     }
@@ -102,12 +105,8 @@
     CHChessClockTimeControlStage* stage = [self.stageManager stageAtIndex:_stageIndex];
     self.availableTime = stage.maximumTime;
     self.stageIndex = 1;
-    self.movesCount = 0;
-}
-
-- (BOOL)isInLastStage
-{
-    return self.stageIndex == [self.stageManager stageCount];
+    self.totalMovesCount = 0;
+    self.movesCountInCurrentStage = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -120,10 +119,10 @@
     [self.delegate timePieceAvailableTimeUpdated:self];
 }
 
-- (void)setMovesCount:(NSUInteger)movesCount
+- (void)setTotalMovesCount:(NSUInteger)totalMovesCount
 {
-    _movesCount = movesCount;
-    [self.delegate timePieceMovesCountUpdated:self];
+    _totalMovesCount = totalMovesCount;
+    [self.delegate timePieceTotalMovesCountUpdated:self];
 }
 
 - (void)setStageIndex:(NSUInteger)stageIndex
@@ -143,9 +142,17 @@
 
 - (void)updateStateAccordingToCurrentTimeStage
 {
+    if (self.stageIndex == 0) {
+        return;
+    }
+    
     // We substract one since the stages at the state manager are zero based
     NSUInteger nextStageIndex = self.stageIndex - 1;
     CHChessClockTimeControlStage* nextStage = [self.stageManager stageAtIndex:nextStageIndex];
+    
+    if (nextStage == nil) {
+        return;
+    }
 
     if (nextStageIndex == 0) {
         self.availableTime = nextStage.maximumTime;
@@ -154,7 +161,7 @@
         self.availableTime += nextStage.maximumTime;
     }
     
-    self.movesCount = 0;
+     self.movesCountInCurrentStage = 0;
 }
 
 @end

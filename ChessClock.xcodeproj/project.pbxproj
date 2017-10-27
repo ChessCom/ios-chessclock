@@ -41,14 +41,18 @@
 		0FAB7A0818C65C010040677B /* CHChessClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB79F818C65C010040677B /* CHChessClockViewController.m */; };
 		0FAB7A0C18C667FB0040677B /* CHUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB7A0B18C667FB0040677B /* CHUtil.m */; };
 		0FAB7A1018C680110040677B /* CHTimePieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB7A0F18C680110040677B /* CHTimePieceView.m */; };
-		0FC6826818C7E16F0064421D /* chess_clock_switch1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826518C7E16F0064421D /* chess_clock_switch1.mp3 */; };
-		0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */; };
-		0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */; };
 		0FFC10E41E92756A00353C08 /* CHChessClockTimeControlTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */; };
 		A20BE2691F27B79D002A7A2F /* ChessGlyph-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20BE2681F27B79D002A7A2F /* ChessGlyph-Regular.ttf */; };
 		A20E8EFE1F02C02400A2DFE6 /* CHIncrementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */; };
 		A20E8F001F02C04100A2DFE6 /* CHIncrementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */; };
+		A22187621F5EF65700650368 /* switch1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A22187601F5EF65700650368 /* switch1.mp3 */; };
+		A22187631F5EF65700650368 /* switch2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A22187611F5EF65700650368 /* switch2.mp3 */; };
+		A255BEC81F575F8B00AB36D6 /* timeEnded.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC71F575F8B00AB36D6 /* timeEnded.wav */; };
+		A255BECA1F57617D00AB36D6 /* reset.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BEC91F57617D00AB36D6 /* reset.wav */; };
+		A255BECC1F57620000AB36D6 /* pause.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BECB1F57620000AB36D6 /* pause.wav */; };
+		A255BECE1F57644B00AB36D6 /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = A255BECD1F57644B00AB36D6 /* start.wav */; };
 		A25BFE0B1F02A16B00F216B7 /* CHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */; };
+		A959644C2B9C7E74E625D42E /* libPods-ChessClockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 879B7CCF3A2208ABB6BB6FD1 /* libPods-ChessClockTests.a */; };
 		C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCD18C52B8C00DDCB32 /* Foundation.framework */; };
 		C00DBBD018C52B8C00DDCB32 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */; };
 		C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C00DBBD118C52B8C00DDCB32 /* UIKit.framework */; };
@@ -63,6 +67,7 @@
 		C00DBBFC18C52B8C00DDCB32 /* ChessClockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C00DBBFB18C52B8C00DDCB32 /* ChessClockTests.m */; };
 		C06831FA18F0560500B7BD96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06831F918F0560500B7BD96 /* SystemConfiguration.framework */; };
 		C06831FC18F0560E00B7BD96 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06831FB18F0560E00B7BD96 /* Security.framework */; };
+		CAF749F7E53F55074BAA8C82 /* libPods-ChessClock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A72F296B19F7002CF53B1B /* libPods-ChessClock.a */; };
 		F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +82,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032EB89A3EB9A3710F1DE825 /* Pods-ChessClockTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClockTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChessClockTests/Pods-ChessClockTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0F127BF81E9FA296009B432C /* CHChessClockTimeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControl.h; sourceTree = "<group>"; };
 		0F127BF91E9FA296009B432C /* CHChessClockTimeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControl.m; sourceTree = "<group>"; };
+		0F2DF7388CFB4321B2DD3FDB /* Pods-ChessClockTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClockTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessClockTests/Pods-ChessClockTests.release.xcconfig"; sourceTree = "<group>"; };
 		0F3EA8741E489CEE0017AC6C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = "ChessClock/Third Party/Crashlytics.framework"; sourceTree = SOURCE_ROOT; };
 		0F3EA8751E489CEE0017AC6C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "ChessClock/Third Party/Fabric.framework"; sourceTree = SOURCE_ROOT; };
 		0F3EA8791E48A5630017AC6C /* UIColor+ChessClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ChessClock.h"; path = "Classes/Other/UIColor+ChessClock.h"; sourceTree = "<group>"; };
@@ -133,15 +140,21 @@
 		0FAB7A0B18C667FB0040677B /* CHUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHUtil.m; path = Classes/Other/CHUtil.m; sourceTree = "<group>"; };
 		0FAB7A0E18C680110040677B /* CHTimePieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTimePieceView.h; path = Classes/Views/CHTimePieceView.h; sourceTree = "<group>"; };
 		0FAB7A0F18C680110040677B /* CHTimePieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTimePieceView.m; path = Classes/Views/CHTimePieceView.m; sourceTree = "<group>"; };
-		0FC6826518C7E16F0064421D /* chess_clock_switch1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_switch1.mp3; sourceTree = "<group>"; };
-		0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_switch2.mp3; sourceTree = "<group>"; };
-		0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chess_clock_time_ended.mp3; sourceTree = "<group>"; };
 		0FFC10E21E92756A00353C08 /* CHChessClockTimeControlTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHChessClockTimeControlTabBarController.h; sourceTree = "<group>"; };
 		0FFC10E31E92756A00353C08 /* CHChessClockTimeControlTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHChessClockTimeControlTabBarController.m; sourceTree = "<group>"; };
+		31A72F296B19F7002CF53B1B /* libPods-ChessClock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChessClock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		879B7CCF3A2208ABB6BB6FD1 /* libPods-ChessClockTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChessClockTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9401EC94957B71BF36167AF1 /* Pods-ChessClock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClock.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChessClock/Pods-ChessClock.release.xcconfig"; sourceTree = "<group>"; };
 		A20BE2681F27B79D002A7A2F /* ChessGlyph-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ChessGlyph-Regular.ttf"; path = "Resources/fonts/ChessGlyph-Regular.ttf"; sourceTree = "<group>"; };
 		A20E8EFC1F02C02400A2DFE6 /* CHIncrementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHIncrementCell.h; path = Classes/Views/CHIncrementCell.h; sourceTree = "<group>"; };
 		A20E8EFD1F02C02400A2DFE6 /* CHIncrementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHIncrementCell.m; path = Classes/Views/CHIncrementCell.m; sourceTree = "<group>"; };
 		A20E8EFF1F02C04100A2DFE6 /* CHIncrementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHIncrementCell.xib; sourceTree = "<group>"; };
+		A22187601F5EF65700650368 /* switch1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switch1.mp3; sourceTree = "<group>"; };
+		A22187611F5EF65700650368 /* switch2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switch2.mp3; sourceTree = "<group>"; };
+		A255BEC71F575F8B00AB36D6 /* timeEnded.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timeEnded.wav; sourceTree = "<group>"; };
+		A255BEC91F57617D00AB36D6 /* reset.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reset.wav; sourceTree = "<group>"; };
+		A255BECB1F57620000AB36D6 /* pause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pause.wav; sourceTree = "<group>"; };
+		A255BECD1F57644B00AB36D6 /* start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = start.wav; sourceTree = "<group>"; };
 		A25BFE091F02A16B00F216B7 /* CHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTableViewCell.h; path = Classes/Views/CHTableViewCell.h; sourceTree = "<group>"; };
 		A25BFE0A1F02A16B00F216B7 /* CHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTableViewCell.m; path = Classes/Views/CHTableViewCell.m; sourceTree = "<group>"; };
 		C00DBBCA18C52B8C00DDCB32 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +176,7 @@
 		C06831F918F0560500B7BD96 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C06831FB18F0560E00B7BD96 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F31CC1A418C8C46F0072398C /* DefaultChessClockSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DefaultChessClockSettings.plist; path = Resources/plist/DefaultChessClockSettings.plist; sourceTree = "<group>"; };
+		FF02967AFDCF895223B8C3E4 /* Pods-ChessClock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessClock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChessClock/Pods-ChessClock.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +192,7 @@
 				C00DBBD218C52B8C00DDCB32 /* UIKit.framework in Frameworks */,
 				C00DBBCE18C52B8C00DDCB32 /* Foundation.framework in Frameworks */,
 				0F3EA8761E489CEE0017AC6C /* Crashlytics.framework in Frameworks */,
+				CAF749F7E53F55074BAA8C82 /* libPods-ChessClock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +203,7 @@
 				C00DBBF018C52B8C00DDCB32 /* XCTest.framework in Frameworks */,
 				C00DBBF218C52B8C00DDCB32 /* UIKit.framework in Frameworks */,
 				C00DBBF118C52B8C00DDCB32 /* Foundation.framework in Frameworks */,
+				A959644C2B9C7E74E625D42E /* libPods-ChessClockTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,12 +354,26 @@
 		0FC6826418C7E16F0064421D /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				0FC6826518C7E16F0064421D /* chess_clock_switch1.mp3 */,
-				0FC6826618C7E16F0064421D /* chess_clock_switch2.mp3 */,
-				0FC6826718C7E16F0064421D /* chess_clock_time_ended.mp3 */,
+				A255BECB1F57620000AB36D6 /* pause.wav */,
+				A255BEC91F57617D00AB36D6 /* reset.wav */,
+				A255BECD1F57644B00AB36D6 /* start.wav */,
+				A22187601F5EF65700650368 /* switch1.mp3 */,
+				A22187611F5EF65700650368 /* switch2.mp3 */,
+				A255BEC71F575F8B00AB36D6 /* timeEnded.wav */,
 			);
 			name = sounds;
 			path = Resources/sounds;
+			sourceTree = "<group>";
+		};
+		AA55ABBCAD2D442D98350DDA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF02967AFDCF895223B8C3E4 /* Pods-ChessClock.debug.xcconfig */,
+				9401EC94957B71BF36167AF1 /* Pods-ChessClock.release.xcconfig */,
+				032EB89A3EB9A3710F1DE825 /* Pods-ChessClockTests.debug.xcconfig */,
+				0F2DF7388CFB4321B2DD3FDB /* Pods-ChessClockTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		C00DBBC118C52B8C00DDCB32 = {
@@ -353,6 +383,7 @@
 				C00DBBF518C52B8C00DDCB32 /* ChessClockTests */,
 				C00DBBCC18C52B8C00DDCB32 /* Frameworks */,
 				C00DBBCB18C52B8C00DDCB32 /* Products */,
+				AA55ABBCAD2D442D98350DDA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -375,6 +406,8 @@
 				C00DBBCF18C52B8C00DDCB32 /* CoreGraphics.framework */,
 				C00DBBD118C52B8C00DDCB32 /* UIKit.framework */,
 				C00DBBEF18C52B8C00DDCB32 /* XCTest.framework */,
+				31A72F296B19F7002CF53B1B /* libPods-ChessClock.a */,
+				879B7CCF3A2208ABB6BB6FD1 /* libPods-ChessClockTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -458,10 +491,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C00DBBFF18C52B8C00DDCB32 /* Build configuration list for PBXNativeTarget "ChessClock" */;
 			buildPhases = (
+				5F6187945ECE24F8BB78FA56 /* [CP] Check Pods Manifest.lock */,
 				C00DBBC618C52B8C00DDCB32 /* Sources */,
 				C00DBBC718C52B8C00DDCB32 /* Frameworks */,
 				C00DBBC818C52B8C00DDCB32 /* Resources */,
 				0F3EA8781E48A06B0017AC6C /* ShellScript */,
+				69ED8B3E1254C4ACE79EAA56 /* [CP] Embed Pods Frameworks */,
+				8451BAF5EB4EB20FEE1BBA0D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -476,9 +512,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C00DBC0218C52B8C00DDCB32 /* Build configuration list for PBXNativeTarget "ChessClockTests" */;
 			buildPhases = (
+				E488BEA32B7216B74D75EB0E /* [CP] Check Pods Manifest.lock */,
 				C00DBBEA18C52B8C00DDCB32 /* Sources */,
 				C00DBBEB18C52B8C00DDCB32 /* Frameworks */,
 				C00DBBEC18C52B8C00DDCB32 /* Resources */,
+				10D7B474251CDDCCA34FAE9E /* [CP] Embed Pods Frameworks */,
+				EBA7AA00AAB7932457AB3743 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -534,17 +573,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F52D2531E56EF0700077F3C /* CHChessClockTimeControlView.xib in Resources */,
+				A22187631F5EF65700650368 /* switch2.mp3 in Resources */,
 				C00DBBE918C52B8C00DDCB32 /* Images.xcassets in Resources */,
+				A255BEC81F575F8B00AB36D6 /* timeEnded.wav in Resources */,
+				A255BECE1F57644B00AB36D6 /* start.wav in Resources */,
 				0F5438D81E34EFF700DF08AC /* CHClock.storyboard in Resources */,
 				0F52D2541E56EF0700077F3C /* CHChessClockTimeView.xib in Resources */,
 				0F52D2461E56EAFE00077F3C /* Launch Screen.storyboard in Resources */,
-				0FC6826A18C7E16F0064421D /* chess_clock_time_ended.mp3 in Resources */,
 				0F52D2521E56EF0700077F3C /* CHChessClockTimeControlStageView.xib in Resources */,
-				0FC6826818C7E16F0064421D /* chess_clock_switch1.mp3 in Resources */,
 				A20BE2691F27B79D002A7A2F /* ChessGlyph-Regular.ttf in Resources */,
 				0F52D2501E56EF0700077F3C /* CHChessClockStageMovesCell.xib in Resources */,
+				A255BECA1F57617D00AB36D6 /* reset.wav in Resources */,
 				F31CC1A518C8C46F0072398C /* DefaultChessClockSettings.plist in Resources */,
-				0FC6826918C7E16F0064421D /* chess_clock_switch2.mp3 in Resources */,
+				A255BECC1F57620000AB36D6 /* pause.wav in Resources */,
+				A22187621F5EF65700650368 /* switch1.mp3 in Resources */,
 				C00DBBD818C52B8C00DDCB32 /* InfoPlist.strings in Resources */,
 				0F9FF0C51E75AB970015B1E4 /* CHTableViewHeader.xib in Resources */,
 				0F52D2511E56EF0700077F3C /* CHChessClockTimeControlNameCell.xib in Resources */,
@@ -576,6 +618,96 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 47969ba8b0f44f287503d0c51b95040668dfa536 94c5f003dd685ab00673823884e50c6056e6f75e9fb719b71b76bc72518bc52f";
+		};
+		10D7B474251CDDCCA34FAE9E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChessClockTests/Pods-ChessClockTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F6187945ECE24F8BB78FA56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		69ED8B3E1254C4ACE79EAA56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChessClock/Pods-ChessClock-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8451BAF5EB4EB20FEE1BBA0D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChessClock/Pods-ChessClock-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E488BEA32B7216B74D75EB0E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EBA7AA00AAB7932457AB3743 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChessClockTests/Pods-ChessClockTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -737,6 +869,7 @@
 		};
 		C00DBC0018C52B8C00DDCB32 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF02967AFDCF895223B8C3E4 /* Pods-ChessClock.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -755,6 +888,7 @@
 		};
 		C00DBC0118C52B8C00DDCB32 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9401EC94957B71BF36167AF1 /* Pods-ChessClock.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -773,6 +907,7 @@
 		};
 		C00DBC0318C52B8C00DDCB32 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 032EB89A3EB9A3710F1DE825 /* Pods-ChessClockTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ChessClock.app/ChessClock";
 				DEVELOPMENT_TEAM = 64WSYCNXBH;
@@ -797,6 +932,7 @@
 		};
 		C00DBC0418C52B8C00DDCB32 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F2DF7388CFB4321B2DD3FDB /* Pods-ChessClockTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ChessClock.app/ChessClock";
 				DEVELOPMENT_TEAM = 64WSYCNXBH;

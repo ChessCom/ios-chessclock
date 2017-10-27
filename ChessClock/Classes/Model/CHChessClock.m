@@ -119,11 +119,9 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
 
 - (void)resetWithTimeControl:(CHChessClockTimeControl *)timeControl
 {
-    if (self.activePiece != nil) {
-        self.paused = NO;
-        self.activePiece = nil;
-        self.timeEnded = NO;
-    }
+    self.paused = NO;
+    self.activePiece = nil;
+    self.timeEnded = NO;
     
     // Reset all time pieces
     [self.playerOneTimePiece resetWithSettings:timeControl.playerOneSettings];
@@ -170,7 +168,7 @@ static const NSInteger CHChessClockSecondTimePieceID = 2;
     }
 }
 
-- (void)timePieceMovesCountUpdated:(CHTimePiece*)timePiece
+- (void)timePieceTotalMovesCountUpdated:(CHTimePiece*)timePiece
 {
     [self.delegate chessClock:self movesCountUpdatedForTimePiece:timePiece];
 }
