@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CHIncrementCell" rowHeight="77" id="KXy-su-Fzo" customClass="CHIncrementCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CHIncrementCell" id="KXy-su-Fzo" customClass="CHIncrementCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KXy-su-Fzo" id="rU0-oz-83I">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0ks-p7-cA5">
-                        <rect key="frame" x="15" y="10.5" width="345" height="29"/>
+                        <rect key="frame" x="15" y="15" width="345" height="29.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <segments>
                             <segment title="Delay"/>
@@ -32,7 +32,7 @@
                         </connections>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgd-QK-S99">
-                        <rect key="frame" x="15" y="48.5" width="345" height="18"/>
+                        <rect key="frame" x="15" y="58.5" width="345" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.78823529411764703" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,11 +41,11 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="0ks-p7-cA5" firstAttribute="leading" secondItem="rU0-oz-83I" secondAttribute="leading" constant="15" id="2Ic-tM-4dd"/>
-                    <constraint firstItem="Mgd-QK-S99" firstAttribute="top" secondItem="0ks-p7-cA5" secondAttribute="bottom" constant="10" id="Cv7-4u-Teg"/>
+                    <constraint firstItem="Mgd-QK-S99" firstAttribute="top" secondItem="0ks-p7-cA5" secondAttribute="bottom" constant="15" id="Cv7-4u-Teg"/>
                     <constraint firstAttribute="trailing" secondItem="0ks-p7-cA5" secondAttribute="trailing" constant="15" id="VF5-fT-zF6"/>
-                    <constraint firstItem="0ks-p7-cA5" firstAttribute="top" secondItem="rU0-oz-83I" secondAttribute="top" constant="10" id="bD6-7l-ntL"/>
+                    <constraint firstItem="0ks-p7-cA5" firstAttribute="top" secondItem="rU0-oz-83I" secondAttribute="top" constant="15" id="bD6-7l-ntL"/>
                     <constraint firstItem="Mgd-QK-S99" firstAttribute="leading" secondItem="0ks-p7-cA5" secondAttribute="leading" id="lHU-Xy-r1G"/>
-                    <constraint firstAttribute="bottom" secondItem="Mgd-QK-S99" secondAttribute="bottom" constant="10" id="xGK-4Z-ccS"/>
+                    <constraint firstAttribute="bottom" secondItem="Mgd-QK-S99" secondAttribute="bottom" constant="15" id="xGK-4Z-ccS"/>
                     <constraint firstItem="Mgd-QK-S99" firstAttribute="trailing" secondItem="0ks-p7-cA5" secondAttribute="trailing" id="xZT-sz-SiN"/>
                 </constraints>
             </tableViewCellContentView>

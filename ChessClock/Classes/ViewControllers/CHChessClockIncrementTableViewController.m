@@ -58,6 +58,7 @@ static NSString* const CHIncrementCellIdentifier = @"CHIncrementCell";
     self.tableView.sectionHeaderHeight = self.tableView.sectionFooterHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = self.tableView.estimatedSectionFooterHeight = 10;
     self.tableView.estimatedRowHeight = 20;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.tableView registerNib:[UINib nibWithNibName:CHIncrementCellIdentifier bundle:nil]
          forCellReuseIdentifier:CHIncrementCellIdentifier];
