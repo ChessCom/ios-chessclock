@@ -225,8 +225,8 @@ static const float CHShowTenthsTime = 10.0f;
     // Store timestamp for debounce
     self.touchDownTimestamp = [[NSDate date] timeIntervalSince1970];
 
-    // Haptic on press (touch down)
-    if (@available(iOS 10.0, *)) {
+    // Haptic on press (touch down) - if enabled in settings
+    if (self.settingsManager.hapticFeedbackEnabled && @available(iOS 10.0, *)) {
         UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
         [generator impactOccurred];
     }
@@ -234,9 +234,9 @@ static const float CHShowTenthsTime = 10.0f;
 
 - (IBAction)timePieceTouched:(UIButton *)sender
 {
-    // Haptic on release - only if more than 100ms since touch down
+    // Haptic on release - only if enabled and more than 250ms since touch down
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSince1970] - self.touchDownTimestamp;
-    if (elapsed > 0.25 && @available(iOS 10.0, *)) {
+    if (self.settingsManager.hapticFeedbackEnabled && elapsed > 0.25 && @available(iOS 10.0, *)) {
         UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
         [generator impactOccurred];
     }

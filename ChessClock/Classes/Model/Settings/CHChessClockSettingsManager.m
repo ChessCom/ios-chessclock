@@ -28,6 +28,7 @@
 @implementation CHChessClockSettingsManager
 
 static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeControlNameKey";
+static NSString *const CHHapticFeedbackEnabledKey = @"CHHapticFeedbackEnabledKey";
 
 - (id)init
 {
@@ -104,6 +105,18 @@ static NSString *const CHChessClockTimeControlNameKey = @"CHChessClockTimeContro
         [self.preferences setObject:_timeControl.name forKey:CHChessClockTimeControlNameKey];
         [self savePreferences];
     }
+}
+
+- (BOOL)hapticFeedbackEnabled
+{
+    NSNumber *value = [self.preferences objectForKey:CHHapticFeedbackEnabledKey];
+    return value ? [value boolValue] : YES;
+}
+
+- (void)setHapticFeedbackEnabled:(BOOL)hapticFeedbackEnabled
+{
+    [self.preferences setObject:@(hapticFeedbackEnabled) forKey:CHHapticFeedbackEnabledKey];
+    [self savePreferences];
 }
 
 - (void)loadDefaultSettings

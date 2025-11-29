@@ -24,4 +24,7 @@
 - (void)saveTimeControls;
 - (void)restoreDefaultClockSettings;
 
+// Haptic feedback setting
+@property (nonatomic, assign) BOOL hapticFeedbackEnabled;
+
 @end

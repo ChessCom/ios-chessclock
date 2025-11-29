@@ -43,7 +43,8 @@
 
 static const NSUInteger CHAddNewTimeControlSection = 0;
 static const NSUInteger CHExistingTimeControlSection = 1;
-static const NSUInteger CHVersionSection = 2;
+static const NSUInteger CHHapticFeedbackSection = 2;
+static const NSUInteger CHVersionSection = 3;
 
 - (void)viewDidLoad
 {
@@ -152,10 +153,28 @@ static const NSUInteger CHVersionSection = 2;
     cell.textLabel.font = [UIFont boldSystemFontOfSize:13];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+
     NSString* shortVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString* versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     cell.textLabel.text = [NSString stringWithFormat:@"v%@ (%@)", shortVersionString, versionString];
+}
+
+- (void)populateHapticFeedbackCell:(UITableViewCell*)cell
+{
+    cell.textLabel.text = NSLocalizedString(@"Haptic Feedback", nil);
+    cell.textLabel.textAlignment = NSTextAlignmentNatural;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    UISwitch *toggle = [[UISwitch alloc] init];
+    toggle.on = self.settingsManager.hapticFeedbackEnabled;
+    [toggle addTarget:self action:@selector(hapticFeedbackToggled:) forControlEvents:UIControlEventValueChanged];
+    cell.accessoryView = toggle;
+}
+
+- (void)hapticFeedbackToggled:(UISwitch *)sender
+{
+    self.settingsManager.hapticFeedbackEnabled = sender.on;
 }
 
 - (void)existingTimeControlSelectedAtIndexPath:(NSIndexPath*)indexPath inTableView:(UITableView*)tableView
@@ -216,7 +235,7 @@ static const NSUInteger CHVersionSection = 2;
 //------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -227,11 +246,12 @@ static const NSUInteger CHVersionSection = 2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == CHAddNewTimeControlSection ||
-        section == CHVersionSection)
+        section == CHVersionSection ||
+        section == CHHapticFeedbackSection)
     {
         return 1;
     }
-    
+
     return [[self.settingsManager allTimeControls] count];
 }
 
@@ -254,11 +274,16 @@ static const NSUInteger CHVersionSection = 2;
             cell = [self cellWithIdentifier:@"CHVersionCell"];
             [self populateVersionCell:cell];
             break;
-            
+
+        case CHHapticFeedbackSection:
+            cell = [self cellWithIdentifier:@"CHHapticFeedbackCell"];
+            [self populateHapticFeedbackCell:cell];
+            break;
+
         default:
             break;
     }
-    
+
     return cell;
 }
 
