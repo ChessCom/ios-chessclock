@@ -20,6 +20,7 @@
 #import "CHSoundPlayer.h"
 
 #import "CHChessClockTimeViewController.h"
+#import <CoreHaptics/CoreHaptics.h>
 
 //------------------------------------------------------------------------------
 #pragma mark - Private methods declarations
@@ -42,6 +43,9 @@ CHChessClockTimeViewControllerDelegate>
 @property (weak, nonatomic) CHTimePiece *currentTimePiece;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *timeUpdateButtons;
+
+@property (strong, nonatomic) UIImpactFeedbackGenerator *feedbackGenerator API_AVAILABLE(ios(10.0));
+@property (assign, nonatomic) NSTimeInterval touchDownTimestamp;
 
 @end
 
@@ -87,6 +91,24 @@ static const float CHShowTenthsTime = 10.0f;
                                                        delegate:self];
     
     [self resetClockWithPlaySound:NO];
+
+    // Initialize haptic feedback generator (iOS 10+)
+    if (@available(iOS 10.0, *)) {
+        self.feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+        [self.feedbackGenerator prepare];
+    }
+
+    // Add touch down haptic to time piece buttons
+    for (UIView *subview in self.playerOneTimePieceView.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            [(UIButton *)subview addTarget:self action:@selector(timePieceTouchDown:) forControlEvents:UIControlEventTouchDown];
+        }
+    }
+    for (UIView *subview in self.playerTwoTimePieceView.subviews) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            [(UIButton *)subview addTarget:self action:@selector(timePieceTouchDown:) forControlEvents:UIControlEventTouchDown];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -198,8 +220,27 @@ static const float CHShowTenthsTime = 10.0f;
 //------------------------------------------------------------------------------
 #pragma mark - IBAction methods
 //------------------------------------------------------------------------------
+- (IBAction)timePieceTouchDown:(UIButton *)sender
+{
+    // Store timestamp for debounce
+    self.touchDownTimestamp = [[NSDate date] timeIntervalSince1970];
+
+    // Haptic on press (touch down)
+    if (@available(iOS 10.0, *)) {
+        UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
+        [generator impactOccurred];
+    }
+}
+
 - (IBAction)timePieceTouched:(UIButton *)sender
 {
+    // Haptic on release - only if more than 100ms since touch down
+    NSTimeInterval elapsed = [[NSDate date] timeIntervalSince1970] - self.touchDownTimestamp;
+    if (elapsed > 0.25 && @available(iOS 10.0, *)) {
+        UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
+        [generator impactOccurred];
+    }
+
     NSUInteger selectedTimePieceId = sender.superview.tag;
     
     if (!self.chessClock.paused) {
